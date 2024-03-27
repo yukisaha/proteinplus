@@ -357,7 +357,7 @@ section {
   display: inline-block;
   width: 48px;
   height: 48px;
-  background: url(/frame/images/1.png) no-repeat center / auto 48px;
+  background: url(/images/1.png) no-repeat center / auto 48px;
 }
 
 .btn-util-coupon {
