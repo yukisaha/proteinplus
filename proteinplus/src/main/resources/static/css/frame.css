@@ -247,7 +247,7 @@ section {
   left: 0;
   width: 180px;
   height: 46px;
-  background-image: url(/resources/pc/images/logo.png);
+  background-image: url(/images/logo.png);
   background-repeat: no-repeat;
 }
 
@@ -364,7 +364,7 @@ section {
   display: inline-block;
   width: 48px;
   height: 48px;
-  background-image: url(/frame/images/2.png);
+  background-image: url(/images/2.png);
   background-size: auto 48px;
   background-position: 0% center;
 }
@@ -373,7 +373,7 @@ section {
   display: inline-block;
   width: 48px;
   height: 48px;
-  background-image: url(/frame/images/2.png);
+  background-image: url(/images/2.png);
   background-size: auto 48px;
   background-position: 50% center;
 }
@@ -383,7 +383,7 @@ section {
   position: relative;
   width: 48px;
   height: 48px;
-  background-image: url(/frame/images/2.png);
+  background-image: url(/images/2.png);
   background-size: auto 48px;
   background-position: 100% center;
 }
@@ -616,7 +616,7 @@ section {
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-  background-image: url(/frame/images/phone.png);
+  background-image: url(/images/phone.png);
   background-size: 100%;
   background-position: center;
 }
@@ -674,7 +674,7 @@ section {
   vertical-align: top;
   width: 30px;
   height: 30px;
-  background-image: url(/frame/images/sns.png);
+  background-image: url(/images/sns.png);
 }
 
 .ico-sns-instagram {
