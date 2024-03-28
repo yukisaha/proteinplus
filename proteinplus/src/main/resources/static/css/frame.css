@@ -543,7 +543,7 @@ section {
   width: 100px;
   height: 38px;
   background: url(/resources/pc/images/footer_logo.png?ver=20230412) 0 0
-    no-repeat;
+  no-repeat;
   background-size: contain;
   margin-bottom: 26px;
 }
