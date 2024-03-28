@@ -1,0 +1,211 @@
+.content-wrap {
+  min-height: 700px;
+}
+
+.head-mypage {
+  background: #f7f7f7;
+}
+
+.frame-full {
+  position: relative;
+  width: 100%;
+}
+
+.user-info-box {
+  width: 1100px;
+  margin: 0 auto;
+  background: #f8f8f8;
+  text-align: center;
+  padding: 30px 0;
+}
+
+.user-info-box .inner {
+  display: flex;
+  width: 100%;
+  gap: 4px;
+}
+
+.user-info-box .inner > .column.user-info {
+  position: relative;
+  padding: 24px 25px;
+  flex: 1;
+}
+
+.user-info-box .inner > .column {
+  display: flex;
+  vertical-align: middle;
+  background: #fff;
+  padding: 0 25px;
+  text-align: left;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-info-box .user-info .txt {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.txt,
+.txt span {
+  word-break: break-all;
+}
+
+.user-info-box .user-info .txt .greeting {
+  font-size: 18px;
+  position: relative;
+}
+
+.user-info-box .user-info .txt .greeting .name {
+  font-weight: 700;
+}
+
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+  font-style: normal;
+}
+
+.head-mypage ~ .frame-sm {
+  margin-top: 45px;
+}
+
+.frame-sm {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.frame-left {
+  float: left;
+}
+
+.aside-menu-wrap {
+  width: 220px;
+}
+
+.aside-menu {
+  padding: 10px 24px;
+  border: 1px solid #e6e6e6;
+}
+
+.aside-menu .menu-list > li:first-child {
+  border-top: 0;
+}
+
+.aside-menu .menu-list > li {
+  padding: 15px 0;
+  border-top: 1px solid #eee;
+}
+
+.aside-menu .menu-list > li .menu {
+  font-size: 15px;
+  color: #000;
+  font-weight: 500;
+}
+
+.aside-menu .menu-list > li .depth2 {
+  margin-top: 8px;
+}
+
+.aside-menu .menu-list > li .depth2 > li {
+  font-size: 14px;
+  color: #666;
+}
+
+.aside-link-box {
+  border: 1px solid #e6e6e6;
+  margin-top: 20px;
+  padding: 18px 20px;
+}
+
+.aside-link-box > a {
+  display: block;
+  position: relative;
+  color: #000;
+  font-size: 15px;
+}
+
+.aside-link-box > a .ico-bl-speaker {
+  vertical-align: middle;
+  margin-top: -3px;
+  margin-right: 8px;
+}
+
+.ico-bl-speaker {
+  background-position: -120px -110px;
+  width: 22px;
+  height: 16px;
+}
+
+.aside-link-box > a .ico-arr-right {
+  position: absolute;
+  right: 0;
+  top: 5px;
+}
+
+[class*="ico-arr-"] {
+  position: relative;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  transform: translateX(0);
+  -webkit-transform: translateX(0);
+}
+
+.ico-arr-right:before {
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 59.45%;
+  -webkit-transform: rotate(135deg);
+  transform: rotate(135deg);
+}
+[class*="ico-arr-"]:after,
+[class*="ico-arr-"]:before {
+  position: absolute;
+  display: block;
+  content: "";
+  background-color: #000;
+  box-shadow: inset 0 0 0 32px;
+}
+
+.ico-arr-right:after {
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  height: 59.45%;
+  -webkit-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+}
+
+[class*="ico-arr-"]:after,
+[class*="ico-arr-"]:before {
+  position: absolute;
+  display: block;
+  content: "";
+  background-color: #000;
+  box-shadow: inset 0 0 0 32px;
+}
+
+.frame-right {
+  float: right;
+}
+
+.frame-wrap,
+.clear:after,
+[class*="frame-"]:after {
+  display: block;
+  clear: both;
+  content: "";
+}

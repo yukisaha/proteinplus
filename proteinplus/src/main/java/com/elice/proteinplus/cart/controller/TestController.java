@@ -9,4 +9,9 @@ public class TestController {
     public String test(){
         return "cart/cart";
     }
+
+    @GetMapping("mypage")
+    public String mypageTest(){
+        return "mypageFrame";
+    }
 }
