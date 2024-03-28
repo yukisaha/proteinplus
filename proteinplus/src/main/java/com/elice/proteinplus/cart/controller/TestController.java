@@ -14,4 +14,9 @@ public class TestController {
     public String mypageTest(){
         return "mypageFrame";
     }
+
+    @GetMapping("wishList")
+    public String wishListTest(){
+        return "cart/wishList";
+    }
 }
