@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>프로틴플러스(ProteinPlus)</title>
-    <link rel="stylesheet" href="../static/css/frame.css" />
-    <link rel="stylesheet" href="../static/css/mypageFrame.css" />
+    <link rel="stylesheet" href="../../static/css/frame.css" />
+    <link rel="stylesheet" href="../../static/css/mypageFrame.css" />
+    <link rel="stylesheet" href="../../static/css/user/user-profile.css" />
   </head>
 
   <body>
@@ -133,8 +134,8 @@
 
       <!-- ========== 컨텐츠 영역 :: container ========== -->
       <section id="contents" class="container">
-        <!-- 여기서부터 작업 -->
         <div class="content-wrap">
+          <!-- 상단 프레임 -->
           <div class="frame-full head-mypage">
             <div class="user-info-box">
               <div class="inner">
@@ -159,7 +160,9 @@
             </div>
             <!--// user-info-box -->
           </div>
+          <!-- 하단 프레임 -->
           <div class="frame-sm">
+            <!-- 좌측 프레임 -->
             <div class="frame-left">
               <div class="aside-menu-wrap">
                 <nav class="aside-menu">
@@ -253,10 +256,61 @@
               </div>
               <!--// aside-menu-wrap -->
             </div>
-
+            <!-- 우측 프레임 -->
             <div class="frame-right">
               <div class="frame-cnt-inner">
                 <!-- 여기서부터 작업-->
+                <!-- 우측 회원탈퇴 -->
+                <div class="user-delete-area">
+                  <!-- 회원탈퇴 유의사항 -->
+                  <div class="user-delete-txt">
+                    <div class="profile_menu-title-area">
+                      <h3 class="profile_title-menu">회원탈퇴</h3>
+                    </div>
+                    <div class="profile_board-form">
+                      <div class="profile_input-guide-box">
+                        <div class="profile_inner">
+                          <h4 class="profile_box-tit">탈퇴 유의사항</h4>
+                          <p class="profile_txt">
+                            * 탈퇴하실 경우 구매내역 확인은 물론 로그인 후
+                            가능한 모든 기능은 사용하실 수 없습니다.<br />
+                            * 탈퇴하신 후에 회원 정보의 복구는 불가능하며,
+                            보유하신 쿠폰이나 적립금도 모두 무효화됩니다.<br />
+                            * 탈퇴하신 후 동일한 이메일, 휴대폰 번호로 재 가입은
+                            탈퇴일로부터 90일 이후 가능합니다.
+                          </p>
+                        </div>
+                      </div>
+                      <!--// input-guide-box -->
+                    </div>
+                  </div>
+                  <!-- 회원탈퇴 form -->
+                  <div class="profile_frame-inner">
+                    <span>탈퇴사유</span>
+                    <form
+                      id="user-delete_form"
+                      name="user-delete_form"
+                      action=""
+                      method=""
+                      onsubmit=""
+                    >
+                      <textarea></textarea>
+                      <div class="profile_page-guide-center">
+                        <ul class="profile_txt-link-list">
+                          <button
+                            type="submit"
+                            class="user_btn-secondary w-full"
+                          >
+                            <span>취소</span>
+                          </button>
+                          <button type="submit" class="user_btn-primary w-full">
+                            <span>확인</span>
+                          </button>
+                        </ul>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </div>
               <!--// frame-cnt-inner -->
             </div>

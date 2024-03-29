@@ -1,22 +1,18 @@
-git <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>프로틴플러스(ProteinPlus)</title>
-    <link href="/css/frame.css" rel="stylesheet" />
-    <link href="/css/cart/cart.css" rel="stylesheet" />
     <link rel="stylesheet" href="../../static/css/frame.css" />
-    <link rel="stylesheet" href="../../static/css/cart/cart.css" />
+    <link rel="stylesheet" href="../../static/css/user/join.css" />
   </head>
-
   <body>
     <div class="wrap main">
       <!-- ========== 공통 헤더 :: header ========== -->
-      <header class="header" id="header">
+      <header id="header" class="header">
         <div class="header-inner">
           <h1 class="logo">
-            <a href="/"><span class="blind">ProteinPlus</span></a>
+            <a href="/"><span>ProteinPlus</span></a>
           </h1>
 
           <div class="util">
@@ -32,19 +28,19 @@ git <!DOCTYPE html>
           <div class="header-search">
             <div class="top-search">
               <input
-                class="input-search"
-                maxlength="100"
                 type="search"
+                class="input-search"
                 value=""
+                maxlength="100"
               />
 
               <button
+                type="button"
                 class="btn-top-search"
-                data-search-type="real"
                 id="btnTopSearch"
                 name="btnTopSearch"
+                data-search-type="real"
                 onclick="fnBtnTopSearch(this);"
-                type="button"
               >
                 <span class="blind">검색</span>
               </button>
@@ -54,22 +50,22 @@ git <!DOCTYPE html>
           <div class="my-menu">
             <ul>
               <li>
-                <a class="btn-util-pedometer" href="" title=""
+                <a href="" class="btn-util-pedometer" title=""
                   ><span class="blind">만보기</span></a
                 >
               </li>
               <li>
-                <a class="btn-util-coupon" href="" title=""
+                <a href="" class="btn-util-coupon" title=""
                   ><span class="blind">쿠폰</span></a
                 >
               </li>
               <li>
-                <a class="btn-util-mypage" href="" title=""
+                <a href="" class="btn-util-mypage" title=""
                   ><span class="blind">마이페이지</span></a
                 >
               </li>
               <li>
-                <a class="btn-util-cart" href="" title="">
+                <a href="" class="btn-util-cart" title="">
                   <span class="blind">장바구니</span>
                   <em class="count">0</em>
                 </a>
@@ -83,11 +79,11 @@ git <!DOCTYPE html>
         <div class="gnb-wrap">
           <div class="inner">
             <div class="category-wrap">
-              <a class="btn-menu-all" href="#all-category"
+              <a href="#all-category" class="btn-menu-all"
                 ><span>카테고리</span></a
               >
             </div>
-            <nav class="gnb" id="gnb">
+            <nav id="gnb" class="gnb">
               <ul>
                 <li class="">
                   <a href="">
@@ -133,27 +129,80 @@ git <!DOCTYPE html>
       <!--// ========== 공통 헤더 :: header ========== -->
 
       <!-- ========== 컨텐츠 영역 :: container ========== -->
-      <section class="container" id="contents">
-        <!-- 여기서부터 작업 -->
-        <div class="content-wrap frame-sm cart-jsp">
-          <div class="page-title-area">
-            <h2 class="title-page">장바구니</h2>
-          </div>
-          <div class="cart-list-area">
-            <div class="no-data">
-              <p class="message">장바구니에 담긴 상품이 없습니다.</p>
-              <a href="/" class="btn-basic-lg btn-default-ex"
-                ><span>쇼핑계속하기</span></a
-              >
+      <section id="contents" class="container join-container">
+        <div class="join-certified user_frame-full">
+          <div class="user_frame-sm">
+            <!-- 회원가입 subtitle -->
+            <div class="join_certified-title">
+              <h2>회원가입</h2>
             </div>
+            <!-- 회원가입 form -->
+            <form id="join_form" name="join_form" action="" method="">
+              <!-- input submit -->
+              <fieldset>
+                <div class="join_input-group user_w-full">
+                  <label for="id"
+                    >아이디 <span id="required-text">[필수]</span>
+                  </label>
+                  <input
+                    id="id"
+                    name="id"
+                    class="join_input-text type-lg"
+                    type="text"
+                    placeholder="아이디"
+                    maxlength="100"
+                    required
+                  />
+                </div>
+                <div class="join_input-group user_w-full">
+                  <label for="pw"
+                    >비밀번호 <span id="required-text">[필수]</span></label
+                  >
+                  <input
+                    id="pw"
+                    name="pw"
+                    class="join_input-text type-lg"
+                    type="password"
+                    placeholder="비밀번호"
+                    maxlength="100"
+                    required
+                  />
+                  <input
+                    id="pw2"
+                    name="pw2"
+                    class="join_input-text type-lg"
+                    type="password"
+                    placeholder="비밀번호 확인"
+                    maxlength="100"
+                    required
+                  />
+                </div>
+                <div class="join_input-group user_w-full">
+                  <label for="email"
+                    >이메일 <span id="required-text">[필수]</span></label
+                  >
+                  <input
+                    id="email"
+                    name="email"
+                    class="join_input-text type-lg"
+                    type="email"
+                    placeholder="이메일"
+                    maxlength="100"
+                    required
+                  />
+                </div>
+                <button type="submit" class="user_btn-primary user_w-full">
+                  <span>회원가입</span>
+                </button>
+              </fieldset>
+            </form>
           </div>
-          <div class="btn-bottom-area"></div>
         </div>
       </section>
       <!--// ========== 컨텐츠 영역 :: container ========== -->
 
       <!-- ========== 공통 푸터 :: footer :: include.footer() 영역  ========== -->
-      <footer class="footer" id="footer">
+      <footer id="footer" class="footer">
         <div class="footer-menu">
           <div class="frame-sm">
             <ul class="footer-menu-list">

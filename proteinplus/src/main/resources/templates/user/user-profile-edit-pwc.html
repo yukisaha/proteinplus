@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>프로틴플러스(ProteinPlus)</title>
-    <link rel="stylesheet" href="../static/css/frame.css" />
-    <link rel="stylesheet" href="../static/css/mypageFrame.css" />
+    <link rel="stylesheet" href="../../static/css/frame.css" />
+    <link rel="stylesheet" href="../../static/css/mypageFrame.css" />
+    <link rel="stylesheet" href="../../static/css/user/user-profile.css" />
   </head>
 
   <body>
@@ -133,8 +134,8 @@
 
       <!-- ========== 컨텐츠 영역 :: container ========== -->
       <section id="contents" class="container">
-        <!-- 여기서부터 작업 -->
         <div class="content-wrap">
+          <!-- 상단 프레임 -->
           <div class="frame-full head-mypage">
             <div class="user-info-box">
               <div class="inner">
@@ -159,7 +160,9 @@
             </div>
             <!--// user-info-box -->
           </div>
+          <!-- 하단 프레임 -->
           <div class="frame-sm">
+            <!-- 좌측 프레임 -->
             <div class="frame-left">
               <div class="aside-menu-wrap">
                 <nav class="aside-menu">
@@ -253,10 +256,58 @@
               </div>
               <!--// aside-menu-wrap -->
             </div>
-
+            <!-- 우측 프레임 -->
             <div class="frame-right">
               <div class="frame-cnt-inner">
                 <!-- 여기서부터 작업-->
+                <!-- 우측 pw체크 -->
+                <div class="user-edit-area">
+                  <!-- 회원정보수정 subtitle -->
+                  <div class="profile_menu-title-area">
+                    <h3 class="profile_title-menu">회원정보수정</h3>
+                  </div>
+                  <!-- 회원정보수정 pw체크-->
+                  <div class="profile_board-form">
+                    <div class="profile_input-guide-box">
+                      <div class="profile_inner">
+                        <h4 class="profile_box-tit">
+                          비밀번호를 입력해주세요.
+                        </h4>
+                        <p class="profile_txt">
+                          회원님의 개인정보 보호를 위해 비밀번호를 다시 한번
+                          확인 합니다.<br />비밀번호가 노출되지 않도록
+                          주의해주세요.
+                        </p>
+                      </div>
+                      <!-- pw확인 form -->
+                      <div class="profile_inner">
+                        <form
+                          id="user-pw-check-form"
+                          name="user-pw-check-form"
+                          action=""
+                          method=""
+                          onsubmit=""
+                        >
+                          <div class="profile_button-group">
+                            <input
+                              type="password"
+                              id="password"
+                              name="password"
+                              class="profile_input-text type-lg profile_input-group-first"
+                              placeholder="비밀번호 입력"
+                            />
+                            <button
+                              type="submit"
+                              class="user_btn-primary profile_input-group-second"
+                            >
+                              <span>확인</span>
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <!--// frame-cnt-inner -->
             </div>
