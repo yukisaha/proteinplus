@@ -1,0 +1,36 @@
+.r0101, .r0102, .r0104, .r0105, .r0106, .realtime-rank-category-table td {
+    width: 183.16px;
+    height: 45px;
+    text-align: center;
+    border: 1px solid #cccccc;
+
+    font-weight: 400;
+
+    vertical-align: top;
+    vertical-align: bottom;
+    vertical-align: middle;
+}
+
+.r0103 {
+
+    position: relative; /* 상대적 위치 설정 */
+    z-index: 1; /* 다른 요소들보다 위에 표시되도록 z-index 설정 */
+
+    color: #5356FF;
+
+    vertical-align: top;
+    vertical-align: bottom;
+    vertical-align: middle;
+}
+
+.r0103::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1PX;
+    width: 184.16px;
+    height: 46px;
+    border: 1px solid #5356FF; /* 파란색 테두리 설정 */
+    box-sizing: border-box; /* 테두리를 요소의 크기에 포함 */
+    z-index: -1; /* 테두리는 실제 콘텐츠 아래에 위치하도록 설정 */
+}
