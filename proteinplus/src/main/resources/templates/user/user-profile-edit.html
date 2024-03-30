@@ -293,13 +293,13 @@
                         </div>
                         <!-- 비밀번호 -->
                         <div class="profile_input-group w-full">
-                          <label for="pw"
+                          <label for="password"
                             >비밀번호
                             <span id="required-text">[필수]</span></label
                           >
                           <input
-                            id="pw"
-                            name="pw"
+                            id="password"
+                            name="password"
                             class="profile_input-text type-lg"
                             type="password"
                             placeholder="이전 비밀번호"
@@ -327,10 +327,10 @@
                         </div>
                         <!-- 이름 -->
                         <div class="profile_input-group w-full">
-                          <label for="id">이름</label>
+                          <label for="name">이름</label>
                           <input
-                            id="id"
-                            name="id"
+                            id="name"
+                            name="name"
                             class="profile_input-text type-lg"
                             type="text"
                             placeholder="이름"
@@ -339,10 +339,10 @@
                         </div>
                         <!-- 닉네임 -->
                         <div class="profile_input-group w-full">
-                          <label for="id">닉네임</label>
+                          <label for="nickname">닉네임</label>
                           <input
-                            id="id"
-                            name="id"
+                            id="nickname"
+                            name="nickname"
                             class="profile_input-text type-lg"
                             type="text"
                             placeholder="닉네임"
@@ -351,10 +351,10 @@
                         </div>
                         <!-- 휴대전화 -->
                         <div class="profile_input-group w-full">
-                          <label for="id">휴대전화</label>
+                          <label for="phoneNumber">휴대전화</label>
                           <input
-                            id="id"
-                            name="id"
+                            id="phoneNumber"
+                            name="phoneNumber"
                             class="profile_input-text type-lg"
                             type="text"
                             placeholder="휴대전화"
@@ -379,11 +379,11 @@
                         </div>
                         <!-- 생년월일 -->
                         <div class="profile_input-group w-full">
-                          <label for="email">생년월일</label>
+                          <label for="birth">생년월일</label>
                           <div class="select-group">
                             <select
-                              name="year"
-                              id=""
+                              id="birth_year"
+                              name="birth_year"
                               class="profile_input-text type-lg birth_select"
                             >
                               <option value="">년도</option>
@@ -400,8 +400,8 @@
                               <option value="">2010</option>
                             </select>
                             <select
-                              name="month"
-                              id=""
+                              id="birth_month"
+                              name="birth_month"
                               class="profile_input-text type-lg birth_select"
                             >
                               <option value="">월</option>
@@ -419,8 +419,8 @@
                               <option value="">12</option>
                             </select>
                             <select
-                              name="date"
-                              id=""
+                              id="birth_date"
+                              name="birth_date"
                               class="profile_input-text type-lg birth_select"
                             >
                               <option value="">일</option>
@@ -460,21 +460,33 @@
                         </div>
                         <!-- 성별 -->
                         <div class="profile_input-group w-full">
-                          <label for="email">성별</label>
-                          <input
-                            type="radio"
-                            id="male"
-                            name="male"
-                            value="남자"
-                            checked
-                          />
-                          <input
-                            type="radio"
-                            id="female"
-                            name="female"
-                            value="여자"
-                            checked
-                          />
+                          <label for="gender">성별</label>
+                          <div class="select-group">
+                            <div class="profile_radio-group">
+                              <input
+                                id="male"
+                                name="gender"
+                                class="profile_radio"
+                                type="radio"
+                                value="male"
+                              />
+                              <label for="male" class="profile_radio-label"
+                                >남자</label
+                              >
+                            </div>
+                            <div class="profile_radio-group">
+                              <input
+                                id="female"
+                                name="gender"
+                                class="profile_radio"
+                                type="radio"
+                                value="female"
+                              />
+                              <label for="female" class="profile_radio-label"
+                                >여자</label
+                              >
+                            </div>
+                          </div>
                         </div>
                         <!-- 취소/수정 btn -->
                         <div class="profile_page-guide-center">
