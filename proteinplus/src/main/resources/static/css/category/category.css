@@ -1,0 +1,37 @@
+.content-wrap {
+    min-height: 700px;
+}
+
+.frame-sm {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.content-wrap.frame-sm .page-title-area:first-child {
+    padding-top: 70px;
+}
+
+.page-title-area {
+    position: relative;
+}
+
+.title-page-type2 {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.prd-top-bnr {
+    margin-top: 20px;
+}
+
+.detail-category-table {
+    border-collapse: collapse;  /* 이중선 제거 */
+    border-spacing: 0;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
