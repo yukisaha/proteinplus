@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로틴플러스(ProteinPlus)</title>
+<!--    <link rel="stylesheet" href="/css/frame.css">-->
+<!--    <link rel="stylesheet" href="/css/mypageFrame.css">-->
+    <link rel="stylesheet" href="../../static/css/frame.css">
+    <link rel="stylesheet" href="../../static/css/mypageFrame.css">
+    <link rel="stylesheet" href="../../static/css/order/cancelDetail.css">
+
+</head>
+
+<body>
+<div class="wrap main">
+
+    <!-- ========== 공통 헤더 :: header ========== -->
+    <header id="header" class="header">
+        <div class="header-inner">
+            <h1 class="logo "><a href="/"><span class="blind">ProteinPlus</span></a></h1>
+
+            <div class="util">
+                <ul>
+                    <li><a href="/auth/login">로그인</a></li>
+                    <li><a href="/member/join/general">회원가입</a></li>
+                    <li><a href="/mypage/orderlist">주문조회</a></li>
+                    <li><a href="/service/center">고객센터</a></li>
+                </ul>
+            </div><!--// util -->
+
+            <div class="header-search">
+                <div class="top-search">
+                    <input type="search" class="input-search" value="" maxlength="100">
+
+                    <button type="button" class="btn-top-search" id="btnTopSearch" name="btnTopSearch"
+                            data-search-type="real" onclick="fnBtnTopSearch(this);">
+                        <span class="blind">검색</span>
+                    </button>
+                </div>
+            </div><!--// header-search -->
+
+            <div class="my-menu">
+                <ul>
+                    <li><a href="" class="btn-util-pedometer" title=""><span class="blind">만보기</span></a></li>
+                    <li><a href="" class="btn-util-coupon" title=""><span class="blind">쿠폰</span></a></li>
+                    <li><a href="" class="btn-util-mypage" title=""><span class="blind">마이페이지</span></a>
+                    </li>
+                    <li>
+                        <a href="" class="btn-util-cart" title="">
+                            <span class="blind">장바구니</span>
+                            <em class="count">0</em>
+                        </a>
+                    </li>
+                </ul>
+            </div><!--// my-menu -->
+        </div>
+        <!--// header-inner -->
+
+        <div class="gnb-wrap">
+            <div class="inner">
+                <div class="category-wrap">
+                    <a href="#all-category" class="btn-menu-all"><span>카테고리</span></a>
+                </div>
+                <nav id="gnb" class="gnb">
+                    <ul>
+                        <li class="">
+                            <a href="">
+                                <span>랭킹</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="">
+                                <span>이달의 특가</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="">
+                                <span>브랜드관</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="">
+                                <span>1팩 담기</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="">
+                                <span>혜택정리</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="">
+                                <span>이벤트</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="">
+                                <span>..</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div><!--//  gnb-wrap -->
+    </header>
+    <!--// ========== 공통 헤더 :: header ========== -->
+
+
+
+
+    <!-- ========== 컨텐츠 영역 :: container ========== -->
+    <section id="contents" class="container">
+
+        <!-- 여기서부터 작업 -->
+        <div class="content-wrap">
+            <div class="frame-full head-mypage">
+                <div class="user-info-box">
+                    <div class="inner">
+                        <div class="column user-info ">
+                            <div class="txt">
+                                    <span class="img">
+                                        <i class="ico-cou-level01"></i>
+                                    </span>
+                                <div class="" style="display:inline-block;width:calc(100% - 60xp);">
+                                    <p class="greeting">
+                                        <strong class="name">정주용</strong>님 반갑습니다
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!--// user-info -->
+                    </div><!--// inner -->
+                </div><!--// user-info-box -->
+            </div>
+            <div class="frame-sm">
+                <div class="frame-left">
+                    <div class="aside-menu-wrap">
+                        <nav class="aside-menu">
+                            <ul class="menu-list">
+                                <li>
+                                    <a href="/mypage/orderlist" class="menu">주문관리</a>
+                                    <ul class="depth2">
+                                        <li><a href="/mypage/orderlist">주문내역</a></li>
+                                        <li><a href="/mypage/cancellist">취소/반품 내역</a></li>
+                                        <li class=""><a href="/mypage/routineDelivery">정기배송 관리</a></li>
+                                        <li class=""><a href="/mypage/routineDelivery/card">정기결제 관리</a></li>
+                                        <li class=""><a href="/mypage/restock/list">재입고 알림 상품</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#" class="menu">혜택관리</a>
+                                    <ul class="depth2">
+                                        <li class=""><a href="/mypage/myCoupon">나의 쿠폰</a></li>
+                                        <li class=""><a href="/mypage/myPoint">포인트</a></li>
+                                        <li class=""><a href="/mypage/giftCard/list">랭킹닭컴 상품권 관리</a></li>
+                                        <!-- 활성화될 경우 li에 addClass current  -->
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#" class="menu">활동관리</a>
+                                    <ul class="depth2">
+                                        <li class=""><a href="/mypage/recentProduct/list">최근 본 상품</a></li>
+                                        <li class=""><a href="/mypage/wish/list">찜한상품</a></li>
+                                        <li class=""><a href="/mypage/wishBrand/list">관심브랜드</a></li>
+                                        <li><a href="/mypage/userCounsel/list">1:1문의</a></li>
+                                        <!-- 활성화될 경우 li에 addClass current  -->
+                                        <li><a href="/mypage/prodReview/list">상품후기</a></li>
+                                        <!-- 활성화될 경우 li에 addClass current  -->
+                                        <li><a href="/mypage/prodCounsel/list">상품문의내역</a></li>
+                                        <!-- 활성화될 경우 li에 addClass current  -->
+                                        <li><a href="/mypage/dietManage/list">식단상담 목록</a></li>
+                                        <!-- 활성화될 경우 li에 addClass current  -->
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="" class="menu goVipView">VIP전용관</a>
+                                </li>
+                                <li class="">
+                                    <a href="/mypage/orangeMember" class="menu">오렌지멤버스</a>
+                                </li>
+                                <li>
+                                    <a href="/mypage/delivery" class="menu">회원정보관리</a>
+                                    <ul class="depth2">
+                                        <li class=""><a href="/mypage/delivery">배송지 관리</a></li>
+                                        <li><a href="/mypage/info/mypage">정보수정</a></li>
+                                        <!-- 활성화될 경우 li에 addClass current  -->
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav><!--// menu-mypage -->
+                        <div class="aside-link-box">
+                            <a href="/service/voc"><i class="ico-bl-speaker"></i><span>고객의 소리</span><i
+                                    class="ico-arr-right"></i></a>
+                        </div>
+                    </div><!--// aside-menu-wrap -->
+                </div>
+
+
+                <div class="frame-right order-list-wrap">
+                    <div class="frame-cnt-inner">
+                        <form id="myPageOrderList" name="myPageOrderList" action="/mypage/orderlist?srchFlag=Y&amp;nowPageNo=&amp;mypage-order-search-radio=PERIOD&amp;periodOption=PERIOD&amp;dStartDtm=2023-10-01&amp;dEndDtm=2024-03-31&amp;srchProductNm=&amp;dlvTypeAll=Y&amp;dlvNrm=Y&amp;dlvRtn=Y" method="get">
+                            <div class="menu-title-area">
+                                <h3 class="title-menu">취소/반품내역</h3>
+                            </div><!--// menu-title-area -->
+                            <div class="search-box">
+                                <div class="search-detail">
+                                    <fieldset>
+                                        <legend>상세 검색</legend>
+                                        <div class="search-detail-top">
+                                            <div class="search-detail-date-itemname">
+                                                <div class="input-group w-full">
+                                                    <label for="item1-1" class="blind">검색</label>
+                                                    <input type="text" id="item1-1" name="srchProductNm" class="input-text" placeholder="주문 상품명 검색" value="">
+                                                    <span class="input-group-btn">
+                                                        <button type="submit" class="btn-icon-search search-word" title=""><i class="ico-btn-search"></i>
+                                                            <span class="blind">검색하기</span>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                    </fieldset>
+                                </div><!--// search-detail-->
+                            </div><!--// search-box -->
+                        </form><div class="order-list-area">
+                        <ul class="order-list-inner">
+                            <li>
+                                <div class="order-list-head">
+                                    <strong class="date">취소날짜</strong>
+                                    <div class="right">
+                                        <span class="order-item-id">주문번호</span>
+                                    </div>
+
+                                </div><!--// list-head -->
+                                <div class="order-content-box">
+                                    <ul class="order-div-list">
+                                        <li class="order-div-item">
+                                            <div class="prd-info-area">
+                                                <div class="inner">
+                                                    <div class="column img">
+                                                        <a href="javascript:void(0);" onclick="onClickMyPageOrderListOrderCd(this); return false;" ordercd="주문번호">
+                                                            <img src="https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20230517/IMG1684SDC309384667_100_100.png" alt="상품이미지">
+                                                        </a>
+                                                    </div>
+                                                    <div class="column tit">
+                                                        <div class="prd-state-row">
+                                                            <strong class="prd-state-head">취소상태표시</strong>
+                                                        </div>
+                                                        <div class="tit">
+                                                            <a href="javascript:void(0);" onclick="onClickMyPageOrderListOrderCd(this); return false;" ordercd="RK2310140004898434">상품이름</a>
+                                                        </div>
+                                                        <p class="desc">
+                                                            상품옵션</p>
+                                                    </div><!--// column  -->
+                                                    <div class="price-item">
+                                                        <div class="dlv-nmr">
+                                                            <p class="dlv-nmr-price">
+                                                                <span class="num">가격</span>원
+                                                            </p>
+                                                            <p class="dlv-nmr-cnt">
+                                                                <span class="num">상품개수</span>개
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!--// prd-info-area -->
+                                        </li><!--// order-div-item || 상품별 list 1 -->
+                                    </ul><!--// order-div-list -->
+                                    <div class="addr-info-line">
+                                        <p><i class="ico-bl-home2"></i>주소</p>
+                                    </div><!--// addr-info-line -->
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
+                <form id="command" name="deliveryPop" action="/mypage/main" method="post"><input type="hidden"
+                                                                                                 name="actionFlag" value="M">
+                    <input type="hidden" name="vDeliveryid">
+                    <input type="hidden" name="vOrderCd">
+                    <div>
+                        <input type="hidden" name="_csrf" value="9b875e96-0bdf-4014-973d-fe95f7c829fb">
+                    </div>
+                </form>
+                <div class="layer-wrap" id="modal-my-delivery" style="display: none"></div>
+            </div><!--// frame-sm -->
+        </div>
+
+
+    </section>
+    <!--// ========== 컨텐츠 영역 :: container ========== -->
+
+
+
+
+
+
+    <!-- ========== 공통 푸터 :: footer :: include.footer() 영역  ========== -->
+    <footer id="footer" class="footer">
+        <div class="footer-menu">
+            <div class="frame-sm">
+                <ul class="footer-menu-list">
+                    <li><a>회사소개</a></li>
+                    <li><a>공지사항</a></li>
+                    <li><a>입점 · 제휴 · 광고문의</a></li>
+                    <li><a>이용약관</a></li>
+                    <li><a class="text-black2 text-md">개인정보처리방침</a></li>
+                </ul><!--// footer-menu-list -->
+            </div><!--// footer-info-list -->
+        </div><!--// frame-sm -->
+        <div class="footer-info">
+            <strong class="footer-logo"><span class="blind">ProteinPlus</span></strong>
+            <div class="colum-info">
+                <h5 class="blind">회사 정보</h5>
+                <ul class="footer-biz-info">
+                    <li><span class="company-name">(주)푸드나무</span></li>
+                    <li>대표 : 김영문</li>
+                    <li>주소 : 서울특별시 마포구 월드컵북로 396, 15층(상암동, 누리꿈스퀘어 비지니스타워)</li>
+                    <li>사업자등록번호 : 105-87-81968
+                        사업자정보 확인
+                    </li>
+                    <li>통신판매업신고번호 : 제2015-서울마포-1058호</li>
+                    <li>개인정보보호책임자 : 이재길</li>
+                </ul>
+                <p class="copyright">Copyright©ProteinPlus All rights reserved.</p>
+            </div><!--// colum -->
+            <div class="colum-info">
+                <ul class="customer-info">
+                    <li class="cscenter">고객센터 <em class="footer-tel">02-6405-8088</em></li>
+                    <li>FAX. 02-6351-8088</li>
+                    <li>E-mail. admin@foodnamoo.com</li>
+                </ul>
+                <div class="customer-btns">
+                    <a href="#"><span>고객의 제안</span></a>
+                    <a href="#"><span>1:1 문의</span></a>
+                </div>
+                <ul class="footer-sns-list">
+                    <li><a target="_blank"><i class="ico-sns-facebook"></i><span class="sns_blind">페이스북</span></a>
+                    </li>
+                    <li><a target="_blank"><i class="ico-sns-instagram"></i><span class="sns_blind">인스타그램</span></a>
+                    </li>
+                    <li><a target="_blank"><i class="ico-sns-blog"></i><span class="sns_blind">네이버블로그</span></a>
+                    </li>
+                    <li><a target="_blank"><i class="ico-sns-post"></i><span class="sns_blind">네이버포스트</span></a>
+                    </li>
+                    <li><a target="_blank"><i class="ico-sns-kakaotalk"></i><span class="sns_blind">카카오톡</span></a>
+                    </li>
+                    <li><a target="_blank"><i class="ico-sns-youtube"></i><span class="sns_blind">유튜브</span></a>
+                    </li>
+                </ul>
+            </div><!--// colum -->
+        </div><!--// footer-info -->
+    </footer>
+</body>
+
+</html>
