@@ -409,11 +409,6 @@ fieldset, img {
     box-sizing: border-box;
     background: #fff;
 }
-a {
-    background: transparent;
-    text-decoration: none;
-    color: inherit;
-}
 
 .select-box .select-value > span {
     position: relative;
@@ -470,11 +465,6 @@ a {
     background: #fff;
     box-sizing: border-box;
     font-size: 14px;
-}
-a {
-    background: transparent;
-    text-decoration: none;
-    color: inherit;
 }
 
 .select-box .select-list li + li {
@@ -666,11 +656,6 @@ address, caption, cite, code, dfn, em, strong, th, var {
     display: block;
     width: 100%;
 }
-a {
-    background: transparent;
-    text-decoration: none;
-    color: inherit;
-}
 
 .payment-info-box .check-area {
     position: relative;
@@ -802,12 +787,6 @@ a {
     display: block;
     width: 20px;
     height: 20px;
-}
-
-button .blind {
-    position: relative;
-    font-size: 0;
-    color: transparent;
 }
 
 
@@ -1056,17 +1035,6 @@ input {
     display: block;
     width: 20px;
     height: 20px;
-}
-
-.blind {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
 }
 
 .order-point .btn-ex-grey {
