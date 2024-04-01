@@ -362,7 +362,7 @@ fieldset, img {
 }
 
 .text-primary {
-    color: #FF6001 !important;
+    color: #5356FF !important;
 }
 
 .dlv-request-box .inner-div {
@@ -827,9 +827,9 @@ button .blind {
     width: 100%;
 }
 .btn-primary {
-    background: #ff6001;
+    background: #5356FF;
     color: #fff;
-    border: 1px solid #ff6001;
+    border: 1px solid #5356FF;
 }
 .btn-basic-xlg {
     min-width: 215px;
@@ -1088,7 +1088,7 @@ input {
 .order-point .point-guide {
     display: inline-block;
     margin-left: 10px;
-    color: #FF6001;
+    color: #5356FF;
 }
 
 .text-num-bold {
