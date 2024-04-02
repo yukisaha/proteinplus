@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로틴플러스(ProteinPlus)</title>
+    <link rel="stylesheet" href="/css/frame.css">
+</head>
+
+<body>
+<div class="wrap main">
+
+    <!-- ========== 공통 헤더 :: header ========== -->
+    <header id="header" class="header">
+        <div class="header-inner">
+            <h1 class="logo "><a href="/static"><span class="blind">ProteinPlus</span></a></h1>
+
+            <div class="util">
+                <ul>
+                    <li><a href="/auth/login">로그인</a></li>
+                    <li><a href="/member/join/general">회원가입</a></li>
+                    <li><a href="/mypage/orderlist">주문조회</a></li>
+                    <li><a href="/service/center">고객센터</a></li>
+                </ul>
+            </div><!--// util -->
+
+            <div class="header-search">
+                <div class="top-search">
+                    <input type="search" class="input-search" value="" maxlength="100">
+
+                    <button type="button" class="btn-top-search" id="btnTopSearch" name="btnTopSearch"
+                            data-search-type="real" onclick="fnBtnTopSearch(this);">
+                        <span class="blind">검색</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="my-menu">
+                <ul>
+                    <li><a href="" class="btn-util-pedometer" title=""><span class="blind">만보기</span></a></li>
+                    <li><a href="" class="btn-util-coupon" title=""><span class="blind">쿠폰</span></a></li>
+                    <li><a href="" class="btn-util-mypage" title=""><span class="blind">마이페이지</span></a>
+                    </li>
+                    <li>
+                        <a href="" class="btn-util-cart" title="">
+                            <span class="blind">장바구니</span>
+                            <em class="count">0</em>
+                        </a>
+                    </li>
+                </ul>
+            </div><!--// my-menu -->
+        </div>
+        <!--// header-inner -->
+
+        <div class="gnb-wrap">
+            <div class="inner">
+                <div class="category-wrap">
+                    <a href="#all-category" class="btn-menu-all"><span>카테고리</span></a>
+
+                    <!--          부모 카테고리-->
+                    <div class="category-layer">
+
+                        <div class="first-category-list">
+                            <ul class="category-list">
+
+                                <li class="first-category-item active">
+                                    <a href="신상품 카테고리 페이지">신상품</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="category/category.html">전체</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+
+                                <li class="first-category-item">
+                                    <a href="닭가슴살 카테고리 페이지">닭가슴살</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="category/category.html">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="c0102.html">프로</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="c0103.html">스팀/소프트</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">소스닭가슴살</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">스테이크</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">소시지/햄</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">저염/염분무첨가</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">생 닭가슴살</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">훈제</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">볼/큐브</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">슬라이스</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">냉장/실온보관</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">핫바/어묵바</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">스낵/칩</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">크리스피</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">육포</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+
+
+                                <li class="first-category-item">
+                                    <a href="도시락/볶음밥 카테고리 페이지">도시락/볶음밥</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="category/category.html">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="c0102.html">볶음밥</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="c0103.html">다이어트 도시락</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">주먹밥/김밥</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">더담은 도시락</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">간편 도시락</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">덮밥/컵밥</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">즉석밥/곤약밥</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">간편 죽</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">비건 도시락</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <li class="first-category-item">
+                                    <a href="음료/차/프로틴 카테고리 페이지">음료/차/프로틴</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="category/category.html">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="c0102.html">프로틴 쉐이크</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="c0103.html">프로틴 음료</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">물/탄산수</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">보충제/부스터</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">우유/두유/요거트</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">커피/차</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">클렌즈/주스</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">제로음료</a>
+                                        </li>
+
+                                    </ul>
+
+                                </li>
+                                <li class="first-category-item">
+                                    <a href="즉석 간편식 카테고리 페이지">즉석 간편식</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="category/category.html">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="c0102.html">브리또</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="c0103.html">치킨</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">핫도그</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">즉석밥/곤약밥</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">만두/딤섬</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">떡볶이/튀김/순대</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">피자/탕수육</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">라면/쌀국수</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">곤약면/파스타</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">삼계탕</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">죽/스프</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <li class="first-category-item">
+                                    <a href="샐러드/과일 카테고리 페이지">소고기</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="category/category.html">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="c0102.html">스테이크/볼</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="c0103.html">설도/홍두깨살</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">국거리/조리용</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <li class="first-category-item">
+                                    <a href="견과/고구마/감자 카테고리 페이지">견과/고구마/감자</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="category/category.html">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="c0102.html">고구마/감자</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="c0103.html">단호박</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">견과/옥수수</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <li class="first-category-item">
+                                    <a href="샐러드/과일 카테고리 페이지">샐러드/과일</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">알뜰샐러드</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">토핑샐러드</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">과일</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">야채 믹스</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <li class="first-category-item">
+                                    <a href="계란/난백/콩 카테고리 페이지">계란/난백/콩</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">난백/흰자</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">구운/훈제</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">반숙란</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">콩/두부</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <li class="first-category-item">
+                                    <a href="닭안심살 카테고리 페이지">닭안심살</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">소프트</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">생 안심</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">구이/탕수육</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <li class="first-category-item">
+                                    <a href="과자/간식/떡 카테고리 페이지">과자/간식/떡</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">시리얼/바</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">젤리/쫀드기</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">초콜릿</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">프로틴 스낵</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">과자/쿠키</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">아이스크림</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">떡</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">오트밀</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <li class="first-category-item">
+                                    <a href="수산/해산">수산/해산</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">생선구이</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">어묵/맛살</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">오징어/문어</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">연어/참치</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">스테이크</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">황태포/쥐포</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">갑각류/해조류</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <li class="first-category-item">
+                                    <a href="베이커리/치즈 카테고리 페이지">베이커리/치즈</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">베이커리</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">햄버거</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">치즈</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <li class="first-category-item">
+                                    <a href="돼지/오리고기 카테고리 페이지">돼지/오리고기</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">돼지고기</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">오리고기</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <li class="first-category-item">
+                                    <a href="식단/패키지 카테고리 페이지">식단/패키지</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">골라담기</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">맛보기/패키지</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">식단</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">선물세트</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <li class="first-category-item">
+                                    <a href="소스/오일 카테고리 페이지">소스/오일</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">소스/드레싱</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">분말/시즈닝</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">잼/스프레드</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">오일</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">과일청</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <li class="first-category-item">
+                                    <a href="반찬/밀키트/안주 카테고리 페이지">반찬/밀키트/안주</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">카레/짜장/짬뽕</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">밀키트</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">잡채</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">건강반찬</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">국/탕/찌개</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">건강 안주</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">햄/소시지</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">참치</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <li class="first-category-item">
+                                    <a href="건강식품 카테고리 페이지">건강식품</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">영양제/비타민</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">흑마늘/꿀/홍삼</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">과일/건강즙</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">다이어트 보조제</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">콜라겐</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <li class="first-category-item">
+                                    <a href="채식식단 카테고리 페이지">운동/생활용품</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">보호대/밴드</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">스트랩/장갑</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">보틀/쉐이커</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">스포츠웨어</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">홈트레이닝</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">홈/리빙용품</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">굿즈</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">데일리웨어</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <li class="first-category-item">
+                                    <a href="채식식단 카테고리 페이지">채식식단</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">도시락</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">샐러드</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">대체육/콩고기</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">비건만두</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">콩/두부</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">떡볶이</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">빵/스낵</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">음료/두유</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">과일</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <li class="first-category-item">
+                                    <a href="펫푸드 카테고리 페이지">펫푸드</a>
+
+                                    <ul class="second-category-list">
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">전체</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">닭가슴살</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">간식</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">영양식품</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">동결건조사료</a>
+                                        </li>
+                                        <li class="second-category-item">
+                                            <a href="세부 카테고리 페이지 링크">우유/두유</a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+
+                                <!--                <li class="first-category-item">-->
+                                <!--                  <a href="선물하기 카테고리 페이지">선물하기</a>-->
+                                <!--                </li>-->
+
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div>
+                <nav id="gnb" class="gnb">
+                    <ul>
+                        <li class="">
+                            <a href="">
+                                <span>랭킹</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="">
+                                <span>이달의 특가</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="">
+                                <span>브랜드관</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="">
+                                <span>1팩 담기</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="">
+                                <span>혜택정리</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="">
+                                <span>이벤트</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="">
+                                <span>..</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div><!--//  gnb-wrap -->
+    </header>
+    <!--// ========== 공통 헤더 :: header ========== -->
+
+
+    <!-- ========== 컨텐츠 영역 :: container ========== -->
+    <section id="contents" class="container">
+
+        <!-- 여기서부터 작업 -->
+
+
+    </section>
+    <!--// ========== 컨텐츠 영역 :: container ========== -->
+
+
+    <!-- ========== 공통 푸터 :: footer :: include.footer() 영역  ========== -->
+    <footer id="footer" class="footer">
+        <div class="footer-menu">
+            <div class="frame-sm">
+                <ul class="footer-menu-list">
+                    <li><a>회사소개</a></li>
+                    <li><a>공지사항</a></li>
+                    <li><a>입점 · 제휴 · 광고문의</a></li>
+                    <li><a>이용약관</a></li>
+                    <li><a class="text-black2 text-md">개인정보처리방침</a></li>
+                </ul><!--// footer-menu-list -->
+            </div><!--// footer-info-list -->
+        </div><!--// frame-sm -->
+        <div class="footer-info">
+            <strong class="footer-logo"><span class="blind">ProteinPlus</span></strong>
+            <div class="colum-info">
+                <h5 class="blind">회사 정보</h5>
+                <ul class="footer-biz-info">
+                    <li><span class="company-name">(주)푸드나무</span></li>
+                    <li>대표 : 김영문</li>
+                    <li>주소 : 서울특별시 마포구 월드컵북로 396, 15층(상암동, 누리꿈스퀘어 비지니스타워)</li>
+                    <li>사업자등록번호 : 105-87-81968
+                        사업자정보 확인
+                    </li>
+                    <li>통신판매업신고번호 : 제2015-서울마포-1058호</li>
+                    <li>개인정보보호책임자 : 이재길</li>
+                </ul>
+                <p class="copyright">Copyright©ProteinPlus All rights reserved.</p>
+            </div><!--// colum -->
+            <div class="colum-info">
+                <ul class="customer-info">
+                    <li class="cscenter">고객센터 <em class="footer-tel">02-6405-8088</em></li>
+                    <li>FAX. 02-6351-8088</li>
+                    <li>E-mail. admin@foodnamoo.com</li>
+                </ul>
+                <div class="customer-btns">
+                    <a href="#"><span>고객의 제안</span></a>
+                    <a href="#"><span>1:1 문의</span></a>
+                </div>
+                <ul class="footer-sns-list">
+                    <li><a target="_blank"><i class="ico-sns-facebook"></i><span class="sns_blind">페이스북</span></a>
+                    </li>
+                    <li><a target="_blank"><i class="ico-sns-instagram"></i><span class="sns_blind">인스타그램</span></a>
+                    </li>
+                    <li><a target="_blank"><i class="ico-sns-blog"></i><span class="sns_blind">네이버블로그</span></a>
+                    </li>
+                    <li><a target="_blank"><i class="ico-sns-post"></i><span class="sns_blind">네이버포스트</span></a>
+                    </li>
+                    <li><a target="_blank"><i class="ico-sns-kakaotalk"></i><span class="sns_blind">카카오톡</span></a>
+                    </li>
+                    <li><a target="_blank"><i class="ico-sns-youtube"></i><span class="sns_blind">유튜브</span></a>
+                    </li>
+                </ul>
+            </div><!--// colum -->
+        </div><!--// footer-info -->
+    </footer>
+</div>
+<script>
+    // 모든 first-category-item 요소를 가져옵니다.
+    const firstCategoryItems = document.querySelectorAll('.first-category-item');
+
+    // 각 first-category-item 요소에 대해 이벤트 리스너를 추가합니다.
+    firstCategoryItems.forEach(item => {
+        item.addEventListener('mouseover', function() {
+            // 모든 first-category-item 요소에서 active 클래스를 제거합니다.
+            firstCategoryItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            // 현재 요소에 active 클래스를 추가합니다.
+            this.classList.add('active');
+        });
+    });
+
+
+
+    // category-layer 요소를 가져옵니다.
+    const categoryLayer = document.querySelector('.category-layer');
+    // category-wrap 요소를 가져옵니다.
+    const categoryWrap = document.querySelector('.category-wrap');
+
+    // category-layer에 마우스를 올렸을 때 이벤트를 추가합니다.
+    categoryLayer.addEventListener('mouseover', function() {
+        categoryWrap.style.backgroundColor = '#DFF5FF';
+    });
+
+    // category-wrap에 마우스를 올렸을 때 이벤트를 추가합니다.
+    categoryWrap.addEventListener('mouseover', function() {
+        this.style.backgroundColor = '#DFF5FF';
+    });
+
+    // category-layer와 category-wrap에서 마우스가 벗어났을 때 이벤트를 추가합니다.
+    categoryLayer.addEventListener('mouseout', resetStyles);
+    categoryWrap.addEventListener('mouseout', resetStyles);
+
+    // 배경색 초기화하는 함수입니다.
+    function resetStyles() {
+        categoryWrap.style.backgroundColor = '';
+    }
+
+</script>
+
+</body>
+
+</html>

@@ -425,7 +425,7 @@ section {
 
 .gnb-wrap .category-wrap {
   position: absolute;
-  width: 160px;
+  width: 161px;
   bottom: 0;
   left: -20px;
 }
@@ -464,6 +464,91 @@ section {
   height: 16px;
   background: #ccc;
 }
+
+/* ***************카테고리************** */
+
+
+.category-layer {
+  display: block;
+  width: 320px;
+  position: absolute;
+  /*width: 161px;*/
+  left: 0;
+  display: none;   /*  마우스 오버 하기전엔 안보이게  */
+  border: 1px solid #5356FF;
+  border-radius: 1px;
+  box-sizing: border-box;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15), 1px 1px 0 0 rgba(0, 0, 0, 0.1);
+  z-index: 20;
+  background: #ffffff;
+  text-align: left;
+}
+
+.btn-menu-all:hover + .category-layer, .category-layer:hover {
+  display: block;
+}
+
+.category-layer li:hover {
+  color: #5356FF;
+}
+
+.category-layer .first-category-list {
+  border-right: 1px solid #ccc;
+}
+
+.first-category-list {
+  position: relative;
+  width: 160px;
+  padding: 10px 8px 10px 7px;
+  box-sizing: border-box;
+}
+
+.first-category-list {
+  display: block;
+  text-overflow: ellipsis;
+  line-height: 28px;
+  white-space: nowrap;
+  position: relative;
+  box-sizing: border-box;
+  letter-spacing: -0.5px;
+  color: #131313;
+}
+
+.first-category-item.active {
+  background-color: #DFF5FF;
+}
+
+.first-category-item.active .second-category-list{
+  display: block;
+}
+
+.second-category-list {
+  display: none;
+  top: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: absolute;
+  width: 160px;
+  padding: 10px 8px 10px 7px;
+  box-sizing: border-box;
+  letter-spacing: -0.5px;
+  color: #131313;
+  left: 161px;
+}
+
+.second-category-item {
+  display: block;
+}
+
+.second-category-item:hover {
+  background-color: #DFF5FF;
+}
+
+
+
+
+
+/***********************************/
 
 .gnb-wrap .gnb {
   width: 100%;
