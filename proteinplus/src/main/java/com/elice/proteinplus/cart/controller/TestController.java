@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class TestController {
-    @GetMapping
+
+
+    @GetMapping("cart")
     public String test(){
         return "cart/cart";
     }
@@ -13,5 +15,10 @@ public class TestController {
     @GetMapping("mypage")
     public String mypageTest(){
         return "mypageFrame";
+    }
+
+    @GetMapping("wishList")
+    public String wishListTest(){
+        return "cart/wishList";
     }
 }
