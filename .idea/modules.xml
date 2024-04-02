@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/proteinplus.iml" filepath="$PROJECT_DIR$/.idea/proteinplus.iml" />
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/proteinplus.proteinplus.main.iml" filepath="$PROJECT_DIR$/.idea/modules/proteinplus.proteinplus.main.iml" />
+=======
+>>>>>>> dev
     </modules>
   </component>
 </project>
