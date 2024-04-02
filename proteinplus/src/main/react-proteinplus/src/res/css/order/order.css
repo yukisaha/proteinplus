@@ -30,22 +30,12 @@
     padding-top: 11px;
 }
 
-.order-info {
-    position: relative;
-    padding: 0 0 60px;
-}
 
 .order-info .list-head-sub {
     position: relative;
     padding: 30px 0 5px;
     border-top: 1px solid #ccc;
     margin: 30px 0 15px;
-}
-
-.order-info .title-list {
-    font-size: 16px;
-    font-weight: 700;
-    display: inline-block;
 }
 
 .order-info .list-head-sub .btn-basic-sm2 {
@@ -60,12 +50,14 @@
     background: #fff;
     color: #333;
     border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .btn-basic-sm2 {
     min-width: 67px;
     height: 32px;
     padding: 5px 10px;
+    border-radius: 4px;
 }
 
 .btn-basic-sm2 > span {
@@ -136,7 +128,15 @@
 .badge-point2 {
     background-color: #F8F8F8;
     color: #666666;
+    margin-left:6px;
+    display: inline-block;
 }
+
+.lineless-table.type1 #addressInfoDiv h3 {
+    margin-top: 11px;
+    margin-bottom: 20px;
+}
+
 [class^="badge-"] {
     display: inline-block;
     vertical-align: top;
@@ -345,6 +345,7 @@ fieldset, img {
     border: 1px solid #ccc;
     border-top: 0;
     background-color: #f7f7f7;
+    display: block;
 }
 
 .plus-deli-box {
@@ -575,6 +576,7 @@ address, caption, cite, code, dfn, em, strong, th, var {
     font-size: 12px;
     color: #666;
     font-weight: normal;
+    display:none;
 }
 
 .order-price:not(.type2) .div-price > li + li:not(:last-child) {
@@ -603,7 +605,7 @@ address, caption, cite, code, dfn, em, strong, th, var {
 
 .order-price .total-price {
     border-top: 2px solid #999;
-    padding: 10px 0;
+    padding: 20px 0;
 }
 
 .point-container-box {
@@ -837,12 +839,6 @@ address, caption, cite, code, dfn, em, strong, th, var {
     margin-bottom: -10px;
 }
 
-.order-info .title-list {
-    font-size: 16px;
-    font-weight: 700;
-    display: inline-block;
-}
-
 .lineless-table table {
     width: 100%;
     table-layout: fixed;
@@ -1063,11 +1059,6 @@ input {
     font-weight: 700;
 }
 /* 결제 방법 */
-.order-info .list-head {
-    position: relative;
-    padding: 30px 0 20px;
-    border-top: 1px solid #666;
-}
 
 .grid-wrap,
 .grid-area,
