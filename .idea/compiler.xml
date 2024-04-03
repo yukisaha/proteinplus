@@ -10,9 +10,6 @@
         <module name="proteinplus.proteinplus.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="17">
-      <module name="proteinplus.proteinplus.main~1" target="17" />
-      <module name="proteinplus.proteinplus.test~1" target="17" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="17" />
   </component>
 </project>

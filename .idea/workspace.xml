@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b04c1623-7826-4b79-87cf-796c9c8ff47c" name="Changes" comment="" />
+    <list default="true" id="b04c1623-7826-4b79-87cf-796c9c8ff47c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/Order.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +25,12 @@
       <state>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="proteinplus" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -31,9 +41,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="Class" />
         <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -73,9 +83,10 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.ProteinplusApplication.executor": "Run",
+    "git-widget-placeholder": "feature/order/back",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/seoyeonkang/Desktop/proteinplus/proteinplus/src/main/react-proteinplus/src/component/order",
+    "last_opened_file_path": "C:/Users/seoyeonkang/Desktop/proteinplus",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -127,6 +138,8 @@
       <workItem from="1711879015066" duration="15989000" />
       <workItem from="1711936430456" duration="12945000" />
       <workItem from="1712023154179" duration="14145000" />
+      <workItem from="1712068985734" duration="2545000" />
+      <workItem from="1712109879830" duration="479000" />
     </task>
     <servers />
   </component>
