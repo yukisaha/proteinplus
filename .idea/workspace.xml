@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b04c1623-7826-4b79-87cf-796c9c8ff47c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proteinplus/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/Order.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,11 +136,22 @@
       <workItem from="1711936430456" duration="12945000" />
       <workItem from="1712023154179" duration="14145000" />
       <workItem from="1712068985734" duration="2545000" />
-      <workItem from="1712109879830" duration="479000" />
+      <workItem from="1712109879830" duration="2882000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
