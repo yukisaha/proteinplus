@@ -5,7 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b04c1623-7826-4b79-87cf-796c9c8ff47c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/Address.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/Delivery.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/DeliveryStatus.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/global/entity/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/global/entity/BaseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/OrderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/OrderItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/OrderStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/OrderStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/cart/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/cart/cart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/cart/wishList.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/cart/wishList.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/mypageFrame.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/mypageFrame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/join-complete.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/join-complete.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/join.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/join.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/user-delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/user-delete.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/user-profile-edit-pwc.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/user-profile-edit-pwc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/user-profile-edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/user-profile-edit.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,40 +79,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Gradle.Build proteinplus.executor": "Run",
-    "JavaScript Debug.order.html.executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.ProteinplusApplication.executor": "Run",
-    "git-widget-placeholder": "feature/order/back",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/seoyeonkang/Desktop/proteinplus",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Gradle.Build proteinplus.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.order.html.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ProteinplusApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/order/back&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/seoyeonkang/Desktop/proteinplus&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\seoyeonkang\Desktop\proteinplus\proteinplus\src\main\react-proteinplus\src\res\images\order" />
