@@ -2,7 +2,7 @@ import React from 'react';
 import '../../res/css/order/order.css';
 import '../../res/css/frame.css';
 
-const OrderPage = () => {
+export default function OrderPage(){
     // function openUserDeliveryListPop(check) {
     //     $('body').css("overflow", "hidden");
     //
@@ -419,5 +419,3 @@ const OrderPage = () => {
         </div>
     );
 };
-
-export default OrderPage;
