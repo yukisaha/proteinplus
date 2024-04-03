@@ -1,7 +1,9 @@
 package com.elice.proteinplus.order.entity;
 
+import com.elice.proteinplus.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -9,21 +11,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name ="orders")
+@NoArgsConstructor
 @Getter
 @Setter
+@Table(name ="order")
 public class Order extends BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member; //한명의 회원은 여러번의 주문 할 수 있다. (주문엔티티 기준 다대일 단방향)
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user; //한명의 회원은 여러번의 주문 할 수 있다. (주문엔티티 기준 다대일 단방향)
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    private Product product; //한명의 회원은 여러번의 주문 할 수 있다. (주문엔티티 기준 다대일 단방향)
+
+    @Column(nullable = false)
     private LocalDateTime orderDate; //주문일
+
+    @Column(nullable = false)
+    private String orderReq; //주문 요청사항
+
+    @Column(nullable = false)
+    private String receiverName; //수령인 이름
+
+    @Column(nullable = false)
+    private String receiverPhoneNumber; //수령인 번호
+
 
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus; //주문상태
@@ -35,11 +54,6 @@ public class Order extends BaseEntity {
     @OneToMany(mappedBy = "order" ,cascade = CascadeType.ALL  //연관관계 주인, 부모 엔티티의 영속성 상태 변화를 자식 엔티티에 모두 변이
             ,orphanRemoval = true) //고아객체제거(부모엔티티와 연관관계 끊어짐) , 참조하는 기능이 하나일때만 사용할 것
     private List<OrderItem> orderItems = new ArrayList<>(); //하나의 주문이 여러개의 주문 상품을 가지므로 List사용
-
-   /* private LocalDateTime regTime;
-
-    private LocalDateTime updateTime;
-   */
 
     //cascade : order를 저장할때 delivery도 자동으로 persist 해준다.
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL) //하나의 배송정보는 하나의 주문정보만 가져야 하니까
@@ -54,9 +68,9 @@ public class Order extends BaseEntity {
     }
 
 
-    public static Order createOrder(Member member, List<OrderItem> orderItemList){
+    public static Order createOrder(User user, List<OrderItem> orderItemList){
         Order order = new Order();
-        order.setMember(member); //상품을 주문한 회원의 정보를 세팅합니다.
+        order.setUser(user); //상품을 주문한 회원의 정보를 세팅합니다.
 
         /*
         상품 페이지에서는 1개의 상품을 주문하지만,
