@@ -1,50 +1,52 @@
 import React from 'react';
-import './orderDetail.css';
+import '../../res/css/order/orderDetail.css';
+import '../../res/css/frame.css';
+import '../../res/css/mypageFrame.css';
 
 const OrderDetailPage = () => {
-    function fnBtnTopSearch(keyword) {
-
-        let url = "";
-        let searchKeyword = "";
-
-        switch (keyword.dataset.searchType) {
-
-            case 'real':
-                // 상단 검색창 키워드
-                searchKeyword = $("#rankKeyword").val();
-                break;
-
-            case 'recent':
-                // 최근검색어
-                searchKeyword = $(keyword).text();
-                break;
-
-            case 'popular':
-                // 인기검색어
-                searchKeyword = $(keyword).find('.word').text();
-                break;
-
-            default:
-                // 상단 검색창 키워드
-                searchKeyword = $("#rankKeyword").val();
-                break;
-        }
-
-        // 검색창 광고관리 기능
-        if (isEmpty(searchKeyword)) {
-
-            const searchData = {};
-            searchData.code    = $("#rankKeyword").data('link-code') + '';
-            searchData.url     = $("#rankKeyword").data('advert-url');
-            searchData.keyword = $("#rankKeyword").prop('placeholder');
-
-            fnPageSearchMove(searchData);
-
-        } else {
-            // 리다이렉션 키워드관리 검색
-            fnRedirectKeyword(searchKeyword);
-        }
-    }
+    // function fnBtnTopSearch(keyword) {
+    //
+    //     let url = "";
+    //     let searchKeyword = "";
+    //
+    //     switch (keyword.dataset.searchType) {
+    //
+    //         case 'real':
+    //             // 상단 검색창 키워드
+    //             searchKeyword = $("#rankKeyword").val();
+    //             break;
+    //
+    //         case 'recent':
+    //             // 최근검색어
+    //             searchKeyword = $(keyword).text();
+    //             break;
+    //
+    //         case 'popular':
+    //             // 인기검색어
+    //             searchKeyword = $(keyword).find('.word').text();
+    //             break;
+    //
+    //         default:
+    //             // 상단 검색창 키워드
+    //             searchKeyword = $("#rankKeyword").val();
+    //             break;
+    //     }
+    //
+    //     // 검색창 광고관리 기능
+    //     if (isEmpty(searchKeyword)) {
+    //
+    //         const searchData = {};
+    //         searchData.code    = $("#rankKeyword").data('link-code') + '';
+    //         searchData.url     = $("#rankKeyword").data('advert-url');
+    //         searchData.keyword = $("#rankKeyword").prop('placeholder');
+    //
+    //         fnPageSearchMove(searchData);
+    //
+    //     } else {
+    //         // 리다이렉션 키워드관리 검색
+    //         fnRedirectKeyword(searchKeyword);
+    //     }
+    // }
 
     return (
         <div className="wrap main">

@@ -1,5 +1,6 @@
 import React from 'react';
-import './calcelDetail.css';
+import '../../res/css/order/cancelDetail.css';
+import '../../res/css/frame.css';
 
 const CancelDetailPage = () => {
     function fnBtnTopSearch(keyword) {

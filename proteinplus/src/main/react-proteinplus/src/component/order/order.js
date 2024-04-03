@@ -1,17 +1,18 @@
 import React from 'react';
-import './order.css';
+import '../../res/css/order/order.css';
+import '../../res/css/frame.css';
 
 const OrderPage = () => {
-    function openUserDeliveryListPop(check) {
-        $('body').css("overflow", "hidden");
-
-        let deliveryListUrl = "/order/order/userDeliveryList";
-        if (check == true) {
-            deliveryListUrl += "?phoneCheck="+check;
-        }
-
-        $('#userDeliveryListPop').load(deliveryListUrl);
-    }
+    // function openUserDeliveryListPop(check) {
+    //     $('body').css("overflow", "hidden");
+    //
+    //     let deliveryListUrl = "/order/order/userDeliveryList";
+    //     if (check == true) {
+    //         deliveryListUrl += "?phoneCheck="+check;
+    //     }
+    //
+    //     $('#userDeliveryListPop').load(deliveryListUrl);
+    // }
 
 
 
