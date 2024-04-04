@@ -5,6 +5,7 @@
     <content url="file://$MODULE_DIR$/../../proteinplus">
       <excludeFolder url="file://$MODULE_DIR$/../../proteinplus/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../proteinplus/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../proteinplus/out" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
