@@ -57,7 +57,7 @@
 .category-list.active {
     color: #5356FF;
     border-color: #5356FF;
-    z-index: 20;
+    z-index: 10;
 }
 
 

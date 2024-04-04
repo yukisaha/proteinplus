@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import '../../res/css/category/category.css';
+import Header from '../../components/Header'; // frame.js에서 Header 함수 import
+import Footer from '../../components/Footer'; // frame.js에서 Footer 함수 import
+import '../../styles/category/css/category.css';
 
 function Category() {
 
@@ -30,22 +32,28 @@ function Category() {
     const location = useLocation();
 
     return (
-        <div className="content-wrap frame-sm">
-            <div className="page-title-area">
-                <h2 className="title-page-type2">{category}</h2>
-            </div>
-            <div className="prd-top-bnr"></div>
-            <div className="detail-category-tb-wrap">
-                <div className="detail-category-table">
-                    {/* categories 배열을 매핑하여 동적으로 카테고리 목록 생성 */}
-                    {categories.map(cat => (
-                        <div className={`category-list ${location.pathname === `/product/list/${cat.name}` ? 'active' : ''}`} key={cat.id}>
-                            {/* Link를 사용하여 동적으로 링크 생성 */}
-                            <Link to={`/product/list/${cat.name}`}>{cat.text}</Link>
+        <div className="wrap main">
+            <Header /> {/* Header 컴포넌트 추가 */}
+            <section id="contents" className="container">
+                <div className="content-wrap frame-sm">
+                    <div className="page-title-area">
+                        <h2 className="title-page-type2">{category}</h2>
+                    </div>
+                    <div className="prd-top-bnr"></div>
+                    <div className="detail-category-tb-wrap">
+                        <div className="detail-category-table">
+                            {/* categories 배열을 매핑하여 동적으로 카테고리 목록 생성 */}
+                            {categories.map(cat => (
+                                <div className={`category-list ${location.pathname === `/product/list/${cat.name}` ? 'active' : ''}`} key={cat.id}>
+                                    {/* Link를 사용하여 동적으로 링크 생성 */}
+                                    <Link to={`/product/list/${cat.name}`}>{cat.text}</Link>
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    </div>
                 </div>
-            </div>
+            </section>
+            <Footer /> {/* Footer 컴포넌트 추가 */}
         </div>
     );
 }

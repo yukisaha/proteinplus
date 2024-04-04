@@ -5,6 +5,7 @@ import Home from './pages/home/Home.js';
 import Cart from './pages/cart/Cart.js';
 import MypageFrame from './components/MypageFrame.js';
 import WishList from './pages/cart/WishList.js';
+import Category from "./pages/category/Category";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/wishList",
     element: <WishList />
+  },
+  {
+    path: "/product/list/:category",
+    element: <Category />
   },
 
 ]);
