@@ -1,13 +1,3 @@
-.container {
-  position: relative;
-  min-height: 700px;
-  padding-bottom: 100px;
-}
-
-.main .container {
-  padding-bottom: 100px;
-}
-
 .content-wrap {
   min-height: 700px;
 }

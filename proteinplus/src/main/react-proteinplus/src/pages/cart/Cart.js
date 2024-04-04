@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from '../../component/header'; // frame.js에서 Header 함수 import
-import Footer from '../../component/footer'; // frame.js에서 Footer 함수 import
-import '../../res/css/cart/cart.css'; // cart.css 파일 가져오기
+import Header from '../../components/Header'; // frame.js에서 Header 함수 import
+import Footer from '../../components/Footer'; // frame.js에서 Footer 함수 import
+import '../../styles/cart/css/Cart.css'; // cart.css 파일 가져오기
 
 function Cart() {
     return (
