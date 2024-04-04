@@ -1,6 +1,6 @@
 package com.elice.proteinplus.order.entity;
 
-import com.elice.proteinplus.global.entity.BaseEntity;
+import com.elice.proteinplus.global.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name ="order")
-public class Order extends BaseEntity {
+public class Order extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,24 +53,24 @@ public class Order extends BaseEntity {
      */
     @OneToMany(mappedBy = "order" ,cascade = CascadeType.ALL  //연관관계 주인, 부모 엔티티의 영속성 상태 변화를 자식 엔티티에 모두 변이
             ,orphanRemoval = true) //고아객체제거(부모엔티티와 연관관계 끊어짐) , 참조하는 기능이 하나일때만 사용할 것
-    private List<OrderItem> orderItems = new ArrayList<>(); //하나의 주문이 여러개의 주문 상품을 가지므로 List사용
+    private List<OrderDetail> orderDetails = new ArrayList<>(); //하나의 주문이 여러개의 주문 상품을 가지므로 List사용
 
     //cascade : order를 저장할때 delivery도 자동으로 persist 해준다.
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL) //하나의 배송정보는 하나의 주문정보만 가져야 하니까
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //하나의 배송정보는 하나의 주문정보만 가져야 하니까
     @JoinColumn(name = "delivery_id")  //연관관계 주인 fk
     private Delivery delivery; //배송정보
 
 
     //주문 객체 만들기
-    public void addOrderItem(OrderItem orderItem) { //주문 상품 정보 담아줌
-        orderItems.add(orderItem); //orderItem 객체를 order 객체의 orderItems에 추가합니다.
-        orderItem.setOrder(this);
+    public void addOrderItem(OrderDetail orderDetail) { //주문 상품 정보 담아줌
+        orderDetails.add(orderDetail); //orderItem 객체를 order 객체의 orderItems에 추가
+        orderDetail.setOrder(this);
     }
 
 
-    public static Order createOrder(User user, List<OrderItem> orderItemList){
+    public static Order createOrder(User user, List<OrderDetail> orderDetailList){
         Order order = new Order();
-        order.setUser(user); //상품을 주문한 회원의 정보를 세팅합니다.
+        order.setUser(user); //상품을 주문한 회원의 정보를 세팅
 
         /*
         상품 페이지에서는 1개의 상품을 주문하지만,
@@ -78,11 +78,11 @@ public class Order extends BaseEntity {
         따라서 여러개의 주문 상품을 담을 수 있도록 리스트 형태로 파라미터 값을 받으며
         주문 객체에 ordrItem 객체 추가
          */
-        for(OrderItem orderItem : orderItemList){
-            order.addOrderItem(orderItem);
+        for(OrderDetail orderDetail : orderDetailList){
+            order.addOrderItem(orderDetail);
         }
         order.setOrderStatus(OrderStatus.ORDER); //주문 상태 세팅
-        order.setOrderDate(LocalDateTime.now()); //현재 시간을 주문 시간으로 세팅팅
+        order.setOrderDate(LocalDateTime.now()); //현재 시간을 주문 시간으로 세팅
 
         return order;
     }
@@ -90,8 +90,8 @@ public class Order extends BaseEntity {
     //총 주문 금액
     public int getTotalPrice(){
         int totalPrice = 0;
-        for(OrderItem orderItem : orderItems){
-            totalPrice +=orderItem.getTotalPrice();
+        for(OrderDetail orderDetail : orderDetails){
+            totalPrice += orderDetail.getTotalPrice();
         }
         return  totalPrice;
     }
@@ -99,7 +99,7 @@ public class Order extends BaseEntity {
     //주문 취소 = 상품 재고 더하기 + 주문상태 취소로 바꾸기
     public void cancelOrder() {
         this.orderStatus = OrderStatus.CANCEL;
-        for (OrderItem orderItem : orderItems) {
-            orderItem.cancel();
+        for (OrderDetail orderDetail : orderDetails) {
+            orderDetail.cancel();
         }
     }

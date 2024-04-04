@@ -1,24 +1,26 @@
 package com.elice.proteinplus.order.entity;
 
+import com.elice.proteinplus.global.entity.BaseTimeEntity;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
+@NoArgsConstructor
 @Getter
 @Setter
-public class OrderItem {
+@Table(name = "orderDetail")
+public class OrderDetail extends BaseTimeEntity {
     @Id
     @GeneratedValue
-    @Column(name = "order_item_id")
+    @Column(name = "order_detail_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product; //하나의 상품은 여러 주문 상품으로 들어갈 수 있다. 주문 상품 기준으로 다대일 단방향
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id") //fk
+    @JoinColumn(name = "order_id", nullable = false) //fk
     private Order order; //하나의 주문에 여러개의 상품을 주문할 수 있다. 주문상품과 주문 엔티티를 다대일 단방향
 
     private int orderPrice; //주문가격
@@ -26,16 +28,16 @@ public class OrderItem {
     private int count; //수량
 
     //상품 주문
-    public static OrderItem createOrderItem(Product product, int count){
-        OrderItem orderItem = new OrderItem();
+    public static OrderDetail createOrderItem(Product product, int count){
+        OrderDetail orderDetail = new OrderDetail();
 
-        orderItem.setProduct(product); //주문 상품
-        orderItem.setCount(count); //주문 수량 세팅
-        orderItem.setOrderPrice(product.getPrice()); //나중에 쿠폰이나 할인 설정
+        orderDetail.setProduct(product); //주문 상품
+        orderDetail.setCount(count); //주문 수량 세팅
+        orderDetail.setOrderPrice(product.getPrice()); //나중에 쿠폰이나 할인 설정
 
         //주문한 수량만큼 재고 감소
         product.removeStock(count);
-        return orderItem;
+        return orderDetail;
     }
 
     //주문 가격 *수량 = 총 가격

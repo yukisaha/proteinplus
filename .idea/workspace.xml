@@ -5,24 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b04c1623-7826-4b79-87cf-796c9c8ff47c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/Address.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/Delivery.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/DeliveryStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/global/entity/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/global/entity/BaseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/global/entity/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/global/entity/BaseTimeEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/Delivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/Delivery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/DeliveryStatus.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/OrderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/OrderItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/OrderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/OrderDetail.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/OrderStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/OrderStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/cart/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/cart/cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/cart/wishList.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/cart/wishList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/mypageFrame.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/mypageFrame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/join-complete.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/join-complete.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/join.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/join.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/user-delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/user-delete.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/user-profile-edit-pwc.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/user-profile-edit-pwc.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/user-profile-edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/user/user-profile-edit.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,6 +146,7 @@
       <workItem from="1712023154179" duration="14145000" />
       <workItem from="1712068985734" duration="2545000" />
       <workItem from="1712109879830" duration="2882000" />
+      <workItem from="1712196277765" duration="363000" />
     </task>
     <servers />
   </component>
