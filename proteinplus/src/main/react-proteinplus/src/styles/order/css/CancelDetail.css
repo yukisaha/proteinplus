@@ -143,13 +143,13 @@ label, select, input, textarea {
 }
 [class^="ico-btn-"] {
     display: inline-block;
-    background-image: url(../images/order/ico_btns.png);
+    background-image: url(../images/ico_btns.png);
 }
 
 [class*="btn-icon-"]:after {
     display: inline-block;
     content: '';
-    background-image: url(../images/order/ico_btns.png);
+    background-image: url(../images/ico_btns.png);
 }
 
 .order-list-wrap .order-list-inner > li .order-list-head {
@@ -337,7 +337,7 @@ address, caption, cite, code, dfn, em, strong, th, var {
 
 [class^="ico-bl-"] {
     display: inline-block;
-    background-image: url(/images/ico_bullet.png);
+    /*background-image: url(/images/ico_bullet.png);*/
 }
 
 /*.blind {*/
