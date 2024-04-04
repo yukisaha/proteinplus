@@ -485,3 +485,13 @@ section {
   white-space: nowrap;
   line-height: 20px;
 }
+
+.container {
+  position: relative;
+  min-height: 700px;
+  padding-bottom: 100px;
+}
+
+.main .container {
+  padding-bottom: 100px;
+}
