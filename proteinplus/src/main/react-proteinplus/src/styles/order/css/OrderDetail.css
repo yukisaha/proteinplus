@@ -1,0 +1,354 @@
+.order-list-wrap {
+    width: 820px;
+}
+.frame-right {
+    float: right;
+}
+
+.frame-cnt-inner {
+    width: 820px;
+}
+
+.menu-title-area {
+    position: relative;
+    min-height: 30px;
+}
+
+.menu-title-area .title-menu {
+    display: inline-block;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.order-list-wrap .menu-title-area ~ .search-box {
+    margin-top: 25px;
+    margin-bottom: 30px;
+}
+.menu-title-area ~ .search-box {
+    margin-top: 10px;
+}
+.order-list-wrap .search-box {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+}
+.search-box {
+    padding: 15px 18px;
+    background: #F8F8F8;
+    border: 1px solid #ECECEC;
+}
+
+.order-list-wrap .search-box .search-detail {
+    padding-top: 0;
+}
+.search-box .search-detail {
+    padding-top: 18px;
+}
+
+legend, caption {
+    position: absolute;
+    left: -99999px;
+    display: block;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    text-indent: -99999px;
+    clip: rect(0, 0, 0, 0);
+}
+
+.order-list-wrap .search-detail-top .search-detail-date-itemname {
+    width: 100%;
+}
+.wp100, .w-full {
+    width: 100% !important;
+}
+.input-group {
+    height: 40px;
+}
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: collapse;
+    /* width: 100%; */
+}
+
+label, select, input, textarea {
+    vertical-align: middle;
+}
+.order-list-wrap .search-detail-top .search-detail-date-itemname .input-text {
+    height: 42px;
+    border-radius: 4px;
+    border: 1px solid #e6e6e6;
+    padding-right: 50px;
+}
+.input-group .input-text {
+    height: 100%;
+    /* height: 40px; */
+    padding: 3px 15px;
+}
+.input-group > .input-text {
+    position: relative;
+    display: table-cell;
+    float: left;
+    width: 100%;
+    z-index: 2;
+}
+.input-text {
+    height: 40px;
+    padding: 5px 15px;
+    background: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 13px;
+    border-radius: 0;
+}
+
+.order-list-wrap .search-detail-top .search-detail-date-itemname .input-group-btn {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    display: block;
+    width: auto;
+    height: auto;
+    z-index: 3;
+    padding: 15px;
+}
+.input-group > .input-text + .input-group-form:last-child, .input-group > .input-text + .input-group-btn:last-child {
+    padding: 0 0 0 5px;
+}
+.input-group > .input-group-form:last-child, .input-group > .input-group-btn:last-child {
+    padding: 0;
+}
+.input-group > .input-group-form, .input-group > .input-group-btn {
+    display: table-cell;
+    position: relative;
+    white-space: nowrap;
+    width: 1%;
+    vertical-align: middle;
+    border: 0;
+    padding: 0 5px;
+}
+
+.search-detail-date-itemname .input-group-btn .btn-icon-search {
+    width: 18px;
+    height: 18px;
+}
+
+.ico-btn-search {
+    background-position: 0 0;
+    width: 18px;
+    height: 18px;
+}
+[class^="ico-btn-"] {
+    display: inline-block;
+    background-image: url(../images/order/ico_btns.png);
+}
+
+[class*="btn-icon-"]:after {
+    display: inline-block;
+    content: '';
+    background-image: url(../images/order/ico_btns.png);
+}
+
+.order-list-wrap .order-list-inner > li .order-list-head {
+    padding-top: 15px;
+    border-top: 1px solid #333;
+}
+.order-list-head {
+    position: relative;
+    padding: 30px 0 15px;
+}
+
+.order-list-head .date {
+    display: inline-flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 700;
+    vertical-align: top;
+}
+address, caption, cite, code, dfn, em, strong, th, var {
+    font-style: normal;
+}
+
+.order-list-head .right {
+    margin-top: 4px;
+    displaY: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.order-list-head .right .order-item-id {
+    font-size: 12px;
+    line-height: 16px;
+    color: #999;
+    font-wieght: 400;
+}
+
+.prd-info-area {
+    position: relative;
+}
+
+.prd-info-area .inner {
+    display: table;
+    table-layout: auto;
+    width: 100%;
+}
+
+.prd-info-area .column.img {
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    position: relative;
+}
+.prd-info-area .column {
+    display: table-cell;
+    vertical-align: top;
+    text-align: center;
+}
+
+.order-content-box .prd-info-area .column.img > a {
+    display: block;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.prd-info-area .column.img img {
+    width: 80px;
+    height: 80px;
+}
+img {
+    max-width: 100%;
+    vertical-align: top;
+}
+fieldset, img {
+    border: 0;
+}
+
+.order-content-box .prd-info-area .column.tit {
+    vertical-align: top;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+.prd-info-area .column.tit {
+    padding: 0 10px 0 15px;
+    text-align: left;
+}
+.prd-info-area .column {
+    display: table-cell;
+    vertical-align: top;
+    text-align: center;
+}
+
+.order-content-box .prd-info-area .column.tit .prd-state-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.order-content-box .prd-info-area .column.tit .prd-state-row .prd-state-head {
+    font-weight: 700;
+    color: #5356FF;
+    font-size: 15px;
+    line-height: 16px;
+}
+address, caption, cite, code, dfn, em, strong, th, var {
+    font-style: normal;
+}
+
+.order-content-box .prd-info-area .column.tit .desc {
+    font-size: 14px;
+    line-height: 16px;
+    color: #999;
+    margin-top: 6px;
+    margin-bottom: 0;
+}
+.prd-info-area .column.tit .desc {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.order-content-box .prd-info-area .price-item {
+    width: 130px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: right;
+}
+
+.order-content-box .prd-info-area .price-item .dlv-nmr {
+    display: flex;
+    align-items: center;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.order-content-box .prd-info-area .price-item .dlv-nmr .dlv-nmr-price {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    color: #333;
+}
+
+.order-content-box .prd-info-area .price-item .dlv-nmr .dlv-nmr-cnt {
+    padding-left: 11px;
+    position: relative;
+    font-size: 14px;
+    line-height: 16px;
+    color: #333;
+}
+
+.order-content-box .prd-info-area .price-item .dlv-nmr .dlv-nmr-cnt::before {
+    content: '';
+    display: block;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background-color: #333;
+    position: absolute;
+    top: 50%;
+    left: calc(11px / 2);
+    transform: translate(-50%, -50%);
+}
+
+.order-content-box .addr-info-line {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    margin-top: 15px;
+    display: flex;
+}
+
+.order-content-box .addr-info-line p {
+    color: #666;
+}
+
+.order-content-box .addr-info-line p [class*="ico-bl-"] {
+    margin-right: 10px;
+}
+.ico-bl-home2 {
+    background-position: -210px 0;
+    width: 13px;
+    height: 13px;
+    margin-bottom: -2px;
+}
+
+[class^="ico-bl-"] {
+    display: inline-block;
+    background-image: url(/resources/images/ico_bullet.png);
+}
+
+/*.blind {*/
+/*    position: absolute;*/
+/*    width: 1px;*/
+/*    height: 1px;*/
+/*    margin: -1px;*/
+/*    padding: 0;*/
+/*    overflow: hidden;*/
+/*    clip: rect(0, 0, 0, 0);*/
+/*    border: 0;*/
+/*}*/
+
+
