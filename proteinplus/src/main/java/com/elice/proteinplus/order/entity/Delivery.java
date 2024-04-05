@@ -9,6 +9,7 @@ import static jakarta.persistence.FetchType.LAZY;
 @Entity
 @Getter
 @Setter
+@Table(name = "delivery")
 public class Delivery {
     @Id
     @GeneratedValue
@@ -18,9 +19,26 @@ public class Delivery {
     @OneToOne(mappedBy = "delivery" ,fetch = LAZY)
     private Order order; //한개의 주문에 한개의 배송정보
 
+    //user에서 받아올 수 있나?
+    @Column(name = "receiver_name", nullable = false)
+    private String receiverName;
+
+    @Column(name = "receiver_phone", nullable = false)
+    private String receiverPhone;
+
     @Embedded
     private Address address;
 
-    @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus;
+    @Column(nullable = false)
+    private String deliveryReq; //주문 요청사항
+
+    public Delivery update(Address address, String receiverName, String receiverPhone) {
+        this.address = address;
+        this.receiverName = receiverName;
+        this.receiverPhone = receiverPhone;
+        //주문 개수 수정 넣고 싶음
+
+        return this;
+    }
+
 }

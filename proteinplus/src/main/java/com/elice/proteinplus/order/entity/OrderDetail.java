@@ -23,16 +23,17 @@ public class OrderDetail extends BaseTimeEntity {
     @JoinColumn(name = "order_id", nullable = false) //fk
     private Order order; //하나의 주문에 여러개의 상품을 주문할 수 있다. 주문상품과 주문 엔티티를 다대일 단방향
 
+    @Column(name = "order_price")
     private int orderPrice; //주문가격
 
-    private int count; //수량
+    @Column(name = "order_count")
+    private int orderCount; //수량
 
     //상품 주문
     public static OrderDetail createOrderItem(Product product, int count){
         OrderDetail orderDetail = new OrderDetail();
-
         orderDetail.setProduct(product); //주문 상품
-        orderDetail.setCount(count); //주문 수량 세팅
+        orderDetail.setOrderCount(count); //주문 수량 세팅
         orderDetail.setOrderPrice(product.getPrice()); //나중에 쿠폰이나 할인 설정
 
         //주문한 수량만큼 재고 감소
@@ -42,12 +43,12 @@ public class OrderDetail extends BaseTimeEntity {
 
     //주문 가격 *수량 = 총 가격
     public int getTotalPrice(){
-        return orderPrice*count;
+        return orderPrice*orderCount;
     }
 
     //주문 취소
     public void cancel(){
-        this.getProduct().addStock(count);
+        this.getProduct().addStock(orderCount);
     }
 
 }

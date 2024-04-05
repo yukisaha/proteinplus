@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,14 +15,14 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @Table(name ="order")
-public class Order extends BaseTimeEntity {
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private Long id;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -31,28 +32,13 @@ public class Order extends BaseTimeEntity {
     @JoinColumn(name = "product_id")
     private Product product; //한명의 회원은 여러번의 주문 할 수 있다. (주문엔티티 기준 다대일 단방향)
 
-    @Column(nullable = false)
+    @Column(name = "order_date", nullable = false)
     private LocalDateTime orderDate; //주문일
-
-    @Column(nullable = false)
-    private String orderReq; //주문 요청사항
-
-    @Column(nullable = false)
-    private String receiverName; //수령인 이름
-
-    @Column(nullable = false)
-    private String receiverPhoneNumber; //수령인 번호
-
 
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus; //주문상태
 
-    /*
-    한쪽이 일대다면 다른쪽은 다대일
-    주문 상품 엔티티와 일대다 매핑 ( private Order order; )
-     */
-    @OneToMany(mappedBy = "order" ,cascade = CascadeType.ALL  //연관관계 주인, 부모 엔티티의 영속성 상태 변화를 자식 엔티티에 모두 변이
-            ,orphanRemoval = true) //고아객체제거(부모엔티티와 연관관계 끊어짐) , 참조하는 기능이 하나일때만 사용할 것
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderDetail> orderDetails = new ArrayList<>(); //하나의 주문이 여러개의 주문 상품을 가지므로 List사용
 
     //cascade : order를 저장할때 delivery도 자동으로 persist 해준다.
@@ -62,38 +48,23 @@ public class Order extends BaseTimeEntity {
 
 
     //주문 객체 만들기
-    public void addOrderItem(OrderDetail orderDetail) { //주문 상품 정보 담아줌
-        orderDetails.add(orderDetail); //orderItem 객체를 order 객체의 orderItems에 추가
+    public void addOrderItem(OrderDetail orderDetail) {
+        orderDetails.add(orderDetail);
         orderDetail.setOrder(this);
     }
 
 
-    public static Order createOrder(User user, List<OrderDetail> orderDetailList){
+    public static Order createOrder(User user, List<OrderDetail> orderDetailList) {
         Order order = new Order();
         order.setUser(user); //상품을 주문한 회원의 정보를 세팅
 
-        /*
-        상품 페이지에서는 1개의 상품을 주문하지만,
-        장바구니 페이지에서는 한번에 여러개의 상품을 주문한다.
-        따라서 여러개의 주문 상품을 담을 수 있도록 리스트 형태로 파라미터 값을 받으며
-        주문 객체에 ordrItem 객체 추가
-         */
-        for(OrderDetail orderDetail : orderDetailList){
+        for (OrderDetail orderDetail : orderDetailList) {
             order.addOrderItem(orderDetail);
         }
         order.setOrderStatus(OrderStatus.ORDER); //주문 상태 세팅
         order.setOrderDate(LocalDateTime.now()); //현재 시간을 주문 시간으로 세팅
 
         return order;
-    }
-
-    //총 주문 금액
-    public int getTotalPrice(){
-        int totalPrice = 0;
-        for(OrderDetail orderDetail : orderDetails){
-            totalPrice += orderDetail.getTotalPrice();
-        }
-        return  totalPrice;
     }
 
     //주문 취소 = 상품 재고 더하기 + 주문상태 취소로 바꾸기
@@ -103,3 +74,14 @@ public class Order extends BaseTimeEntity {
             orderDetail.cancel();
         }
     }
+
+    //총 주문 금액
+    public int getTotalPrice() {
+        int totalPrice = 0;
+        for (OrderDetail orderDetail : orderDetails) {
+            totalPrice += orderDetail.getTotalPrice();
+        }
+        return totalPrice;
+    }
+
+}
