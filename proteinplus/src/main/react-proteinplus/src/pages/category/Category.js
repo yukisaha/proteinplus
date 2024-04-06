@@ -1,35 +1,57 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import Header from '../../components/Header'; // frame.js에서 Header 함수 import
 import Footer from '../../components/Footer'; // frame.js에서 Footer 함수 import
-import '../../styles/category/css/category.css';
+import '../../styles/category/css/Category.css';
+import axios from "axios";
 
 function Category() {
 
-    //카테고리 키값
-    const categories = [
-        { id: 0, text: '전체', name: 'c0100' },    //name : url에 들어갈 값
-        { id: 1, text: '프로', name: 'c0101' },
-        { id: 2, text: '스팀/소프트', name: 'c0102' },
-        { id: 3, text: '소스닭가슴살', name: 'c0103' },
-        { id: 4, text: '스테이크', name: 'c0104' },
-        { id: 5, text: '소시지/햄', name: 'c0105' },
-        { id: 6, text: '저염/염분무첨가', name: 'c0106' },
-        { id: 7, text: '생 닭가슴살', name: 'c0107' },
-        { id: 8, text: '훈제', name: 'c0108' },
-        { id: 9, text: '볼/큐브', name: 'c0109' },
-        { id: 10, text: '슬라이스', name: 'c0110' },
-        { id: 11, text: '냉장/실온보관', name: 'c0111' },
-        { id: 12, text: '핫바/어묵바', name: 'c0112' },
-        { id: 13, text: '스낵/칩', name: 'c0113' },
-        { id: 14, text: '크리스피', name: 'c0114' },
-        { id: 15, text: '육포', name: 'c0115' }
-    ]
-
-
-    const category = "닭가슴살";
+    const baseUrl = "http://localhost:8080";
 
     const location = useLocation();
+
+    const { categoryId } = useParams(); // URL에서 카테고리 이름 파라미터 추출
+
+    const [ categoryData, setCategoryData ] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState([]); // 선택된 카테고리 상태
+
+    const [title, setTitle] = useState('');
+
+    useEffect(() => {
+        // 카테고리 데이터 가져오기
+        getCategory();
+    }, []);
+
+    useEffect(() => {
+        // URL 파라미터값에 따라 선택된 카테고리 설정
+        const selected = categoryData.find(category => category.id === parseInt(categoryId));
+
+        if (selected) {
+            // 선택된 categoryId가 parentCategory인 경우
+            if (!selected.parent) {
+                const filteredCategories = categoryData.filter(category => category.parent && category.parent.id === selected.id);
+                setSelectedCategory(filteredCategories);
+
+                setTitle(selected.name);
+            } else {
+                // 선택된 categoryId가 ChildCategory인 경우
+                const parentCategory = categoryData.find(category => category.id === selected.parent.id);
+
+                //부모 categoryId에 해당하는 자식 카테고리들
+                const filteredCategories = categoryData.filter(category => category.parent && category.parent.id === parentCategory.id);
+                setSelectedCategory(filteredCategories);
+                setTitle(parentCategory.name);
+            }
+        }
+
+    }, [categoryData, categoryId]);
+
+    async function getCategory() { // Axios 방식 사용
+        const response = await axios.get(`${baseUrl}/admin/category/test`);
+
+        setCategoryData(response.data);
+    }
 
     return (
         <div className="wrap main">
@@ -37,19 +59,23 @@ function Category() {
             <section id="contents" className="container">
                 <div className="content-wrap frame-sm">
                     <div className="page-title-area">
-                        <h2 className="title-page-type2">{category}</h2>
+                        <h2 className="title-page-type2">{title}</h2>
                     </div>
                     <div className="prd-top-bnr"></div>
                     <div className="detail-category-tb-wrap">
-                        <div className="detail-category-table">
-                            {/* categories 배열을 매핑하여 동적으로 카테고리 목록 생성 */}
-                            {categories.map(cat => (
-                                <div className={`category-list ${location.pathname === `/product/list/${cat.name}` ? 'active' : ''}`} key={cat.id}>
-                                    {/* Link를 사용하여 동적으로 링크 생성 */}
-                                    <Link to={`/product/list/${cat.name}`}>{cat.text}</Link>
-                                </div>
-                            ))}
-                        </div>
+                            <div className="detail-category-table">
+                                {selectedCategory.map((category, idx) => (
+                                    <div key={idx} className={`category-list ${location.pathname === `/product/list/${category.id}` ? 'active' : ''}`}>
+                                        <ul>
+                                            <li>
+                                                <Link to={`/product/list/${category.id}`}>
+                                                    {category.name}
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                ))}
+                            </div>
                     </div>
                 </div>
             </section>

@@ -25,10 +25,9 @@ const router = createBrowserRouter([
     element: <WishList />
   },
   {
-    path: "/product/list/:category",
+    path: "/product/list/:categoryId",
     element: <Category />
-  },
-
+  }
 ]);
 
 export default function App(){
