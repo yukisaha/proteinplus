@@ -48,11 +48,13 @@
     font-weight: 400;
     box-sizing: border-box;
     margin-right: -1px; /* 오른쪽 마진 추가 */
-    margin-bottom: -1px; /* 아래쪽 마진 추가 */
+    margin-top: 1px;
+    margin-bottom: -2px; /* 아래쪽 마진 추가 */
 
     justify-content: center; /* 수평 가운데 정렬 */
     align-items: center; /* 수직 가운데 정렬 */
 }
+
 
 .category-list.active {
     color: #5356FF;

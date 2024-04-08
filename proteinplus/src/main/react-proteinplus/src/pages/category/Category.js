@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Header from '../../components/Header'; // frame.js에서 Header 함수 import
 import Footer from '../../components/Footer'; // frame.js에서 Footer 함수 import
 import '../../styles/category/css/Category.css';
@@ -7,19 +7,21 @@ import axios from "axios";
 
 function Category() {
 
-    const baseUrl = "http://localhost:8080";
-
-    const location = useLocation();
-
     const { categoryId } = useParams(); // URL에서 카테고리 이름 파라미터 추출
 
-    const [ categoryData, setCategoryData ] = useState([]);
+    const [categoryData, setCategoryData] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState([]); // 선택된 카테고리 상태
 
     const [title, setTitle] = useState('');
 
+    async function getCategory() { // Axios 방식 사용
+        const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
+        const response = await axios.get(`${Spring_Server_Ip}/admin/category/test`);
+        setCategoryData(response.data);
+    }
+
     useEffect(() => {
-        // 카테고리 데이터 가져오기
+        // 카테고리 전체 조회 함수 호출
         getCategory();
     }, []);
 
@@ -47,15 +49,10 @@ function Category() {
 
     }, [categoryData, categoryId]);
 
-    async function getCategory() { // Axios 방식 사용
-        const response = await axios.get(`${baseUrl}/admin/category/test`);
-
-        setCategoryData(response.data);
-    }
-
     return (
         <div className="wrap main">
-            <Header /> {/* Header 컴포넌트 추가 */}
+            {/*<Header /> {/* Header 컴포넌트 추가 */}
+            <Header categoryId = {categoryId}/>
             <section id="contents" className="container">
                 <div className="content-wrap frame-sm">
                     <div className="page-title-area">
@@ -63,19 +60,19 @@ function Category() {
                     </div>
                     <div className="prd-top-bnr"></div>
                     <div className="detail-category-tb-wrap">
-                            <div className="detail-category-table">
-                                {selectedCategory.map((category, idx) => (
-                                    <div key={idx} className={`category-list ${location.pathname === `/product/list/${category.id}` ? 'active' : ''}`}>
-                                        <ul>
-                                            <li>
-                                                <Link to={`/product/list/${category.id}`}>
-                                                    {category.name}
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                ))}
-                            </div>
+                        <div className="detail-category-table">
+                            {selectedCategory.map((category) => (
+                                <div key={category.id} className={`category-list ${categoryId === `${category.id}` ? 'active' : ''}`}>
+                                    <ul>
+                                        <li>
+                                            <Link to={`/product/list/${category.id}`}>
+                                                {category.name}
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>

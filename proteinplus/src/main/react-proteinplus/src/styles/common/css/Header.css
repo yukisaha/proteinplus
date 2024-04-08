@@ -520,6 +520,10 @@ section {
   display: block;
 }
 
+.btn-menu-all.inactive + .category-layer {
+  display: none;
+}
+
 .category-layer li:hover {
   color: #5356FF;
 }
@@ -572,6 +576,9 @@ section {
   display: block;
 }
 
+.category-layer:hover .first-category-item.active .second-category-list{
+  display: block;
+}
 
 .second-category-item:hover {
   background-color: #DFF5FF;
