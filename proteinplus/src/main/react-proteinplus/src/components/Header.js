@@ -5,7 +5,7 @@ export default function Header() {
     return (
         <header id="header" className="header">
             <div className="header-inner">
-                <h1 className="logo "><a href="/"><span className="blind">ProteinPlus</span></a></h1>
+                <h1 className="logo "><a href="/"><span>ProteinPlus</span></a></h1>
 
                 <div className="util">
                     <ul>
