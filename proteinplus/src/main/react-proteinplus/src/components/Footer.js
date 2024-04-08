@@ -16,7 +16,7 @@ export default function Footer() {
                 </div>
             </div>
             <div className="footer-info">
-                <strong className="footer-logo"><span className="blind">ProteinPlus</span></strong>
+                <strong className="footer-logo"><span>ProteinPlus</span></strong>
                 <div className="colum-info">
                     <h5 className="blind">회사 정보</h5>
                     <ul className="footer-biz-info">
@@ -42,12 +42,12 @@ export default function Footer() {
                         <a href="#"><span>1:1 문의</span></a>
                     </div>
                     <ul className="footer-sns-list">
-                        <li><a target="_blank"><i className="ico-sns-facebook"></i><span className="sns_blind">페이스북</span></a></li>
-                        <li><a target="_blank"><i className="ico-sns-instagram"></i><span className="sns_blind">인스타그램</span></a></li>
-                        <li><a target="_blank"><i className="ico-sns-blog"></i><span className="sns_blind">네이버블로그</span></a></li>
-                        <li><a target="_blank"><i className="ico-sns-post"></i><span className="sns_blind">네이버포스트</span></a></li>
-                        <li><a target="_blank"><i className="ico-sns-kakaotalk"></i><span className="sns_blind">카카오톡</span></a></li>
-                        <li><a target="_blank"><i className="ico-sns-youtube"></i><span className="sns_blind">유튜브</span></a></li>
+                        <li><a target="_blank"><i className="ico-sns-facebook"></i><span className="blind">페이스북</span></a></li>
+                        <li><a target="_blank"><i className="ico-sns-instagram"></i><span className="blind">인스타그램</span></a></li>
+                        <li><a target="_blank"><i className="ico-sns-blog"></i><span className="blind">네이버블로그</span></a></li>
+                        <li><a target="_blank"><i className="ico-sns-post"></i><span className="blind">네이버포스트</span></a></li>
+                        <li><a target="_blank"><i className="ico-sns-kakaotalk"></i><span className="blind">카카오톡</span></a></li>
+                        <li><a target="_blank"><i className="ico-sns-youtube"></i><span className="blind">유튜브</span></a></li>
                     </ul>
                 </div>
             </div>

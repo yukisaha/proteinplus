@@ -220,6 +220,11 @@ section {
   display: block;
 }
 
+img {
+  max-width: 100%;
+  vertical-align: top;
+}
+
 .wrap {
   position: relative;
   min-width: 1300px;
@@ -334,6 +339,18 @@ section {
   width: 35px;
   height: 35px;
   transform: translateY(-50%);
+}
+
+.btn-top-search:after {
+  display: inline-block;
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: url(../images/search.png);
+  vertical-align: top;
+  background-size: 16px;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .header-inner .my-menu {
