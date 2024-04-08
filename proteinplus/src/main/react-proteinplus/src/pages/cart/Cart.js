@@ -152,10 +152,16 @@ function Cart() {
                                         </div>
                                     </div>
                                 </li>
-
-
                             </ul>
                         </div>
+
+                        {/* 아래는 데이터값 없을 때 */}
+                        {/*
+                        <div className="no-data">
+                            <p className="message">장바구니에 담긴 상품이 없습니다.</p>
+                            <a href="/" className="btn-basic-lg btn-default-ex"><span>쇼핑계속하기</span></a>
+                        </div>
+                        */}
                     </div>
 
                     <div className="cart-total-box grid-area-span4">
