@@ -220,6 +220,11 @@ section {
   display: block;
 }
 
+img {
+  max-width: 100%;
+  vertical-align: top;
+}
+
 .wrap {
   position: relative;
   min-width: 1300px;
