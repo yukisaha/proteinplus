@@ -18,7 +18,7 @@ public class SwaggerConfig {
 
     @Bean
     public GroupedOpenApi chatOpenApi() {
-        String[] paths = {"/v1/**","/admin/category/**", "/test"};
+        String[] paths = {"/v1/**","/admin/category/**", "/test", "/rank"};
 
         return GroupedOpenApi.builder()
                 .group("ProteinPlus v1")
