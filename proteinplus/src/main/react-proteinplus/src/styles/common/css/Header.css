@@ -315,7 +315,7 @@ img {
   display: inline-block;
   width: 380px;
   height: 40px;
-  border: 1px solid #ffa751;
+  border: 1px solid #5356FF;
   border-radius: 6px;
   background: #fff;
   padding: 0 45px 0 15px;
@@ -369,12 +369,6 @@ img {
   vertical-align: top;
 }
 
-.btn-util-pedometer {
-  display: inline-block;
-  width: 48px;
-  height: 48px;
-      background: url(../images/1.png) no-repeat center / auto 48px;
-}
 
 .btn-util-coupon {
   display: inline-block;
