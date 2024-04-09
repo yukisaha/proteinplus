@@ -5,16 +5,16 @@ import Footer from '../../components/Footer'; // frame.js에서 Footer 함수 im
 
 
 export default function Order(){
-    // function openUserDeliveryListPop(check) {
-    //     $('body').css("overflow", "hidden");
-    //
-    //     let deliveryListUrl = "/order/order/userDeliveryList";
-    //     if (check == true) {
-    //         deliveryListUrl += "?phoneCheck="+check;
-    //     }
-    //
-    //     $('#userDeliveryListPop').load(deliveryListUrl);
-    // }
+    function openUserDeliveryListPop(check) {
+        $('body').css("overflow", "hidden");
+
+        let deliveryListUrl = "/order/order";
+        if (check == true) {
+            deliveryListUrl += "?phoneCheck="+check;
+        }
+
+        $('#userDeliveryListPop').load(deliveryListUrl);
+    }
 
     return (
         <div className="wrap main">
@@ -30,7 +30,7 @@ export default function Order(){
                             <div className="order-info">
                                 <div className="list-head-sub">
                                     <h3 className="title-list">배송지 정보</h3>
-                                    <a href="javascript:void(0);" className="btn-basic-sm2 btn-default" onClick="openUserDeliveryListPop();">
+                                    <a href="javascript:void(0);" className="btn-basic-sm2 btn-default" onClick={openUserDeliveryListPop}>
                                         <span>배송지변경</span>
                                         <i className="ico-arr-right"></i>
                                     </a>
