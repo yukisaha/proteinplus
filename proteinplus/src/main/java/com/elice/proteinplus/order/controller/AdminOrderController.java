@@ -10,43 +10,46 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/api/admin/orders")
 @RequiredArgsConstructor
+@RestController
+@RequestMapping("/api/admin")
 public class AdminOrderController {
 
     private final AdminOrderService adminOrderService;
 
-    @GetMapping("/all")
+    // 모든 주문 조회 (페이지네이션 포함)
+    @GetMapping("/orders")
     public ResponseEntity<Page<OrderHistDto>> getAllOrders(Pageable pageable) {
         Page<OrderHistDto> orders = adminOrderService.getAllOrders(pageable);
         return ResponseEntity.ok(orders);
     }
 
-    @GetMapping("/user/{userId}")
+    // 특정 사용자의 주문 조회 (페이지네이션 포함)
+    @GetMapping("/order/user/{userId}")
     public ResponseEntity<Page<OrderHistDto>> getOrdersByUserId(@PathVariable Long userId, Pageable pageable) {
         Page<OrderHistDto> orders = adminOrderService.getOrdersByUserId(userId, pageable);
         return ResponseEntity.ok(orders);
     }
 
-    @PutMapping("/update/status/{orderId}")
-    public ResponseEntity<String> updateOrderStatus(@PathVariable Long orderId, @RequestParam OrderStatus newStatus) {
-        boolean result = adminOrderService.updateOrderStatus(orderId, newStatus);
-        if (result) {
-            return ResponseEntity.ok("Order status updated successfully.");
+    // 주문 상태 변경
+    @PutMapping("/order/{orderId}/edit")
+    public ResponseEntity<Void> updateOrderStatus(@PathVariable Long orderId, @RequestParam OrderStatus newStatus) {
+        boolean updated = adminOrderService.updateOrderStatus(orderId, newStatus);
+        if (updated) {
+            return ResponseEntity.ok().build();
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Order not found.");
+            return ResponseEntity.notFound().build();
         }
     }
 
-    @DeleteMapping("/delete/{orderId}")
-    public ResponseEntity<String> deleteOrder(@PathVariable Long orderId) {
-        boolean result = adminOrderService.deleteOrder(orderId);
-        if (result) {
-            return ResponseEntity.ok("Order deleted successfully.");
+    // 주문 삭제
+    @PostMapping("/order/{orderId}")
+    public ResponseEntity<Void> deleteOrder(@PathVariable Long orderId) {
+        boolean deleted = adminOrderService.deleteOrder(orderId);
+        if (deleted) {
+            return ResponseEntity.ok().build();
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Order not found.");
+            return ResponseEntity.notFound().build();
         }
     }
 }
-
