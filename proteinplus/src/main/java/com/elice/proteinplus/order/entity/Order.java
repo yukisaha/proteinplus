@@ -2,10 +2,7 @@ package com.elice.proteinplus.order.entity;
 
 import com.elice.proteinplus.global.entity.BaseTimeEntity;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,8 +13,8 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@Table(name ="order")
-public class Order {
+@Table(name ="orders")
+public class Order extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,29 +46,53 @@ public class Order {
 
     //주문 객체 만들기
     public void addOrderItem(OrderDetail orderDetail) {
-        orderDetails.add(orderDetail);
+        orderDetails.add(orderDetail); //OrderDetail 객체를 order 객체의 OrderDetail에 추가합니다.
         orderDetail.setOrder(this);
     }
 
+    // 주문하기 = 주문상태 주문으로 바꾸기 + 현재 시간을 주문 시간으로 세팅
+    @Builder
+    public static Order createOrder(User user, LocalDateTime orderDate, OrderStatus orderStatus, List<OrderDetail> orderDetails) {
 
-    public static Order createOrder(User user, List<OrderDetail> orderDetailList) {
-        Order order = new Order();
-        order.setUser(user); //상품을 주문한 회원의 정보를 세팅
+        Order order = Order.builder()
+                .user(user)
+                .orderDate(orderDate)
+                .orderStatus(orderStatus)
+                .orderDetails(new ArrayList<>())
+                .build();
 
-        for (OrderDetail orderDetail : orderDetailList) {
-            order.addOrderItem(orderDetail);
+        for (OrderDetail orderItem : orderDetails) {
+
+            order.addOrderItem(orderItem);
         }
-        order.setOrderStatus(OrderStatus.ORDER); //주문 상태 세팅
-        order.setOrderDate(LocalDateTime.now()); //현재 시간을 주문 시간으로 세팅
+
+        order.setOrderStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
 
         return order;
     }
 
     //주문 취소 = 상품 재고 더하기 + 주문상태 취소로 바꾸기
     public void cancelOrder() {
-        this.orderStatus = OrderStatus.CANCEL;
+        if(this.getOrderStatus() == OrderStatus.PREPARE_DELIVERY){ //COMP 는 이미 배송이 완료된 상품이다.
+            throw new IllegalStateException("이미 배송 준비중인 상품은 취소가 불가능합니다.");
+        }
+        if(this.getOrderStatus() == OrderStatus.ON_DELIVERY){ //COMP 는 이미 배송이 완료된 상품이다.
+            throw new IllegalStateException("이미 배송중인 상품은 취소가 불가능합니다.");
+        }
+        if(this.getOrderStatus() == OrderStatus.DELIVERY_OVER){ //COMP 는 이미 배송이 완료된 상품이다.
+            throw new IllegalStateException("이미 배송완료된 상품은 취소가 불가능합니다.");
+        }
+        this.setOrderStatus(OrderStatus.CANCEL);
         for (OrderDetail orderDetail : orderDetails) {
             orderDetail.cancel();
+        }
+    }
+
+    public void updateOrder(int count) {
+
+        for(OrderDetail orderDetail : orderDetails) {
+            orderDetail.update(count);
         }
     }
 
