@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/proteinplus.proteinplus.iml" filepath="$PROJECT_DIR$/.idea/modules/proteinplus.proteinplus.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/proteinplus.proteinplus.main.iml" filepath="$PROJECT_DIR$/.idea/modules/proteinplus.proteinplus.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/proteinplus.proteinplus.test.iml" filepath="$PROJECT_DIR$/.idea/modules/proteinplus.proteinplus.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/proteinplus.main.iml" filepath="$PROJECT_DIR$/.idea/modules/proteinplus.main.iml" />
     </modules>
   </component>
 </project>
