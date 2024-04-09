@@ -29,7 +29,7 @@ public class Delivery {
     @Embedded
     private Address address;
 
-    @Column(nullable = false)
+    @Column(name = "delivery_request")
     private String deliveryReq; //주문 요청사항
 
     public Delivery update(Address address, String receiverName, String receiverPhone) {
