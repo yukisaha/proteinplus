@@ -134,7 +134,7 @@ export default function Header({categoryId}) {
                     <nav id="gnb" className="gnb">
                         <ul>
                             <li className="">
-                                <a href="">
+                                <a href="/product/rank/0">
                                     <span>랭킹</span>
                                 </a>
                             </li>

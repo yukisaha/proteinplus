@@ -62,12 +62,34 @@
     margin: 0 auto;
 }
 
-.realtime-rank-category-table {
-    border-collapse: collapse;  /* 이중선 제거 */
-    border-spacing: 0;
+.rank-category-table {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
-    margin-left: auto;
-    margin-right: auto;
+.category-list {
+    display: flex;
+    width: 16.66667%;
+    height: 45px;
+    text-align: center;
+    border: 1px solid #cccccc;
+
+    font-weight: 400;
+    box-sizing: border-box;
+    margin-right: -1px; /* 오른쪽 마진 추가 */
+    margin-top: 1px;
+    margin-bottom: -2px; /* 아래쪽 마진 추가 */
+
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+}
+
+.category-list.active {
+    color: #5356FF;
+    border-color: #5356FF;
+    z-index: 10;
 }
 
 .sorting-tab-menu {
@@ -94,7 +116,7 @@
     margin-left: 6px;
 }
 
-.sorting-tab-menu li.realtime-tab-menu a {
+.sorting-tab-menu li.active a {
     color: #5356FF;
     background: #ffffff;
     border: 1px solid #5356FF;
@@ -276,7 +298,7 @@ img {
     font-size: 13px;
     font-style: normal;
     font-weight: 400;
-    line-height: 12px;
+    line-height: 14px;
 }
 
 .text-elps {
@@ -321,25 +343,6 @@ img {
     background: url(/resources/pc/images/txt/imgbadge-dlv-exp.svg) no-repeat center / 100%;
     vertical-align: middle;
 }
-
-.imgbadge-dlv-exp {
-    display: inline-block;
-    width: 64px;
-    height: 20px;
-    background: url(/resources/pc/images/txt/txt_badge_dlv.png) no-repeat 0 0;
-    vertical-align: middle;
-}
-
-.blind {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-}
  */
 
 .list-renewal-2 .prd-info-area .column.point2 {
@@ -372,7 +375,7 @@ img {
 }
 
 .list-renewal-2 .rating-simply:before {
-    background: url(/resources/static/images/ico-rating-simply-pc.svg) no-repeat center / 100%;
+    background: url(../../images/rank/ico-rating-simply-pc.svg) no-repeat center / 100%;
     margin: 0 0 0;
 }
 
@@ -386,7 +389,7 @@ img {
     display: inline-block;
     width: 12px;
     height: 12px;
-    background: url(/resources/pc/images/icon/ico_bullet.png) no-repeat -90px -160px;  /*별 이미지*/
+    /*background: url(/resources/pc/images/icon/ico_bullet.png) no-repeat -90px -160px;  /*별 이미지*/
     position: relative;
     margin: 1px 2px 0 0;
     vertical-align: top;
@@ -499,12 +502,12 @@ img {
     border-left: 1px solid #eee;
 }
 
-.prd-info-area .column .btns-list {
+.prd-info-area .column .btn-list {
     text-align: center;
     font-size: 0;
 }
 
-.prd-info-area .column .btns-list > li {
+.prd-info-area .column .btn-list > li {
     display: inline-block;
     vertical-align: middle;
     line-height: 1;
@@ -513,7 +516,7 @@ img {
 .list-renewal-2 .btn-icon-cart2 {
     width: 40px;
     height: 40px;
-    background: url(/resources/static/images/cart-icon24.svg) no-repeat center / 24px 24px;
+    background: url(../../images/rank/cart-icon24.svg) no-repeat center / 24px 24px;
 }
 
 .btn-icon-cart2 {
@@ -541,27 +544,16 @@ button .blind {
     color: transparent;
 }
 
-.blind {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-}
-
 button span {
     position: relative;
 }
 
-.list-renewal-2 .prd-info-area .column .btns-list .btn-icon-cart-li:after {
+.list-renewal-2 .prd-info-area .column .btn-list .btn-icon-cart-li:after {
     margin: 3px 15px 0 10px;
     vertical-align: middle;
 }
 
-.prd-info-area .column .btns-list .btn-icon-cart-li:after {
+.prd-info-area .column .btn-list .btn-icon-cart-li:after {
     display: inline-block;
     content: '';
     width: 1px;
@@ -623,7 +615,7 @@ input[type="checkbox"], input[type="radio"] {
     top: 0;
     width: 24px;
     height: 24px;
-    background: url(/resources/static/images/heart-icon.png) -24px -40px;
+    background: url(../../images/rank/heart-icon.png) -24px -40px;
     background-size: 240px;
 }
 

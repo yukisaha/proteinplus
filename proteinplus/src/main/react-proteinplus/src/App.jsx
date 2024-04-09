@@ -6,6 +6,7 @@ import Cart from './pages/cart/Cart.js';
 import MypageFrame from './components/MypageFrame.js';
 import WishList from './pages/cart/WishList.js';
 import Category from "./pages/category/Category";
+import Rank from "./pages/rank/Rank";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,14 @@ const router = createBrowserRouter([
   {
     path: "/product/list/:categoryId",
     element: <Category />
+  },
+  {
+    path: "/product/rank/:categoryId",
+    element: <Rank />
+  },
+  {
+    path: "/product/rank/:categoryId/sales",
+    element:<Rank />
   }
 ]);
 
