@@ -152,9 +152,6 @@ address, caption, strong[lang=en], em, cite, b {
     font-weight: normal;
     font-style: normal;
 }
-address, caption, cite, code, dfn, em, strong, th, var {
-    font-style: normal;
-}
 
 .order-payment-area .order-order-info li {
     margin-bottom: 12px;
@@ -203,6 +200,11 @@ address, caption, cite, code, dfn, em, strong, th, var {
 
 .delivery-state .right-dlv-info .txt {
     color: #fff;
+}
+
+.right-dlv-info .txt {
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .right-dlv-info .txt > span {
@@ -757,16 +759,6 @@ address, caption, cite, code, dfn, em, strong, th, var {
 .check-area .final-info-box .link-txt .ico-arr-right {
     vertical-align: middle;
 }
-[class*="ico-arr-"] {
-    position: relative;
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    transition: .2s;
-    -webkit-transition: .2s;
-    transform: translateX(0);
-    -webkit-transform: translateX(0);
-}
 
 .check-area .final-info-box .btn-x-sm3 {
     position: absolute;
@@ -835,10 +827,6 @@ address, caption, cite, code, dfn, em, strong, th, var {
     padding: 0 0 60px;
 }
 
-.order-info .lineless-table.type1 {
-    margin-bottom: -10px;
-}
-
 .lineless-table table {
     width: 100%;
     table-layout: fixed;
@@ -862,6 +850,16 @@ legend, caption {
 address, caption, strong[lang=en], em, cite, b {
     font-weight: normal;
     font-style: normal;
+}
+
+colgroup {
+    display: table-column-group;
+    unicode-bidi: isolate;
+}
+
+col {
+    display: table-column;
+    unicode-bidi: isolate;
 }
 
 colgroup {
@@ -1059,6 +1057,17 @@ input {
     font-weight: 700;
 }
 /* 결제 방법 */
+.order-info .list-head {
+    position: relative;
+    padding: 30px 0 20px;
+    border-top: 1px solid #666;
+}
+
+.order-info .title-list {
+    font-size: 16px;
+    font-weight: 700;
+    display: inline-block;
+}
 
 .grid-wrap,
 .grid-area,

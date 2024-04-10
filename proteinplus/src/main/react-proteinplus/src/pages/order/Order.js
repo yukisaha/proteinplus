@@ -193,11 +193,15 @@ export default function Order(){
                                     </button>
                                 </div>
                             </div>
-                            <div className="order-info">
+                            <div className="order-info" style={{borderTop: "1px solid #333", paddingTop: "30px"}}>
+
                                 <div className="lineless-table type1">
                                     <h3 className="title-list">포인트</h3>
                                     <table>
                                         <caption>포인트 사용</caption>
+                                        <colgroup>
+                                            <col style={{width: "190px"}}/>
+                                        </colgroup>
                                         <tbody>
                                         <tr>
                                             <th scope="row"><span className="tit">포인트 사용</span></th>
@@ -205,15 +209,24 @@ export default function Order(){
                                                 <div className="order-point">
                                                     <div className="input-group-wrap box-type">
                                                         <div className="input-group">
-                                                            <input type="hidden" id="currentPoint" name="currentPoint" value="1582"/>
-                                                                <input type="hidden" id="usePoint" name="usePoint" value="0"/>
-                                                                    <input type="text" title="" className="input-text ui-point-input" id="textUsePoint" name="textUsePoint" placeholder="2,000P부터 사용가능" onkeydown="return numberOnly(event)" onkeyup="removeChar(event)" onblur="fnUsePoint()"/>
-                                                    <span className="input-group-btn">
-                                                        <button type="button" className="btn-ex-grey" onClick="fnUsePoint('all')"><span>전액사용</span></button>
+                                                            <input type="hidden" id="currentPoint" name="currentPoint"
+                                                                   value="1582"/>
+                                                            <input type="hidden" id="usePoint" name="usePoint"
+                                                                   value="0"/>
+                                                            <input type="text" title=""
+                                                                   className="input-text ui-point-input"
+                                                                   id="textUsePoint" name="textUsePoint"
+                                                                   placeholder="2,000P부터 사용가능"
+                                                                   onkeydown="return numberOnly(event)"
+                                                                   onkeyup="removeChar(event)" onblur="fnUsePoint()"/>
+                                                            <span className="input-group-btn">
+                                                        <button type="button" className="btn-ex-grey"
+                                                                onClick="fnUsePoint('all')"><span>전액사용</span></button>
                                                     </span>
                                                         </div>
                                                     </div>
-                                                    <p className="point-guide">사용 가능 포인트 <em className="text-num-bold">포인트값</em>P</p>
+                                                    <p className="point-guide">사용 가능 포인트 <em
+                                                        className="text-num-bold">포인트값</em>P</p>
                                                 </div>
                                             </td>
                                         </tr>
@@ -222,7 +235,7 @@ export default function Order(){
                                 </div>
                             </div>
                             <div className="order-info">
-                                <div className="list-head">
+                            <div className="list-head">
                                     <h3 className="title-list">결제방법</h3>
                                 </div>{/* list-head */}
 
