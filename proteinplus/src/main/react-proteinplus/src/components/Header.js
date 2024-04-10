@@ -113,18 +113,18 @@ export default function Header({categoryId}) {
                                                 className={`first-category-item ${activeCategoryId === parentCategory.id ? 'active' : ''}`}
                                                 onMouseEnter={() => handleMouseOver(parentCategory.id)}
                                             >
-                                            <Link to={`/product/list/${getFirstChildCategoryId(parentCategory.id)}`}>{parentCategory.name}</Link>
-                                            <ul className="second-category-list">
-                                                {categoryData
-                                                    .filter((childCategory) => childCategory.parent && childCategory.parent.id === parentCategory.id)
-                                                    .map((childCategory) => (
-                                                    <li key={childCategory.id} className="second-category-item">
-                                                        <Link to={`/product/list/${childCategory.id}`}>{childCategory.name}</Link>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </li>
-                                    ))}
+                                                <Link to={`/product/list/${getFirstChildCategoryId(parentCategory.id)}`}>{parentCategory.name}</Link>
+                                                <ul className="second-category-list">
+                                                    {categoryData
+                                                        .filter((childCategory) => childCategory.parent && childCategory.parent.id === parentCategory.id)
+                                                        .map((childCategory) => (
+                                                            <li key={childCategory.id} className="second-category-item">
+                                                                <Link to={`/product/list/${childCategory.id}`}>{childCategory.name}</Link>
+                                                            </li>
+                                                        ))}
+                                                </ul>
+                                            </li>
+                                        ))}
                                 </ul>
                             </div>
                         </div>

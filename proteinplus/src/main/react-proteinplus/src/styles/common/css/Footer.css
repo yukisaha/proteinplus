@@ -1,216 +1,216 @@
 .footer-menu {
-  width: 100%;
-  /* max-width: 1920px; */
-  min-height: 48px;
-  padding: 19px 0 20px;
-  margin: 0 auto;
-  background-color: #f8f8f8;
+    width: 100%;
+    /* max-width: 1920px; */
+    min-height: 48px;
+    padding: 19px 0 20px;
+    margin: 0 auto;
+    background-color: #f8f8f8;
 }
 
 .frame-sm {
-  position: relative;
-  max-width: 1100px;
-  margin: 0 auto;
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .footer-menu-list > li {
-  display: inline-block;
-  padding: 0 16px 0 0;
+    display: inline-block;
+    padding: 0 16px 0 0;
 }
 
 .footer-menu-list > li {
-  display: inline-block;
-  padding: 0 16px 0 0;
+    display: inline-block;
+    padding: 0 16px 0 0;
 }
 
 .footer-menu-list > li > a {
-  color: #666;
-  font-size: 14px;
+    color: #666;
+    font-size: 14px;
 }
 
 .footer-info {
-  position: relative;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 35px 0 45px 167px;
-  overflow: hidden;
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 35px 0 45px 167px;
+    overflow: hidden;
 }
 
 .footer-info .footer-logo {
-  position: absolute;
-  top: 35px;
-  left: 0;
-  display: block;
-  width: 100px;
-  height: 38px;
-  background-size: contain;
-  margin-bottom: 26px;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    display: block;
+    width: 100px;
+    height: 38px;
+    background-size: contain;
+    margin-bottom: 26px;
 }
 
 .footer-info .colum-info {
-  position: relative;
-  float: left;
-  width: 50%;
-  font-size: 12px;
-  color: #666;
+    position: relative;
+    float: left;
+    width: 50%;
+    font-size: 12px;
+    color: #666;
 }
 
 .footer-biz-info {
-  padding-right: 55px;
+    padding-right: 55px;
 }
 
 .footer-biz-info li:first-child {
-  display: block;
-  border: none;
-  margin-bottom: 15px;
-  font-size: 15px;
-  line-height: 16px;
-  color: #333;
+    display: block;
+    border: none;
+    margin-bottom: 15px;
+    font-size: 15px;
+    line-height: 16px;
+    color: #333;
 }
 
 .footer-biz-info li .company-name {
-  font-size: 14px;
-  color: #333;
-  font-weight: 500;
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
 }
 
 .footer-biz-info li {
-  font-size: 13px;
-  color: #666;
-  line-height: 23px;
-  display: inline;
+    font-size: 13px;
+    color: #666;
+    line-height: 23px;
+    display: inline;
 }
 
 .colum-info .copyright {
-  margin-top: 10px;
-  color: #666;
-  font-size: 13px;
-  line-height: 23px;
+    margin-top: 10px;
+    color: #666;
+    font-size: 13px;
+    line-height: 23px;
 }
 
 .footer-info .colum-info {
-  position: relative;
-  float: left;
-  width: 50%;
-  font-size: 12px;
-  color: #666;
+    position: relative;
+    float: left;
+    width: 50%;
+    font-size: 12px;
+    color: #666;
 }
 
 .footer-info .customer-info > li.cscenter {
-  display: block;
-  width: 100%;
-  margin-right: 0;
-  font-size: 15px;
-  line-height: 16px;
-  font-weight: 500;
-  color: #333;
+    display: block;
+    width: 100%;
+    margin-right: 0;
+    font-size: 15px;
+    line-height: 16px;
+    font-weight: 500;
+    color: #333;
 }
 
 .footer-info .customer-info > li.cscenter .footer-tel::before {
-  content: "";
-  display: block;
-  width: 18px;
-  height: 18px;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  background-image: url(../images/phone.png);
-  background-size: 100%;
-  background-position: center;
+    content: "";
+    display: block;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    background-image: url(../images/phone.png);
+    background-size: 100%;
+    background-position: center;
 }
 
 .footer-info .customer-info > li.cscenter .footer-tel {
-  display: block;
-  font-size: 22px;
-  line-height: 16px;
-  font-weight: 600;
-  margin: 16px 0 9px;
-  padding-left: 24px;
-  position: relative;
+    display: block;
+    font-size: 22px;
+    line-height: 16px;
+    font-weight: 600;
+    margin: 16px 0 9px;
+    padding-left: 24px;
+    position: relative;
 }
 
 .footer-info .customer-info > li {
-  display: inline-block;
-  margin-right: 10px;
-  color: #777;
-  font-size: 13px;
-  line-height: 23px;
+    display: inline-block;
+    margin-right: 10px;
+    color: #777;
+    font-size: 13px;
+    line-height: 23px;
 }
 
 .footer-info .customer-btns {
-  margin-top: 8px;
+    margin-top: 8px;
 }
 
 .footer-info .customer-btns > a {
-  display: inline-block;
-  font-size: 11px;
-  color: #777;
-  border: 1px solid #ccc;
-  margin-right: 3px;
-  padding: 0 6px;
-  height: 22px;
-  line-height: 2;
-  border-radius: 4px;
+    display: inline-block;
+    font-size: 11px;
+    color: #777;
+    border: 1px solid #ccc;
+    margin-right: 3px;
+    padding: 0 6px;
+    height: 22px;
+    line-height: 2;
+    border-radius: 4px;
 }
 
 .footer-sns-list {
-  margin-top: 18px;
-  overflow: hidden;
+    margin-top: 18px;
+    overflow: hidden;
 }
 
 .footer-sns-list > li {
-  float: left;
-  margin-right: 10px;
+    float: left;
+    margin-right: 10px;
 }
 
 .ico-sns-facebook {
-  background-position: 0 0;
+    background-position: 0 0;
 }
 
 [class^="ico-sns-"] {
-  display: inline-block;
-  vertical-align: top;
-  width: 30px;
-  height: 30px;
-  background-image: url(../images/sns.png);
+    display: inline-block;
+    vertical-align: top;
+    width: 30px;
+    height: 30px;
+    background-image: url(../images/sns.png);
 }
 
 .ico-sns-instagram {
-  background-position: -40px 0;
+    background-position: -40px 0;
 }
 
 .ico-sns-blog {
-  background-position: -80px 0;
+    background-position: -80px 0;
 }
 
 .ico-sns-post {
-  background-position: -120px 0;
+    background-position: -120px 0;
 }
 
 .ico-sns-kakaotalk {
-  background-position: -160px 0;
+    background-position: -160px 0;
 }
 
 .ico-sns-youtube {
-  background-position: -200px 0;
+    background-position: -200px 0;
 }
 
 .blind {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
 
 button .blind {
-  position: relative;
-  font-size: 0;
-  color: transparent;
+    position: relative;
+    font-size: 0;
+    color: transparent;
 }
 
 address,
@@ -222,7 +222,7 @@ em,
 strong,
 th,
 var {
-  font-style: normal;
+    font-style: normal;
 }
 
 address,
@@ -231,7 +231,7 @@ strong[lang="en"],
 em,
 cite,
 b {
-  font-weight: normal;
-  font-style: normal;
+    font-weight: normal;
+    font-style: normal;
 }
 

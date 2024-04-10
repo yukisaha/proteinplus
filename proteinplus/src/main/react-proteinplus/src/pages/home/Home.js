@@ -7,7 +7,7 @@ function Home() {
         <div className="wrap main">
             <Header /> {/* Header 컴포넌트 추가 */}
             <section id="contents" className="container">
-//                여기서부터 작업
+                //                여기서부터 작업
 
             </section>
             <Footer /> {/* Footer 컴포넌트 추가 */}
