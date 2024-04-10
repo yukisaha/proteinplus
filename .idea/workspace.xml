@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c93fd707-c715-4872-abda-b54c90e5f2e6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/proteinplus/src/test/java/com/elice/proteinplus/AdminOrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/controller/TestController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/Address.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/Delivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/order/entity/Delivery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/pages/order/Order.js" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/pages/order/Order.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,38 +24,7 @@
       <state>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="proteinplus" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="proteinplus" type="f1a62948:ProjectNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="proteinplus" type="f1a62948:ProjectNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
-                <item name="compileClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="proteinplus" type="f1a62948:ProjectNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
-                <item name="compileClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
-                <item name="org.springframework.boot:spring-boot-starter-data-jpa:3.2.4" type="b3323d55:ExternalSystemViewDefaultContributor$DependencyExternalSystemNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="proteinplus" type="f1a62948:ProjectNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
-                <item name="compileClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
-                <item name="org.springframework.boot:spring-boot-starter-data-jpa:3.2.4" type="b3323d55:ExternalSystemViewDefaultContributor$DependencyExternalSystemNode" />
-                <item name="org.hibernate.orm:hibernate-core:6.4.4.Final" type="b3323d55:ExternalSystemViewDefaultContributor$DependencyExternalSystemNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -95,7 +62,6 @@
     "Gradle.Build proteinplus.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.ProteinplusApplication.executor": "Run",
     "git-widget-placeholder": "feature/order/back",
     "ignore.virus.scanning.warn.message": "true",
@@ -112,9 +78,9 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\seoyeonkang\Desktop\proteinplus\proteinplus\src\main\react-proteinplus\src\styles\order\images" />
       <recent name="C:\Users\seoyeonkang\Desktop\proteinplus\proteinplus\src\main\react-proteinplus\src\styles\common\css" />
       <recent name="C:\Users\seoyeonkang\Desktop\proteinplus\proteinplus\src\main\react-proteinplus\src\pages\home" />
-      <recent name="C:\Users\seoyeonkang\Desktop\proteinplus\proteinplus\src\main\react-proteinplus\src\styles\order\images" />
       <recent name="C:\Users\seoyeonkang\Desktop\proteinplus\proteinplus\src\main\react-proteinplus\src\components" />
       <recent name="C:\Users\seoyeonkang\Desktop\proteinplus\proteinplus\src\main\react-proteinplus\src\styles\common\images" />
     </key>
@@ -145,7 +111,8 @@
       <updated>1712470171898</updated>
       <workItem from="1712470173519" duration="23698000" />
       <workItem from="1712539761486" duration="4422000" />
-      <workItem from="1712636276138" duration="17869000" />
+      <workItem from="1712636276138" duration="23935000" />
+      <workItem from="1712714640434" duration="2431000" />
     </task>
     <servers />
   </component>
