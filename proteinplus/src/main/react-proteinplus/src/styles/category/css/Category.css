@@ -1,0 +1,65 @@
+.content-wrap {
+    min-height: 700px;
+}
+
+.frame-sm {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.content-wrap.frame-sm .page-title-area:first-child {
+    padding-top: 70px;
+}
+
+.page-title-area {
+    position: relative;
+}
+
+.title-page-type2 {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.prd-top-bnr {
+    margin-top: 20px;
+}
+
+.detail-category-tb-wrap {
+    display: block;
+    width: 100%;
+    position: absolute;
+}
+
+.detail-category-table {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.category-list {
+    display: flex;
+    width: 16.66667%;
+    height: 45px;
+    text-align: center;
+    border: 1px solid #cccccc;
+
+    font-weight: 400;
+    box-sizing: border-box;
+    margin-right: -1px; /* 오른쪽 마진 추가 */
+    margin-top: 1px;
+    margin-bottom: -2px; /* 아래쪽 마진 추가 */
+
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+}
+
+
+.category-list.active {
+    color: #5356FF;
+    border-color: #5356FF;
+    z-index: 10;
+}
+
+
