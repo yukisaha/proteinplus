@@ -45,7 +45,7 @@ public class ProductService {
     @Transactional(readOnly = true)
     public Page<Product> findAllByCategoryIdAndSortedBy(Long categoryId, Pageable pageable, String orderBy) {
         return switch (orderBy) {
-            case "sales" -> productRepository.findAllByCategoryIdOrderBySales(pageable, categoryId);
+//            case "sales" -> productRepository.findAllByCategoryIdOrderBySales(pageable, categoryId);
             case "priceAsc" -> productRepository.findAllByCategoryIdOrderByFinalPriceAsc(pageable, categoryId);
             case "priceDesc" -> productRepository.findAllByCategoryIdOrderByFinalPriceDesc(pageable, categoryId);
             case "uploadDateDesc" -> productRepository.findAllByCategoryIdOrderByUploadDateDesc(pageable, categoryId);
