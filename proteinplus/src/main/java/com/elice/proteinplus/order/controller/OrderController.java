@@ -33,13 +33,13 @@ public class OrderController {
     }
 
     // 주문을 생성합니다.
-    @PostMapping("/order/order")
-    public ResponseEntity<Long> addOrder(@RequestBody OrderDto orderDto,
-                                           @RequestBody DeliveryDto deliveryDto,
-                                           @PathVariable Long userId) {
-        Long orderId = orderService.order(orderDto, deliveryDto, userId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
-    }
+//    @PostMapping("/order/order")
+//    public ResponseEntity<Long> addOrder(@RequestBody OrderDto orderDto,
+//                                           @RequestBody DeliveryDto deliveryDto,
+//                                           @PathVariable Long userId) {
+//        Long orderId = orderService.order(orderDto, deliveryDto, userId);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
+//    }
 
     // 주문의 배송 정보를 업데이트합니다.
     @PutMapping("/user/{userId}/mypage/orderlist/{orderId}/edit")
