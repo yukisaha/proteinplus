@@ -63,7 +63,7 @@ export default function Header({categoryId}) {
     return (
         <header id="header" className="header">
             <div className="header-inner">
-                <h1 className="logo "><a href="/"><span className="blind">ProteinPlus</span></a></h1>
+                <h1 className="logo "><a href="/"><span>ProteinPlus</span></a></h1>
 
                 <div className="util">
                     <ul>
@@ -86,7 +86,6 @@ export default function Header({categoryId}) {
 
                 <div className="my-menu">
                     <ul>
-                        <li><a href="" className="btn-util-pedometer" title=""><span className="blind">만보기</span></a></li>
                         <li><a href="" className="btn-util-coupon" title=""><span className="blind">쿠폰</span></a></li>
                         <li><a href="" className="btn-util-mypage" title=""><span className="blind">마이페이지</span></a></li>
                         <li>
@@ -161,11 +160,6 @@ export default function Header({categoryId}) {
                             <li className="">
                                 <a href="">
                                     <span>이벤트</span>
-                                </a>
-                            </li>
-                            <li className="">
-                                <a href="">
-                                    <span>..</span>
                                 </a>
                             </li>
                         </ul>
