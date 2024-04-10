@@ -5,16 +5,16 @@ import Footer from '../../components/Footer'; // frame.js에서 Footer 함수 im
 
 
 export default function Order(){
-    function openUserDeliveryListPop(check) {
-        $('body').css("overflow", "hidden");
-
-        let deliveryListUrl = "/order/order";
-        if (check == true) {
-            deliveryListUrl += "?phoneCheck="+check;
-        }
-
-        $('#userDeliveryListPop').load(deliveryListUrl);
-    }
+    // function openUserDeliveryListPop(check) {
+    //     $('body').css("overflow", "hidden");
+    //
+    //     let deliveryListUrl = "/order/order";
+    //     if (check == true) {
+    //         deliveryListUrl += "?phoneCheck="+check;
+    //     }
+    //
+    //     $('#userDeliveryListPop').load(deliveryListUrl);
+    // }
 
     return (
         <div className="wrap main">
@@ -30,7 +30,8 @@ export default function Order(){
                             <div className="order-info">
                                 <div className="list-head-sub">
                                     <h3 className="title-list">배송지 정보</h3>
-                                    <a href="javascript:void(0);" className="btn-basic-sm2 btn-default" onClick={openUserDeliveryListPop}>
+                                    {/*<a href="javascript:void(0);" className="btn-basic-sm2 btn-default" onClick={openUserDeliveryListPop}>*/}
+                                    <a href="javascript:void(0);" className="btn-basic-sm2 btn-default">
                                         <span>배송지변경</span>
                                         <i className="ico-arr-right"></i>
                                     </a>
@@ -183,7 +184,9 @@ export default function Order(){
                                                     <li><span id="totPgPrice" className="final-info-box-reset">35,900</span>원</li>
                                                 </ul>
                                                 <p className="address final-info-box-reset" id="address"></p>
-                                                <a className="link-txt" id="dlvLocationSaveBtn" href="javascript:void(0);" onClick="openUserDeliveryListPop();"><span>배송지변경</span><i className="ico-arr-right"></i></a>
+                                                {/*<a className="link-txt" id="dlvLocationSaveBtn" href="javascript:void(0);" onClick="openUserDeliveryListPop();">*/}
+                                                <a className="link-txt" id="dlvLocationSaveBtn" href="javascript:void(0);">
+                                                    <span>배송지변경</span><i className="ico-arr-right"></i></a>
                                             </div>
                                             <button className="btn-x-sm3" type="button"><i className="ico-x-white"></i><span className="blind">닫기</span></button>
                                         </div>
