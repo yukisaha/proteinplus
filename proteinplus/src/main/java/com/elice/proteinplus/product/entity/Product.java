@@ -1,7 +1,7 @@
 package com.elice.proteinplus.product.entity;
 
 import com.elice.proteinplus.category.entity.Category;
-import com.elice.proteinplus.order.entity.OrderDetail;
+//import com.elice.proteinplus.order.entity.OrderDetail;
 import com.elice.proteinplus.product.dto.ProductCreateDto;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -26,9 +26,9 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    //order_detail에서 product랑 ManyToOne
-    @OneToMany(mappedBy = "product")
-    private Set<OrderDetail> orderDetails = new HashSet<>();
+//    //order_detail에서 product랑 ManyToOne
+//    @OneToMany(mappedBy = "product")
+//    private Set<OrderDetail> orderDetails = new HashSet<>();
 
     @Column(nullable = false, length = 50)
     private String name;

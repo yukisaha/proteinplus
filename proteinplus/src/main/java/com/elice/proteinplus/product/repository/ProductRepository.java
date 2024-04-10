@@ -12,8 +12,8 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     // 판매량(주문테이블에서 받아올것임)순 정렬
-    @Query("SELECT p FROM Product p LEFT JOIN p.orders o WHERE p.category.id = :categoryId OR p.category.parent.id = :categoryId GROUP BY p ORDER BY COUNT(o) DESC")
-    Page<Product> findAllByCategoryIdOrderBySales(Pageable pageable, @Param("categoryId") Long categoryId);
+//    @Query("SELECT p FROM Product p LEFT JOIN p.orders o WHERE p.category.id = :categoryId OR p.category.parent.id = :categoryId GROUP BY p ORDER BY COUNT(o) DESC")
+//    Page<Product> findAllByCategoryIdOrderBySales(Pageable pageable, @Param("categoryId") Long categoryId);
 
     @Query("SELECT p FROM Product p JOIN p.category c WHERE c.id = :categoryId OR c.parent.id = :categoryId ORDER BY p.finalPrice ASC")
     Page<Product> findAllByCategoryIdOrderByFinalPriceAsc(Pageable pageable, @Param("categoryId") Long categoryId);
