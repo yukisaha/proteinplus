@@ -9,38 +9,51 @@ import Category from "./pages/category/Category";
 import Rank from "./pages/rank/Rank";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />
-  },
-  {
-    path: "/cart",
-    element: <Cart />
-  },
-  {
-    path: "/mypageFrame",
-    element: <MypageFrame />
-  },
-  {
-    path: "/wishList",
-    element: <WishList />
-  },
-  {
-    path: "/product/list/:categoryId",
-    element: <Category />
-  },
-  {
-    path: "/product/rank/:categoryId",
-    element: <Rank />
-  },
-  {
-    path: "/product/rank/:categoryId/sales",
-    element:<Rank />
-  }
+    {
+        path: "/",
+        element: <Home />
+    },
+    {
+        path: "/cart",
+        element: <Cart />
+    },
+    {
+        path: "/mypageFrame",
+        element: <MypageFrame />
+    },
+    {
+        path: "/wishList",
+        element: <WishList />
+    },
+    {
+        path: "/product/list/:categoryId",
+        element: <Category />
+    },
+    {
+        path: "/product/rank/:categoryId",
+        element: <Rank />
+    },
+    {
+        path: "/product/rank/:categoryId/sales",
+        element:<Rank />
+    }
+
+    {
+        path: "/order",
+        element: <Order />
+    },
+    {
+        path: "/orderDetail",
+        element: <OrderDetail />
+    },
+    {
+        path: "/cancelDetail",
+        element: <CancelDetail />
+    }
 ]);
 
 export default function App(){
-  return (
-    <RouterProvider router={router} />
-  );
+    return (
+        <RouterProvider router={router} />
+    );
 }
