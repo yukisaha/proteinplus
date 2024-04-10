@@ -196,7 +196,7 @@
     background-position: -200px 0;
 }
 
-.sns_blind {
+.blind {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -206,3 +206,32 @@
     clip: rect(0, 0, 0, 0);
     border: 0;
 }
+
+button .blind {
+    position: relative;
+    font-size: 0;
+    color: transparent;
+}
+
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+    font-style: normal;
+}
+
+address,
+caption,
+strong[lang="en"],
+em,
+cite,
+b {
+    font-weight: normal;
+    font-style: normal;
+}
+

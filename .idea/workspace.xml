@@ -5,9 +5,53 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c93fd707-c715-4872-abda-b54c90e5f2e6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/category/controller/CategoryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/category/entity/Category.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/category/entity/CategoryDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/category/entity/UpdateCategoryDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/category/repository/CategoryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/category/service/CategoryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/config/SwaggerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/rank/controller/RankController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/rank/entity/Rank.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/rank/repository/RankRespository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/java/com/elice/proteinplus/rank/service/RankService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/components/user/join.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/pages/cart/Cart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/pages/cart/WishList.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/pages/category/Category.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/pages/rank/Rank.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/styles/cart/css/Cart.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/styles/cart/images/bullet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/styles/cart/images/heart.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/styles/cart/images/icon_form.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/styles/cart/images/icon_img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/styles/category/css/Category.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/styles/common/images/search.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/styles/images/rank/cart-icon24.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/styles/images/rank/heart-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/styles/images/rank/ico-rating-simply-pc.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/styles/rank/css/Rank.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proteinplus/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/components/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/components/Footer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/components/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/components/MypageFrame.js" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/components/MypageFrame.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/pages/home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/pages/home/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/styles/common/css/Footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/styles/common/css/Footer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/styles/common/css/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/styles/common/css/Header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/static/css/cart/cart.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/static/css/cart/wishList.css" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/styles/cart/css/WishList.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/static/css/frame.css" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/static/css/frame.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/static/images/cart/cartIcon.png" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/styles/cart/images/cartIcon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/static/images/cart/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/styles/cart/images/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/static/images/cart/pageMove.png" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/react-proteinplus/src/styles/cart/images/pageMove.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/cart/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/cart/cart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/cart/wishList.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/cart/wishList.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/mypageFrame.html" beforeDir="false" afterPath="$PROJECT_DIR$/proteinplus/src/main/resources/templates/mypageFrame.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +107,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.ProteinplusApplication.executor": "Run",
-    "git-widget-placeholder": "feature/order/back",
+    "git-widget-placeholder": "Merging feature/order/back",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/seoyeonkang/Desktop/SpringBoot-Board",
@@ -112,7 +156,7 @@
       <workItem from="1712470173519" duration="23698000" />
       <workItem from="1712539761486" duration="4422000" />
       <workItem from="1712636276138" duration="23935000" />
-      <workItem from="1712714640434" duration="2431000" />
+      <workItem from="1712714640434" duration="3453000" />
     </task>
     <servers />
   </component>
