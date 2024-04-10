@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/order/css/Order.css';
+import '../../styles/order/css/Order.scoped.css';
 import Header from '../../components/Header'; // frame.js에서 Header 함수 import
 import Footer from '../../components/Footer'; // frame.js에서 Footer 함수 import
 

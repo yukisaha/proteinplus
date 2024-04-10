@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams, useLocation  } from 'react-router-dom';
 import Header from '../../components/Header'; // frame.js에서 Header 함수 import
 import Footer from '../../components/Footer'; // frame.js에서 Footer 함수 import
-import '../../styles/rank/css/Rank.css';
+import '../../styles/rank/css/Rank.scoped.css';
 import axios from "axios";
 
 function Rank() {
