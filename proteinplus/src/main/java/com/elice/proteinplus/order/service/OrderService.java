@@ -7,6 +7,8 @@ import com.elice.proteinplus.order.dto.OrderHistDto;
 import com.elice.proteinplus.order.entity.*;
 import com.elice.proteinplus.order.repository.DeliveryRepository;
 import com.elice.proteinplus.order.repository.OrderRepository;
+import com.elice.proteinplus.product.entity.Product;
+import com.elice.proteinplus.product.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +31,7 @@ import java.util.List;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
-    private final UserRepository userRepository;
+//    private final UserRepository userRepository;
     private final DeliveryRepository deliveryRepository;
 
     /* 회원의 주문 내역 조회(회원) */
@@ -65,46 +67,47 @@ public class OrderService {
             orderHistDtos.add(orderHistDto);
         }
         // 페이지 구현 객체를 생성하여 반환
-        return new PageImpl<OrderHistDto>(orderHistDtos, pageable);
+//        return new PageImpl<OrderHistDto>(orderHistDtos, pageable);
+        return new PageImpl<OrderHistDto>(orderHistDtos);
     }
 
-    /* 주문 (회원) */
-    @Transactional
-    public Long order(OrderDto orderDto, DeliveryDto deliveryDto, Long userId) {
-        // 상품 조회
-        Product product = productRepository.findById(orderDto.getProductId())
-                .orElseThrow(EntityNotFoundException::new);
-        // 사용자 조회
-        User user = userRepository.findById(userId)
-                .orElseThrow(EntityNotFoundException::new);
-
-        // 배송 정보 생성
-        Address address = deliveryDto.getAddress();
-        Delivery delivery = new Delivery();
-        delivery.setReceiverName(deliveryDto.getReceiverName());
-        delivery.setReceiverPhone(deliveryDto.getReceiverPhoneNumber());
-        delivery.setDeliveryReq(deliveryDto.getDeliveryReq());
-        delivery.setAddress(address);
-
-        // 배송 정보 저장
-        deliveryRepository.save(delivery);
-
-        // 주문 상세 생성
-        OrderDetail orderDetail = OrderDetail.createOrderDetail(product, orderDto.getOrderPrice(), orderDto.getCount());
-        // 주문 상세 목록 생성
-        List<OrderDetail> orderDetailList = new ArrayList<>();
-        orderDetailList.add(orderDetail);
-
-        LocalDateTime orderDate = LocalDateTime.now();
-        OrderStatus orderStatus = OrderStatus.ORDER;
-
-        //주문 생성
-        Order order = Order.createOrder(user, orderDate, orderStatus, orderDetailList);
-        order.setDelivery(delivery); // 배송 정보 설정
-        orderRepository.save(order);
-
-        return order.getId();
-    }
+//    /* 주문 (회원) */
+//    @Transactional
+//    public Long order(OrderDto orderDto, DeliveryDto deliveryDto, Long userId) {
+//        // 상품 조회
+//        Product product = productRepository.findById(orderDto.getProductId())
+//                .orElseThrow(EntityNotFoundException::new);
+//        // 사용자 조회
+//        User user = userRepository.findById(userId)
+//                .orElseThrow(EntityNotFoundException::new);
+//
+//        // 배송 정보 생성
+//        Address address = deliveryDto.getAddress();
+//        Delivery delivery = new Delivery();
+//        delivery.setReceiverName(deliveryDto.getReceiverName());
+//        delivery.setReceiverPhone(deliveryDto.getReceiverPhoneNumber());
+//        delivery.setDeliveryReq(deliveryDto.getDeliveryReq());
+//        delivery.setAddress(address);
+//
+//        // 배송 정보 저장
+//        deliveryRepository.save(delivery);
+//
+//        // 주문 상세 생성
+//        OrderDetail orderDetail = OrderDetail.createOrderDetail(product, orderDto.getOrderPrice(), orderDto.getCount());
+//        // 주문 상세 목록 생성
+//        List<OrderDetail> orderDetailList = new ArrayList<>();
+//        orderDetailList.add(orderDetail);
+//
+//        LocalDateTime orderDate = LocalDateTime.now();
+//        OrderStatus orderStatus = OrderStatus.ORDER;
+//
+//        //주문 생성
+//        Order order = Order.createOrder(user, orderDate, orderStatus, orderDetailList);
+//        order.setDelivery(delivery); // 배송 정보 설정
+//        orderRepository.save(order);
+//
+//        return order.getId();
+//    }
 
     /* 주문 수정(회원) - 배송지 */
     /* TODO - 상품수량 수정하는 코드 추가할지 말지 고민중 */

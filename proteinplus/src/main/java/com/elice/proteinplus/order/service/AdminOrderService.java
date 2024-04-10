@@ -50,7 +50,8 @@ public class AdminOrderService {
             orderHistDtos.add(orderHistDto);
         }
         // 페이지 구현 객체를 생성하여 반환
-        return new PageImpl<OrderHistDto>(orderHistDtos, pageable);
+//        return new PageImpl<OrderHistDto>(orderHistDtos, pageable);
+        return new PageImpl<OrderHistDto>(orderHistDtos);
     }
 
     /* 주문 상태 변경(관리자) */

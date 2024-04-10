@@ -1,6 +1,7 @@
 package com.elice.proteinplus.order.entity;
 
 import com.elice.proteinplus.global.entity.BaseTimeEntity;
+import com.elice.proteinplus.product.entity.Product;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -39,7 +40,7 @@ public class OrderDetail extends BaseTimeEntity{
                 .count(count)
                 .build();
 
-        product.removeStock(count);
+        product.decreaseStock(count);
         return orderDetail;
     }
 
@@ -50,7 +51,7 @@ public class OrderDetail extends BaseTimeEntity{
 
     //주문 취소
     public void cancel(){
-        this.getProduct().addStock(count);
+        this.getProduct().increaseStock(count);
     }
 
     public void update(int count) {

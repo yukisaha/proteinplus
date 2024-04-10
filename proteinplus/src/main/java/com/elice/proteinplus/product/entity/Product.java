@@ -1,5 +1,7 @@
 package com.elice.proteinplus.product.entity;
 
+import com.elice.proteinplus.category.entity.Category;
+import com.elice.proteinplus.order.entity.OrderDetail;
 import com.elice.proteinplus.product.dto.ProductCreateDto;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,6 +9,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "product")
