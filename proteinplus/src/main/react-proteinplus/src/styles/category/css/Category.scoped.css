@@ -28,7 +28,8 @@
 .detail-category-tb-wrap {
     display: block;
     width: 100%;
-    position: absolute;
+    position: relative;
+    margin-top: 20px;
 }
 
 .detail-category-table {
@@ -62,4 +63,14 @@
     z-index: 10;
 }
 
+.grid-list-wrap {
+    position: relative;
+}
 
+.grid-list-wrap.type-photo {
+    border-top: 0;
+}
+
+.page-title-area ~ .grid-list-wrap {
+    margin-top: 50px;
+}
