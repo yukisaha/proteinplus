@@ -32,8 +32,21 @@ public class CategoryService {
     //특정 카테고리 조회
     public Long findCategoryIdByNameAndParentId(String name, Long parent_id) { return categoryRepository.findCategoryIdByNameAndParentId(name, parent_id); }
 
+    //자식 카테고리 id를 이용하여 부모 카테고리 id 조회
+    //부모 카테고리가 child_id 로 들어갈 경우 null 값 리턴
+    public Long findParentCategoryId(Long child_id) {
+
+        Long parentId = categoryRepository.findParentCategoryId(child_id);
+
+        if(parentId == null){
+            return null;
+        }
+
+        return parentId;
+    }
+
     //부모 카테고리 추가
-    //카테고리 명 중복일 경우 에러 코드 ㄱㄱ  수정할 때도
+    //부모 카테고리 명 중복일 경우 에러 코드 ㄱㄱ  수정할 때도
     public Category createParentCategory(String name){
 
         Category parentCategory = null;
