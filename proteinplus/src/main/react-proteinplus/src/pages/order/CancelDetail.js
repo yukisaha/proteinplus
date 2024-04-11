@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/order/css/OrderDetail.css';
+import '../../styles/order/css/OrderDetail.scoped.css';
 import MypageFrame from '../../components/MypageFrame';
 
 export default function CancelDetail(){

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/product/css/Review.css';
+import '../../styles/product/css/Review.scoped.css';
 
 function Review ({reviewOpen, closeReview}){
     const handleClose = () => {

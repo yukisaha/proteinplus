@@ -141,13 +141,13 @@ img {
 }
 .ui-compare-select .prd-item .tit,
 .prd-item.type-md .tit {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .prd-item .tit,
 .prd-item.type-md .tit {
   display: block;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 22px;
   margin: 4px 0 10px;
   font-weight: 400;
@@ -388,4 +388,50 @@ element.style {
 .no-data .message {
     color: #333;
     font-size: 15px;
+}
+
+[class*="grid-area-"] > .colum, .grid-area > .colum {
+    /* float: left; */
+    display: inline-block;
+    vertical-align: top;
+    font-size: 14px;
+}
+
+.grid-area-span2 > .colum:nth-child(-n+2), .grid-area-span3 > .colum:nth-child(-n+3), .grid-area-span4 > .colum:nth-child(-n+4), .grid-area-span6 > .colum:nth-child(-n+6), .grid-area-span7 > .colum:nth-child(-n+7) {
+    margin-top: 0 !important;
+}
+
+[class*="grid-area-"].gap33 {
+    margin: 0 -17px 0 -16px;
+}
+
+[class*="grid-area-"].gap33 > .colum {
+    margin-top: 33px;
+}
+
+[class*="grid-area-"].gap33 > .colum {
+    padding-left: 16px;
+    padding-right: 17px;
+}
+
+.grid-area-span4 > .colum {
+    width: 25%;
+}
+
+.list-renewal .prd-item .tit a, .list-renewal .prd-item.type-md .tit a {
+    height: auto;
+}
+.prd-item .tit a, .prd-item.type-md .tit a {
+    max-height: 44px;
+    height: 44px;
+    word-break: break-all;
+}
+.text-elps2 {
+    display: block;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: keep-all;
 }

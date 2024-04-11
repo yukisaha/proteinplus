@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Header from '../../components/Header'; // frame.js에서 Header 함수 import
 import Footer from '../../components/Footer'; // frame.js에서 Footer 함수 import
-import '../../styles/category/css/Category.css';
+import '../../styles/category/css/Category.scoped.css';
 import axios from "axios";
 
 function Category() {

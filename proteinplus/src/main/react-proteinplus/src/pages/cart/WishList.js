@@ -28,6 +28,36 @@ export default function WishList() {
       rating: '★4.7',
       totalRating: '(13,445)',
     },
+    {
+      id: 1,
+      name: '[맛있닭] 닭가슴살 스테이크',
+      imageUrl: 'https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20240109/IMG1704AEO777787343_330_330.jpg',
+      salePercent: 29,
+      price: '17,900',
+      originalPrice: '24,900',
+      rating: '★4.9',
+      totalRating: '(82,648)',
+    },
+        {
+          id: 1,
+          name: '[맛있닭] 닭가슴살 스테이크',
+          imageUrl: 'https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20240109/IMG1704AEO777787343_330_330.jpg',
+          salePercent: 29,
+          price: '17,900',
+          originalPrice: '24,900',
+          rating: '★4.9',
+          totalRating: '(82,648)',
+        },    {
+                id: 1,
+                name: '[맛있닭] 닭가슴살 스테이크',
+                imageUrl: 'https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20240109/IMG1704AEO777787343_330_330.jpg',
+                salePercent: 29,
+                price: '17,900',
+                originalPrice: '24,900',
+                rating: '★4.9',
+                totalRating: '(82,648)',
+              },
+
     // 추가적인 상품 데이터를 이곳에 추가할 수 있습니다.
   ];
 

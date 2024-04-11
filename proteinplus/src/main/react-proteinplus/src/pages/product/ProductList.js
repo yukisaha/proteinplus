@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../../styles/product/css/ProductList.css';
+import '../../styles/product/css/ProductList.scoped.css';
 import {Link, useParams} from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
