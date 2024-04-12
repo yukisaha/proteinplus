@@ -68,7 +68,7 @@ export default function Header({categoryId}) {
                 <div className="util">
                     <ul>
                         <li><a href="/auth/login">로그인</a></li>
-                        <li><a href="/member/join/general">회원가입</a></li>
+                        <li><a href="/member/join">회원가입</a></li>
                         <li><a href="/mypage/orderlist">주문조회</a></li>
                         <li><a href="/service/center">고객센터</a></li>
                     </ul>
