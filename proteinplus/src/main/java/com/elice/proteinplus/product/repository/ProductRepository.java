@@ -62,4 +62,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT count(p.id) FROM Product p JOIN p.category c WHERE (c.id = :categoryId OR c.parent.id = :categoryId) AND p.productStatus = 'sell'")
     Long countBySellCategoryId(Long categoryId);
 
+    // 장바구니에 있는 제품들을 조회하는 메소드
+    List<Product> findAllByIdIn(List<Long> ids);
 }
