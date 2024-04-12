@@ -1,0 +1,224 @@
+.user-profile-container {
+  display: flex;
+  margin: 0 170px;
+  /* min-height: 700px;
+  background: #ffffff; 
+  
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;*/
+}
+.user-delete-area {
+  width: 850px;
+  margin: 0 auto;
+}
+.user-edit-area {
+  width: 850px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* 회원탈퇴 유의사항 */
+.user-delete-txt {
+  margin-bottom: 50px;
+}
+.profile_menu-title-area {
+  position: relative;
+  min-height: 30px;
+  margin-bottom: 15px;
+}
+.profile_title-menu {
+  /* display: inline-block; */
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.profile_board-form {
+  width: 100%;
+  border-top: 1px solid #666;
+  /* border-bottom: 1px solid #ccc; */
+}
+.profile_input-guide-box {
+  background: #f9f9f9;
+  padding: 80px 0;
+}
+.profile_input-guide-box .profile_inner {
+  padding: 0 155px;
+  font-size: 14px;
+}
+.profile_input-guide-box .profile_inner .profile_box-tit {
+  font-size: 20px;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+.profile_input-guide-box .profile_inner .profile_txt {
+  line-height: 1.4;
+}
+
+/* 회원탈퇴 form */
+.profile_frame-inner {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.profile_frame-inner span {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+.profile_frame-inner textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border-radius: 10px;
+  resize: none;
+}
+
+.profile_page-guide-center {
+  margin-top: 30px;
+}
+.profile_txt-link-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+/*      */
+.frame-cnt-inner {
+  width: 820px;
+}
+
+.input-group-btn {
+  width: 30%;
+}
+
+.btn_submit {
+  width: 100%;
+}
+.profile_button-group {
+  margin-top: 10px;
+}
+.profile_button-group .profile_input-group-first {
+  width: 70%;
+}
+.profile_button-group .profile_input-group-second {
+  width: 20%;
+}
+
+/*  */
+/*  */
+/*  */
+/*  */
+/* input 섹션 */
+.profile_input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+.select-group {
+  display: flex;
+  gap: 5px;
+  width: 100%;
+}
+.birth_select {
+  width: 33.3%;
+}
+
+.profile_input-text.type-lg {
+  height: 50px;
+  padding: 3px 15px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  border-radius: 6px;
+}
+
+/* 정보 수정 */
+#user-profile-edit-form {
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+
+/* 회원탈퇴 */
+.user_delete-btn {
+  margin-top: 30px;
+  position: absolute;
+  right: 0;
+}
+
+/* 공통사항 */
+
+/* frame */
+.user_frame-full {
+  /* position: relative; */
+  width: 100%;
+}
+.user_frame-sm {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 50px 100px;
+}
+
+/* width */
+.w-full {
+  width: 100% !important;
+}
+
+/* 버튼 */
+.user_btn-primary {
+  background: #5356ff;
+  color: #fff;
+  border: 1px solid #5356ff;
+  height: 50px;
+  margin-top: 15px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.user_btn-secondary {
+  background: #fff;
+  color: #5356ff;
+  border: 1px solid #5356ff;
+  height: 50px;
+  margin-top: 15px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* form fieldset */
+fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#required-text {
+  color: #5356ff;
+}
+
+input {
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  appearance: auto;
+  -webkit-rtl-ordering: logical;
+  cursor: pointer;
+}
+
+input{
+  vertical-align: middle;
+}
+
+input {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
