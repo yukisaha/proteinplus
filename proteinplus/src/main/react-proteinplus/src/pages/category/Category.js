@@ -4,7 +4,7 @@ import Header from '../../components/Header'; // frame.js에서 Header 함수 im
 import Footer from '../../components/Footer'; // frame.js에서 Footer 함수 import
 import '../../styles/category/css/Category.scoped.css';
 import axios from "axios";
-// import ProductList from "../product/ProductList";
+import ProductList from "../product/ProductList";
 
 function Category() {
 
@@ -68,8 +68,7 @@ function Category() {
 
     return (
         <div className="wrap main">
-            {/*<Header /> {/* Header 컴포넌트 추가 */}
-            <Header categoryId = {categoryId}/>
+            <Header categoryId = {categoryId}/> {/* Header 컴포넌트 추가 */}
             <section id="contents" className="container">
                 <div className="content-wrap frame-sm">
                     <div className="page-title-area">
@@ -100,9 +99,9 @@ function Category() {
                             ))}
                         </div>
                     </div>
-                    {/*<div className={`grid-list-wrap type-photo`}>*/}
-                    {/*    <ProductList categoryId = {categoryId}/>*/}
-                    {/*</div>*/}
+                    <div className={`grid-list-wrap type-photo`}>
+                        <ProductList categoryId = {categoryId}/>
+                    </div>
                 </div>
             </section>
             <Footer /> {/* Footer 컴포넌트 추가 */}
