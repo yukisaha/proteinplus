@@ -45,31 +45,29 @@ public class ProductService {
     @Transactional(readOnly = true)
     public Page<Product> findAllByCategoryIdAndSortedBy(Long categoryId, Pageable pageable, String orderBy) {
         return switch (orderBy) {
-//            case "sales" -> productRepository.findAllByCategoryIdOrderBySales(pageable, categoryId);
-            case "priceAsc" -> productRepository.findAllByCategoryIdOrderByFinalPriceAsc(pageable, categoryId);
-            case "priceDesc" -> productRepository.findAllByCategoryIdOrderByFinalPriceDesc(pageable, categoryId);
+            //판매량순
+            //case "sales" -> productRepository.findAllByCategoryIdOrderBySales(pageable, categoryId);
+            //높은가격순
+            //case "priceAsc" -> productRepository.findAllByCategoryIdOrderByFinalPriceAsc(pageable, categoryId);
+            //낮은가격순
+            ///case "priceDesc" -> productRepository.findAllByCategoryIdOrderByFinalPriceDesc(pageable, categoryId);
+            //신상품순
             case "uploadDateDesc" -> productRepository.findAllByCategoryIdOrderByUploadDateDesc(pageable, categoryId);
+            //할인율순
             case "discountRateDesc" -> productRepository.findAllByCategoryIdOrderByDiscountRateDesc(pageable, categoryId);
             default -> productRepository.findAllByCategoryId(pageable, categoryId);
         };
     }
 
-
-    //카테고리 id에 해당하는 상품의 수
-    @Transactional(readOnly = true)
-    public Long countByCategoryId(Long categoryId) {
-        return productRepository.countByCategoryId(categoryId);
-    }
-
-    @Transactional(readOnly = true)
-    public Page<Product> findAllIncludingSoldOut(Pageable pageable) {
-        return productRepository.findAllIncludingSoldOut(pageable);
-    }
-
-    @Transactional(readOnly = true)
-    public Page<Product> findAllExcludingSoldOut(Pageable pageable) {
-        return productRepository.findAllExcludingSoldOut(pageable);
-    }
+//    @Transactional(readOnly = true)
+//    public Page<Product> findAllIncludingSoldOut(Pageable pageable) {
+//        return productRepository.findAllIncludingSoldOut(pageable);
+//    }
+//
+//    @Transactional(readOnly = true)
+//    public Page<Product> findAllExcludingSoldOut(Pageable pageable) {
+//        return productRepository.findAllExcludingSoldOut(pageable);
+//    }
 
     //상품 상세 페이지로
     @Transactional(readOnly = true)
@@ -81,5 +79,31 @@ public class ProductService {
     // 장바구니에 있는 제품들을 가져오는 메소드
     public List<Product> getProductsInCartByIds(List<Long> ids) {
         return productRepository.findAllByIdIn(ids);
+    }
+    /************************ react에서 사용중인 코드 *********************************/
+
+    //카테고리 id에 해당하는 상품의 수
+    @Transactional(readOnly = true)
+    public Long countByCategoryId(Long categoryId) {
+        return productRepository.countByCategoryId(categoryId);
+    }
+
+    //카테고리 id 상품 중 판매중인 상품의 수
+    public Long countBySellCategoryId(Long categoryId) {
+        return productRepository.countBySellCategoryId(categoryId);
+    }
+
+    //카테고리 id별 상품 조회
+    public List<Product> findProductByCategoryId(Long categoryId) {
+        //모든 랭크 조회
+        List<Product> products = productRepository.findProductByCategoryId(categoryId);
+        //카테고리 id만 조회
+        return products;
+    }
+
+    //상품 조회 < 품절 상품 제외 >
+    public List<Product> findSellProduct(Long categoryId) {
+        List<Product> sellProducts = productRepository.findSellProduct(categoryId);
+        return sellProducts;
     }
 }

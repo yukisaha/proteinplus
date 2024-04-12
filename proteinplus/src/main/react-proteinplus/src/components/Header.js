@@ -19,7 +19,7 @@ export default function Header({categoryId}) {
     async function getCategory() { // Axios 방식 사용
         const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
         try {
-            const response = await axios.get(`${Spring_Server_Ip}/admin/category/test`);
+            const response = await axios.get(`${Spring_Server_Ip}/admin/category/find/category`);
             setCategoryData(response.data);
             setLoading(false); // 데이터를 성공적으로 받아온 후 로딩 상태 해제
         } catch (error) {
@@ -68,7 +68,7 @@ export default function Header({categoryId}) {
                 <div className="util">
                     <ul>
                         <li><a href="/auth/login">로그인</a></li>
-                        <li><a href="/member/join/general">회원가입</a></li>
+                        <li><a href="/member/join">회원가입</a></li>
                         <li><a href="/mypage/orderlist">주문조회</a></li>
                         <li><a href="/service/center">고객센터</a></li>
                     </ul>
@@ -113,8 +113,11 @@ export default function Header({categoryId}) {
                                                 className={`first-category-item ${activeCategoryId === parentCategory.id ? 'active' : ''}`}
                                                 onMouseEnter={() => handleMouseOver(parentCategory.id)}
                                             >
-                                                <Link to={`/product/list/${getFirstChildCategoryId(parentCategory.id)}`}>{parentCategory.name}</Link>
+                                                <Link to={`/product/list/${parentCategory.id}`}>{parentCategory.name}</Link>
                                                 <ul className="second-category-list">
+                                                    <li className="second-category-item">
+                                                        <Link to={`/product/list/${parentCategory.id}`}>전체</Link>
+                                                    </li>
                                                     {categoryData
                                                         .filter((childCategory) => childCategory.parent && childCategory.parent.id === parentCategory.id)
                                                         .map((childCategory) => (
