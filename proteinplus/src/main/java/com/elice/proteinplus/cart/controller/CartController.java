@@ -15,14 +15,11 @@ public class CartController {
 
     private final ProductService productService;
 
-    @GetMapping
-    public List<Product> findProductsInCartByIds(@RequestParam("ids") List<Long> ids) {
+    @PostMapping
+    public List<Product> findProductsInCartByIds(@RequestBody List<Long> ids) {
         return productService.getProductsInCartByIds(ids);
     }
 
 
-    @GetMapping("/test")
-    public String testEndpoint() {
-        return "This is a test endpoint for /cart";
-    }
+
 }
