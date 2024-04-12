@@ -40,4 +40,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p WHERE p.productStatus = 'sell'")
     Page<Product> findAllExcludingSoldOut(Pageable pageable);
 
+    // 장바구니에 있는 제품들을 조회하는 메소드
+    List<Product> findAllByIdIn(List<Long> ids);
 }

@@ -2,12 +2,26 @@ import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import '../../styles/cart/css/Cart.scoped.css';
+import axios from "axios";
 
 function Cart() {
     const [isChecked, setIsChecked] = useState(true); // isChecked 상태와 해당 상태를 변경할 함수 setIsChecked를 생성하고 기본값으로 true를 설정
 
     // 로컬스토리지
     const [cartItems, setCartItems] = useState({});
+
+    const [CartData, setCartData] = useState([]);
+
+    async function getCartList() { // Axios
+        const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
+        const response = await axios.get(`${Spring_Server_Ip}/cart?ids=1,2,3`);
+        setCartData(response.data);
+    }
+
+    // 페이지 로드 시 장바구니 데이터 가져오기
+    useEffect(() => {
+        getCartList();
+    }, []);
 
     // 모든 상품의 체크 상태가 변경될 때 호출되는 함수
     const handleCheckAllChange = () => {
@@ -46,9 +60,8 @@ function Cart() {
         localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
     };
 
-
     // 상품 추가
-    const addItemToCart = (productId, count) => {
+    const addItemToCart = (productId, count = 1) => {
         setCartItems(prevItems => ({
             ...prevItems,
             [productId]: { product_id: productId, count: count, isChecked: true } // 상품 추가 시 기본적으로 isChecked를 true로 설정합니다.
@@ -123,33 +136,31 @@ function Cart() {
         }
     };
 
+
     // 페이지 로드 시 로컬 스토리지에서 데이터 로드
     useEffect(() => {
         loadCartItemsFromLocalStorage();
     }, []);
 
+
     // 초기에 productId, count  데이터 추가
     useEffect(() => {
+        addItemToCart(1, 1);
         addItemToCart(2, 2);
         addItemToCart(3, 3);
-        addItemToCart(4, 4);
-        addItemToCart(5, 5);
 
     }, []);
 
-    // updateItemInCart 함수 테스트
-    useEffect(() => {
-        console.log(updateItemInCart(3, 5)); // 해당 상품의 수량을 5로 업데이트
-    }, []);
-
-    // deleteItemFromCart 함수 테스트
-    useEffect(() => {
-        deleteItemFromCart(2); // 해당 상품 삭제
-    }, []);
 
     // 장바구니 상품 렌더링 함수
     const renderCartItems = () => {
         const cartItemKeys = Object.keys(cartItems);
+
+        // 각 상품의 가격을 모두 더한 값을 계산
+        const totalProductPrice = cartItemKeys.reduce((total, productId) => {
+            const productData = CartData.find(product => product.id === cartItems[productId].product_id);
+            return total + (productData ? productData.price : 0) * cartItems[productId].count;
+        }, 0);
 
         if (cartItemKeys.length === 0) {
             return (
@@ -189,69 +200,76 @@ function Cart() {
                 <div className="cart-list-area">
                     <div className="cart-list-area" id="delivery-group-1600">
                         <ul className="cart-list">
-                            {Object.values(cartItems).map((item) => (
-                                <li key={item.product_id} id={`delivery-product-${item.product_id}`} className={`delivery-product-${item.product_id}NY`}>
-                                    <div className="prd-info-area cart-info-area">
-                                        <div className="inner">
-                                            <div className="column check">
-                                                <div className="custom-checkbox single">
-                                                    <input type="checkbox" id={`check-product-${item.product_id}N`} className="checkbox deleteUserCartList productCheckbox" name="check1600"
-                                                        checked={item.isChecked} // 개별 상품의 isChecked 값을 사용합니다.
-                                                        onChange={() => handleProductCheckChange(item.product_id)} // 개별 상품의 체크 상태가 변경될 때 handleProductCheckChange 함수를 호출합니다.
-                                                    />
-                                                    <label htmlFor={`check-product-${item.product_id}N`} className="blind">선택</label>
+
+                            {/* 여기에 cartItems와 CartData를 함께 사용하여 데이터를 매핑합니다. */}
+                            {Object.values(cartItems).map((item) => {
+                                const productData = CartData.find(product => product.id === item.product_id);
+
+                                return (
+                                    <li key={item.product_id} id={`delivery-product-${item.product_id}`} className={`delivery-product-${item.product_id}NY`}>
+                                        <div className="prd-info-area cart-info-area">
+                                            <div className="inner">
+                                                <div className="column check">
+                                                    <div className="custom-checkbox single">
+                                                        <input type="checkbox" id={`check-product-${item.product_id}N`} className="checkbox deleteUserCartList productCheckbox" name="check1600"
+                                                            checked={item.isChecked}
+                                                            onChange={() => handleProductCheckChange(item.product_id)}
+                                                        />
+                                                        <label htmlFor={`check-product-${item.product_id}N`} className="blind">선택</label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <input type="hidden" className={`arrCartid-${item.product_id}`} value="20240408000024272765" />
-                                            <input type="hidden" className={`vProductcd-${item.product_id}`} value={item.product_id} />
-                                            <input type="hidden" className={`vProductcd-${item.product_id}-couponPrice couponPrice`} value="0" />
+                                                <input type="hidden" className={`arrCartid-${item.product_id}`} value="20240408000024272765" />
+                                                <input type="hidden" className={`vProductcd-${item.product_id}`} value={item.product_id} />
+                                                <input type="hidden" className={`vProductcd-${item.product_id}-couponPrice couponPrice`} value="0" />
 
-                                            <div className="column img">
-                                                <label htmlFor={`check-product-${item.product_id}N`}>
-                                                    <img src={`https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20240109/IMG1704AEO777787343_100_100.jpg`} alt="상품이미지" />
-                                                </label>
-                                            </div>
-                                            <div className="column tit">
-                                                <p className="tit">
-                                                    <a href={`/product/view?productCd=${item.product_id}`} className="productNm">{item.product_id} [맛있닭] 닭가슴살 스테이크</a>
-                                                </p>
-                                                <p className="desc">오리지널 100g / 10팩</p>
-                                                <p className="desc"></p>
+                                                <div className="column img">
+                                                    <label htmlFor={`check-product-${item.product_id}N`}>
+                                                        <img src={`https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20240109/IMG1704AEO777787343_100_100.jpg`} alt="상품이미지" />
+                                                    </label>
+                                                </div>
+                                                <div className="column tit">
+                                                    <p className="tit">
+                                                        <a href={`/product/view?productCd=${item.product_id}`} className="productNm">{productData ? productData.name : "상품 이름 없음"}</a>
+                                                    </p>
+                                                    <p className="desc">옵션</p>
+                                                    <p className="desc"></p>
 
-                                                <ul className="price-item">
-                                                    <li><span className="num">17,900</span>원</li>
-                                                </ul>
-                                            </div>
+                                                    <ul className="price-item">
+                                                        <li><span className="num">{productData ? productData.price : "가격 정보 없음"}</span>원</li>
+                                                    </ul>
+                                                </div>
 
-                                            <div className="column qty">
-                                                <div className="qty-group">
-                                                    <button type="button" className="btn-qty cart" title="" onClick={() => handleDecreaseQuantity(item.product_id)}>
-                                                        <i className="ico-minus-bold"></i><span className="blind">빼기</span>
+                                                <div className="column qty">
+                                                    <div className="qty-group">
+                                                        <button type="button" className="btn-qty cart" title="" onClick={() => handleDecreaseQuantity(item.product_id)}>
+                                                            <i className="ico-minus-bold"></i><span className="blind">빼기</span>
+                                                        </button>
+                                                        <input type="text" title="" className={`input-qty product-${item.product_id}`} id={`qty-20240408000024272765`} value={item.count} data-max-qty="0" readOnly />
+                                                        <button type="button" className="btn-qty cart" title="" onClick={() => handleIncreaseQuantity(item.product_id)}>
+                                                            <i className="ico-plus-bold"></i><span className="blind">더하기</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <div className="column price">
+                                                    <input type="hidden" id={`cart-orange-save-price-minus-20240408000024272765`} className="nOrangeSavePriceMinus" value="350" />
+                                                    <input type="hidden" id={`cart-orange-save-price-${item.product_id}`} className="nOrangeSavePrice" value="17550" />
+                                                    <div className="price-div">
+                                                        <span className="num cart-price-923 brand-cd-1042 partner-cd-16 cart-price-923" id={`cart-price-20240408000024272765`}>{productData ? productData.price : "가격 정보 없음"}</span>원
+                                                    </div>
+                                                </div>
+
+                                                <div className="column btn">
+                                                    <button type="button" className="btn-x-sm deleteUserCart" title="" onClick={() => deleteItemFromCart(item.product_id)}>
+                                                        <i className="ico-x-black"></i><span className="blind">삭제</span>
                                                     </button>
-                                                    <input type="text" title="" className={`input-qty product-${item.product_id}`} id={`qty-20240408000024272765`} value={item.count} data-max-qty="0" readOnly />
-                                                    <button type="button" className="btn-qty cart" title="" onClick={() => handleIncreaseQuantity(item.product_id)}>
-                                                        <i className="ico-plus-bold"></i><span className="blind">더하기</span>
-                                                    </button>
                                                 </div>
-                                            </div>
-
-                                            <div className="column price">
-                                                <input type="hidden" id={`cart-orange-save-price-minus-20240408000024272765`} className="nOrangeSavePriceMinus" value="350" />
-                                                <input type="hidden" id={`cart-orange-save-price-${item.product_id}`} className="nOrangeSavePrice" value="17550" />
-                                                <div className="price-div">
-                                                    <span className="num cart-price-923 brand-cd-1042 partner-cd-16 cart-price-923" id={`cart-price-20240408000024272765`}>17,900</span>원
-                                                </div>
-                                            </div>
-
-                                            <div className="column btn">
-                                                <button type="button" className="btn-x-sm deleteUserCart" title="" onClick={() => deleteItemFromCart(item.product_id)}>
-                                                    <i className="ico-x-black"></i><span className="blind">삭제</span>
-                                                </button>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                            ))}
+                                    </li>
+                                );
+                            })}
+
                         </ul>
                     </div>
                 </div>
@@ -260,7 +278,7 @@ function Cart() {
                     <div className="colum">
                         <dl className="price-info">
                             <dt className="tit">상품금액</dt>
-                            <dd className="price"><em className="num" id="totalProductPrice">63,700</em>원</dd>
+                            <dd className="price"><em className="num" id="totalProductPrice">{totalProductPrice}</em>원</dd>
                         </dl>
                     </div>
                     <div className="colum">
@@ -279,7 +297,7 @@ function Cart() {
                         <dl className="price-info-last">
                             <dt className="tit">총 결제금액</dt>
                             <dd className="price">
-                                <em className="num text-primary totalOrderPrice">63,700</em>원
+                                <em className="num text-primary totalOrderPrice">{totalProductPrice}</em>원
                             </dd>
                         </dl>
                     </div>
@@ -298,12 +316,13 @@ function Cart() {
                         <span>쇼핑계속하기</span>
                     </a>
                     <a href="javascript:void(0);" className="btn-basic-xxlg btn-primary-ex" id="order">
-                        <span><em className="text-num-bold totalOrderPrice">63,700</em>원 주문하기</span>
+                        <span><em className="text-num-bold totalOrderPrice">{totalProductPrice}</em>원 주문하기</span>
                     </a>
                 </div>
             </div>
         );
     };
+
 
     return (
         <div className="wrap main">

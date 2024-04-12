@@ -298,6 +298,7 @@
   font-size: 14px;
   color: #666;
   margin-bottom: 15px;
+  opacity: 0;
 }
 
 .prd-info-area .column.tit .price-item > li {

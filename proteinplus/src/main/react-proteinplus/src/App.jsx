@@ -17,7 +17,7 @@ const router = createBrowserRouter([
         element: <Home />
     },
     {
-        path: "/cart",
+        path: "/order/cart",
         element: <Cart />
     },
     {
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         element: <MypageFrame />
     },
     {
-        path: "/wishList",
+        path: "/mypage/wishList",
         element: <WishList />
     },
     {

@@ -78,4 +78,8 @@ public class ProductService {
                 .orElseThrow(() -> new EntityNotFoundException("상품을 찾을 수 없습니다. ID: " + productId));
     }
 
+    // 장바구니에 있는 제품들을 가져오는 메소드
+    public List<Product> getProductsInCartByIds(List<Long> ids) {
+        return productRepository.findAllByIdIn(ids);
+    }
 }
