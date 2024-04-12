@@ -25,14 +25,15 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     @Query("select c from Category c left join c.parent p where p.id = :parent_id order by c.id asc")
     List<Category> findCategoryByParentId(@Param("parent_id") Long parent_id);
+
     //category_id를 이용하여 특정 카테고리 조회
     Category findCategoryById(@Param("id") Long id);
+
     @Query("select c.id from Category c left join c.parent p where (p.id = :parent_id or :parent_id is null) and c.name = :name")
     Long findCategoryIdByNameAndParentId(@Param("name") String name, @Param("parent_id") Long parent_id);
 
-//    @Query("select c.id from Category c left join c.parent p where p.id  is null and c.name = :name")
-//    Long findCategoryIdByName(@Param("name") String name);
-
-
+    //category_id를 이용하여 부모 카테고리 id 조회
+    @Query("select p.id from Category c left join c.parent p where c.id = :category_id")
+    Long findParentCategoryId(@Param("category_id") Long child_id);
 
 }

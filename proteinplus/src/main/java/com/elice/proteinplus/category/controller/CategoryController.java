@@ -6,6 +6,7 @@ import com.elice.proteinplus.category.entity.UpdateCategoryDTO;
 import com.elice.proteinplus.category.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,13 +21,20 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-
-    @GetMapping("/test")
+    //모든 카테고리 조회
+    @GetMapping("/find/category")
     public List<Category> getCategory(){
 
         List<Category> category= categoryService.findAllCategory();
 
         return category;
+    }
+
+    //자식 카테고리 id를 이용하여 부모 카테고리 id 조회
+    @GetMapping("/find/{category_id}")
+    public Long getParentId(@PathVariable(name = "category_id") Long child_id){
+        Long parentId = categoryService.findParentCategoryId(child_id);
+        return parentId;
     }
 
     //관리자 영역
