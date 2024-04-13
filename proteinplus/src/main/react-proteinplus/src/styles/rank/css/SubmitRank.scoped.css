@@ -1,0 +1,125 @@
+.submitRankContainer {
+    padding-left: 45px;
+    border-top: 1px solid #dff5ff;
+    padding-top: 15px;
+}
+
+select {
+    min-height: 65px;
+    padding: 15px 25px;
+    font-size: 1.1rem;
+    border: 2px solid #5356ff;
+    border-radius: 5px;
+}
+
+button{
+    min-height: 65px;
+    padding: 15px 25px;
+    font-size: 1.1rem;
+    background-color: #fff;
+    border: 2px solid gray;
+    border-radius: 5px;
+}
+
+h1,
+h2,
+select,
+button{
+    margin: 15px 15px 0 0;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin: 15px 0 10px 0;
+}
+
+.form-row label {
+    width: 100px;
+    min-width: 100px;
+    font-size: 1.1rem;
+}
+
+.required {
+    font-weight: bold;
+}
+
+h1 {
+    margin: 15px 15px 20px 0;
+}
+h2 {
+    padding-top: 15px;
+}
+
+.submitRankContainer {
+    position: relative;
+    min-width: 1300px;
+    max-width: 1720px;
+}
+
+.selectRankContainer {
+    display: flex; /* Flexbox를 사용하여 요소들을 행으로 배치 */
+    justify-content: space-between; /* 요소들을 좌우로 최대한 펼쳐서 배치 */
+    width: 100%; /* 부모 요소 너비를 100%로 설정 */
+    border-top: 2px solid #dff5ff;
+}
+
+.selectRank {
+    width: 50%; /* 왼쪽 영역의 너비를 50%로 설정 */
+    padding-right: 10px; /* 오른쪽 여백 추가 (선택 사항) */
+}
+
+.submitRank {
+    width: 50%; /* 오른쪽 영역의 너비를 50%로 설정 */
+    padding-left: 10px; /* 왼쪽 여백 추가 (선택 사항) */
+    padding-right: 10px;
+}
+
+.selectedCategory {
+    margin-top: 15px;
+
+    font-size: 1.1rem;
+    font-family: "Pretendard", sans-serif;
+    font-weight: bold;
+}
+
+.changeCategory h2 {
+    margin-top: 15px;
+}
+
+.submitRank .form-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0 10px 0;
+}
+
+.submitRank .form-row button[type="submit"] {
+    margin: 15px 15px 0 0;
+    padding: 15px 25px;
+    font-size: 1.1rem;
+    background-color: #5356ff;
+    color: #fff;
+    border: 2px solid #5356ff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.changeRank_first_add {
+    padding-bottom: 20px;
+    border-bottom: 2px solid #dff5ff;
+}
+
+.changeRank {
+    padding-bottom: 15px;
+    border-bottom: 2px solid #dff5ff;
+}
+
+.title {
+    display: inline-block;
+}
+
+.title2 {
+    display: inline-block;
+    margin-left: 30px;
+}
