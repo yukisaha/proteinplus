@@ -9,6 +9,8 @@ function Rank() {
 
     const { categoryId } = useParams(); // URL에서 카테고리 이름 파라미터 추출
 
+    const all = 0;
+
     const location = useLocation();
 
     const [categoryData, setCategoryData] = useState([]);
@@ -26,7 +28,19 @@ function Rank() {
         }
     }
 
-    const fetchProducts = async () => {
+    //전체 상품 조회
+    const fetchAllProducts = async () => {
+        try {
+            const response = await axios.get(`${Spring_Server_Ip}/product/test/sell`);
+            setProducts(response.data);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    };
+
+
+    //id별 판매중인 상품 조회
+    const fetchProducts = async (categoryId) => {
         try {
             const response = await axios.get(`${Spring_Server_Ip}/product/test/sell/${categoryId}`);
             setProducts(response.data);
@@ -38,11 +52,21 @@ function Rank() {
     useEffect(() => {
         // 카테고리 전체 조회 함수 호출
         getCategory();
+        fetchAllProducts();
     }, []);
 
     useEffect(() => {
-        fetchProducts();
+
+        if (categoryId === `${all}`) {
+            // 전체 카테고리 선택 시 모든 상품 조회
+            fetchAllProducts();
+        } else {
+            // 특정 카테고리 선택 시 해당 카테고리 상품 조회
+            fetchProducts(categoryId);
+        }
     }, [categoryId]);
+
+
 
     const limitedProducts = products.slice(0, 40); // 처음부터 40개의 상품 데이터만 추출
 
@@ -65,16 +89,16 @@ function Rank() {
                         <div className="title-area">
                             <h2 className="tit">랭킹</h2>
                         </div>
-                        <ul className="side-tab-menu">
-                            <li className="realtime">
-                                <Link to={`/product/rank/${categoryId}`} className="tit_rank">실시간랭킹</Link>
-                            </li>
-                            {/*
-                            <li className="ingredient">
-                                <Link to={`/product/rank/${categoryId}/ingredient`} className="tit_rank">성분별랭킹</Link>
-                            </li>
-                            */}
-                        </ul>
+                        {/*<ul className="side-tab-menu">*/}
+                        {/*    <li className="realtime">*/}
+                        {/*        <Link to={`/product/rank/${categoryId}`} className="tit_rank">실시간랭킹</Link>*/}
+                        {/*    </li>*/}
+                        {/*    /!**/}
+                        {/*    <li className="ingredient">*/}
+                        {/*        <Link to={`/product/rank/${categoryId}/ingredient`} className="tit_rank">성분별랭킹</Link>*/}
+                        {/*    </li>*/}
+                        {/*    *!/*/}
+                        {/*</ul>*/}
                     </div>
 
                     <div className="frame-sm">
@@ -83,7 +107,7 @@ function Rank() {
                                 <div className={`category-list ${categoryId == 0 ? 'active' : ''}`}>
                                     <ul>
                                         <li>
-                                            <Link to={`/product/rank/0 `}>
+                                            <Link to={`/product/rank/${all}`}>
                                                 전체
                                             </Link>
                                         </li>
@@ -104,14 +128,14 @@ function Rank() {
                         </div>
                         <div className="sorting-tab-menu">
                             <h2 className="text-left">오늘의 전체 랭킹 순위!</h2>
-                            <ul>
-                                <li className={`sorting-tab-menu-list ${location.pathname === `/product/rank/${categoryId}/sales` ? '' : 'active'}`}>
-                                    <Link to={`/product/rank/${categoryId}`} className={`tit_type`} data-type="REALTIME">실시간</Link>
-                                </li>
-                                <li className={`sorting-tab-menu-list ${location.pathname === `/product/rank/${categoryId}/sales` ? 'active' : ''}`}>
-                                    <Link to={`/product/rank/${categoryId}/sales`} className={`tit_type`} data-type="SALE">판매량</Link>
-                                </li>
-                            </ul>
+                            {/*<ul>*/}
+                            {/*    <li className={`sorting-tab-menu-list ${location.pathname === `/product/rank/${categoryId}/sales` ? '' : 'active'}`}>*/}
+                            {/*        <Link to={`/product/rank/${categoryId}`} className={`tit_type`} data-type="REALTIME">실시간</Link>*/}
+                            {/*    </li>*/}
+                            {/*    <li className={`sorting-tab-menu-list ${location.pathname === `/product/rank/${categoryId}/sales` ? 'active' : ''}`}>*/}
+                            {/*        <Link to={`/product/rank/${categoryId}/sales`} className={`tit_type`} data-type="SALE">판매량</Link>*/}
+                            {/*    </li>*/}
+                            {/*</ul>*/}
                         </div>
 
 
@@ -139,14 +163,14 @@ function RankProductCard({product, index}) {
         <div className="prd-info-area">
             <div className="inner">
                 <div className="column img w110">
-                    <a href="상품상세페이지링크">
+                    <Link to={"상품상세페이지링크"}>
                         <img className="lozad" data-src="이미지 링크" alt="이미지 정보" src="이미지 링크"
                              loaded="true"></img>
-                    </a>
+                    </Link>
                 </div>
                 <div className="column tit">
                     <p className="tit">
-                        <a href="상품상세페이지링크" className="text-elps2">{product.name}</a>
+                        <Link to={"상품상세페이지링크"} className="text-elps2">{product.name}</Link>
                     </p>
                     <p className="tit-sub text-elps">{product.content}</p>
                     <p className="text-guide-sm"></p>
@@ -176,8 +200,7 @@ function RankProductCard({product, index}) {
                 <div className="column btn2">
                     <ul className="btn-list">
                         <li className="btn-icon-cart-li">
-                            <button type="button" className="btn-icon-cart2 btn-ext-cart"
-                                    title>
+                            <button type="button" className="btn-icon-cart2 btn-ext-cart">
                                 <span className="blind">장바구니</span>
                             </button>
                         </li>
@@ -185,7 +208,7 @@ function RankProductCard({product, index}) {
                             <button className="custom-checkbox">
                                 <input type="checkbox" id="check-0" name="check-wish-item"
                                        className="checkbox-wish btn-ext-wish"/>
-                                <label htmlFor="check-0" title>
+                                <label htmlFor="check-0">
                                     <span className="blind">찜하기</span>
                                 </label>
                             </button>
