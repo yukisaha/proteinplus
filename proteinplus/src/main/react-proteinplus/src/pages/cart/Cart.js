@@ -178,6 +178,24 @@ function Cart() {
     };
 
 
+    // 주문하기 버튼 클릭 시 호출될 함수
+    const handleOrder = async () => {
+        // 여기에 로컬 스토리지의 값을 읽어와서 필요한 데이터를 백엔드로 전송하는 코드를 추가
+        const storedCartItems = localStorage.getItem('cartItems');
+        if (storedCartItems) {
+            const parsedCartItems = JSON.parse(storedCartItems);
+
+            // 필요한 데이터를 추출하여 API에 전달
+            const requestData = Object.values(parsedCartItems).map(item => ({
+                productId: item.product_id,
+                count: item.count
+            }));
+
+            // Axios를 사용하여 HTTP POST 요청을 보냅니다.
+            const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
+            await axios.post(`${Spring_Server_Ip}/order`, requestData);
+        }
+    };
 
 
     // 장바구니 상품 렌더링 함수
@@ -349,7 +367,7 @@ function Cart() {
                     <a href="/" className="btn-basic-xxlg btn-default-ex">
                         <span>쇼핑계속하기</span>
                     </a>
-                    <a href="javascript:void(0);" className="btn-basic-xxlg btn-primary-ex" id="order">
+                    <a href="" className="btn-basic-xxlg btn-primary-ex" id="order" onClick={handleOrder}>
                         <span><em className="text-num-bold totalOrderPrice">{totalProductPrice}</em>원 주문하기</span>
                     </a>
                 </div>

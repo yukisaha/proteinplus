@@ -1,10 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MypageFrame from '../../components/MypageFrame';
 import '../../styles/cart/css/WishList.css';
+import axios from "axios";
 
 export default function WishList() {
 
   const [selectedProducts, setSelectedProducts] = useState([]);
+  const [WishList, setWishListData] = useState([]);
+
+
+    async function getWishList() { // Axios 방식 사용
+        const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
+        const response = await axios.get(`${Spring_Server_Ip}/wishList`);
+        setWishListData(response.data);
+    }
+
+    useEffect(() => {
+        // wishList 상품들 조회 함수 호출
+        getWishList();
+    }, []);
 
   // 임시 데이터를 사용하여 상품 목록 생성
   const tempProductData = [
