@@ -16,10 +16,8 @@ public class CartController {
     private final ProductService productService;
 
     @PostMapping
-    public List<Product> findProductsInCartByIds(@RequestBody List<Long> ids) {
-        return productService.getProductsInCartByIds(ids);
+    public List<Product> getProductsInCartByIds(@RequestBody List<Long> cartIds) {
+        return productService.getProductsByIds(cartIds);
     }
-
-
 
 }
