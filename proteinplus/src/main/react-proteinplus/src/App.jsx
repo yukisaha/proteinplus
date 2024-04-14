@@ -10,6 +10,13 @@ import Rank from "./pages/rank/Rank";
 import Order from "./pages/order/Order";
 import OrderDetail from "./pages/order/OrderDetail";
 import CancelDetail from "./pages/order/CancelDetail";
+import ProductList from "./pages/product/ProductList";
+import Join from "./pages/user/Join";
+import JoinComplete from "./pages/user/JoinComplete";
+import Login from "./pages/user/Login";
+import UserDelete from "./pages/user/UserDelete";
+import UserProfileEdit from "./pages/user/UserProfileEdit";
+import UserProfileEditPwdCheck from "./pages/user/UserProfileEditPwdCheck";
 
 const router = createBrowserRouter([
     {
@@ -17,7 +24,7 @@ const router = createBrowserRouter([
         element: <Home />
     },
     {
-        path: "/cart",
+        path: "/order/cart",
         element: <Cart />
     },
     {
@@ -25,7 +32,7 @@ const router = createBrowserRouter([
         element: <MypageFrame />
     },
     {
-        path: "/wishList",
+        path: "/mypage/wishList",
         element: <WishList />
     },
     {
@@ -52,7 +59,36 @@ const router = createBrowserRouter([
     {
         path: "/cancelDetail",
         element: <CancelDetail />
+    },
+    {
+        path: "/product",
+        element: <ProductList />
+    },
+    {
+        path: "/member/join",
+        element: <Join />
+    },
+    {
+        path: "/member/join/complete",
+        element: <JoinComplete />
+    },
+    {
+        path: "/auth/login",
+        element: <Login />
+    },
+    {
+        path: "/mypage/member/delete",
+        element: <UserDelete />
+    },
+    {
+        path: "/mypage/info/edit",
+        element: <UserProfileEdit />
+    },
+    {
+        path: "/member-pwd-check",
+        element: <UserProfileEditPwdCheck />
     }
+
 ]);
 
 export default function App(){
