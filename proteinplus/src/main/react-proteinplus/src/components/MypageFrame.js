@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import '../styles/common/css/MypageFrame.css';
+import {Link} from "react-router-dom";
 
 export default function MypageFrame({children}) {
     return (
@@ -15,9 +16,9 @@ export default function MypageFrame({children}) {
                             <div className="inner">
                                 <div className="column user-info">
                                     <div className="txt">
-                    <span className="img">
-                      <i className="ico-cou-level01"></i>
-                    </span>
+                                        <span className="img">
+                                          <i className="ico-cou-level01"></i>
+                                        </span>
                                         <div
                                             className=""
                                             style={{ display: 'inline-block', width: 'calc(100% - 60px)' }}
@@ -79,7 +80,7 @@ export default function MypageFrame({children}) {
                                                     <a href="/mypage/recentProduct/list">최근 본 상품</a>
                                                 </li>
                                                 <li className="">
-                                                    <a href="/mypage/wish/list">찜한상품</a>
+                                                    <a href="/mypage/wishList">찜한상품</a>
                                                 </li>
                                                 <li className="">
                                                     <a href="/mypage/wishBrand/list">관심브랜드</a>
@@ -112,8 +113,11 @@ export default function MypageFrame({children}) {
                                                 <li className="">
                                                     <a href="/mypage/delivery">배송지 관리</a>
                                                 </li>
-                                                <li><a href="/mypage/info/mypage">정보수정</a></li>
+                                                <li><a href="/mypage/info/edit">정보수정</a></li>
                                                 {/* 활성화될 경우 li에 addClass current  */}
+                                                <li>
+                                                    <a href="/mypage/member/delete">회원탈퇴하기</a>
+                                                </li>
                                             </ul>
                                         </li>
                                     </ul>

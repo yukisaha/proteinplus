@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>제품 등록</title>
+    <script src="dropdownCategory.js"></script>
+    <script src="dropdownOption.js"></script>
+    <link rel="stylesheet" href="../../styles/admin/submitProduct.module.css" />
+  </head>
+  <body>
+    <h1>제품 등록</h1>
+
+    <form id="productDetailsForm" method="post" novalidate>
+      <h2 class="required">제품 카테고리</h2>
+      <!-- 전체 카테고리 드롭다운 -->
+      <select id="mainCategory" required onchange="updateSubcategories()">
+        <option value="">전체 카테고리 선택</option>
+      </select>
+
+      <!-- 세부 카테고리 드롭다운 -->
+      <select id="subCategory" required>
+        <option value="">세부 카테고리 선택</option>
+      </select>
+
+      <h2>제품 옵션 목록</h2>
+      <!-- 옵션 추가 드롭다운 -->
+      <div id="dropdownOptionContainer"></div>
+      <button class="btn-mini" onclick="addDropdown()">+</button>
+
+      <h2>제품 세부정보</h2>
+      <div class="form-row">
+        <label for="productName" class="required">제품명</label>
+        <input type="text" id="productName" name="productName" required />
+      </div>
+      <div class="form-row">
+        <label for="brandName" class="required">브랜드명</label>
+        <input type="text" id="brandName" name="brandName" required />
+      </div>
+      <div class="form-row">
+        <label for="storageMethod">보관방법</label>
+        <input type="text" id="storageMethod" name="storageMethod" />
+      </div>
+      <div class="form-row">
+        <label for="notice">공지사항</label>
+        <input type="text" id="notice" name="notice" />
+      </div>
+      <input type="submit" value="상품 추가하기" />
+    </form>
+
+    <div id="warningMessage" style="color: red; display: none">
+      필수 입력 항목을 모두 입력해주세요.
+    </div>
+    <script>
+      document
+        .getElementById("productDetailsForm")
+        .addEventListener("submit", function (event) {
+          if (!this.checkValidity()) {
+            event.preventDefault();
+            document.getElementById("warningMessage").style.display = "block";
+          }
+        });
+    </script>
+  </body>
+</html>
