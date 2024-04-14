@@ -6,22 +6,78 @@ import axios from "axios";
 
 function Cart() {
     const [isChecked, setIsChecked] = useState(true); // isChecked 상태와 해당 상태를 변경할 함수 setIsChecked를 생성하고 기본값으로 true를 설정
-
     // 로컬스토리지
     const [cartItems, setCartItems] = useState({});
-
     const [CartData, setCartData] = useState([]);
 
-    async function getCartList() { // Axios
+
+//    useEffect(() => {
+//        getCartList(); // 페이지 로드 시 장바구니 데이터 가져오기
+//        loadCartItemsFromLocalStorage(); // 페이지 로드 시 로컬 스토리지에서 데이터 로드
+//        // 초기 데이터 추가
+//        addItemToCart(1, 1);// 초기에 productId, count  데이터 추가
+//        addItemToCart(2, 2);
+//        addItemToCart(3, 3);
+//    }, []);
+//
+//
+//    // 예시 데이터 로드
+//    const loadCartItemsFromLocalStorage = () => {
+//        const storedCartItems = localStorage.getItem('cartItems');
+//        if (storedCartItems) {
+//            const parsedCartItems = JSON.parse(storedCartItems);
+//            // 각 항목에 isChecked 속성 추가 및 true로 설정
+//            for (const productId in parsedCartItems) {
+//                parsedCartItems[productId].isChecked = true;
+//            }
+//            setCartItems(parsedCartItems);
+//            setIsChecked(true); // 모든 상품이 선택되도록 isChecked 상태를 true로 설정
+//        }
+//    };
+//
+//    async function getCartList() { // Axios
+//        const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
+//        const response = await axios.post(`${Spring_Server_Ip}/cart`,  [1, 2, 3] );
+//        setCartData(response.data);
+//    }
+
+//      로컬스토리지 product_id 가져오는 코드 (오류 있음 마지막 값만 가져옴)
+    useEffect(() => {
+
+            // 초기 데이터 추가
+            addItemToCart(1, 1);// 초기에 productId, count  데이터 추가
+            addItemToCart(2, 2);
+            addItemToCart(3, 3);
+            loadCartItemsFromLocalStorage(); // 페이지 로드 시 로컬 스토리지에서 데이터 로드
+    }, []);
+
+    const loadCartItemsFromLocalStorage = async () => {
+        const storedCartItems = localStorage.getItem('cartItems');
+        if (storedCartItems) {
+            const parsedCartItems = JSON.parse(storedCartItems);
+            // 각 항목에 isChecked 속성 추가 및 true로 설정
+            for (const productId in parsedCartItems) {
+                parsedCartItems[productId].isChecked = true;
+            }
+            setCartItems(parsedCartItems);
+            setIsChecked(true); // 모든 상품이 선택되도록 isChecked 상태를 true로 설정
+
+            // product_id 배열 생성
+            const productIds = Object.keys(parsedCartItems).map(productId => parsedCartItems[productId].product_id);
+
+            // 장바구니 데이터 가져오기
+            await getCartList(productIds);
+        }
+    };
+    async function getCartList(productIds) { // Axios
         const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-        const response = await axios.get(`${Spring_Server_Ip}/cart?ids=1,2,3`);
+        console.log("productIds:", productIds); // productIds를 콘솔에 출력하여 확인
+        const response = await axios.post(`${Spring_Server_Ip}/cart`,  productIds );
         setCartData(response.data);
     }
 
-    // 페이지 로드 시 장바구니 데이터 가져오기
-    useEffect(() => {
-        getCartList();
-    }, []);
+
+
 
     // 모든 상품의 체크 상태가 변경될 때 호출되는 함수
     const handleCheckAllChange = () => {
@@ -122,45 +178,23 @@ function Cart() {
     };
 
 
-    // 예시 데이터 로드
-    const loadCartItemsFromLocalStorage = () => {
-        const storedCartItems = localStorage.getItem('cartItems');
-        if (storedCartItems) {
-            const parsedCartItems = JSON.parse(storedCartItems);
-            // 각 항목에 isChecked 속성 추가 및 true로 설정
-            for (const productId in parsedCartItems) {
-                parsedCartItems[productId].isChecked = true;
-            }
-            setCartItems(parsedCartItems);
-            setIsChecked(true); // 모든 상품이 선택되도록 isChecked 상태를 true로 설정
-        }
-    };
-
-
-    // 페이지 로드 시 로컬 스토리지에서 데이터 로드
-    useEffect(() => {
-        loadCartItemsFromLocalStorage();
-    }, []);
-
-
-    // 초기에 productId, count  데이터 추가
-    useEffect(() => {
-        addItemToCart(1, 1);
-        addItemToCart(2, 2);
-        addItemToCart(3, 3);
-
-    }, []);
 
 
     // 장바구니 상품 렌더링 함수
     const renderCartItems = () => {
         const cartItemKeys = Object.keys(cartItems);
 
-        // 각 상품의 가격을 모두 더한 값을 계산
-        const totalProductPrice = cartItemKeys.reduce((total, productId) => {
+        // 각 상품의 총 가격을 계산하는 함수
+        const calculateTotalPriceForItem = (productId) => {
             const productData = CartData.find(product => product.id === cartItems[productId].product_id);
-            return total + (productData ? productData.price : 0) * cartItems[productId].count;
+            return productData ? productData.price * cartItems[productId].count : 0;
+        };
+
+        // 각 상품의 총 가격을 합하여 전체 상품 가격을 계산
+        const totalProductPrice = cartItemKeys.reduce((total, productId) => {
+            return total + calculateTotalPriceForItem(productId);
         }, 0);
+
 
         if (cartItemKeys.length === 0) {
             return (
@@ -255,7 +289,7 @@ function Cart() {
                                                     <input type="hidden" id={`cart-orange-save-price-minus-20240408000024272765`} className="nOrangeSavePriceMinus" value="350" />
                                                     <input type="hidden" id={`cart-orange-save-price-${item.product_id}`} className="nOrangeSavePrice" value="17550" />
                                                     <div className="price-div">
-                                                        <span className="num cart-price-923 brand-cd-1042 partner-cd-16 cart-price-923" id={`cart-price-20240408000024272765`}>{productData ? productData.price : "가격 정보 없음"}</span>원
+                                                        <span className="num cart-price-923 brand-cd-1042 partner-cd-16 cart-price-923" id={`cart-price-20240408000024272765`}>{calculateTotalPriceForItem(item.product_id)} {/* 각 상품의 총 가격을 표시 */}</span>원
                                                     </div>
                                                 </div>
 
