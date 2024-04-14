@@ -71,6 +71,7 @@ export default function SubmitRank() {
         const selectedId = e.target.value;
         setSelectedRankId(selectedId);
         setSelectedExceptRankId("default");
+        setExceptRankCategoryName("랭크에 포함되지 않은 카테고리")
     }
 
     const handleExceptRankSelect = (e) => {
