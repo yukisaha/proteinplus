@@ -212,7 +212,6 @@ export default function SubmitCategory() {
                                 value={selectedParentId}
                         >
                             <option value={"default"}>1차 카테고리 선택</option>
-                             부모 카테고리
                             {parentCategory.map((category) => (
                                 <option value={category.id}>{category.name}</option>
                             ))}
