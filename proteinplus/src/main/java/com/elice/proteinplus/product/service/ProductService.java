@@ -101,6 +101,13 @@ public class ProductService {
         return products;
     }
 
+    //전체 상품 조회 < 품절 상품 제외 >
+    public List<Product> findSellProducts(){
+        List<Product> sellProducts = productRepository.findSellProducts();
+        return sellProducts;
+    }
+
+
     //상품 조회 < 품절 상품 제외 >
     public List<Product> findSellProduct(Long categoryId) {
         List<Product> sellProducts = productRepository.findSellProduct(categoryId);
