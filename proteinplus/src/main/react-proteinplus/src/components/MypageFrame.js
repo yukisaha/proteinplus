@@ -80,7 +80,7 @@ export default function MypageFrame({children}) {
                                                     <a href="/mypage/recentProduct/list">최근 본 상품</a>
                                                 </li>
                                                 <li className="">
-                                                    <a href="/mypage/wish/list">찜한상품</a>
+                                                    <a href="/mypage/wishList">찜한상품</a>
                                                 </li>
                                                 <li className="">
                                                     <a href="/mypage/wishBrand/list">관심브랜드</a>

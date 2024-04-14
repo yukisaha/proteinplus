@@ -77,7 +77,7 @@ public class ProductService {
     }
 
     // 장바구니에 있는 제품들을 가져오는 메소드
-    public List<Product> getProductsInCartByIds(List<Long> ids) {
+    public List<Product> getProductsByIds(List<Long> ids) {
         return productRepository.findAllByIdIn(ids);
     }
     /************************ react에서 사용중인 코드 *********************************/
