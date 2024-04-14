@@ -1,8 +1,8 @@
 package com.elice.proteinplus.category.service;
 
 import com.elice.proteinplus.category.entity.Category;
-import com.elice.proteinplus.category.entity.CategoryDTO;
-import com.elice.proteinplus.category.entity.UpdateCategoryDTO;
+import com.elice.proteinplus.category.dto.CategoryDTO;
+import com.elice.proteinplus.category.dto.UpdateCategoryDTO;
 import com.elice.proteinplus.category.repository.CategoryRepository;
 import com.elice.proteinplus.product.service.ProductService;
 import lombok.RequiredArgsConstructor;

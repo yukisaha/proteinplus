@@ -1,8 +1,8 @@
 package com.elice.proteinplus.category.controller;
 
 import com.elice.proteinplus.category.entity.Category;
-import com.elice.proteinplus.category.entity.CategoryDTO;
-import com.elice.proteinplus.category.entity.UpdateCategoryDTO;
+import com.elice.proteinplus.category.dto.CategoryDTO;
+import com.elice.proteinplus.category.dto.UpdateCategoryDTO;
 import com.elice.proteinplus.category.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

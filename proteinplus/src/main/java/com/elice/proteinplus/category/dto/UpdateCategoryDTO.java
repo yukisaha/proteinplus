@@ -1,15 +1,13 @@
-package com.elice.proteinplus.category.entity;
+package com.elice.proteinplus.category.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
-public class CategoryDTO {
+public class UpdateCategoryDTO {
+    private Long id;
     private String name;
-    private Long parent_id;
 }

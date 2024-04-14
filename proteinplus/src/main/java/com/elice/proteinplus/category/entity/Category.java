@@ -1,5 +1,6 @@
 package com.elice.proteinplus.category.entity;
 
+import com.elice.proteinplus.category.dto.UpdateCategoryDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
