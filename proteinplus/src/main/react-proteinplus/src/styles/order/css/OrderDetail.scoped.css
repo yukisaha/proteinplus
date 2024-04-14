@@ -102,9 +102,7 @@ se.search-detail-top .search-detail-date-itemname .input-group-btn {
     z-index: 3;
     padding: 15px;
 }
-.input-group > .input-text + .input-group-form:last-child, .input-group > .input-text + .input-group-btn:last-child {
-    padding: 0 0 0 5px;
-}
+
 .input-group > .input-group-form:last-child, .input-group > .input-group-btn:last-child {
     padding: 0;
 }
@@ -139,6 +137,11 @@ se.search-detail-top .search-detail-date-itemname .input-group-btn {
     height: auto;
     z-index: 3;
     padding: 15px;
+}
+
+.order-list-wrap .search-detail-top .search-detail-date-itemname .input-group-btn .btn-icon-search {
+    width: 18px;
+    height: 18px;
 }
 
 [class^="ico-btn-"] {
