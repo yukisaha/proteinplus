@@ -42,6 +42,7 @@
 .product-result{
   font-size: 1.2em;
   font-weight: bold;
+  color: #5356FF;
 }
 
 .product-price {
@@ -52,7 +53,6 @@
 
 .product-discount {
   font-weight: bold;
-  color: #5356FF;
 }
 
 .dropdown-container{
@@ -115,4 +115,25 @@ input {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.pagination span.active, .pagination button.active{
+    background-color: #007bff;
+    color: #fff;
+}
+
+.pagination button{
+    background-color: #fff;
+    color: #007bff;
+}
+
+.pagination button[disabled]{
+    cursor: not-allowed;
+    opacity: 0.5;
 }
