@@ -26,7 +26,7 @@ public class WishListController {
     @GetMapping
     public List<Product> getProductsInWishListByIds(){
         List<Long> productIds = wishListService.findProductIdsByUserId(1L); //userId 받아왔다고 가정
-        log.info("장바구니의 상품 아이템 아이디들 : " + productIds);
+        log.info("찜 목록의 상품 아이템 아이디들 : " + productIds);
         return productService.getProductsByIds(productIds);
     }
 
