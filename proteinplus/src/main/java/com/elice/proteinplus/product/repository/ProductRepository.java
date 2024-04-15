@@ -48,7 +48,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     /************************ react에서 사용중인 코드 *********************************/
     //카테고리 id 별 상품 조회
     @Query("SELECT p FROM Product p JOIN p.category c WHERE c.id = :categoryId OR c.parent.id = :categoryId")
-    List<Product> findProductByCategoryId(Long categoryId);
+    List<Product> findProductByCategoryId(@Param("categoryId") Long categoryId);
 
     //랭크 카테고리에 있는 전체 상품 조회 < 품절 상품 제외 >
     //p.category의 id 또는 parent.id 값이 rank의 category.id 값과 일치한 는 경우 -< 해당 p를 출력
@@ -60,15 +60,15 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     //카테고리별 상품 조회 < 품절 상품 제외 >
     @Query("SELECT p FROM Product p JOIN p.category c WHERE (c.id = :categoryId OR c.parent.id = :categoryId) AND p.productStatus = 'sell'")
-    List<Product> findSellProduct(Long categoryId);
+    List<Product> findSellProduct(@Param("categoryId") Long categoryId);
 
     //카테고리 상품 총 개수
     @Query("SELECT count(p.id) FROM Product p JOIN p.category c WHERE c.id = :categoryId OR c.parent.id = :categoryId")
-    Long countByCategoryId(Long categoryId);
+    Long countByCategoryId(@Param("categoryId") Long categoryId);
 
     //카테고리 id 상품 중 판매중인 상품의 수
     @Query("SELECT count(p.id) FROM Product p JOIN p.category c WHERE (c.id = :categoryId OR c.parent.id = :categoryId) AND p.productStatus = 'sell'")
-    Long countBySellCategoryId(Long categoryId);
+    Long countBySellCategoryId(@Param("categoryId") Long categoryId);
 
     // 장바구니에 있는 제품들을 조회하는 메소드
     List<Product> findAllByIdIn(List<Long> ids);
