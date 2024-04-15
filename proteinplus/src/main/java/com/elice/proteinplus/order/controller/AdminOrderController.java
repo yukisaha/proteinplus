@@ -25,11 +25,11 @@ public class AdminOrderController {
     }
 
     // 특정 사용자의 주문 조회 (페이지네이션 포함)
-//    @GetMapping("/order/user/{userId}")
-//    public ResponseEntity<Page<OrderHistDto>> getOrdersByUserId(@PathVariable Long userId, Pageable pageable) {
-//        Page<OrderHistDto> orders = adminOrderService.getOrdersByUserId(userId, pageable);
-//        return ResponseEntity.ok(orders);
-//    }
+    @GetMapping("/order/user/{userId}")
+    public ResponseEntity<Page<OrderHistDto>> getOrdersByUserId(@PathVariable Long userId, Pageable pageable) {
+        Page<OrderHistDto> orders = adminOrderService.getOrdersByUserId(userId, pageable);
+        return ResponseEntity.ok(orders);
+    }
 
     // 주문 상태 변경
     @PutMapping("/order/{orderId}/edit")

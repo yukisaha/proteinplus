@@ -23,27 +23,27 @@ public class OrderController {
     private final OrderService orderService;
 
     // 특정 사용자의 주문 목록을 조회합니다.
-//    @GetMapping("/user/mypage/orderlist")
-//    public ResponseEntity<Page<OrderHistDto>> getUserOrders(@PathVariable Long userId, Pageable pageable) {
-//        Page<OrderHistDto> orders = orderService.getOrders(userId, pageable);
-//        return ResponseEntity.ok(orders);
-//    }
+    @GetMapping("/user/mypage/orderlist")
+    public ResponseEntity<Page<OrderHistDto>> getUserOrders(@PathVariable Long userId, Pageable pageable) {
+        Page<OrderHistDto> orders = orderService.getOrders(userId, pageable);
+        return ResponseEntity.ok(orders);
+    }
 
     // 특정 사용자의 취소된 주문 목록을 조회합니다.
-//    @GetMapping("/user/mypage/cancellist")
-//    public ResponseEntity<Page<OrderHistDto>> getCancelledUserOrders(@PathVariable Long userId, Pageable pageable) {
-//        Page<OrderHistDto> cancelledOrders = orderService.getCancelledOrders(userId, pageable);
-//        return ResponseEntity.ok(cancelledOrders);
-//    }
+    @GetMapping("/user/mypage/cancellist")
+    public ResponseEntity<Page<OrderHistDto>> getCancelledUserOrders(@PathVariable Long userId, Pageable pageable) {
+        Page<OrderHistDto> cancelledOrders = orderService.getCancelledOrders(userId, pageable);
+        return ResponseEntity.ok(cancelledOrders);
+    }
 
     // 주문을 생성합니다.
-//    @PostMapping("/order/order")
-//    public ResponseEntity<Long> addOrder(@RequestBody OrderDto orderDto,
-//                                           @RequestBody DeliveryDto deliveryDto,
-//                                           @PathVariable Long userId) {
-//        Long orderId = orderService.order(orderDto, deliveryDto, userId);
-//        return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
-//    }
+    @PostMapping("/order/order")
+    public ResponseEntity<Long> addOrder(@RequestBody OrderDto orderDto,
+                                           @RequestBody DeliveryDto deliveryDto,
+                                           @PathVariable Long userId) {
+        Long orderId = orderService.order(orderDto, deliveryDto, userId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
+    }
 
     @PostMapping("/order")
     public void order(@RequestBody CartDto cartDto) {
@@ -62,7 +62,7 @@ public class OrderController {
     }
 
     // 주문을 취소합니다.
-    @PostMapping("/user//mypage/orderlist/{orderId}")
+    @PostMapping("/user/mypage/orderlist/{orderId}")
     public ResponseEntity<Void> cancelOrder(@PathVariable Long orderId) {
         boolean cancelled = orderService.cancelOrder(orderId);
         if (cancelled) {
