@@ -17,10 +17,75 @@ function Join(){
     const [loginPwdCheck, setLoginPwdCheck] = useState("");
     const [email, setEmail] = useState("");
 
+    const [isIdAvailable, setIsIdAvailable] = useState(false);
+
     const navigate = useNavigate();
+
+    const handleLoginIdChange = (e) => {
+        const LoginId = e.target.value;
+        setLoginId(LoginId);
+        setIsIdAvailable(false); //아이디 변경 시 다시 중복체 크 해야함
+    }
+    const handleLoginPwdChange = (e) => {
+        const LoginPwd = e.target.value;
+        setLoginPwd(LoginPwd);
+    }
+    const handleLoginPwdCheckChange = (e) => {
+        const LoginPwdCheck = e.target.value;
+        setLoginPwdCheck(LoginPwdCheck);
+    }
+    const handleEmailChange = (e) => {
+        const email = e.target.value;
+        setEmail(email);
+    }
+
+    const idDuplicateCheck = async (e) => {
+        e.preventDefault();
+
+        if (!loginId) {
+            alert("아이디를 입력해주세요.");
+            return;
+        }
+
+        try {
+            const data = {
+                loginId: loginId
+            };
+            const response = await axios.get(`${Spring_Server_Ip}/member/join/idDuplicateCheck`, {params: data});
+            //이미 존재하는 아이디일 경우
+            if(response.data === true) {
+                alert("이미 사용 중인 아이디입니다.");
+            }else{
+                alert("사용할 수 있는 아이디입니다.");
+                //아이디 입력 필드 잠금
+                setIsIdAvailable(true);
+            }
+        } catch (error) {
+            alert("에러 발생");
+        }
+    }
+
+    const emailDuplicateCheck = async () => {
+        try {
+            const data = {
+                email: email
+            };
+            const response = await axios.get(`${Spring_Server_Ip}/member/join/emailDuplicateCheck`, {params: data});
+            //이미 존재하는 이메일일 경우
+            return response.data === true;
+        } catch (error) {
+            alert("에러 발생");
+            return false;
+        }
+    }
 
     const join = async (e) => {
         e.preventDefault();
+
+        if(!isIdAvailable){
+            alert("아이디 중복 확인을 해주세요")
+            return;
+        }
 
         //비밀번호 확인
         if(loginPwd === loginPwdCheck){
@@ -45,62 +110,6 @@ function Join(){
         }else{
             setLoginPwdCheck("");
             alert("비밀번호가 일치하지 않습니다");
-        }
-    }
-
-    const handleLoginIdChange = (e) => {
-        const LoginId = e.target.value;
-        setLoginId(LoginId);
-    }
-    const handleLoginPwdChange = (e) => {
-        const LoginPwd = e.target.value;
-        setLoginPwd(LoginPwd);
-    }
-    const handleLoginPwdCheckChange = (e) => {
-        const LoginPwdCheck = e.target.value;
-        setLoginPwdCheck(LoginPwdCheck);
-    }
-    const handleEmailChange = (e) => {
-        const email = e.target.value;
-        setEmail(email);
-    }
-
-
-    const idDuplicateCheck = async (e) => {
-        e.preventDefault();
-
-        if (!loginId) {
-            alert("아이디를 입력해주세요.");
-            return;
-        }
-
-        try {
-            const data = {
-                loginId: loginId
-            };
-            const response = await axios.get(`${Spring_Server_Ip}/member/join/idDuplicateCheck`, {params: data});
-            //이미 존재하는 아이디일 경우
-            if(response.data === true) {
-                alert("이미 사용 중인 아이디입니다.");
-            }else{
-                alert("사용할 수 있는 아이디입니다.");
-            }
-        } catch (error) {
-            alert("에러 발생");
-        }
-    }
-
-    const emailDuplicateCheck = async () => {
-        try {
-            const data = {
-                email: email
-            };
-            const response = await axios.get(`${Spring_Server_Ip}/member/join/emailDuplicateCheck`, {params: data});
-            //이미 존재하는 이메일일 경우
-            return response.data === true;
-        } catch (error) {
-            alert("에러 발생");
-            return false;
         }
     }
 
@@ -188,7 +197,7 @@ function Join(){
                                         required
                                     />
                                 </div>
-                                <button type="submit" className="user_btn-primary user_w-full">
+                                <button onClick={join} className="user_btn-primary user_w-full">
                                     <span>회원가입</span>
                                 </button>
                             </fieldset>
