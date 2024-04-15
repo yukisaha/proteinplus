@@ -44,7 +44,7 @@ export default function Order(){
 
     const [userInfo, setUserInfo] = useState({
         name: "강서연",
-        address: "인천광역시 연수구",
+        address: "인천광역시",
         phoneNumber: "010-0000-0000"
     });
 
@@ -65,21 +65,35 @@ export default function Order(){
         }
     };
 
-    const [selectedItems, setSelectedItems] = useState({});
+    const [orderItems, setOrderItems] = useState([]);
 
-    // 페이지가 로드될 때 로컬 스토리지에서 선택된 상품들을 가져옴
-    useEffect(() => {
-        const storedSelectedItems = localStorage.getItem('selectedItems');
-        if (storedSelectedItems) {
-            setSelectedItems(JSON.parse(storedSelectedItems));
-        }
-    }, []);
+    async function getOrderItems() { // Axios 방식 사용
+        const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
+        const response = await axios.get(`${Spring_Server_Ip}/api/order`);
+        setOrderItems(response.data);
+    }
 
-    // async function getCategory() { // Axios 방식 사용
-    //     const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-    //     const response = await axios.get(`${Spring_Server_Ip}/admin/category/test`);
-    //     setCategoryData(response.data);
-    // }
+    // 최종 결제 금액 계산 함수
+    const calculateTotalPrice = () => {
+        // 상품들의 총 가격 계산
+        const subtotal = orderItems.reduce((total, item) => total + item.price * item.count, 0);
+
+        // 배송비 (여기서는 고정 배송비로 처리)
+        const shippingFee = 0; // 예시로 3000원으로 설정
+
+        // 최종 결제 금액 계산 (상품 총 가격 + 배송비)
+        const totalPrice = subtotal + shippingFee;
+
+        return totalPrice;
+    };
+
+// 총 상품 금액을 계산하는 함수
+    const calculateTotalProductPrice = () => {
+        // 상품들의 총 가격 계산
+        const subtotal = orderItems.reduce((total, item) => total + item.price * item.count, 0);
+
+        return subtotal;
+    };
 
 
     return (
@@ -127,7 +141,7 @@ export default function Order(){
                                             </div>
                                         </div>
                                         <ul className="cart-list">
-                                            {Object.values(selectedItems).map(item => (
+                                            {Object.values(orderItems).map(item => (
                                                 <li key={item.product_id}>
                                                     <div className="prd-info-area ">
                                                         <div className="inner">
@@ -143,7 +157,7 @@ export default function Order(){
                                                                 <p className="desc">{item.option}</p>
                                                                 <ul className="price-item">
                                                                     <li><span className="num">{item.price}</span>원</li>
-                                                                    <li><span className="num">{item.quantity}</span>개
+                                                                    <li><span className="num">{item.count}</span>개
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -192,7 +206,7 @@ export default function Order(){
                                                 <div className="list-inner">
                                                     <span className="tit">상품금액</span>
                                                     <p className="price"><strong className="num resetOrderPaySide"
-                                                                                 id="txt_tot_price">가격</strong> 원
+                                                                                 id="txt_tot_price">{calculateTotalProductPrice()}</strong> 원
                                                     </p>
                                                     <input type="hidden" name="tot_price" className="resetOrderPaySide"
                                                            value="가격"/>
@@ -215,7 +229,7 @@ export default function Order(){
                                                 <span className="tit">최종 결제금액</span>
                                                 <div className="price">
                                                     <strong className="num text-primary resetOrderPaySide"
-                                                            id="txt_tot_pg_price">가격</strong> 원
+                                                            id="txt_tot_pg_price">{calculateTotalPrice()}</strong> 원
                                                     <input type="hidden" name="tot_pg_price"
                                                            className="resetOrderPaySide" value="가격"/>
                                                 </div>

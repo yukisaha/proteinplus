@@ -1,5 +1,6 @@
 package com.elice.proteinplus.order.controller;
 
+import com.elice.proteinplus.cart.dto.CartDto;
 import com.elice.proteinplus.order.dto.DeliveryDto;
 import com.elice.proteinplus.order.dto.OrderDto;
 import com.elice.proteinplus.order.dto.OrderHistDto;
@@ -11,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 @RestController
@@ -20,14 +23,14 @@ public class OrderController {
     private final OrderService orderService;
 
     // 특정 사용자의 주문 목록을 조회합니다.
-//    @GetMapping("/user/{userId}/mypage/orderlist")
+//    @GetMapping("/user/mypage/orderlist")
 //    public ResponseEntity<Page<OrderHistDto>> getUserOrders(@PathVariable Long userId, Pageable pageable) {
 //        Page<OrderHistDto> orders = orderService.getOrders(userId, pageable);
 //        return ResponseEntity.ok(orders);
 //    }
 
     // 특정 사용자의 취소된 주문 목록을 조회합니다.
-//    @GetMapping("/user/{userId}/mypage/cancellist")
+//    @GetMapping("/user/mypage/cancellist")
 //    public ResponseEntity<Page<OrderHistDto>> getCancelledUserOrders(@PathVariable Long userId, Pageable pageable) {
 //        Page<OrderHistDto> cancelledOrders = orderService.getCancelledOrders(userId, pageable);
 //        return ResponseEntity.ok(cancelledOrders);
@@ -42,8 +45,12 @@ public class OrderController {
 //        return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
 //    }
 
+    @PostMapping("/order")
+    public void order(@RequestBody CartDto cartDto) {
+    }
+
     // 주문의 배송 정보를 업데이트합니다.
-    @PutMapping("/user/{userId}/mypage/orderlist/{orderId}/edit")
+    @PutMapping("/user/mypage/orderlist/{orderId}/edit")
     public ResponseEntity<Void> updateDeliveryInfo(@PathVariable Long orderId,
                                                    @RequestBody DeliveryDto deliveryDto) {
         boolean updated = orderService.updateDeliveryInfo(orderId, deliveryDto);
@@ -55,7 +62,7 @@ public class OrderController {
     }
 
     // 주문을 취소합니다.
-    @PostMapping("/user/{userId}/mypage/orderlist/{orderId}")
+    @PostMapping("/user//mypage/orderlist/{orderId}")
     public ResponseEntity<Void> cancelOrder(@PathVariable Long orderId) {
         boolean cancelled = orderService.cancelOrder(orderId);
         if (cancelled) {

@@ -274,12 +274,37 @@ address, caption, cite, code, dfn, em, strong, th, var {
     margin-bottom: 15px;
 }
 
+.order-content-box .prd-info-area .column.col-btn-group {
+    vertical-align: middle;
+}
+.prd-info-area .column {
+    display: table-cell;
+    vertical-align: top;
+    text-align: center;
+}
+
+
+.order-content-box .prd-info-area .column.col-btn-group .col-btn-group-inn .prd-control-btn {
+    display: block;
+    padding: 7px 0.5px;
+    border-radius: 4px;
+    border: 1px solid #e6e6e6;
+}
+
+.order-content-box .prd-info-area .column.col-btn-group .col-btn-group-inn .prd-control-btn span {
+    font-size: 12px;
+    line-height: 14px;
+    color: #333;
+    white-space: nowrap;
+}
+
 .order-content-box .prd-info-area .price-item {
     width: 130px;
     display: table-cell;
     vertical-align: middle;
     text-align: right;
 }
+
 
 .order-content-box .prd-info-area .price-item .dlv-nmr {
     display: flex;

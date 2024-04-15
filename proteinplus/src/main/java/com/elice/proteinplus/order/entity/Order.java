@@ -97,13 +97,4 @@ public class Order extends BaseTimeEntity{
         }
     }
 
-    //총 주문 금액
-    public int getTotalPrice() {
-        int totalPrice = 0;
-        for (OrderDetail orderDetail : orderDetails) {
-            totalPrice += orderDetail.getTotalPrice();
-        }
-        return totalPrice;
-    }
-
 }

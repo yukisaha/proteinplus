@@ -40,18 +40,13 @@ public class OrderDetail extends BaseTimeEntity{
                 .count(count)
                 .build();
 
-        product.decreaseStock(count);
+        // product.decreaseStock(count);
         return orderDetail;
-    }
-
-    //주문 가격 *수량 = 총 가격
-    public int getTotalPrice(){
-        return orderPrice*count;
     }
 
     //주문 취소
     public void cancel(){
-        this.getProduct().increaseStock(count);
+        // this.getProduct().increaseStock(count);
     }
 
     public void update(int count) {
