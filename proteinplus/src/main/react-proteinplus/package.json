@@ -13,7 +13,10 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.8",
+    "build": "^0.1.4",
+    "craco": "^0.0.3",
     "craco-plugin-scoped-css": "^1.1.1",
+    "http-proxy-middleware": "^3.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
@@ -21,6 +24,7 @@
     "web-vitals": "^2.1.4",
     "zustand": "^4.5.2"
   },
+  "proxy": "http://localhost:8080",
   "scripts": {
     "start": "craco start",
     "build": "craco build",

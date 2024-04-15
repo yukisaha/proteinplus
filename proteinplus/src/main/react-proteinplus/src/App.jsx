@@ -1,5 +1,10 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
+import {
+    createBrowserRouter
+    , RouterProvider
+    , Route
+    , Navigate
+} from 'react-router-dom';
 
 import Home from './pages/home/Home.js';
 import Cart from './pages/cart/Cart.js';
@@ -10,6 +15,10 @@ import Rank from "./pages/rank/Rank";
 import Order from "./pages/order/Order";
 import OrderDetail from "./pages/order/OrderDetail";
 import CancelDetail from "./pages/order/CancelDetail";
+import AdminLogin from "./pages/admin/admin.js"
+import SubmitProduct from "./pages/admin/submitProduct.js"
+
+
 
 const router = createBrowserRouter([
     {
@@ -52,6 +61,14 @@ const router = createBrowserRouter([
     {
         path: "/cancelDetail",
         element: <CancelDetail />
+    },
+    {
+        path: "/admin",
+        element: <AdminLogin />
+    },
+    {
+        path: "/admin/product/add",
+        element: <SubmitProduct />
     }
 ]);
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/admin/submitProduct.module.css';
+import '../../styles/admin/css/submitProduct.module.css';
 
 export default function SubmitProduct() {
 
