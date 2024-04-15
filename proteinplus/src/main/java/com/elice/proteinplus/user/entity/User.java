@@ -1,7 +1,8 @@
 package com.elice.proteinplus.user.entity;
 
-import com.elice.proteinplus.user.dto.UserJoinDTO;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +10,7 @@ import java.time.LocalDate;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
     @Id
@@ -23,7 +24,7 @@ public class User {
     private String loginPwd;
 
     @Column(name = "name", nullable = false)
-    private String name;
+    private String username;
 
     @Column(name = "nickname", nullable = false)
     private String nickname;
@@ -46,13 +47,22 @@ public class User {
     @Column(name = "is_delete", nullable = false, columnDefinition = "varchar(1) default 'N'")
     private String isDelete = "N";
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    public void create(UserJoinDTO joinUserDTO){
-        this.name = joinUserDTO.getName();
-        this.nickname = joinUserDTO.getNickname();
-        this.loginId = joinUserDTO.getLoginId();
-        this.loginPwd = joinUserDTO.getLoginPwd();
-        this.phone = joinUserDTO.getPhone();
-        this.email = joinUserDTO.getEmail();
+    @Builder
+    public User(String loginId, String loginPwd, String username, String nickname,
+                int phone, String email, LocalDate birth, String address,
+                String detailAddress, Role role){
+        this.loginId = loginId;
+        this.loginPwd = loginPwd;
+        this.username = username;
+        this.nickname = nickname;
+        this.phone = phone;
+        this.email = email;
+        this.birth = birth;
+        this.address = address;
+        this.detailAddress = detailAddress;
+        this.role = role;
     }
 }
