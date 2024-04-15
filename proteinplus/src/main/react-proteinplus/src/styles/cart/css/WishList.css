@@ -1,3 +1,12 @@
+.hide {
+  display: none;
+}
+
+.list-renewal .prd-item .origin.hide {
+    display: none;
+}
+
+
 .frame-cnt-inner {
   width: 820px;
 }
@@ -204,13 +213,6 @@ img {
   color: #999;
   font-weight: 400;
   line-height: 20px;
-}
-.prd-item .origin {
-  font-size: 13px;
-  line-height: 20px;
-  color: #999;
-  padding-left: 4px;
-  display: inline;
 }
 
 .list-renewal .prd-item .rating-simply .score {
@@ -421,11 +423,13 @@ element.style {
 .list-renewal .prd-item .tit a, .list-renewal .prd-item.type-md .tit a {
     height: auto;
 }
+
 .prd-item .tit a, .prd-item.type-md .tit a {
     max-height: 44px;
     height: 44px;
     word-break: break-all;
 }
+
 .text-elps2 {
     display: block;
     display: -webkit-box !important;
@@ -435,3 +439,4 @@ element.style {
     text-overflow: ellipsis;
     word-break: keep-all;
 }
+

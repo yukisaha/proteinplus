@@ -1,102 +1,65 @@
 import React, { useState, useEffect } from 'react';
 import MypageFrame from '../../components/MypageFrame';
+import CartModal from '../../components/CartModal';
 import '../../styles/cart/css/WishList.css';
 import axios from "axios";
 
 export default function WishList() {
-
-  const [selectedProducts, setSelectedProducts] = useState([]);
+  const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
   const [WishList, setWishListData] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
 
-    async function getWishList() { // Axios 방식 사용
-        const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-        const response = await axios.get(`${Spring_Server_Ip}/wishList`);
-        setWishListData(response.data);
+  async function getWishList() {
+    const response = await axios.get(`${Spring_Server_Ip}/wishList`);
+    setWishListData(response.data);
+  }
+
+  useEffect(() => {
+    getWishList();
+  }, []);
+
+  const handleDeleteSelected = async (productId) => {
+    // WishList에서 선택된 상품 삭제
+    await axios.delete(`${Spring_Server_Ip}/wishList/${productId}`);
+    // WishList를 다시 가져와서 렌더링
+    await getWishList();
+  };
+
+    // 전체삭제
+  const handleDeleteAll = async () => {
+    // WishList를 서버에서 비우는 로직
+    await axios.delete(`${Spring_Server_Ip}/wishList`);
+
+    // WishList를 다시 가져와서 렌더링
+    await getWishList();
+  };
+
+  const handleAddToCart = (productId) => {
+    // 여기서 선택된 상품의 ID와 count를 1로 설정하여 로컬 스토리지에 추가합니다.
+    const storedCartItems = localStorage.getItem('cartItems');
+    let cartItems = {};
+    if (storedCartItems) {
+      cartItems = JSON.parse(storedCartItems);
     }
+    // 상품 추가
+    cartItems[productId] = { product_id: productId, count: 1, isChecked: true };
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    setModalIsOpen(true);
+  };
 
-    useEffect(() => {
-        // wishList 상품들 조회 함수 호출
-        getWishList();
-    }, []);
-
-  // 임시 데이터를 사용하여 상품 목록 생성
-  const tempProductData = [
-    {
-      id: 1,
-      name: '[맛있닭] 닭가슴살 스테이크',
-      imageUrl: 'https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20240109/IMG1704AEO777787343_330_330.jpg',
-      salePercent: 29,
-      price: '17,900',
-      originalPrice: '24,900',
-      rating: '★4.9',
-      totalRating: '(82,648)',
-    },
-    {
-      id: 2,
-      name: '[한끼통살] 닭가슴살',
-      imageUrl: 'https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20231214/IMG1702pnr545701505_330_330.jpg',
-      salePercent: 22,
-      price: '21,600',
-      originalPrice: '26,600',
-      rating: '★4.7',
-      totalRating: '(13,445)',
-    },
-    {
-      id: 1,
-      name: '[맛있닭] 닭가슴살 스테이크',
-      imageUrl: 'https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20240109/IMG1704AEO777787343_330_330.jpg',
-      salePercent: 29,
-      price: '17,900',
-      originalPrice: '24,900',
-      rating: '★4.9',
-      totalRating: '(82,648)',
-    },
-        {
-          id: 1,
-          name: '[맛있닭] 닭가슴살 스테이크',
-          imageUrl: 'https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20240109/IMG1704AEO777787343_330_330.jpg',
-          salePercent: 29,
-          price: '17,900',
-          originalPrice: '24,900',
-          rating: '★4.9',
-          totalRating: '(82,648)',
-        },    {
-                id: 1,
-                name: '[맛있닭] 닭가슴살 스테이크',
-                imageUrl: 'https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20240109/IMG1704AEO777787343_330_330.jpg',
-                salePercent: 29,
-                price: '17,900',
-                originalPrice: '24,900',
-                rating: '★4.9',
-                totalRating: '(82,648)',
-              },
-
-    // 추가적인 상품 데이터를 이곳에 추가할 수 있습니다.
-  ];
-
-  // 상품 선택 체크박스 핸들러
-  const handleCheckboxChange = (productId) => {
-    if (selectedProducts.includes(productId)) {
-      setSelectedProducts(selectedProducts.filter((id) => id !== productId));
+  // 할인율을 적용한 가격 계산 함수
+  const calculateDiscountedPrice = (price, discountRate) => {
+    if (discountRate !== null) {
+      const discountedPrice = price * (1 - discountRate / 100);
+      return Math.round(discountedPrice);
     } else {
-      setSelectedProducts([...selectedProducts, productId]);
+      return price;
     }
   };
 
-  // 상품 삭제 버튼 핸들러
-  const handleDeleteSelected = () => {
-    // 선택된 상품들을 삭제하는 로직을 구현(아직안함)
-
-    // 이 예제에서는 선택된 상품들의 ID를 콘솔에 출력
-    console.log('Delete selected products:', selectedProducts);
-    // 삭제 후 선택된 상품 목록 초기화
-    setSelectedProducts([]);
-  };
-
-  // 찜한 상품이 있으면 상품 목록을, 없으면 메시지를 반환하는 함수
   const renderWishlistItems = () => {
-    if (tempProductData.length === 0) {
+    if (WishList.length === 0) {
       return (
         <div>
           <div className="menu-title-area">
@@ -106,8 +69,8 @@ export default function WishList() {
           </div>
           <div className="grid-list-wrap ui-compare-select">
             <ul id="wishList" className="prd-item-list grid-area-span4 gap33">
-              <div class="no-data">
-                <p class="message">
+              <div className="no-data">
+                <p className="message">
                   찜 상품이 없습니다.
                 </p>
               </div>
@@ -122,14 +85,15 @@ export default function WishList() {
         <div className="menu-title-area">
           <h3 className="title-menu">찜한 상품</h3>
           <div className="right" style={{ display: 'block' }}>
-            <button type="button" className="btn-link-txt5" id="btnDeltAll">
+            <button type="button" className="btn-link-txt5" id="btnDeltAll" onClick={handleDeleteAll}>
               <i className="ico-btn-delete"></i><span>전체삭제</span>
             </button>
           </div>
         </div>
         <div className="grid-list-wrap ui-compare-select">
           <ul id="wishList" className="prd-item-list grid-area-span4 gap33">
-            {tempProductData.map((product) => (
+
+            {WishList.map((product) => (
               <li key={product.id} className="list-renewal ext-li colum" data-list="1">
                 <div className="prd-item type-sm2">
                   <figure className="img w180">
@@ -138,11 +102,11 @@ export default function WishList() {
                         className="lozad"
                         data-src={product.imageUrl}
                         alt={product.name}
-                        src={product.imageUrl}
+                        src="https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20220325/6473e755cba869aacc30656bc3e2b3bf_330_330.jpg"
                         data-loaded="true"
                       />
                     </a>
-                    <button type="button" className="btn-icon-cart2 btn-ext-cart" title="">
+                    <button type="button" className="btn-icon-cart2 btn-ext-cart" title="" onClick={() => handleAddToCart(product.id)}>
                       <span className="blind">장바구니</span>
                     </button>
                   </figure>
@@ -153,19 +117,19 @@ export default function WishList() {
                       </a>
                     </p>
                     <div className="price-flex">
-                      <span className="sale">
-                        <strong>{product.salePercent}</strong>%
+                      <span className={`sale ${product.discountRate === null ? 'hide' : ''}`}>
+                        <strong>{product.discountRate}</strong>%
                       </span>
                       <span className="price">
-                        <em className="num">{product.price}</em>원
+                        <em className="num">{calculateDiscountedPrice(product.price, product.discountRate)}</em>원
                       </span>
-                      <p className="origin">
-                        <span>{product.originalPrice}</span>원
+                      <p className={`${product.discountRate === null ? 'hide' : ''} origin`}>
+                        <span>{product.price}</span>원
                       </p>
                     </div>
                     <div className="rating-simply">
-                      <span className="score">{product.rating}</span>
-                      <span className="total-num">{product.totalRating}</span>
+                      <span className="score">★{product.rating}</span>
+                      <span className="total-num">({product.totalRating})</span>
                     </div>
                   </div>
                   <div className="desc-form">
@@ -177,8 +141,7 @@ export default function WishList() {
                             id={`check-${product.id}`}
                             className="checkbox-wish btn-ext-wish"
                             name="check-wish-item"
-                            checked={selectedProducts.includes(product.id)}
-                            onChange={() => handleCheckboxChange(product.id)}
+                            onChange={() => handleDeleteSelected(product.id)}
                           />
                           <label htmlFor={`check-${product.id}`} title="">
                             <span className="blind">찜하기</span>
@@ -190,6 +153,7 @@ export default function WishList() {
                 </div>
               </li>
             ))}
+
             {renderPagination()}
           </ul>
         </div>
@@ -197,7 +161,6 @@ export default function WishList() {
     );
   };
 
-  // 페이지 이동 버튼 렌더링 함수
   const renderPagination = () => {
     return (
       <div className="pagination mt20" style={{ marginTop: '60px' }}>
@@ -214,5 +177,10 @@ export default function WishList() {
     );
   };
 
-  return <MypageFrame>{renderWishlistItems()}</MypageFrame>;
+  return (
+    <div>
+      <MypageFrame>{renderWishlistItems()}</MypageFrame>
+      <CartModal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} />
+    </div>
+  );
 }

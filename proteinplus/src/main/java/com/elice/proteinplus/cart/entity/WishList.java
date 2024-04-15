@@ -12,11 +12,11 @@ public class WishList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false) // NotNull 제약 조건 추가
+    @JoinColumn(name = "user_id", nullable = false) // NotNull 제약 조건 추가
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false) // NotNull 제약 조건 추가
+    @JoinColumn(name = "product_id", nullable = false) // NotNull 제약 조건 추가
     private Product product;
 }

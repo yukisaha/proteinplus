@@ -1,10 +1,13 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import "../../styles/user/css/join.scoped.css"
 
 function JoinComplete(){
+
+    let location = useLocation();
+    const loginId = location.state.loginId;
 
     return(
         <div className="wrap main">
@@ -13,19 +16,12 @@ function JoinComplete(){
                 <div className="join-certified user_frame-full">
                     <div className="user_frame-sm">
                         <div className="join-greeting">
-                            {/*아이디*/}님,
+                            <div className={`and loginId`}>{loginId}</div>
+                            <div className={`and`}>님,</div>
                             <br/>회원가입을 축하합니다.
                             <br/>
                             <span>로그인 후 다양한 서비스를 이용하실 수 있습니다.</span>
                         </div>
-                        {/* 로그인 form */}
-                        {/*<form*/}
-                        {/*    id="login_form"*/}
-                        {/*    name="login_form"*/}
-                        {/*    action="/auth/login"*/}
-                        {/*    method="post"*/}
-                        {/*>*/}
-                        {/* input submit */}
                         <Link to={"/"}>
                             <button type="submit" className="user_btn-secondary user_w-full">
                                 <span>둘러보기</span>
@@ -36,7 +32,6 @@ function JoinComplete(){
                                 <span>로그인</span>
                             </button>
                         </Link>
-                        {/*</form>*/}
                     </div>
                 </div>
             </section>

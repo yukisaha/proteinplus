@@ -77,6 +77,14 @@ public class ProductController {
         List<Product> products = productService.findProductByCategoryId(categoryId);
         return products;
     }
+    //전체 상품 조회 < 품절 상품 제외 >
+    @GetMapping("test/sell")
+    public List<Product> getSellProducts() {
+
+        List<Product> sellProducts = productService.findSellProducts();
+        return sellProducts;
+    }
+
 
     //상품 조회 < 품절 상품 제외 >
     @GetMapping("/test/sell/{categoryId}")

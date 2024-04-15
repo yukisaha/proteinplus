@@ -11,43 +11,9 @@ function Cart() {
     const [CartData, setCartData] = useState([]);
 
 
-//    useEffect(() => {
-//        getCartList(); // 페이지 로드 시 장바구니 데이터 가져오기
-//        loadCartItemsFromLocalStorage(); // 페이지 로드 시 로컬 스토리지에서 데이터 로드
-//        // 초기 데이터 추가
-//        addItemToCart(1, 1);// 초기에 productId, count  데이터 추가
-//        addItemToCart(2, 2);
-//        addItemToCart(3, 3);
-//    }, []);
-//
-//
-//    // 예시 데이터 로드
-//    const loadCartItemsFromLocalStorage = () => {
-//        const storedCartItems = localStorage.getItem('cartItems');
-//        if (storedCartItems) {
-//            const parsedCartItems = JSON.parse(storedCartItems);
-//            // 각 항목에 isChecked 속성 추가 및 true로 설정
-//            for (const productId in parsedCartItems) {
-//                parsedCartItems[productId].isChecked = true;
-//            }
-//            setCartItems(parsedCartItems);
-//            setIsChecked(true); // 모든 상품이 선택되도록 isChecked 상태를 true로 설정
-//        }
-//    };
-//
-//    async function getCartList() { // Axios
-//        const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-//        const response = await axios.post(`${Spring_Server_Ip}/cart`,  [1, 2, 3] );
-//        setCartData(response.data);
-//    }
 
 //      로컬스토리지 product_id 가져오는 코드 (오류 있음 마지막 값만 가져옴)
     useEffect(() => {
-
-        // 초기 데이터 추가
-        addItemToCart(1, 1);// 초기에 productId, count  데이터 추가
-        addItemToCart(2, 2);
-        addItemToCart(3, 3);
         loadCartItemsFromLocalStorage(); // 페이지 로드 시 로컬 스토리지에서 데이터 로드
     }, []);
 
@@ -116,18 +82,6 @@ function Cart() {
         localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
     };
 
-    // 상품 추가
-    const addItemToCart = (productId, count = 1) => {
-        setCartItems(prevItems => ({
-            ...prevItems,
-            [productId]: { product_id: productId, count: count, isChecked: true } // 상품 추가 시 기본적으로 isChecked를 true로 설정합니다.
-        }));
-        localStorage.setItem('cartItems', JSON.stringify({
-            ...cartItems,
-            [productId]: { product_id: productId, count: count, isChecked: true }
-        }));
-    };
-
     // 상품 조회
     const getItemFromCart = (productId) => {
         return cartItems[productId] || null;
@@ -193,7 +147,7 @@ function Cart() {
 
             // Axios를 사용하여 HTTP POST 요청을 보냅니다.
             const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-            await axios.post(`${Spring_Server_Ip}/api/order`, requestData);
+            await axios.post(`${Spring_Server_Ip}/order`, requestData);
         }
     };
 
@@ -367,7 +321,7 @@ function Cart() {
                     <a href="/" className="btn-basic-xxlg btn-default-ex">
                         <span>쇼핑계속하기</span>
                     </a>
-                    <a href="/order" className="btn-basic-xxlg btn-primary-ex" id="order" onClick={handleOrder}>
+                    <a href="" className="btn-basic-xxlg btn-primary-ex" id="order" onClick={handleOrder}>
                         <span><em className="text-num-bold totalOrderPrice">{totalProductPrice}</em>원 주문하기</span>
                     </a>
                 </div>
