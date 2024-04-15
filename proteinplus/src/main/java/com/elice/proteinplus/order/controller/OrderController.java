@@ -6,6 +6,7 @@ import com.elice.proteinplus.order.dto.OrderDto;
 import com.elice.proteinplus.order.dto.OrderHistDto;
 import com.elice.proteinplus.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
+@Slf4j
 public class OrderController {
 
     private final OrderService orderService;
@@ -46,7 +48,13 @@ public class OrderController {
 //    }
 
     @PostMapping("/order")
-    public void order(@RequestBody CartDto cartDto) {
+    public void order(@RequestBody List<CartDto> cartDto) {
+        log.info("cartDto ------------------------n" + cartDto.toString());
+
+    }
+    @GetMapping("/order")
+    public List<Pro> getorder() {
+
     }
 
     // 주문의 배송 정보를 업데이트합니다.
