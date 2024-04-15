@@ -1,5 +1,6 @@
 package com.elice.proteinplus.product.entity;
 
+import com.elice.proteinplus.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,9 +24,9 @@ public class Review {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id", nullable = false)
-//    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(nullable = false)
     private int rating;
