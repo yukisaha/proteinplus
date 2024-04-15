@@ -2,6 +2,7 @@ package com.elice.proteinplus.order.entity;
 
 import com.elice.proteinplus.global.entity.BaseTimeEntity;
 import com.elice.proteinplus.product.entity.Product;
+import com.elice.proteinplus.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,9 +23,9 @@ public class Order extends BaseTimeEntity{
     @Column(name = "order_id")
     private Long id;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id", nullable = false)
-//    private User user; //한명의 회원은 여러번의 주문 할 수 있다. (주문엔티티 기준 다대일 단방향)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user; //한명의 회원은 여러번의 주문 할 수 있다. (주문엔티티 기준 다대일 단방향)
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
@@ -52,26 +53,26 @@ public class Order extends BaseTimeEntity{
     }
 
     // 주문하기 = 주문상태 주문으로 바꾸기 + 현재 시간을 주문 시간으로 세팅
-//    @Builder
-//    public static Order createOrder(User user, LocalDateTime orderDate, OrderStatus orderStatus, List<OrderDetail> orderDetails) {
-//
-//        Order order = Order.builder()
-//                .user(user)
-//                .orderDate(orderDate)
-//                .orderStatus(orderStatus)
-//                .orderDetails(new ArrayList<>())
-//                .build();
-//
-//        for (OrderDetail orderItem : orderDetails) {
-//
-//            order.addOrderItem(orderItem);
-//        }
-//
-//        order.setOrderStatus(OrderStatus.ORDER);
-//        order.setOrderDate(LocalDateTime.now());
-//
-//        return order;
-//    }
+    @Builder
+    public static Order createOrder(User user, LocalDateTime orderDate, OrderStatus orderStatus, List<OrderDetail> orderDetails) {
+
+        Order order = Order.builder()
+                .user(user)
+                .orderDate(orderDate)
+                .orderStatus(orderStatus)
+                .orderDetails(new ArrayList<>())
+                .build();
+
+        for (OrderDetail orderItem : orderDetails) {
+
+            order.addOrderItem(orderItem);
+        }
+
+        order.setOrderStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
+
+        return order;
+    }
 
     //주문 취소 = 상품 재고 더하기 + 주문상태 취소로 바꾸기
     public void cancelOrder() {

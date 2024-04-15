@@ -31,14 +31,14 @@ public class ProductController {
 
     //상품 수정
     @PutMapping("/admin/edit/{productId}")
-    public void updateProduct(@PathVariable Long productId, @RequestBody ProductCreateDto productCreateDto){
+    public void updateProduct(@PathVariable("categoryId") Long productId, @RequestBody ProductCreateDto productCreateDto){
         productCreateDto.setId(productId);
         productService.updateProduct(productCreateDto);
     }
 
     //상품 삭제
     @DeleteMapping("/admin/delete/{productId}")
-    public void deleteProduct(@PathVariable Long productId){
+    public void deleteProduct(@PathVariable("categoryId") Long productId){
         productService.deleteProduct(productId);
     }
 
@@ -63,7 +63,7 @@ public class ProductController {
 //    }
 
     @GetMapping("/{productId}")
-    public Product getProductById(@PathVariable Long productId) {
+    public Product getProductById(@PathVariable("categoryId") Long productId) {
         return productService.getProductById(productId);
     }
 
@@ -72,7 +72,7 @@ public class ProductController {
 
     //카테고리 id별 상품 조회
     @GetMapping("/test/{categoryId}")
-    public List<Product> getProduct(@PathVariable Long categoryId){
+    public List<Product> getProduct(@PathVariable("categoryId") Long categoryId){
 
         List<Product> products = productService.findProductByCategoryId(categoryId);
         return products;
@@ -88,7 +88,7 @@ public class ProductController {
 
     //상품 조회 < 품절 상품 제외 >
     @GetMapping("/test/sell/{categoryId}")
-    public List<Product> getSellProduct(@PathVariable Long categoryId) {
+    public List<Product> getSellProduct(@PathVariable("categoryId") Long categoryId) {
 
         List<Product> sellProducts = productService.findSellProduct(categoryId);
         return sellProducts;
@@ -96,13 +96,13 @@ public class ProductController {
 
     //카테고리 id에 해당하는 상품의 수
     @GetMapping("/count/{categoryId}")
-    public Long countByCategoryId(@PathVariable Long categoryId) {
+    public Long countByCategoryId(@PathVariable("categoryId") Long categoryId) {
         return productService.countByCategoryId(categoryId);
     }
 
     //카테고리 id 상품 중 판매중인 상품의 수
     @GetMapping("/count/sell/{categoryId}")
-    public Long countBySellCategoryId(@PathVariable Long categoryId) {
+    public Long countBySellCategoryId(@PathVariable("categoryId") Long categoryId) {
         return productService.countBySellCategoryId(categoryId);
     }
 }

@@ -7,17 +7,39 @@ import axios from "axios";
 export default function WishList() {
   const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
   const [WishList, setWishListData] = useState([]);
+  const [Review, setReviewData] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  useEffect(() => {
+    // WishList 가져오기
+    getWishList();
+  }, []);
 
   async function getWishList() {
     const response = await axios.get(`${Spring_Server_Ip}/wishList`);
-    setWishListData(response.data);
+    const reviews = await axios.get(`${Spring_Server_Ip}/review`); // 리뷰 정보 가져오기
+
+    // productId를 기준으로 리뷰 정보를 매핑
+    const reviewMap = {};
+    reviews.data.forEach(review => {
+      const productId = review.productId;
+      if (!reviewMap[productId]) {
+        reviewMap[productId] = review;
+      }
+    });
+
+    // WishList와 리뷰 정보 합치기
+    const wishListWithReview = response.data.map(product => {
+      const productId = product.id;
+      const productReview = reviewMap[productId];
+      return { ...product, review: productReview };
+    });
+
+    setWishListData(wishListWithReview);
+    // WishListData 값 확인
+    console.log("WishListData:", wishListWithReview);
   }
 
-  useEffect(() => {
-    getWishList();
-  }, []);
 
   const handleDeleteSelected = async (productId) => {
     // WishList에서 선택된 상품 삭제
@@ -26,7 +48,7 @@ export default function WishList() {
     await getWishList();
   };
 
-    // 전체삭제
+  // 전체삭제
   const handleDeleteAll = async () => {
     // WishList를 서버에서 비우는 로직
     await axios.delete(`${Spring_Server_Ip}/wishList`);
@@ -127,10 +149,19 @@ export default function WishList() {
                         <span>{product.price}</span>원
                       </p>
                     </div>
-                    <div className="rating-simply">
-                      <span className="score">★{product.rating}</span>
-                      <span className="total-num">({product.totalRating})</span>
-                    </div>
+
+                   {product.review ? (
+                     <div className="rating-simply">
+                       <span className="score">★{product.review.rating ? product.review.rating.toFixed(1) : '0.0'}</span>
+                       <span className="total-num">({product.review.totalReviewCount})</span>
+                     </div>
+                   ) : (
+                     <div className="rating-simply">
+                       <span className="score">★0</span>
+                       <span className="total-num">(0)</span>
+                     </div>
+                   )}
+
                   </div>
                   <div className="desc-form">
                     <ul className="btns-list">

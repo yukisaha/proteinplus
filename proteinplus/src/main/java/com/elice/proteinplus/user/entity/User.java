@@ -1,5 +1,6 @@
 package com.elice.proteinplus.user.entity;
 
+import com.elice.proteinplus.order.entity.Order;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -7,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -47,8 +50,13 @@ public class User {
     @Column(name = "is_delete", nullable = false, columnDefinition = "varchar(1) default 'N'")
     private String isDelete = "N";
 
+
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders = new ArrayList<>();
+
 
     @Builder
     public User(String loginId, String loginPwd, String username, String nickname,

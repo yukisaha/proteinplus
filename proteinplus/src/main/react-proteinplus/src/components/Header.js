@@ -89,7 +89,7 @@ export default function Header({categoryId}) {
                         <li><a href="" className="btn-util-coupon" title=""><span className="blind">쿠폰</span></a></li>
                         <li><a href="" className="btn-util-mypage" title=""><span className="blind">마이페이지</span></a></li>
                         <li>
-                            <a href="" className="btn-util-cart" title="">
+                            <a href="/order/cart" className="btn-util-cart" title="">
                                 <span className="blind">장바구니</span>
                                 <em className="count">0</em>
                             </a>
