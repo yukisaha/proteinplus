@@ -1,11 +1,15 @@
 package com.elice.proteinplus.user.entity;
 
+import com.elice.proteinplus.order.entity.Order;
+import com.elice.proteinplus.order.entity.OrderDetail;
 import com.elice.proteinplus.user.dto.JoinUserDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -46,6 +50,8 @@ public class User {
     @Column(name = "is_delete", nullable = false, columnDefinition = "varchar(1) default 'N'")
     private String isDelete = "N";
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders = new ArrayList<>();
 
     public void create(JoinUserDTO joinUserDTO){
         this.loginId = joinUserDTO.getLoginId();

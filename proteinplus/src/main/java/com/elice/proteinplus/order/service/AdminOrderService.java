@@ -24,7 +24,6 @@ import java.util.List;
 public class AdminOrderService {
 
     private final OrderRepository orderRepository;
-    private final OrderDetailRepository orderDetailRepository;
 
     /* 전체 주문리스트 조회(관리자) */
     public Page<OrderHistDto> getAllOrders(Pageable pageable) {
@@ -33,10 +32,10 @@ public class AdminOrderService {
     }
 
     /* 회원별 주문리스트 조회(관리자) */
-//    public Page<OrderHistDto>  getOrdersByUserId(Long userId, Pageable pageable) {
-//        List<Order> orders = orderRepository.findByUserIdOrders(userId, pageable); // 회원별 주문 내역 조회
-//        return convertToOrderDtoList(orders, pageable);
-//    }
+    public Page<OrderHistDto>  getOrdersByUserId(Long userId, Pageable pageable) {
+        List<Order> orders = orderRepository.findByUserId(userId, pageable); // 회원별 주문 내역 조회
+        return convertToOrderDtoList(orders, pageable);
+    }
 
     private Page<OrderHistDto>  convertToOrderDtoList(List<Order> orders, Pageable pageable) {
         List<OrderHistDto> orderHistDtos = new ArrayList<>();
