@@ -193,7 +193,7 @@ function Cart() {
 
             // Axios를 사용하여 HTTP POST 요청을 보냅니다.
             const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-            await axios.post(`${Spring_Server_Ip}/order`, requestData);
+            await axios.post(`${Spring_Server_Ip}/api/order`, requestData);
         }
     };
 
@@ -367,7 +367,7 @@ function Cart() {
                     <a href="/" className="btn-basic-xxlg btn-default-ex">
                         <span>쇼핑계속하기</span>
                     </a>
-                    <a href="" className="btn-basic-xxlg btn-primary-ex" id="order" onClick={handleOrder}>
+                    <a href="/order" className="btn-basic-xxlg btn-primary-ex" id="order" onClick={handleOrder}>
                         <span><em className="text-num-bold totalOrderPrice">{totalProductPrice}</em>원 주문하기</span>
                     </a>
                 </div>
