@@ -38,3 +38,6 @@ out/
 
 .DS_Store
 .idea/
+
+*.yml
+*.yaml
