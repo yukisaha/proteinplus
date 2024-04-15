@@ -8,8 +8,8 @@ import WishList from './pages/cart/WishList.js';
 import Category from "./pages/category/Category";
 import Rank from "./pages/rank/Rank";
 import Order from "./pages/order/Order";
-import OrderDetail from "./pages/order/OrderDetail";
-import CancelDetail from "./pages/order/CancelDetail";
+import OrderList from "./pages/order/OrderList";
+import CancelList from "./pages/order/CancelList";
 import ProductList from "./pages/product/ProductList";
 import Join from "./pages/user/Join";
 import JoinComplete from "./pages/user/JoinComplete";
@@ -55,12 +55,12 @@ const router = createBrowserRouter([
         element: <Order />
     },
     {
-        path: "/orderDetail",
-        element: <OrderDetail />
+        path: "/mypage/orderList",
+        element: <OrderList />
     },
     {
-        path: "/cancelDetail",
-        element: <CancelDetail />
+        path: "/mypage/cancelList",
+        element: <CancelList />
     },
     {
         path: "/product",

@@ -192,8 +192,8 @@ function Cart() {
                     <div className="cart-option">
                         <div className="custom-checkbox">
                             <input type="checkbox" id="checkAll" className="checkbox checkboxGroup"
-                                checked={areAllProductsChecked()} // 모든 상품이 체크되었는지 여부에 따라 상태를 설정합니다.
-                                onChange={handleCheckAllChange} // 체크 상태가 변경될 때 handleCheckAllChange 함수를 호출합니다.
+                                   checked={areAllProductsChecked()} // 모든 상품이 체크되었는지 여부에 따라 상태를 설정합니다.
+                                   onChange={handleCheckAllChange} // 체크 상태가 변경될 때 handleCheckAllChange 함수를 호출합니다.
                             />
                             <label htmlFor="checkAll">전체선택</label>
                         </div>
@@ -218,8 +218,8 @@ function Cart() {
                                                 <div className="column check">
                                                     <div className="custom-checkbox single">
                                                         <input type="checkbox" id={`check-product-${item.product_id}N`} className="checkbox deleteUserCartList productCheckbox" name="check1600"
-                                                            checked={item.isChecked}
-                                                            onChange={() => handleProductCheckChange(item.product_id)}
+                                                               checked={item.isChecked}
+                                                               onChange={() => handleProductCheckChange(item.product_id)}
                                                         />
                                                         <label htmlFor={`check-product-${item.product_id}N`} className="blind">선택</label>
                                                     </div>

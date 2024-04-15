@@ -4,42 +4,21 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 function ProductList({categoryId}){
+
+//  const categoryId = 13;
+
   const [loading, setLoading] = useState(true); // 초기에는 로딩 중 상태로 설정
 
   const [products, setProducts] = useState([]);
 
   const [selectedOption1, setSelectedOption1] = useState('');
-  const [itemsPerPage, setItemsPerPage] = useState(30);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [categoryProductCount, setCategoryProductCount] = useState(0);
   const [includeSoldOut, setIncludeSoldOut] = useState(false);
 
   const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-
-  // const fetchProducts = async () => {
-  //     try {
-  //       let url;
-  //       if (includeSoldOut) {
-  //         url = `${Spring_Server_Ip}/product/includingSoldOut`;
-  //       } else {
-  //         url = `${Spring_Server_Ip}/product/excludingSoldOut`;
-  //       }
-  //       const response = await axios.get(url, {
-  //         params: {
-  //           categoryId: categoryId,
-  //           orderBy: selectedOption1,
-  //           page: currentPage,
-  //           size: itemsPerPage
-  //         }
-  //       });
-  //       setProducts(response.data.content);
-  //       setTotalPages(response.data.totalPages);
-  //     } catch (error) {
-  //       console.error('Error fetching products:', error);
-  //     }
-  //   };
-
 
   const fetchProducts = async () => {
     try {
@@ -50,12 +29,25 @@ function ProductList({categoryId}){
         url = `${Spring_Server_Ip}/product/test/sell/${categoryId}`;
       }
       const response = await axios.get(url);
-      setProducts(response.data);
-      setTotalPages(response.data);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-    }
-  };
+
+      let sortedProducts = response.data;
+      if (selectedOption1 === 'priceAsc') {
+        sortedProducts.sort((a, b) => calculateFinalPrice(a.price, a.discountRate) - calculateFinalPrice(b.price, b.discountRate));
+      } else if (selectedOption1 === 'priceDesc') {
+        sortedProducts.sort((a, b) => calculateFinalPrice(b.price, b.discountRate) - calculateFinalPrice(a.price, a.discountRate));
+      }
+
+      setTotalPages(Math.ceil(sortedProducts.length / itemsPerPage));
+
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      setProducts(sortedProducts.slice(startIndex, endIndex));
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      } finally {
+      setLoading(false);
+      }
+    };
 
   const fetchCategoryProductCount = async () => {
     try {
@@ -74,20 +66,61 @@ function ProductList({categoryId}){
     }
   };
 
-  // useEffect(() => {
-  //   fetchProducts();
-  //   fetchCategoryProductCount();
-  // }, [categoryId, selectedOption1, itemsPerPage, currentPage, includeSoldOut]);
-
   useEffect(() => {
     fetchProducts();
     fetchCategoryProductCount();
-  }, [categoryId, includeSoldOut]);
+  }, [categoryId, includeSoldOut, selectedOption1, currentPage, itemsPerPage]);
 
+  useEffect(() => {
+      const fetchProducts = async () => {
+          try {
+              let sortedProducts = [...products]; // 상품을 복사하여 정렬
+
+              switch (selectedOption1) {
+                case 'priceAsc':
+                    // 클라이언트 측에서 낮은가격순으로 정렬
+                    sortedProducts.sort((a, b) => calculateFinalPrice(a.price, a.discountRate) - calculateFinalPrice(b.price, b.discountRate));
+                    break;
+                case 'priceDesc':
+                    // 클라이언트 측에서 높은가격순으로 정렬
+                    sortedProducts.sort((a, b) => calculateFinalPrice(b.price, b.discountRate) - calculateFinalPrice(a.price, a.discountRate));
+                    break;
+                default:
+                    // 나머지 경우는 서버에서 해당 순서로 정렬된 상품을 가져오도록 설정
+                    let url;
+                    switch (selectedOption1) {
+                    case 'sales':
+                        url = `${Spring_Server_Ip}/product/test/${categoryId}?orderBy=sales`;
+                        break;
+                    case 'uploadDateDesc':
+                        url = `${Spring_Server_Ip}/product/test/${categoryId}?orderBy=uploadDateDesc`;
+                        break;
+                    case 'discountRateDesc':
+                        url = `${Spring_Server_Ip}/product/test/${categoryId}?orderBy=discountRateDesc`;
+                        break;
+                    default:
+                        url = `${Spring_Server_Ip}/product/test/${categoryId}?orderBy=uploadDateDesc`;
+                        break;
+                    }
+                    const response = await axios.get(url);
+                    sortedProducts = response.data;
+                    break;
+                }
+                const startIndex = (currentPage - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                setProducts(sortedProducts.slice(startIndex, endIndex));
+          } catch (error) {
+                console.error('Error fetching products:', error);
+          }
+      };
+
+      fetchProducts();
+  }, [selectedOption1, categoryId]); // useEffect 의존성 배열에 selectedOption1과 categoryId 추가
 
   const handleSelectChange1 = (event) => {
     setSelectedOption1(event.target.value);
   };
+
   const handleSelectChange2 = (event) => {
     setItemsPerPage(parseInt(event.target.value));
     setCurrentPage(1);
@@ -132,10 +165,10 @@ function ProductList({categoryId}){
             </div>
             <div className="dropdown">
               <select value={itemsPerPage} onChange={handleSelectChange2}>
-                <option value={10}>10개 보기</option>
-                <option value={30}>30개 보기</option>
-                <option value={60}>60개 보기</option>
-                <option value={100}>100개 보기</option>
+                <option value={1}>1개 보기</option>
+                <option value={2}>2개 보기</option>
+                <option value={3}>3개 보기</option>
+                <option value={4}>4개 보기</option>
               </select>
             </div>
           </div>
@@ -152,6 +185,15 @@ function ProductList({categoryId}){
   )
 }
 
+function calculateFinalPrice(price, discountRate) {
+  if (discountRate) {
+    const discountedPrice = price - (price * (discountRate / 100));
+    return discountedPrice;
+  } else {
+    return price; // 할인율이 없으면 원래 가격을 반환합니다.
+  }
+}
+
 function ProductCard({product}) {
   return (
       <div className="product-card">
@@ -163,25 +205,44 @@ function ProductCard({product}) {
         <div className="product-details">
           <h3 className="product-name">{product.name}</h3>
           <p className="product-description">{product.content}</p>
-          {/*<span className="product-result">{product.finalPrice}</span>*/}
-          <span className="product-discount">{product.discountRate}</span>
-          <span className="product-price"> {product.price}</span>
-        </div>
+          {product.discountRate ? (
+                      <>
+                        <span className="product-result">{calculateFinalPrice(product.price, product.discountRate).toLocaleString()}원</span>
+                        <span className="product-discount"> {product.discountRate.toLocaleString()}%</span>
+                        <span className="product-price">{product.price.toLocaleString()}원</span>
+                      </>
+                    ) : (
+                      <span className="product-result">{product.price.toLocaleString()}원</span>
+                    )}
+          </div>
       </div>
   );
 }
 
 function Pagination({ currentPage, totalPages, onPageChange }) {
-  const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
+  const handlePageClick = (pageNumber) => {
+      onPageChange(pageNumber);
+    };
+
+  const renderPageButtons = () => {
+    const pageButtons = [];
+    for (let i=1; i<=totalPages; i++) {
+      pageButtons.push(
+        <span key={i} className={i === currentPage ? 'active' : ''} onClick={() => handlePageClick(i)}>
+          {i}
+        </span>
+      );
+    }
+    return pageButtons;
+  };
 
   return (
-      <div className="pagination">
-        {pageNumbers.map((number) => (
-            <span key={number} className={number === currentPage ? 'active' : ''} onClick={() => onPageChange(number)}>
-          {number}
-        </span>
-        ))}
-      </div>
+    <div className="pagination">
+      {currentPage > 1 && <button onClick={() => handlePageClick(currentPage - 1)}>이전</button>}
+      {renderPageButtons()}
+      {currentPage < totalPages && <button onClick={() => handlePageClick(currentPage + 1)}>다음</button>}
+    </div>
   );
 }
+
 export default ProductList;
