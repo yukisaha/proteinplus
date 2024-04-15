@@ -1,6 +1,6 @@
 package com.elice.proteinplus.user.entity;
 
-import com.elice.proteinplus.user.dto.JoinUserDTO;
+import com.elice.proteinplus.user.dto.UserJoinDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,13 +22,13 @@ public class User {
     @Column(name = "login_pwd", nullable = false)
     private String loginPwd;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "nickname")
+    @Column(name = "nickname", nullable = false)
     private String nickname;
 
-    @Column(name = "phone")
+    @Column(name = "phone", nullable = false, unique = true)
     private int phone;
 
     @Column(name = "email", nullable = false, unique = true)
@@ -47,9 +47,12 @@ public class User {
     private String isDelete = "N";
 
 
-    public void create(JoinUserDTO joinUserDTO){
+    public void create(UserJoinDTO joinUserDTO){
+        this.name = joinUserDTO.getName();
+        this.nickname = joinUserDTO.getNickname();
         this.loginId = joinUserDTO.getLoginId();
         this.loginPwd = joinUserDTO.getLoginPwd();
+        this.phone = joinUserDTO.getPhone();
         this.email = joinUserDTO.getEmail();
     }
 }

@@ -1,7 +1,7 @@
 package com.elice.proteinplus.user.Controller;
 
 import com.elice.proteinplus.user.Service.UserJoinService;
-import com.elice.proteinplus.user.dto.JoinUserDTO;
+import com.elice.proteinplus.user.dto.UserJoinDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.elice.proteinplus.user.entity.User;
@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class JoinUserController {
+public class UserJoinController {
 
     private final UserJoinService userService;
 
     //회원가입
     @PostMapping
-    public User join(JoinUserDTO joinUserDTO){
+    public User join(UserJoinDTO joinUserDTO){
 
         User joinUser = userService.join(joinUserDTO);
         return joinUser;
@@ -31,10 +31,15 @@ public class JoinUserController {
     }
 
     //이메일 중복체크
-    //해당 이메일로 가입된 계정이 있습니다
-    @GetMapping("emailDuplicateCheck")
+    @GetMapping("/emailDuplicateCheck")
     public boolean emailDuplicateCheck(@RequestParam String email){
         return userService.emailDuplicateCheck(email);
+    }
+
+    //전화번호 중복체크
+    @GetMapping("/phoneDuplicateCheck")
+    public boolean phoneDuplicateCheck(@RequestParam int phone){
+        return userService.phoneDuplicateCheck(phone);
     }
 
 }
