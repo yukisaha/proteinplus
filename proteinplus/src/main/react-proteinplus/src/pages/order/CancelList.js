@@ -2,7 +2,7 @@ import React from 'react';
 import '../../styles/order/css/OrderDetail.scoped.css';
 import MypageFrame from '../../components/MypageFrame';
 
-export default function OrderDetail(){
+export default function CancelList(){
     // function fnBtnTopSearch(keyword) {
     //
     //     let url = "";
@@ -50,7 +50,7 @@ export default function OrderDetail(){
     return (
         <MypageFrame>
             <div className="menu-title-area">
-                <h3 className="title-menu">주문내역</h3>
+                <h3 className="title-menu">취소/반품내역</h3>
             </div>{/* menu-title-area */}
             <div className="search-box">
                 <div className="search-detail">
@@ -59,7 +59,7 @@ export default function OrderDetail(){
                         <div className="search-detail-top">
                             <div className="search-detail-date-itemname">
                                 <div className="input-group w-full">
-                                    <label for="item1-1" className="blind">검색</label>
+                                    <label htmlFor="item1-1" className="blind">검색</label>
                                     <input type="text" id="item1-1" name="srchProductNm" className="input-text" placeholder="주문 상품명 검색" value=""/>
                                     <span className="input-group-btn">
                                         <button type="submit" className="btn-icon-search search-word" title=""><i className="ico-btn-search"></i>
@@ -76,7 +76,7 @@ export default function OrderDetail(){
                 <ul className="order-list-inner">
                     <li>
                         <div className="order-list-head">
-                            <strong className="date">주문날짜</strong>
+                            <strong className="date">취소날짜</strong>
                             <div className="right">
                                 <span className="order-item-id">주문번호</span>
                             </div>
@@ -94,7 +94,7 @@ export default function OrderDetail(){
                                             </div>
                                             <div className="column tit">
                                                 <div className="prd-state-row">
-                                                    <strong className="prd-state-head">배송상태표시</strong>
+                                                    <strong className="prd-state-head">취소상태표시</strong>
                                                 </div>
                                                 <div className="tit">
                                                     <a href="javascript:void(0);" onClick="onClickMyPageOrderListOrderCd(this); return false;" ordercd="RK2310140004898434">상품이름</a>
@@ -126,4 +126,3 @@ export default function OrderDetail(){
         </MypageFrame>
     );
 };
-
