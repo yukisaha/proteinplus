@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-@Table(name= "rank")
-public class Rank {
+@Table(name= "rank_category")
+public class RankCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -18,5 +18,9 @@ public class Rank {
     @OneToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    public void create(Category category){
+        this.category = category;
+    }
 
 }

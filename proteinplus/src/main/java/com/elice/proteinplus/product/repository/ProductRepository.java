@@ -50,7 +50,15 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p JOIN p.category c WHERE c.id = :categoryId OR c.parent.id = :categoryId")
     List<Product> findProductByCategoryId(Long categoryId);
 
-    //상품 조회 < 품절 상품 제외 >
+    //랭크 카테고리에 있는 전체 상품 조회 < 품절 상품 제외 >
+    //p.category의 id 또는 parent.id 값이 rank의 category.id 값과 일치한 는 경우 -< 해당 p를 출력
+//    @Query("SELECT p FROM Product p JOIN p.category c WHERE p.productStatus = 'sell'")
+//    List<Product> findSellProducts();
+
+    @Query("SELECT p FROM Product p JOIN p.category c WHERE p.productStatus = 'sell' AND (c.id IN (SELECT r.category.id FROM RankCategory r) OR c.parent.id IN (SELECT r.category.id FROM RankCategory r))")
+    List<Product> findSellProducts();
+
+    //카테고리별 상품 조회 < 품절 상품 제외 >
     @Query("SELECT p FROM Product p JOIN p.category c WHERE (c.id = :categoryId OR c.parent.id = :categoryId) AND p.productStatus = 'sell'")
     List<Product> findSellProduct(Long categoryId);
 

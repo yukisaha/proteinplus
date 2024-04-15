@@ -17,6 +17,8 @@ import Login from "./pages/user/Login";
 import UserDelete from "./pages/user/UserDelete";
 import UserProfileEdit from "./pages/user/UserProfileEdit";
 import UserProfileEditPwdCheck from "./pages/user/UserProfileEditPwdCheck";
+import SubmitCategory from "./pages/category/SubmitCategory";
+import SubmitRank from "./pages/rank/SubmitRank";
 
 const router = createBrowserRouter([
     {
@@ -87,6 +89,14 @@ const router = createBrowserRouter([
     {
         path: "/member-pwd-check",
         element: <UserProfileEditPwdCheck />
+    },
+    {
+        path: "/admin/category",
+        element: <SubmitCategory />
+    },
+    {
+        path: "/admin/rank",
+        element: <SubmitRank />
     }
 
 ]);

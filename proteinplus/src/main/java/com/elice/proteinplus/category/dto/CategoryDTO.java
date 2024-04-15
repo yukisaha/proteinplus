@@ -1,4 +1,4 @@
-package com.elice.proteinplus.category.entity;
+package com.elice.proteinplus.category.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
