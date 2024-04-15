@@ -13,7 +13,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/admin/category")
+@RequestMapping("/category")
 @Slf4j
 public class CategoryController {
 

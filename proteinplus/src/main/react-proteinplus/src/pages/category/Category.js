@@ -18,14 +18,14 @@ function Category() {
 
     async function getCategory() { // Axios 방식 사용
         const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-        const response = await axios.get(`${Spring_Server_Ip}/admin/category/find/category`);
+        const response = await axios.get(`${Spring_Server_Ip}/category/find/category`);
         setCategoryData(response.data);
     }
 
     // 자식 카테고리 중 전체는  -> 부모 카테고리 id로 갖는다.
     async function getParentId() { // Axios 방식 사용
         const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-        const response = await axios.get(`${Spring_Server_Ip}/admin/category/find/${categoryId}`);
+        const response = await axios.get(`${Spring_Server_Ip}/category/find/${categoryId}`);
         console.log("response.data = ", response.data);
         if(response.data === ``){
             setParentId(categoryId);

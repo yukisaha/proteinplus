@@ -1,9 +1,9 @@
 package com.elice.proteinplus.user.entity;
 
 import com.elice.proteinplus.order.entity.Order;
-import com.elice.proteinplus.order.entity.OrderDetail;
-import com.elice.proteinplus.user.dto.JoinUserDTO;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
     @Id
@@ -26,13 +26,13 @@ public class User {
     @Column(name = "login_pwd", nullable = false)
     private String loginPwd;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "name", nullable = false)
+    private String username;
 
-    @Column(name = "nickname")
+    @Column(name = "nickname", nullable = false)
     private String nickname;
 
-    @Column(name = "phone")
+    @Column(name = "phone", nullable = false, unique = true)
     private int phone;
 
     @Column(name = "email", nullable = false, unique = true)
@@ -50,12 +50,27 @@ public class User {
     @Column(name = "is_delete", nullable = false, columnDefinition = "varchar(1) default 'N'")
     private String isDelete = "N";
 
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
 
-    public void create(JoinUserDTO joinUserDTO){
-        this.loginId = joinUserDTO.getLoginId();
-        this.loginPwd = joinUserDTO.getLoginPwd();
-        this.email = joinUserDTO.getEmail();
+
+    @Builder
+    public User(String loginId, String loginPwd, String username, String nickname,
+                int phone, String email, LocalDate birth, String address,
+                String detailAddress, Role role){
+        this.loginId = loginId;
+        this.loginPwd = loginPwd;
+        this.username = username;
+        this.nickname = nickname;
+        this.phone = phone;
+        this.email = email;
+        this.birth = birth;
+        this.address = address;
+        this.detailAddress = detailAddress;
+        this.role = role;
     }
 }
