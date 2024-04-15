@@ -87,7 +87,7 @@ const router = createBrowserRouter([
         element: <UserProfileEdit />
     },
     {
-        path: "/member-pwd-check",
+        path: "mypage/memberPwdCheck",
         element: <UserProfileEditPwdCheck />
     },
     {
