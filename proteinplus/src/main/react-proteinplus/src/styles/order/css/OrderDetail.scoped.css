@@ -286,7 +286,7 @@ address, caption, cite, code, dfn, em, strong, th, var {
 
 .order-content-box .prd-info-area .column.col-btn-group .col-btn-group-inn .prd-control-btn {
     display: block;
-    padding: 7px 0.5px;
+    padding: 7px 14px;
     border-radius: 4px;
     border: 1px solid #e6e6e6;
 }

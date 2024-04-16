@@ -38,75 +38,8 @@
     margin: 30px 0 15px;
 }
 
-.order-info .list-head-sub .btn-basic-sm2 {
-    position: absolute;
-    top: 22px;
-    right: 0;
-    border: 1px solid #666;
-    border-radius: 0;
-}
-
-.btn-default {
-    background: #fff;
-    color: #333;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.btn-basic-sm2 {
-    min-width: 67px;
-    height: 32px;
-    padding: 5px 10px;
-    border-radius: 4px;
-}
-
-.btn-basic-sm2 > span {
-    font-size: 13px;
-    line-height: 1.6;
-}
-
-.order-info .list-head-sub .btn-basic-sm2 span + i {
-    vertical-align: top;
-    margin-top: 4px;
-}
-[class*="ico-arr-"] {
-    position: relative;
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    transition: .2s;
-    -webkit-transition: .2s;
-    transform: translateX(0);
-    -webkit-transform: translateX(0);
-}
-
-[class^="btn-article-"] [class*="ico-arr-"]:after, [class^="btn-article-"] [class*="ico-arr-"]:before, [class^="btn-basic-"] [class*="ico-arr-"]:after, [class^="btn-basic-"] [class*="ico-arr-"]:before {
+[class^="btn-basic-"] {
     box-shadow: none;
-}
-.ico-arr-right:before {
-    top: 0;
-    left: 50%;
-    width: 1px;
-    height: 59.45%;
-    -webkit-transform: rotate(135deg);
-    transform: rotate(135deg);
-}
-
-.ico-arr-right:after {
-    bottom: 0;
-    left: 50%;
-    width: 1px;
-    height: 59.45%;
-    -webkit-transform: rotate(-135deg);
-    transform: rotate(-135deg);
-}
-
-[class*="ico-arr-"]:after, [class*="ico-arr-"]:before {
-    position: absolute;
-    display: block;
-    content: '';
-    background-color: #000;
-    box-shadow: inset 0 0 0 32px;
 }
 
 
@@ -125,29 +58,7 @@
     margin-bottom: -10px;
 }
 
-.badge-point2 {
-    background-color: #F8F8F8;
-    color: #666666;
-    margin-left:6px;
-    display: inline-block;
-}
 
-.lineless-table.type1 #addressInfoDiv h3 {
-    margin-top: 11px;
-    margin-bottom: 20px;
-}
-
-[class^="badge-"] {
-    display: inline-block;
-    vertical-align: top;
-    padding: 0 4px;
-    height: 18px;
-    border: 1px solid transparent;
-    font-size: 10px;
-    text-align: center;
-    line-height: 1.7;
-    border-radius: 4px;
-}
 address, caption, strong[lang=en], em, cite, b {
     font-weight: normal;
     font-style: normal;
@@ -387,9 +298,7 @@ fieldset, img {
     width: 540px;
 }
 
-.wp100, .w-full {
-    width: 100% !important;
-}
+
 .select-box {
     display: inline-block;
     min-width: 120px;
@@ -442,32 +351,6 @@ fieldset, img {
     -webkit-transform: rotate(225deg) translateY(100%);
     -ms-transform: rotate(225deg) translateY(100%);
 }
-
-.select-box .select-list {
-    display: none;
-    overflow-y: auto;
-    position: absolute;
-    top: calc(100% - 1px);
-    width: 100%;
-    max-height: 300px;
-    padding: 0;
-    border: 1px solid #ddd;
-    background: #fff;
-    z-index: 1;
-}
-
-
-
-.select-box .select-list a {
-    display: block;
-    width: 100%;
-    height: 100%;
-    padding: 10px 17px 10px;
-    background: #fff;
-    box-sizing: border-box;
-    font-size: 14px;
-}
-
 
 .inner-div .request-detail .select-box ~ .ui-direct-input {
     margin-top: 5px;
@@ -708,13 +591,6 @@ address, caption, cite, code, dfn, em, strong, th, var {
     border: 1px solid #5356ff;
 }
 
-.custom-checkbox input[type="checkbox"] + label {
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-    vertical-align: top;
-}
-
 .btn-x-sm3 {
     padding: 0;
 }
@@ -775,10 +651,6 @@ address, caption, cite, code, dfn, em, strong, th, var {
     padding: 0 0 40px;
 }
 
-
-label, select, input, textarea {
-    vertical-align: middle;
-}
 
 input[type="hidden" i] {
     appearance: none;
@@ -916,5 +788,196 @@ input {
     word-break: break-all;
 }
 
+/*배송지 정보*/
 
+.lineless-table table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
 
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.lineless-table.type2 th {
+    padding: 3px 0;
+}
+.lineless-table th {
+    text-align: left;
+    font-weight: normal;
+    padding: 10px 0;
+    font-size: 13px;
+    vertical-align: middle;
+}
+table td, table th {
+    word-break: keep-all;
+    word-wrap: break-word;
+}
+
+lineless-table.type2 td {
+    padding: 3px 0;
+}
+.lineless-table td {
+    text-align: left;
+    font-weight: normal;
+    padding: 10px 0;
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+.input-group-wrap.box-type {
+    border: 1px solid #ccc;
+}
+
+.input-group {
+    height: 40px;
+}
+
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: collapse;
+    /* width: 100%; */
+}
+
+.lineless-table .row-th-top .input-group > .input-group-cell {
+    padding: 0;
+}
+.input-group > .input-group-cell:first-child {
+    padding: 0 5px 0 0;
+}
+.input-group > .input-group-cell {
+    display: table-cell;
+    padding: 0 5px;
+}
+
+.w160 {
+    width: 160px !important;
+}
+
+.input-group > .input-group-cell > .input-text {
+    width: 100%;
+}
+.input-group-wrap .input-group .input-text {
+    border: 0;
+}
+.input-group .input-text {
+    height: 100%;
+    /* height: 40px; */
+    padding: 3px 15px;
+}
+
+.input-group > .input-text {
+    position: relative;
+    display: table-cell;
+    float: left;
+    width: 100%;
+    z-index: 2;
+}
+
+input[readonly] {
+    background-color: #F3F8FF;
+    border: 1px solid #ccc;
+    opacity: 1;
+    color: #333;
+}
+
+.lineless-table .row-th-top .input-group > .input-group-cell {
+    padding: 0;
+}
+.input-group-wrap.box-type .input-group-cell + .input-group-cell {
+    border-left: 1px solid #ddd;
+}
+
+.input-group-wrap .input-group > .input-group-btn:last-child {
+    padding: 0;
+}
+.input-group > .input-group-form:last-child, .input-group > .input-group-btn:last-child {
+    padding: 0;
+}
+.input-group > .input-group-form, .input-group > .input-group-btn {
+    display: table-cell;
+    position: relative;
+    white-space: nowrap;
+    width: 1%;
+    vertical-align: middle;
+    border: 0;
+    padding: 0 5px;
+}
+
+.input-group-wrap.box-type .input-group-btn > .btn-ex-white {
+    position: relative;
+    margin: -1px;
+    height: 44px;
+    line-height: 44px;
+}
+.btn-ex-white {
+    display: inline-block;
+    background-color: #fff;
+    font-size: 13px;
+    min-width: 100px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #333;
+    border: 1px solid #333;
+}
+
+a {
+    background: transparent;
+    text-decoration: none;
+    color: inherit;
+}
+
+.lineless-table .input-group-wrap + .input-text, .lineless-table .input-group + .input-group {
+    margin-top: 6px;
+}
+
+.input-group > .input-group-txt:first-child, .input-group > .input-group-form:first-child {
+    padding-left: 0 !important;
+}
+
+.input-group > .input-group-form, .input-group > .input-group-btn {
+    display: table-cell;
+    position: relative;
+    white-space: nowrap;
+    width: 1%;
+    vertical-align: middle;
+    border: 0;
+    padding: 0 5px;
+}
+
+.input-group .select-box, .input-group .btn-form {
+    height: 40px;
+}
+
+.w135 {
+    width: 135px !important;
+}
+
+button, input {
+    overflow: visible;
+}
+
+button, input, optgroup, select, textarea {
+    font: inherit;
+    color: inherit;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+legend, caption {
+    position: absolute;
+    left: -99999px;
+    display: block;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    text-indent: -99999px;
+    clip: rect(0, 0, 0, 0);
+}
