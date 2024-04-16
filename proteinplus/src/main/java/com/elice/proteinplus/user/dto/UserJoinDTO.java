@@ -11,7 +11,7 @@ import lombok.Setter;
 public class UserJoinDTO {
 
     //회원가입 시 필요한 정보
-    private String username;
+    private String name;
     private String nickname;
     private String loginId;
     private String loginPwd;

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import MypageFrame from '../../components/MypageFrame';
-import CartModal from '../../components/CartModal';
+import CartModal from '../../components/Modal/CartModal';
 import '../../styles/cart/css/WishList.css';
 import axios from "axios";
+import { RedirectToLogin } from '../../components/utils/useNavigation';
 
 export default function WishList() {
   const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
@@ -16,28 +17,32 @@ export default function WishList() {
   }, []);
 
   async function getWishList() {
-    const response = await axios.get(`${Spring_Server_Ip}/wishList`);
-    const reviews = await axios.get(`${Spring_Server_Ip}/review`); // 리뷰 정보 가져오기
+    const token = window.localStorage.getItem("token");
+    if (!token) {
+      // 토큰이 없는 경우 로그인 페이지로 리디렉션
+      return <RedirectToLogin />;
+    }
+      const response = await axios.get(`${Spring_Server_Ip}/wishList`);
+      const reviews = await axios.get(`${Spring_Server_Ip}/review`);
 
-    // productId를 기준으로 리뷰 정보를 매핑
-    const reviewMap = {};
-    reviews.data.forEach(review => {
-      const productId = review.productId;
-      if (!reviewMap[productId]) {
-        reviewMap[productId] = review;
-      }
-    });
+      // productId를 기준으로 리뷰 정보를 매핑
+      const reviewMap = {};
+      reviews.data.forEach(review => {
+        const productId = review.productId;
+        if (!reviewMap[productId]) {
+          reviewMap[productId] = review;
+        }
+      });
 
-    // WishList와 리뷰 정보 합치기
-    const wishListWithReview = response.data.map(product => {
-      const productId = product.id;
-      const productReview = reviewMap[productId];
-      return { ...product, review: productReview };
-    });
+      // WishList와 리뷰 정보 합치기
+      const wishListWithReview = response.data.map(product => {
+        const productId = product.id;
+        const productReview = reviewMap[productId];
+        return { ...product, review: productReview };
+      });
 
-    setWishListData(wishListWithReview);
-    // WishListData 값 확인
-    console.log("WishListData:", wishListWithReview);
+      setWishListData(wishListWithReview);
+
   }
 
 

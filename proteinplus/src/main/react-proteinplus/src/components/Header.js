@@ -9,7 +9,6 @@ export default function Header({categoryId}) {
     const [activeCategoryId, setActiveCategoryId] = useState(null);
     const [categoryData, setCategoryData] = useState(null);
     const [loading, setLoading] = useState(true); // 초기에는 로딩 중 상태로 설정
-
     const [isCategoryIdChanged, setIsCategoryIdChanged] = useState(false); // categoryId 변경 여부 상태
 
     const handleMouseOver = (itemId) => {
@@ -60,6 +59,16 @@ export default function Header({categoryId}) {
         return <div className="loading-indicator">데이터를 가져오는 중입니다...</div>;
     }
 
+    const logout = () => {
+        // 로컬 스토리지에서 토큰 제거
+        window.localStorage.removeItem("token");
+        // 새로고침하여 로그아웃 적용
+        window.location.href = '/'; // 홈으로 이동
+
+    };
+
+    const token = window.localStorage.getItem("token");
+
     return (
         <header id="header" className="header">
             <div className="header-inner">
@@ -67,8 +76,14 @@ export default function Header({categoryId}) {
 
                 <div className="util">
                     <ul>
-                        <li><a href="/auth/login">로그인</a></li>
-                        <li><a href="/member/join">회원가입</a></li>
+                        {token ? (
+                            <li><button onClick={logout}>로그아웃</button></li>
+                        ) : (
+                            <>
+                                <li><a href="/auth/login">로그인</a></li>
+                                <li><a href="/member/join">회원가입</a></li>
+                            </>
+                        )}
                         <li><a href="/mypage/orderlist">주문조회</a></li>
                         <li><a href="/service/center">고객센터</a></li>
                     </ul>
@@ -87,7 +102,7 @@ export default function Header({categoryId}) {
                 <div className="my-menu">
                     <ul>
                         <li><a href="" className="btn-util-coupon" title=""><span className="blind">쿠폰</span></a></li>
-                        <li><a href="" className="btn-util-mypage" title=""><span className="blind">마이페이지</span></a></li>
+                        <li><a href="/mypageFrame" className="btn-util-mypage" title=""><span className="blind">마이페이지</span></a></li>
                         <li>
                             <a href="/order/cart" className="btn-util-cart" title="">
                                 <span className="blind">장바구니</span>

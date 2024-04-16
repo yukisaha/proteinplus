@@ -24,7 +24,7 @@ public class SecurityConfig {
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
     private final JwtFilter jwtFilter;
     private final String[] adminUrl = {"/admin/**"};
-    private final String[] userUrl = {"/user/**", "/mypage/**", "/order/**"};
+    private final String[] userUrl = {"/user/**", "/mypage/**", "/api/**"};
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws  Exception {
@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/", "/cart/**", "/wishList/**", "/product/**").permitAll()
                         .requestMatchers(adminUrl).hasRole("ADMIN")
                         .requestMatchers(userUrl).hasRole("USER")
                         .anyRequest().permitAll()

@@ -37,24 +37,26 @@ function Login(){
                 loginId: loginId,
                 loginPwd: loginPwd
             };
-            const response = await axios.post(`${Spring_Server_Ip}/member/auth/login`, null, {params: data});
+            const response = await axios.post(`${Spring_Server_Ip}/member/auth/login`, data);
 
-            console.log(response.data);
 
             if(response.status === 200){
 
                 //response header에 Authorization 값으로 토큰을 넣는다.
-                axios.defaults.headers.common['Authorization'] = response.data;
+//                axios.defaults.headers.common['Authorization'] = response.data;
 
-                //localStorage에 토큰 값 넣는다.
-                window.localStorage.setItem("token", response.data.slice(7));
+                // 서버에서 받은 토큰을 로컬 스토리지에 저장
+                const token = response.data.data.accessToken;
+                window.localStorage.setItem("token", token);
+
+                console.log("저장된 토큰:", token);
+                console.log("로컬스토리지에 저장된 토큰:", window.localStorage.getItem("token"));
 
                 navigate('/');
-
             }
 
         }catch (error){
-            alert("로그인 실패");
+            alert("로그인 실패: " + error.message);
         }
     }
 
