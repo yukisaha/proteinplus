@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/common/css/CartModal.css';
+import '../../styles/common/css/CartModal.css';
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root');

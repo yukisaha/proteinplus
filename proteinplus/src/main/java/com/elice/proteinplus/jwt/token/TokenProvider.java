@@ -46,7 +46,7 @@ public class TokenProvider {
         String accessToken = Jwts.builder()
                 .setSubject(users.getLoginId())
                 .claim(AUTHORITIES_KEY, users.getRole())
-                .claim(USERNAME_KEY, users.getUsername())
+                .claim(USERNAME_KEY, users.getName())
                 .claim(TOKEN_ID_KEY, tokenId)
                 .signWith(hashKey, SignatureAlgorithm.HS512)
                 .setExpiration(accessTokenExpireTime)
