@@ -139,3 +139,10 @@
   font-size: 40px;
   color: #5356ff;
 }
+
+.idUnavailable{
+  color: red;
+}
+.idAvailable {
+  color: green;
+}

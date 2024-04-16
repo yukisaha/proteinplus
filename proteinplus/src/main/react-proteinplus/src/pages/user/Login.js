@@ -1,11 +1,62 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, {useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import "../../styles/user/css/login.scoped.css"
 import "../../styles/common/css/MypageFrame.css"
+import axios from "axios";
 
 function Login(){
+
+    const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
+
+    const [loginId, setLoginId] = useState("");
+    const [loginPwd, setLoginPwd] = useState("");
+
+    const navigate = useNavigate();
+
+
+    const handleLoginIdChange = (e) => {
+        const LoginId = e.target.value;
+        setLoginId(LoginId);
+    };
+    const handleLoginPwdChange = (e) => {
+        const LoginPwd = e.target.value;
+        setLoginPwd(LoginPwd);
+    };
+
+
+    const login = async (e) => {
+        try {
+            e.preventDefault();
+
+            console.log("아이디" , loginId);
+            console.log("비번" , loginPwd);
+
+            const data = {
+                loginId: loginId,
+                loginPwd: loginPwd
+            };
+            const response = await axios.post(`${Spring_Server_Ip}/member/auth/login`, null, {params: data});
+
+            console.log(response.data);
+
+            if(response.status === 200){
+
+                //response header에 Authorization 값으로 토큰을 넣는다.
+                axios.defaults.headers.common['Authorization'] = response.data;
+
+                //localStorage에 토큰 값 넣는다.
+                window.localStorage.setItem("token", response.data.slice(7));
+
+                navigate('/');
+
+            }
+
+        }catch (error){
+            alert("로그인 실패");
+        }
+    }
 
     return(
         <div className="wrap main">
@@ -18,7 +69,7 @@ function Login(){
                         <span>Protein Plus 입니다.</span>
                     </div>
                     {/* 로그인 form */}
-                    <form id="login_form" name="login_form" action="" method="">
+                    <form id="login_form" name="login_form" onSubmit={login}>
                         {/* input submit */}
                         <fieldset>
                             <div className="login_input-group w-full">
@@ -28,6 +79,8 @@ function Login(){
                                     id="id"
                                     name="id"
                                     className="login_input-text login_type-lg"
+                                    onChange={handleLoginIdChange}
+                                    value={loginId}
                                     placeholder="아이디"
                                     maxLength="100"
                                     required
@@ -39,6 +92,8 @@ function Login(){
                                     type="password"
                                     id="pw"
                                     className="login_input-text login_type-lg"
+                                    onChange={handleLoginPwdChange}
+                                    value={loginPwd}
                                     placeholder="비밀번호"
                                     maxLength="100"
                                     required
@@ -46,7 +101,7 @@ function Login(){
                             </div>
 
                             {/*로그인 로직*/}
-                            <button type="submit" className="user_btn-primary w-full">
+                            <button onClick={login} className="user_btn-primary w-full">
                                 <span>로그인</span>
                             </button>
                         </fieldset>

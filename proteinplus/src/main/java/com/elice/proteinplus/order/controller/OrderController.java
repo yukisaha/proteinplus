@@ -53,7 +53,7 @@ public class OrderController {
 
     }
 
-    // 주문의 배송 정보를 수정합니다.
+    // 주문의 배송 정보를 업데이트합니다.
     @PutMapping("/user/mypage/orderlist/{orderId}/edit")
     public ResponseEntity<Void> updateDeliveryInfo(@PathVariable Long orderId,
                                                    @RequestBody DeliveryDto deliveryDto) {
