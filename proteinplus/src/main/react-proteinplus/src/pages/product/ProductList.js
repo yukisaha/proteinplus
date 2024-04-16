@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 import '../../styles/product/css/ProductList.scoped.css';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import Pagination from './Pagination';
+import { storage } from "./firebase";
+import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 
 function ProductList({categoryId}){
 
-//  const categoryId = 13;
-
   const [loading, setLoading] = useState(true); // 초기에는 로딩 중 상태로 설정
-
   const [products, setProducts] = useState([]);
-
   const [selectedOption1, setSelectedOption1] = useState('');
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,7 +36,8 @@ function ProductList({categoryId}){
         sortedProducts.sort((a, b) => calculateFinalPrice(b.price, b.discountRate) - calculateFinalPrice(a.price, a.discountRate));
       }
 
-      setTotalPages(Math.ceil(sortedProducts.length / itemsPerPage));
+      const newTotalPages = Math.ceil(sortedProducts.length / itemsPerPage);
+      setTotalPages(newTotalPages);
 
       const startIndex = (currentPage - 1) * itemsPerPage;
       const endIndex = startIndex + itemsPerPage;
@@ -178,9 +178,8 @@ function ProductList({categoryId}){
                 <ProductCard key={product.id} product={product}/>
             ))}
           </div>
-
-          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
         </div>
+        <Pagination className="pagination" currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       </>
   )
 }
@@ -190,7 +189,7 @@ function calculateFinalPrice(price, discountRate) {
     const discountedPrice = price - (price * (discountRate / 100));
     return discountedPrice;
   } else {
-    return price; // 할인율이 없으면 원래 가격을 반환합니다.
+    return price;
   }
 }
 
@@ -216,32 +215,6 @@ function ProductCard({product}) {
                     )}
           </div>
       </div>
-  );
-}
-
-function Pagination({ currentPage, totalPages, onPageChange }) {
-  const handlePageClick = (pageNumber) => {
-      onPageChange(pageNumber);
-    };
-
-  const renderPageButtons = () => {
-    const pageButtons = [];
-    for (let i=1; i<=totalPages; i++) {
-      pageButtons.push(
-        <span key={i} className={i === currentPage ? 'active' : ''} onClick={() => handlePageClick(i)}>
-          {i}
-        </span>
-      );
-    }
-    return pageButtons;
-  };
-
-  return (
-    <div className="pagination">
-      {currentPage > 1 && <button onClick={() => handlePageClick(currentPage - 1)}>이전</button>}
-      {renderPageButtons()}
-      {currentPage < totalPages && <button onClick={() => handlePageClick(currentPage + 1)}>다음</button>}
-    </div>
   );
 }
 
