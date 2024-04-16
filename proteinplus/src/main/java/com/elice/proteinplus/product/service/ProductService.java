@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -22,6 +23,7 @@ public class ProductService {
     //상품 등록
     public Long createProduct(ProductCreateDto productCreateDto){
         Product product = productCreateDto.createProduct();
+        product.setUploadDate(LocalDateTime.now());
         productRepository.save(product);
 
         return product.getId();

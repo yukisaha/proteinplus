@@ -41,13 +41,6 @@ public class Product extends BaseTimeEntity {
     @Column(name = "price", nullable = false)
     private int price;  //원가
 
-
-//    @Column(name = "final_price", nullable = false)
-//    private int finalPrice;     //최종 가격      -> 다른 서비스단에서 계산을 구현하고 entity에 포함하지 않기로 했었어요!
-
-//    @Column(nullable = false)
-//    private String description; //상품 대표설명   -> 기존 erd에는 없던 내용인데 필요하다면 주석 해제하고 db에 잘 저장 되었는지 확인 부탁드려요!
-
     @Lob
     @Column(name = "content")
     private String content; //상품 상세설명
@@ -65,24 +58,13 @@ public class Product extends BaseTimeEntity {
     @Column(nullable = false)
     private int stock;
 
-//    public void calculateFinalPrice(){
-//        if(discountRate == null){
-//            finalPrice = price;
-//        } else{
-//            double discountFactor = 1.0 - (double) discountRate / 100; // 할인율 계산
-//            double discountedPrice = price * discountFactor; // 할인된 가격 계산
-//            finalPrice = (int) Math.round(discountedPrice);
-//        }
-//    }
 
     public void updateProduct(ProductCreateDto productCreateDto){
         this.name = productCreateDto.getName();
         this.price = productCreateDto.getPrice();
-//        this.description = productCreateDto.getDescription();
         this.stock = productCreateDto.getStock();
         this.discountRate = productCreateDto.getDiscountRate();
         this.productStatus = productCreateDto.getProductStatus();
-//        calculateFinalPrice();
     }
 
     //주문 수량(count)만큼 재고 감소
