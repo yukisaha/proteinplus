@@ -20,17 +20,16 @@ public class ProductCreateDto {
     @NotNull(message = "가격을 입력해주세요.")
     private Integer price;
 
-    @NotBlank(message = "상품 대표정보를 입력해주세요.")
-    private String description;
+    @NotBlank(message = "상품정보를 입력해주세요.")
+    private String content;
 
     @NotNull(message = "재고를 입력해주세요.")
     private Integer stock;
 
     private Integer discountRate;
 
+    @NotBlank(message = "상품상태를 입력해주세요. (sell 또는 soldout)")
     private String productStatus;
-
-    private String content;
 
     //객체간 변환을 위해 modelmapper 사용
     private static ModelMapper modelMapper = new ModelMapper();

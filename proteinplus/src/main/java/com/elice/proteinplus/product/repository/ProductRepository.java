@@ -15,14 +15,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 //    @Query("SELECT p FROM Product p LEFT JOIN p.orders o WHERE p.category.id = :categoryId OR p.category.parent.id = :categoryId GROUP BY p ORDER BY COUNT(o) DESC")
 //    Page<Product> findAllByCategoryIdOrderBySales(Pageable pageable, @Param("categoryId") Long categoryId);
 
-    //높은가격순
-//    @Query("SELECT p FROM Product p JOIN p.category c WHERE c.id = :categoryId OR c.parent.id = :categoryId ORDER BY p.finalPrice ASC")
-//    Page<Product> findAllByCategoryIdOrderByFinalPriceAsc(Pageable pageable, @Param("categoryId") Long categoryId);
-//
-//    //낮은가격순
-//    @Query("SELECT p FROM Product p JOIN p.category c WHERE c.id = :categoryId OR c.parent.id = :categoryId ORDER BY p.finalPrice DESC")
-//    Page<Product> findAllByCategoryIdOrderByFinalPriceDesc(Pageable pageable, @Param("categoryId") Long categoryId);
-
     //신상품순
     @Query("SELECT p FROM Product p JOIN p.category c WHERE c.id = :categoryId OR c.parent.id = :categoryId ORDER BY p.uploadDate DESC")
     Page<Product> findAllByCategoryIdOrderByUploadDateDesc(Pageable pageable, @Param("categoryId") Long categoryId);

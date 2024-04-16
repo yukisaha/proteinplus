@@ -19,6 +19,7 @@ import UserProfileEdit from "./pages/user/UserProfileEdit";
 import UserProfileEditPwdCheck from "./pages/user/UserProfileEditPwdCheck";
 import SubmitCategory from "./pages/category/SubmitCategory";
 import SubmitRank from "./pages/rank/SubmitRank";
+import UploadProduct from "./pages/product/UploadProduct";
 
 const router = createBrowserRouter([
     {
@@ -97,6 +98,10 @@ const router = createBrowserRouter([
     {
         path: "/admin/rank",
         element: <SubmitRank />
+    },
+    {
+        path: "/admin/product",
+        element: <UploadProduct />
     }
 
 ]);
