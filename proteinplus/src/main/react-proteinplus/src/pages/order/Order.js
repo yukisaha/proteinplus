@@ -19,7 +19,8 @@ export default function Order(){
             originalPrice: '24,900',
             rating: '★4.9',
             totalRating: '(82,648)',
-        }]
+        }
+        ]
 
 
     const  options = [
