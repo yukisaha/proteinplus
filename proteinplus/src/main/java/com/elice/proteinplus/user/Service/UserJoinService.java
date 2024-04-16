@@ -39,7 +39,7 @@ public class UserJoinService {
         User user = User.builder()
                 .loginId(joinUserDTO.getLoginId())
                 .loginPwd(passwordEncoder.encode(joinUserDTO.getLoginPwd()))
-                .username(joinUserDTO.getUsername())
+                .name(joinUserDTO.getName())
                 .nickname(joinUserDTO.getNickname())
                 .phone(joinUserDTO.getPhone())
                 .email(joinUserDTO.getEmail())

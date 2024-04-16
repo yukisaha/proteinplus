@@ -29,7 +29,7 @@ public class UserJoinController {
         User joinUser = userService.join(joinUserDTO);
         return new ApiResponseJson(HttpStatus.OK, Map.of(
                 "loginId", joinUser.getLoginId(),
-                "username", joinUser.getUsername()
+                "username", joinUser.getName()
         ));
     }
 
@@ -53,9 +53,10 @@ public class UserJoinController {
 
 
     @PostMapping("/auth/login")
-    public ApiResponseJson login(UserLoginDTO userLoginDTO){
+    public ApiResponseJson login(@RequestBody UserLoginDTO userLoginDTO){
 
         log.info("컨트롤러 아이디 = {}", userLoginDTO.getLoginId());
+        log.info("컨트롤러 비번 = {}", userLoginDTO.getLoginPwd());
         TokenInfo tokenInfo = userService.login(userLoginDTO.getLoginId(), userLoginDTO.getLoginPwd());
         log.info("Token issued: {}", tokenInfo);
 

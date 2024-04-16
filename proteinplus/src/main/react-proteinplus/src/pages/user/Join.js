@@ -95,10 +95,14 @@ function Join(){
         }
 
         try {
+        console.log(loginId);
             const data = {
                 loginId: loginId
+
             };
-            const response = await axios.get(`${Spring_Server_Ip}/member/join/idDuplicateCheck`, {params: data});
+        console.log(data);
+            const response = await axios.get(`${Spring_Server_Ip}/member/idDuplicateCheck`, {params: data});
+            console.log(response);
             //이미 존재하는 아이디일 경우
             if(response.data === true) {
                 setIdMessage("이미 사용 중인 아이디입니다.");
@@ -122,7 +126,7 @@ function Join(){
             const data = {
                 email: email
             };
-            const response = await axios.get(`${Spring_Server_Ip}/member/join/emailDuplicateCheck`, {params: data});
+            const response = await axios.get(`${Spring_Server_Ip}/member/emailDuplicateCheck`, {params: data});
             //이미 존재하는 이메일일 경우
             return response.data === true;
         } catch (error) {
@@ -136,7 +140,7 @@ function Join(){
             const data = {
                 phone: phone
             };
-            const response = await axios.get(`${Spring_Server_Ip}/member/join/phoneDuplicateCheck`, {params: data});
+            const response = await axios.get(`${Spring_Server_Ip}/member/phoneDuplicateCheck`, {params: data});
             //이미 존재하는 전화번호일 경우
             return response.data === true;
         } catch (error) {
@@ -204,8 +208,9 @@ function Join(){
                             phone: phone,
                             email: email
                         };
-                        await axios.post(`${Spring_Server_Ip}/member/join`, null, {params: data});
-                        navigate('/member/join/complete', {state: {loginId: loginId}}, {replace: true});
+                        console.log(data);
+                        const response = await axios.post(`${Spring_Server_Ip}/member/join`, data);
+                        navigate('/member/join/complete', {state: {loginId: response.data.loginId}}, {replace: true});
                     } catch (error) {
                         alert("회원가입에 실패했습니다.");
                     }
