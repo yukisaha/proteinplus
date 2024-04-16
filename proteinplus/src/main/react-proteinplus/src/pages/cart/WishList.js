@@ -17,11 +17,11 @@ export default function WishList() {
   }, []);
 
   async function getWishList() {
-    const token = window.localStorage.getItem("token");
-    if (!token) {
-      // 토큰이 없는 경우 로그인 페이지로 리디렉션
-      return <RedirectToLogin />;
-    }
+//    const token = window.localStorage.getItem("token");
+//    if (!token) {
+//      // 토큰이 없는 경우 로그인 페이지로 리디렉션
+//      return <RedirectToLogin />;
+//    }
       const response = await axios.get(`${Spring_Server_Ip}/wishList`);
       const reviews = await axios.get(`${Spring_Server_Ip}/review`);
 
