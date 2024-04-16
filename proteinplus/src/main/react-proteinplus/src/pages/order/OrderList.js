@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import '../../styles/order/css/OrderDetail.scoped.css';
 import MypageFrame from '../../components/MypageFrame';
+import axios from "axios";
 
 export default function OrderList(){
-    // 임시 데이터를 사용하여 상품 목록 생성
     const tempProductData = [
         {
             id: 1,
@@ -16,6 +16,30 @@ export default function OrderList(){
             totalRating: '(82,648)'
         }
     ];
+
+    const [orderListData, setOrderListData] = useState([]);
+
+    async function getOrderList() { // Axios 방식 사용
+        const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
+        const response = await axios.get(`${Spring_Server_Ip}/api/user/mypage/orderlist`);
+        setOrderListData(response.data);
+    }
+
+    useEffect(() => {
+        // 카테고리 전체 조회 함수 호출
+        getOrderList();
+    }, []);
+
+    const handleCancelOrder = async (orderId) => {
+        try {
+            const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
+            await axios.post(`${Spring_Server_Ip}/api/user/mypage/orderlist/${orderId}`);
+            // 주문 취소 성공 시 화면 갱신 또는 사용자에게 알림
+        } catch (error) {
+            // 오류 처리
+            console.error('주문 취소 중 오류가 발생했습니다:', error);
+        }
+    };
 
     const renderOrderListItems = () => {
         if (tempProductData.length === 0) {
@@ -124,9 +148,10 @@ export default function OrderList(){
                                                     </div>
                                                     <div className="column col-btn-group">
                                                         <div className="col-btn-group-inn">
-                                                            <a href="#" className="prd-control-btn" disabled="">
+                                                            <button onClick={() => handleCancelOrder(item.id)}
+                                                                    className="prd-control-btn">
                                                                 <span>취소</span>
-                                                            </a>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                     <div className="price-item">

@@ -29,7 +29,7 @@ public class Order extends BaseTimeEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    private Product product; //한명의 회원은 여러번의 주문 할 수 있다. (주문엔티티 기준 다대일 단방향)
+    private Product product;
 
     @Column(name = "order_date", nullable = false)
     private LocalDateTime orderDate; //주문일
