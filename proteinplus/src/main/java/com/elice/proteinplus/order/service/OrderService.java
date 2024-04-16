@@ -133,7 +133,7 @@ public class OrderService {
 
     /* 주문 취소(회원) */
     @Transactional
-    public Boolean cancelOrder(Long orderId){
+    public boolean cancelOrder(Long orderId){
         return orderRepository.findById(orderId)
                 .map(order -> {
                     order.cancelOrder();

@@ -53,17 +53,17 @@ public class OrderController {
 
     }
 
-    // 주문의 배송 정보를 업데이트합니다.
-    @PutMapping("/user/mypage/orderlist/{orderId}/edit")
-    public ResponseEntity<Void> updateDeliveryInfo(@PathVariable Long orderId,
-                                                   @RequestBody DeliveryDto deliveryDto) {
-        boolean updated = orderService.updateDeliveryInfo(orderId, deliveryDto);
-        if (updated) {
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+//    // 주문의 배송 정보를 업데이트합니다.
+//    @PutMapping("/user/mypage/orderlist/{orderId}/edit")
+//    public ResponseEntity<Void> updateDeliveryInfo(@PathVariable Long orderId,
+//                                                   @RequestBody DeliveryDto deliveryDto) {
+//        boolean updated = orderService.updateDeliveryInfo(orderId, deliveryDto);
+//        if (updated) {
+//            return ResponseEntity.ok().build();
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
     // 주문을 취소합니다.
     @PostMapping("/user/mypage/orderlist/{orderId}")
