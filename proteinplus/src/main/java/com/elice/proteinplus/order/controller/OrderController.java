@@ -51,10 +51,12 @@ public class OrderController {
     // 배송정보을 생성합니다.
     @PostMapping("/order/delivery")
     public ResponseEntity<Long> addDelivery(@RequestBody DeliveryDto deliveryDto) {
-        log.info(deliveryDto.toString()+"addDelivery");
-        Long orderId = orderService.delivery(deliveryDto, 1L);
-        return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
+        log.info(deliveryDto.toString() + " addDelivery");
+        Long orderId = deliveryDto.getOrderId(); // DeliveryDto에서 orderId를 가져옴
+        Long deliveryId = orderService.delivery(deliveryDto, orderId); // orderId를 함께 전달
+        return ResponseEntity.status(HttpStatus.CREATED).body(deliveryId);
     }
+
 
 
 

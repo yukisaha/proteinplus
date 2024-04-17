@@ -171,17 +171,20 @@ public class OrderService {
 
 
 
+    @Transactional
+    public Long delivery(DeliveryDto deliveryDto, Long orderId) {
+        // 주문에 대한 배송 정보가 이미 존재하는지 확인
+        if (deliveryRepository.existsByOrder_Id(orderId)) {
+            throw new IllegalStateException("이 주문에 대한 배송 정보가 이미 존재합니다.");
+        }
 
-    public Long delivery(DeliveryDto deliveryDto, Long userId) {
-        // 사용자 조회
-        // 여기서는 사용자 조회 로직이 필요한 경우에만 사용하도록 가정합니다.
-        // 예를 들어, 배송 주소를 사용자의 기본 배송 주소로 저장하는 등의 로직이 있다면 사용될 수 있습니다.
-
-        User user = userRepository.findById(userId)
+        // 주문 조회
+        Order order = orderRepository.findById(orderId)
                 .orElseThrow(EntityNotFoundException::new);
 
         // 배송 정보 생성
         Delivery delivery = new Delivery();
+        delivery.setOrder(order); // 주문 객체 설정
         delivery.setReceiverName(deliveryDto.getReceiverName());
         delivery.setReceiverPhone(deliveryDto.getReceiverPhoneNumber());
         delivery.setDeliveryReq(deliveryDto.getDeliveryReq());
@@ -192,6 +195,8 @@ public class OrderService {
 
         return delivery.getId();
     }
+
+
 
     /* 주문 수정(회원) - 배송지 */
     @Transactional

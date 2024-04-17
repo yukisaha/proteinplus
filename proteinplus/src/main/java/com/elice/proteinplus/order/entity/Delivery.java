@@ -24,7 +24,7 @@ public class Delivery {
     private String receiverName;
 
     @Column(name = "receiver_phone", nullable = false)
-    private String receiverPhone;
+    private int receiverPhone;
 
     @Embedded
     private Address address;
@@ -32,7 +32,7 @@ public class Delivery {
     @Column(name = "delivery_request")
     private String deliveryReq; //주문 요청사항
 
-    public Delivery update(Address address, String receiverName, String receiverPhone) {
+    public Delivery update(Address address, String receiverName, Integer receiverPhone) {
         this.address = address;
         this.receiverName = receiverName;
         this.receiverPhone = receiverPhone;

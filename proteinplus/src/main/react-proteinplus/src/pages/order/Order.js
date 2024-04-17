@@ -155,6 +155,7 @@ export default function Order(){
 
 
     // 주문 생성 함수
+    // 주문 생성 함수
     const handleOrder = async () => {
         try {
             // 주문을 생성할 때 필요한 상품 정보들을 추출합니다.
@@ -176,28 +177,23 @@ export default function Order(){
 
             // 배송 정보를 백엔드로 전송합니다.
             const deliveryResponse = await axios.post(
-                `${Spring_Server_Ip}/api/order/delivery`, // 배송 정보를 전송하는 API 엔드포인트에 맞게 수정해야 합니다.
+                `${Spring_Server_Ip}/api/order/delivery`,
                 {
-                    deliveryDto: { // 배송 정보
-                        orderId, // 주문 ID
-                        receiverName,
-                        receiverPhoneNumber,
-                        deliveryReq,
-                        address: {
-                            city: receiverAddr,
-                            zipcode: receiverPost,
-                            addressDetail: receiverAddrDtl
-                        }
+                    orderId, // 직접 orderId를 넣어줍니다.
+                    receiverName,
+                    receiverPhoneNumber,
+                    deliveryReq,
+                    address: {
+                        city: receiverAddr,
+                        zipcode: receiverPost,
+                        addressDetail: receiverAddrDtl
                     }
                 }
             );
-
-            console.log('주문 및 배송이 생성되었습니다.');
-            // 주문 및 배송 성공 시 처리
-            setOrderSuccess(true);
-        } catch (error) {
-            console.error('주문 또는 배송 생성 중 오류가 발생했습니다:', error);
-            // 주문 또는 배송 생성에 실패했을 때 처리할 코드를 작성합니다.
+        }
+        catch (error) {
+            // 오류 처리
+            console.error('Error while handling order:', error);
         }
     };
 

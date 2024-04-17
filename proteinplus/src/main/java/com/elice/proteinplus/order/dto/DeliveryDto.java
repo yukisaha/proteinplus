@@ -14,7 +14,7 @@ public class DeliveryDto {
 
     private String receiverName;
 
-    private String receiverPhoneNumber;
+    private int receiverPhoneNumber;
 
     private String deliveryReq;
 
