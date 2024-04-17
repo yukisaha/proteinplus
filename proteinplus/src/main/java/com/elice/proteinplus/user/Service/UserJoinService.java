@@ -56,7 +56,7 @@ public class UserJoinService {
         }
 
         log.info("비밀번호 정책 미달");
-        throw new IllegalArgumentException("비밀번호는 최소 8저라에 영어, 숫자, 특수문자를 포함해야 합니다.");
+        throw new IllegalArgumentException("비밀번호는 최소 8자리에 영어, 숫자, 특수문자를 포함해야 합니다.");
     }
 
     //아이디 중복체크
