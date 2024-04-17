@@ -140,7 +140,7 @@ export default function WishList() {
                         className="lozad"
                         data-src={product.imageUrl}
                         alt={product.name}
-                        src="https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20220325/6473e755cba869aacc30656bc3e2b3bf_330_330.jpg"
+                        src={product.mainImageUrl}
                         data-loaded="true"
                       />
                     </a>

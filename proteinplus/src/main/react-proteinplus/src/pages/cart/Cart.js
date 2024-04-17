@@ -39,10 +39,24 @@ function Cart() {
         const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
         console.log("productIds:", productIds); // productIds를 콘솔에 출력하여 확인
         const response = await axios.post(`${Spring_Server_Ip}/cart`,  productIds );
-        setCartData(response.data);
+        // response.data 배열의 각 상품에 할인된 가격을 적용하여 업데이트합니다.
+        const updatedCartData = response.data.map(product => ({
+            ...product,
+            price: calculateDiscountedPrice(product.price, product.discountRate) // 할인된 가격을 계산하여 적용
+        }));
+
+        setCartData(updatedCartData); // 업데이트된 데이터를 상태에 설정합니다.;
     }
 
-
+    // 할인율을 적용한 가격 계산 함수
+    const calculateDiscountedPrice = (price, discountRate) => {
+      if (discountRate !== null) {
+        const discountedPrice = price * (1 - discountRate / 100);
+        return Math.round(discountedPrice);
+      } else {
+        return price;
+      }
+    };
 
 
     // 모든 상품의 체크 상태가 변경될 때 호출되는 함수
@@ -132,25 +146,6 @@ function Cart() {
     };
 
 
-    // 주문하기 버튼 클릭 시 호출될 함수
-    const handleOrder = async () => {
-        // 여기에 로컬 스토리지의 값을 읽어와서 필요한 데이터를 백엔드로 전송하는 코드를 추가
-        const storedCartItems = localStorage.getItem('cartItems');
-        if (storedCartItems) {
-            const parsedCartItems = JSON.parse(storedCartItems);
-
-            // 필요한 데이터를 추출하여 API에 전달
-            const requestData = Object.values(parsedCartItems).map(item => ({
-                productId: item.product_id,
-                count: item.count
-            }));
-
-            // Axios를 사용하여 HTTP POST 요청을 보냅니다.
-            const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-            await axios.post(`${Spring_Server_Ip}/api/order`, requestData);
-        }
-    };
-
 
     // 장바구니 상품 렌더링 함수
     const renderCartItems = () => {
@@ -230,7 +225,12 @@ function Cart() {
 
                                                 <div className="column img">
                                                     <label htmlFor={`check-product-${item.product_id}N`}>
-                                                        <img src={`https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20240109/IMG1704AEO777787343_100_100.jpg`} alt="상품이미지" />
+                                                        {productData && productData.mainImageUrl ? (
+                                                          <img src={productData.mainImageUrl} alt="상품이미지" />
+                                                        ) : (
+                                                          <img src="https://firebasestorage.googleapis.com/v0/b/proteinplus-1f358.appspot.com/o/product_images%2F%EA%B8%B0%EB%B3%B8%EC%9D%B4%EB%AF%B8%EC%A7%80.png?alt=media&token=8e9f89a0-a182-4dc0-a69d-5db89dda6299" alt="상품이미지 없음" />
+                                                        )}
+
                                                     </label>
                                                 </div>
                                                 <div className="column tit">
@@ -321,7 +321,7 @@ function Cart() {
                     <a href="/" className="btn-basic-xxlg btn-default-ex">
                         <span>쇼핑계속하기</span>
                     </a>
-                    <a href="/order" className="btn-basic-xxlg btn-primary-ex" id="order" onClick={handleOrder}>
+                    <a href="/order" className="btn-basic-xxlg btn-primary-ex" id="order">
                         <span><em className="text-num-bold totalOrderPrice">{totalProductPrice}</em>원 주문하기</span>
                     </a>
                 </div>
