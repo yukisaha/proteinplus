@@ -131,7 +131,7 @@ export default function Order(){
         const storedCartItems = localStorage.getItem('cartItems');
         if (storedCartItems) {
             const cartItems = JSON.parse(storedCartItems);
-            const checkedItems = cartItems;
+            const checkedItems = cartItems.filter(item => item.isChecked === true);
             setOrderItems(checkedItems);
 
             // product_id 배열 생성
