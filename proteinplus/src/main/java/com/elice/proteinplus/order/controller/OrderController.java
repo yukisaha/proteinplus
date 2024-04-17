@@ -41,11 +41,12 @@ public class OrderController {
 
     // 주문을 생성합니다.
     @PostMapping("/order/order")
-    public ResponseEntity<Long> addOrder(@RequestBody List<OrderDto> orderDto) {
-        log.info(orderDto.toString()+"addOrder");
-        Long orderId = orderService.order(orderDto, 1L);
+    public ResponseEntity<Long> addOrder(@RequestBody List<OrderDto> orderDtoList) {
+        Long orderId = orderService.order(orderDtoList, 1L); // 여기서 1L은 사용자 ID로 변경 가능
         return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
     }
+
+
 
     // 배송정보을 생성합니다.
     @PostMapping("/order/delivery")

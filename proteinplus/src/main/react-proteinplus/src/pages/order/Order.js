@@ -158,16 +158,16 @@ export default function Order(){
     const handleOrder = async () => {
         try {
             // 주문을 생성할 때 필요한 상품 정보들을 추출합니다.
-            const orderItemsInfo = orderItems.map(item => ({
-                productId: item.product_id,
-                count: item.count,
+            const orderDtoList = orderItems.map(item => ({
+                productIds: [item.product_id],
+                counts: [item.count],
                 isChecked: item.isChecked
             }));
-            console.log(orderItemsInfo);
+            console.log(orderDtoList);
 
             // 주문 정보를 백엔드로 전송합니다.
             const orderResponse = await axios.post(
-                `${Spring_Server_Ip}/api/order/order`, orderItemsInfo // 주문 정보만 전송
+                `${Spring_Server_Ip}/api/order/order`, orderDtoList
             );
 
             // 주문 생성 후 주문 ID를 받아옵니다.
@@ -176,7 +176,7 @@ export default function Order(){
 
             // 배송 정보를 백엔드로 전송합니다.
             const deliveryResponse = await axios.post(
-                `${Spring_Server_Ip}/api/delivery`, // 배송 정보를 전송하는 API 엔드포인트에 맞게 수정해야 합니다.
+                `${Spring_Server_Ip}/api/order/delivery`, // 배송 정보를 전송하는 API 엔드포인트에 맞게 수정해야 합니다.
                 {
                     deliveryDto: { // 배송 정보
                         orderId, // 주문 ID
@@ -200,6 +200,7 @@ export default function Order(){
             // 주문 또는 배송 생성에 실패했을 때 처리할 코드를 작성합니다.
         }
     };
+
 
 
 

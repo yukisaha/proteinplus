@@ -6,6 +6,7 @@ import com.elice.proteinplus.order.dto.OrderDto;
 import com.elice.proteinplus.order.dto.OrderHistDto;
 import com.elice.proteinplus.order.entity.*;
 import com.elice.proteinplus.order.repository.DeliveryRepository;
+import com.elice.proteinplus.order.repository.OrderDetailRepository;
 import com.elice.proteinplus.order.repository.OrderRepository;
 import com.elice.proteinplus.user.Repository.UserJoinRepository;
 import com.elice.proteinplus.product.entity.Product;
@@ -25,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 /* 주문 로직 */
@@ -36,6 +38,7 @@ public class OrderService {
     private final ProductRepository productRepository;
     private final UserJoinRepository userRepository;
     private final DeliveryRepository deliveryRepository;
+    private final OrderDetailRepository orderDetailRepository;
 
     /* 회원의 주문 내역 조회(회원) */
     @Transactional
@@ -136,38 +139,36 @@ public class OrderService {
 //        return order.getId();
 //    }
 
+    @Transactional
     public Long order(List<OrderDto> orderDtoList, Long userId) {
-        // 사용자 조회
         User user = userRepository.findById(userId)
                 .orElseThrow(EntityNotFoundException::new);
-
-        // 주문 상세 목록 생성
-        List<OrderDetail> orderDetailList = new ArrayList<>();
-
-        for (OrderDto orderDto : orderDtoList) {
-            // 상품 조회
-            Product product = productRepository.findById(orderDto.getProductId())
-                    .orElseThrow(EntityNotFoundException::new);
-
-            // 주문 상세 생성
-            OrderDetail orderDetail = OrderDetail.createOrderDetail(product, product.getPrice(), orderDto.getCount());
-            orderDetailList.add(orderDetail);
-        }
 
         LocalDateTime orderDate = LocalDateTime.now();
         OrderStatus orderStatus = OrderStatus.ORDER;
 
-        //주문 생성
-        Order order = Order.builder()
-                .user(user)
-                .orderDate(orderDate)
-                .orderStatus(orderStatus)
-                .orderDetails(orderDetailList)
-                .build();
-        orderRepository.save(order);
+        Order order = Order.createOrder(user, orderDate, orderStatus);
+        order = orderRepository.save(order);
+
+        for (OrderDto orderDto : orderDtoList) {
+            List<Long> productIds = orderDto.getProductIds();
+            List<Integer> counts = orderDto.getCounts();
+
+            for (int i = 0; i < productIds.size(); i++) {
+                Long productId = productIds.get(i);
+                Integer count = counts.get(i);
+
+                Product product = productRepository.findById(productId)
+                        .orElseThrow(EntityNotFoundException::new);
+
+                OrderDetail orderDetail = OrderDetail.createOrderDetail(order, product, count);
+                orderDetailRepository.save(orderDetail);
+            }
+        }
 
         return order.getId();
     }
+
 
 
 
