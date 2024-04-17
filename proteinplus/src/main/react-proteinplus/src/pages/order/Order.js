@@ -121,19 +121,6 @@ export default function Order(){
     const [orderItems, setOrderItems] = useState([]);
     const [orderData, setOrderData] = useState([]);
 
-    // order.js 파일
-
-    // // 로컬 스토리지에서 장바구니 데이터를 가져오고 상태에 설정하는 함수
-    // const getCartItemsFromLocalStorage = () => {
-    //     const storedCartItems = localStorage.getItem('cartItems');
-    //     if (storedCartItems) {
-    //         const cartItems = JSON.parse(storedCartItems);
-    //         setOrderItems(cartItems);
-    //     } else {
-    //         setOrderItems([]);
-    //     }
-    // };
-
 
     useEffect(() => {
         // 컴포넌트가 마운트될 때 로컬 스토리지에서 장바구니 데이터를 가져와서 상태에 설정합니다.
@@ -171,7 +158,7 @@ export default function Order(){
     const handleOrder = async () => {
         try {
             // 주문을 생성할 때 필요한 상품 정보들을 추출합니다.
-            const orderItemsInfo = orderItems.map(item => ({
+            const orderItemsInfo = Object.values(orderItems).map(item => ({
                 productId: item.product_id,
                 count: item.count,
                 isChecked: item.isChecked
@@ -181,15 +168,17 @@ export default function Order(){
             const response = await axios.post(
                 `${Spring_Server_Ip}/api/order/order`, // userId를 어떻게 얻을지에 따라 수정해야 합니다.
                 {
-                    orderDto: orderItemsInfo,
-                    deliveryDto: {
-                        receiverName,
-                        receiverPhoneNumber,
-                        deliveryReq,
-                        address: {
-                            city: receiverPost,
-                            zipcode: receiverAddr,
-                            addressDetail: receiverAddrDtl
+                    orderAndDeliveryDto: {
+                        orderDto: orderItemsInfo,
+                        deliveryDto: {
+                            receiverName,
+                            receiverPhoneNumber,
+                            deliveryReq,
+                            address: {
+                                city: receiverAddr,
+                                zipcode: receiverPost,
+                                addressDetail: receiverAddrDtl
+                            }
                         }
                     }
                 }
@@ -203,6 +192,8 @@ export default function Order(){
             // 주문 생성에 실패했을 때 처리할 코드를 작성합니다.
         }
     };
+
+
     const renderOrderItems = () => {
         const orderItemKeys = Object.keys(orderItems);
 
