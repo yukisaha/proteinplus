@@ -31,6 +31,11 @@ public class ProductCreateDto {
     @NotBlank(message = "상품상태를 입력해주세요. (sell 또는 soldout)")
     private String productStatus;
 
+    private String mainImageUrl;
+    private String detailImageUrl;
+
+    private Long categoryId;
+
     //객체간 변환을 위해 modelmapper 사용
     private static ModelMapper modelMapper = new ModelMapper();
 
