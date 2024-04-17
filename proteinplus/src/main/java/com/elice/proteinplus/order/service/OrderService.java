@@ -96,7 +96,7 @@ public class OrderService {
         deliveryRepository.save(delivery);
 
         // 주문 상세 생성
-        OrderDetail orderDetail = OrderDetail.createOrderDetail(product, orderDto.getOrderPrice(), orderDto.getCount());
+        OrderDetail orderDetail = OrderDetail.createOrderDetail(product, product.getPrice(), orderDto.getCount());
         // 주문 상세 목록 생성
         List<OrderDetail> orderDetailList = new ArrayList<>();
         orderDetailList.add(orderDetail);

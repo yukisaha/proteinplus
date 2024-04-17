@@ -146,7 +146,6 @@ function Cart() {
     };
 
 
-
     // 장바구니 상품 렌더링 함수
     const renderCartItems = () => {
         const cartItemKeys = Object.keys(cartItems);

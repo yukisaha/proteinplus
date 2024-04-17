@@ -23,6 +23,7 @@ public class OrderDto {
     @Max(value = 200, message = "최대 주문 수량은 200개 입니다.")
     private int count;
 
-    private int orderPrice;
+    private boolean isChecked;
+
 
 }

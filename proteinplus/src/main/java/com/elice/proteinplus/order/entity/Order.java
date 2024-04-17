@@ -49,7 +49,7 @@ public class Order extends BaseTimeEntity{
     //주문 객체 만들기
     public void addOrderItem(OrderDetail orderDetail) {
         orderDetails.add(orderDetail); //OrderDetail 객체를 order 객체의 OrderDetail에 추가합니다.
-        orderDetail.setOrder(this);
+//        orderDetail.setOrder(this);
     }
 
     // 주문하기 = 주문상태 주문으로 바꾸기 + 현재 시간을 주문 시간으로 세팅

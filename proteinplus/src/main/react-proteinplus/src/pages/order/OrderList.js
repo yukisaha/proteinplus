@@ -33,7 +33,7 @@ export default function OrderList(){
     const handleCancelOrder = async (orderId) => {
         try {
             const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-            await axios.post(`${Spring_Server_Ip}/api/user/mypage/orderlist/${orderId}`);
+            await axios.delete(`${Spring_Server_Ip}/api/user/mypage/orderlist/${orderId}`);
             // 주문 취소 성공 시 화면 갱신 또는 사용자에게 알림
         } catch (error) {
             // 오류 처리
@@ -128,7 +128,7 @@ export default function OrderList(){
                             </div>
                             <div className="order-content-box">
                                 <ul className="order-div-list">
-                                    {tempProductData.map(item => (
+                                    {orderListData.map(item => (
                                         <li key={item.id} className="order-div-item">
                                             <div className="prd-info-area">
                                                 <div className="inner">

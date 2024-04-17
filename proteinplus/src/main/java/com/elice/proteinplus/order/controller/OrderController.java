@@ -2,9 +2,12 @@ package com.elice.proteinplus.order.controller;
 
 import com.elice.proteinplus.cart.dto.CartDto;
 import com.elice.proteinplus.order.dto.DeliveryDto;
+import com.elice.proteinplus.order.dto.OrderAndDeliveryDto;
 import com.elice.proteinplus.order.dto.OrderDto;
 import com.elice.proteinplus.order.dto.OrderHistDto;
 import com.elice.proteinplus.order.service.OrderService;
+import com.elice.proteinplus.product.entity.Product;
+import com.elice.proteinplus.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -13,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -23,6 +27,7 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
+    private final ProductService productService;
 
     // 특정 사용자의 주문 목록을 조회합니다.
     @GetMapping("/user/mypage/orderlist")
@@ -40,18 +45,13 @@ public class OrderController {
 
     // 주문을 생성합니다.
     @PostMapping("/order/order")
-    public ResponseEntity<Long> addOrder(@RequestBody OrderDto orderDto,
-                                           @RequestBody DeliveryDto deliveryDto,
-                                           @PathVariable Long userId) {
-        Long orderId = orderService.order(orderDto, deliveryDto, userId);
+    public ResponseEntity<Long> addOrder(@RequestBody OrderAndDeliveryDto orderAndDeliveryDto, @PathVariable Long userId) {
+        Long orderId = orderService.order(orderAndDeliveryDto.getOrderDto(), orderAndDeliveryDto.getDeliveryDto(), userId);
         return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
     }
 
-    @PostMapping("/order")
-    public void order(@RequestBody List<CartDto> cartDto) {
-        log.info("cartDto ------------------------n" + cartDto.toString());
 
-    }
+
 
 //    // 주문의 배송 정보를 업데이트합니다.
 //    @PutMapping("/user/mypage/orderlist/{orderId}/edit")
@@ -66,7 +66,7 @@ public class OrderController {
 //    }
 
     // 주문을 취소합니다.
-    @PostMapping("/user/mypage/orderlist/{orderId}")
+    @DeleteMapping("/user/mypage/orderlist/{orderId}")
     public ResponseEntity<Void> cancelOrder(@PathVariable Long orderId) {
         boolean cancelled = orderService.cancelOrder(orderId);
         if (cancelled) {
