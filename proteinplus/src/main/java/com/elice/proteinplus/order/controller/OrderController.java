@@ -5,6 +5,7 @@ import com.elice.proteinplus.order.dto.DeliveryDto;
 import com.elice.proteinplus.order.dto.OrderDto;
 import com.elice.proteinplus.order.dto.OrderHistDto;
 import com.elice.proteinplus.order.service.OrderService;
+import com.elice.proteinplus.product.entity.Product;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -47,10 +49,23 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
     }
 
-    @PostMapping("/order")
-    public void order(@RequestBody List<CartDto> cartDto) {
-        log.info("cartDto ------------------------n" + cartDto.toString());
+    private List<CartDto> savedCartDto;
 
+    @PostMapping("/order/cartOrderItems")
+    public void addOrderItems(@RequestBody List<CartDto> cartDto) {
+        this.savedCartDto = cartDto;
+        log.info("Received and saved cartDto: " + cartDto.toString());
+    }
+
+    @GetMapping("/order/orderItems")
+    public List<CartDto> getOrderItems() {
+        if (savedCartDto != null) {
+            log.info("Returning saved cartDto: " + savedCartDto.toString());
+            return savedCartDto;
+        } else {
+            log.info("No saved cartDto found.");
+            return Collections.emptyList();
+        }
     }
 
 //    // 주문의 배송 정보를 업데이트합니다.
