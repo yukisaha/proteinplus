@@ -23,10 +23,22 @@ public class WishListController {
     // Todo: 다른페이지에서 하트누르면 찜한 상품에 추가
 
     // userId로 products 정보 받는 메소드
+//    @GetMapping
+//    public List<Product> getProductsInWishListByIds(){
+//        List<Long> productIds = wishListService.findProductIdsByUserId(1L); //userId 받아왔다고 가정
+//        log.info("찜 목록의 상품 아이템 아이디들 : " + productIds);
+//        return productService.getProductsByIds(productIds);
+//    }
     @GetMapping
-    public List<Product> getProductsInWishListByIds(){
-        List<Long> productIds = wishListService.findProductIdsByUserId(1L); //userId 받아왔다고 가정
+    public List<Product> getProductsInWishListByIds(@RequestHeader("Authorization") String token){
+        // JWT 디코딩하여 사용자 ID 추출
+        log.info("token ---------------------- : "+token);
+
+        // userId로 상품 아이디 리스트 가져오기
+        List<Long> productIds = wishListService.findProductIdsByUserId(1L);
         log.info("찜 목록의 상품 아이템 아이디들 : " + productIds);
+
+        // 상품 아이디 리스트로 상품 목록 가져오기
         return productService.getProductsByIds(productIds);
     }
 
