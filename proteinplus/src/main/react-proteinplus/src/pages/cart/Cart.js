@@ -147,7 +147,7 @@ function Cart() {
 
             // Axios를 사용하여 HTTP POST 요청을 보냅니다.
             const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-            await axios.post(`${Spring_Server_Ip}/api/order`, requestData);
+            await axios.post(`${Spring_Server_Ip}/api/order/cartOrderItems`, requestData);
         }
     };
 
