@@ -17,4 +17,6 @@ public class ProductDto {
     private LocalDateTime uploadDate;
     private Integer discountRate;
     private int stock;
+    private String mainImageUrl;
+    private String detailImageUrl;
 }

@@ -6,6 +6,7 @@ import com.elice.proteinplus.jwt.JwtProperties;
 import com.elice.proteinplus.jwt.token.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +20,7 @@ import java.util.HashMap;
 public class JwtConfig {
 
     @Bean
-    public TokenProvider tokenProvider (JwtProperties jwtProperties) {
+    public TokenProvider tokenProvider (@Qualifier("jwtProperties") JwtProperties jwtProperties) {
         return new TokenProvider(jwtProperties.getSecret(), jwtProperties.getAccessTokenValidityInSeconds());
     }
 

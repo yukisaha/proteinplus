@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getStorage } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBrPuVXR1cYRTgjtuf9fiXdVY-Z7NLorqY",
@@ -13,5 +12,16 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 export const storage = getStorage(app);
+
+export const uploadImage = async (file) => {
+    try{
+        const storageRef = ref(storage, `product_images/${Date.now()}_${file.name}`);
+        const snapshot = await uploadBytes(storageRef, file);
+        const imageUrl = await getDownloadURL(storageRef);
+        return imageUrl;
+    } catch (error){
+        console.error('이미지 업로드 실패:', error);
+        throw error;
+    }
+};

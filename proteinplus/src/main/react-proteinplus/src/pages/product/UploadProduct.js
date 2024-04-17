@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {uploadImage} from './firebase';
 
 function UploadProduct() {
   const [productName, setProductName] = useState('');
@@ -10,23 +11,51 @@ function UploadProduct() {
   const [productStatus, setProductStatus] = useState('');
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState([]);
+  const [mainImage, setMainImage] = useState(null);
+  const [detailImage, setDetailImage] = useState(null);
 
   const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
+
+  const uploadProductImages = async (mainImage, detailImage) => {
+    try{
+        const mainImageUrl = await uploadImage(mainImage);
+        const detailImageUrl = await uploadImage(detailImage);
+        return { mainImageUrl, detailImageUrl };
+    } catch (error){
+        alert('이미지 업로드 실패: ', error);
+        console.error('이미지 업로드 실패:', error);
+        throw error;
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let url = `${Spring_Server_Ip}/product/admin/add`;
 
-      const response = await axios.post( url, {
+      if (productStatus === '') {
+        alert('상품 상태를 선택해주세요.');
+        return;
+      }
+
+      const { mainImageUrl, detailImageUrl } = await uploadProductImages(
+        mainImage,
+        detailImage
+      );
+
+      const statusToSend = productStatus === '' ? null : productStatus;
+
+      const response = await axios.post( `${Spring_Server_Ip}/product/admin/add`, {
         name: productName,
         price: parseInt(price),
         content: content,
         stock: parseInt(stock),
         discountRate: discountRate ? parseInt(discountRate) : null,
-        productStatus: productStatus,
-        categoryId: parseInt(category)
+        productStatus: statusToSend,
+        categoryId: category,
+        mainImageUrl: mainImageUrl,
+        detailImageUrl: detailImageUrl
       });
+
       alert('상품 등록 성공:', response.data);
       // 상품 등록이 성공시에 할 작업을 추가
     } catch (error) {
@@ -95,6 +124,7 @@ function UploadProduct() {
               value={productStatus}
               onChange={(e) => setProductStatus(e.target.value)}
             >
+              <option value="">상품상태를 선택하세요</option>
               <option value="sell">판매가능</option>
               <option value="soldout">품절</option>
             </select>
@@ -102,7 +132,7 @@ function UploadProduct() {
           <select
             id="category"
             value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            onChange={(e) => setCategory(parseInt(e.target.value))}
             required
           >
             <option value="">카테고리를 선택하세요</option>
@@ -112,6 +142,8 @@ function UploadProduct() {
               </option>
             ))}
           </select>
+          <input type="file" onChange={(e) => setMainImage(e.target.files[0])} />
+          <input type="file" onChange={(e) => setDetailImage(e.target.files[0])} />
           <button type="submit">상품 등록</button>
       </form>
     </div>

@@ -60,6 +60,10 @@
     margin-right: 3px;
 }
 
+.main-discount-text{
+    font-size: 1rem;
+}
+
 .main-sales{
     font-weight: bold;
     color: #525252;
