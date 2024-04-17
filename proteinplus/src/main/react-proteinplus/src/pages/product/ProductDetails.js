@@ -8,6 +8,7 @@ import Review from './Review';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import axios from 'axios';
+import CartModal from '../../components/Modal/CartModal';
 
 function ProductDetails() {
 
@@ -17,6 +18,7 @@ function ProductDetails() {
     const {productId} = useParams();
     const [like, setLike] = useState(false);
     const [reviewOpen, setReviewOpen] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const getProductById = async (productId) => {
         try {
@@ -28,12 +30,62 @@ function ProductDetails() {
         }
     }
 
+    const checkProductInWishList = async (productId) => {
+        try {
+            const url = `${Spring_Server_Ip}/wishList/${productId}`;
+            const response = await axios.get(url);
+            setLike(response.data); // 위시리스트에 해당 상품이 있으면 true, 없으면 false
+        } catch (error) {
+            console.error('Error checking product in WishList: ', error);
+        }
+    }
+
+    const postAddWishListByProductId = async (productId) => {
+        try {
+            const url = `${Spring_Server_Ip}/wishList/${productId}`;
+            await axios.post(url);
+            alert("찜한 상품에 담겼습니다.");
+        } catch (error){
+            console.error('Error Add WishList: ', error);
+        }
+    }
+
+    const deleteWishListByProductId = async (productId) => {
+        try {
+            const url = `${Spring_Server_Ip}/wishList/${productId}`;
+            await axios.delete(url);
+        } catch (error){
+            console.error('Error Add WishList: ', error);
+        }
+    }
+
+    const handleAddToCart = (productId) => {
+      // 여기서 선택된 상품의 ID와 count를 1로 설정하여 로컬 스토리지에 추가합니다.
+      const storedCartItems = localStorage.getItem('cartItems');
+      let cartItems = {};
+      if (storedCartItems) {
+        cartItems = JSON.parse(storedCartItems);
+      }
+      // 상품 추가
+      cartItems[productId] = { product_id: productId, count: 1, isChecked: true };
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+      setModalIsOpen(true);
+    };
+
     useEffect(() => {
         getProductById(productId);
+        checkProductInWishList(productId); // 페이지 로드 시 위시리스트에 상품이 있는지 확인
     }, [productId]);
 
-    const clickLike = () =>{
-        setLike(!like);
+    const clickLike = () => {
+        if (!like) {
+            postAddWishListByProductId(productId);
+            setLike(true);
+        } else {
+            // 이미 위시리스트에 있는 경우에는 위시리스트에서 삭제
+            deleteWishListByProductId(productId)
+            setLike(false);
+        }
     };
 
     const openReview = () =>{
@@ -73,7 +125,7 @@ function ProductDetails() {
                     <button className={`like-btn ${like ? 'liked' : ''}`} onClick={clickLike}>
                         <FontAwesomeIcon icon={like ? solidHeart : regularHeart} />
                     </button>
-                    <button className="cart-btn">장바구니 담기</button>
+                    <button className="cart-btn" onClick={() => handleAddToCart(product.id)}>장바구니 담기</button>
                     <button className="product-order-btn">바로구매</button>
                 </div>
                 </div>
@@ -82,6 +134,7 @@ function ProductDetails() {
         </div>
         {reviewOpen && <Review closeReview={closeReview} />}
         <Footer/>
+        <CartModal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} />
         </>
     )
 

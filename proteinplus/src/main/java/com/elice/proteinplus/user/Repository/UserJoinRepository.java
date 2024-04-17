@@ -17,4 +17,5 @@ public interface UserJoinRepository extends JpaRepository<User, Long> {
     boolean existsByPhone(int phone);
 
     void deleteByLoginId(String loginId);
+
 }

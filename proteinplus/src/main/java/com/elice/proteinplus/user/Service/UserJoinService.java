@@ -6,6 +6,7 @@ import com.elice.proteinplus.user.entity.Role;
 import com.elice.proteinplus.user.entity.User;
 import com.elice.proteinplus.user.Repository.UserJoinRepository;
 import com.elice.proteinplus.user.dto.UserJoinDTO;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 @Service
@@ -110,5 +112,12 @@ public class UserJoinService {
 
     public void delete(String loginId) {
         userJoinRepository.deleteByLoginId(loginId);
+    }
+
+
+    @Transactional(readOnly = true)
+    public User getUserById(Long UserId) {
+        return userJoinRepository.findById(UserId)
+                .orElseThrow(() -> new EntityNotFoundException("유저을 찾을 수 없습니다. ID: " + UserId));
     }
 }

@@ -4,9 +4,11 @@ import com.elice.proteinplus.product.entity.Product;
 import com.elice.proteinplus.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Getter
+@Setter
 public class WishList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
