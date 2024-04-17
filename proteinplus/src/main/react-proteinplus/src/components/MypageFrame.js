@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import '../styles/common/css/MypageFrame.css';
 import {Link} from "react-router-dom";
 
 export default function MypageFrame({children}) {
+
+  useEffect(() => {
+    checkToken();
+  }, []);
+
+  async function checkToken() {
+    const token = window.localStorage.getItem("token");
+    if (!token) {
+      // 토큰이 없는 경우 로그인 페이지로 리디렉션
+      window.location.href = '/auth/login'; // 로그인 페이지로 이동
+    }
+  }
     return (
         <div className="wrap main">
             {/* ========== 컨텐츠 영역 :: container ========== */}

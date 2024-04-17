@@ -3,26 +3,35 @@ import MypageFrame from '../../components/MypageFrame';
 import CartModal from '../../components/Modal/CartModal';
 import '../../styles/cart/css/WishList.css';
 import axios from "axios";
-import { RedirectToLogin } from '../../components/utils/useNavigation';
 
 export default function WishList() {
   const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
   const [WishList, setWishListData] = useState([]);
   const [Review, setReviewData] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const token = window.localStorage.getItem("token");
 
   useEffect(() => {
+    checkToken();
     // WishList 가져오기
     getWishList();
   }, []);
 
+  async function checkToken() {
+      if (!token) {
+         // 토큰이 없는 경우 로그인 페이지로 리디렉션
+         window.location.href = '/auth/login'; // 로그인 페이지로 이동
+      }
+  }
+
   async function getWishList() {
-//    const token = window.localStorage.getItem("token");
-//    if (!token) {
-//      // 토큰이 없는 경우 로그인 페이지로 리디렉션
-//      return <RedirectToLogin />;
-//    }
-      const response = await axios.get(`${Spring_Server_Ip}/wishList`);
+
+      const response = await axios.get(`${Spring_Server_Ip}/wishList`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
       const reviews = await axios.get(`${Spring_Server_Ip}/review`);
 
       // productId를 기준으로 리뷰 정보를 매핑
