@@ -74,42 +74,122 @@ public class OrderService {
         return new PageImpl<OrderHistDto>(orderHistDtos);
     }
 
-    /* 주문 (회원) */
-    @Transactional
-    public Long order(OrderDto orderDto, DeliveryDto deliveryDto, Long userId) {
-        // 상품 조회
-        Product product = productRepository.findById(orderDto.getProductId())
-                .orElseThrow(EntityNotFoundException::new);
+//    /* 주문 (회원) */
+//    @Transactional
+//    public Long order(OrderDto orderDto, DeliveryDto deliveryDto, Long userId) {
+//        // 상품 조회
+//        Product product = productRepository.findById(orderDto.getProductId())
+//                .orElseThrow(EntityNotFoundException::new);
+//        // 사용자 조회
+//        User user = userRepository.findById(userId)
+//                .orElseThrow(EntityNotFoundException::new);
+//
+//        // 배송 정보 생성
+//        Address address = deliveryDto.getAddress();
+//        Delivery delivery = new Delivery();
+//        delivery.setReceiverName(deliveryDto.getReceiverName());
+//        delivery.setReceiverPhone(deliveryDto.getReceiverPhoneNumber());
+//        delivery.setDeliveryReq(deliveryDto.getDeliveryReq());
+//        delivery.setAddress(address);
+//
+//        // 배송 정보 저장
+//        deliveryRepository.save(delivery);
+//
+//        // 주문 상세 생성
+//        OrderDetail orderDetail = OrderDetail.createOrderDetail(product, product.getPrice(), orderDto.getCount());
+//        // 주문 상세 목록 생성
+//        List<OrderDetail> orderDetailList = new ArrayList<>();
+//        orderDetailList.add(orderDetail);
+//
+//        LocalDateTime orderDate = LocalDateTime.now();
+//        OrderStatus orderStatus = OrderStatus.ORDER;
+//
+//        //주문 생성
+//        Order order = Order.createOrder(user, orderDate, orderStatus, orderDetailList);
+//        order.setDelivery(delivery); // 배송 정보 설정
+//        orderRepository.save(order);
+//
+//        return order.getId();
+//    }
+
+//    public Long order(List<OrderDto> orderDto, Long userId) {
+//        // 상품 조회
+//        Product product = productRepository.findById(orderDto.getProductId())
+//                .orElseThrow(EntityNotFoundException::new);
+//        // 사용자 조회
+//        User user = userRepository.findById(userId)
+//                .orElseThrow(EntityNotFoundException::new);
+//
+//        // 주문 상세 생성
+//        OrderDetail orderDetail = OrderDetail.createOrderDetail(product, product.getPrice(), orderDto.getCount());
+//        // 주문 상세 목록 생성
+//        List<OrderDetail> orderDetailList = new ArrayList<>();
+//        orderDetailList.add(orderDetail);
+//
+//        LocalDateTime orderDate = LocalDateTime.now();
+//        OrderStatus orderStatus = OrderStatus.ORDER;
+//
+//        //주문 생성
+//        Order order = Order.createOrder(user, orderDate, orderStatus, orderDetailList);
+//        orderRepository.save(order);
+//
+//        return order.getId();
+//    }
+
+    public Long order(List<OrderDto> orderDtoList, Long userId) {
         // 사용자 조회
         User user = userRepository.findById(userId)
                 .orElseThrow(EntityNotFoundException::new);
 
-        // 배송 정보 생성
-        Address address = deliveryDto.getAddress();
-        Delivery delivery = new Delivery();
-        delivery.setReceiverName(deliveryDto.getReceiverName());
-        delivery.setReceiverPhone(deliveryDto.getReceiverPhoneNumber());
-        delivery.setDeliveryReq(deliveryDto.getDeliveryReq());
-        delivery.setAddress(address);
-
-        // 배송 정보 저장
-        deliveryRepository.save(delivery);
-
-        // 주문 상세 생성
-        OrderDetail orderDetail = OrderDetail.createOrderDetail(product, product.getPrice(), orderDto.getCount());
         // 주문 상세 목록 생성
         List<OrderDetail> orderDetailList = new ArrayList<>();
-        orderDetailList.add(orderDetail);
+
+        for (OrderDto orderDto : orderDtoList) {
+            // 상품 조회
+            Product product = productRepository.findById(orderDto.getProductId())
+                    .orElseThrow(EntityNotFoundException::new);
+
+            // 주문 상세 생성
+            OrderDetail orderDetail = OrderDetail.createOrderDetail(product, product.getPrice(), orderDto.getCount());
+            orderDetailList.add(orderDetail);
+        }
 
         LocalDateTime orderDate = LocalDateTime.now();
         OrderStatus orderStatus = OrderStatus.ORDER;
 
         //주문 생성
-        Order order = Order.createOrder(user, orderDate, orderStatus, orderDetailList);
-        order.setDelivery(delivery); // 배송 정보 설정
+        Order order = Order.builder()
+                .user(user)
+                .orderDate(orderDate)
+                .orderStatus(orderStatus)
+                .orderDetails(orderDetailList)
+                .build();
         orderRepository.save(order);
 
         return order.getId();
+    }
+
+
+
+    public Long delivery(DeliveryDto deliveryDto, Long userId) {
+        // 사용자 조회
+        // 여기서는 사용자 조회 로직이 필요한 경우에만 사용하도록 가정합니다.
+        // 예를 들어, 배송 주소를 사용자의 기본 배송 주소로 저장하는 등의 로직이 있다면 사용될 수 있습니다.
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(EntityNotFoundException::new);
+
+        // 배송 정보 생성
+        Delivery delivery = new Delivery();
+        delivery.setReceiverName(deliveryDto.getReceiverName());
+        delivery.setReceiverPhone(deliveryDto.getReceiverPhoneNumber());
+        delivery.setDeliveryReq(deliveryDto.getDeliveryReq());
+        delivery.setAddress(deliveryDto.getAddress());
+
+        // 배송 정보 저장
+        deliveryRepository.save(delivery);
+
+        return delivery.getId();
     }
 
     /* 주문 수정(회원) - 배송지 */

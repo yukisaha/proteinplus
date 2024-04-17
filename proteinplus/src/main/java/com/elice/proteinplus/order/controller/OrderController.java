@@ -1,12 +1,9 @@
 package com.elice.proteinplus.order.controller;
 
-import com.elice.proteinplus.cart.dto.CartDto;
 import com.elice.proteinplus.order.dto.DeliveryDto;
-import com.elice.proteinplus.order.dto.OrderAndDeliveryDto;
 import com.elice.proteinplus.order.dto.OrderDto;
 import com.elice.proteinplus.order.dto.OrderHistDto;
 import com.elice.proteinplus.order.service.OrderService;
-import com.elice.proteinplus.product.entity.Product;
 import com.elice.proteinplus.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -38,18 +34,26 @@ public class OrderController {
 
     // 특정 사용자의 취소된 주문 목록을 조회합니다.
     @GetMapping("/user/mypage/cancellist")
-    public ResponseEntity<Page<OrderHistDto>> getCancelledUserOrders(@PathVariable Long userId, Pageable pageable) {
-        Page<OrderHistDto> cancelledOrders = orderService.getCancelledOrders(userId, pageable);
+    public ResponseEntity<Page<OrderHistDto>> getCancelledUserOrders(Pageable pageable) {
+        Page<OrderHistDto> cancelledOrders = orderService.getCancelledOrders(1L, pageable);
         return ResponseEntity.ok(cancelledOrders);
     }
 
     // 주문을 생성합니다.
     @PostMapping("/order/order")
-    public ResponseEntity<Long> addOrder(@RequestBody OrderAndDeliveryDto orderAndDeliveryDto, @PathVariable Long userId) {
-        Long orderId = orderService.order(orderAndDeliveryDto.getOrderDto(), orderAndDeliveryDto.getDeliveryDto(), userId);
+    public ResponseEntity<Long> addOrder(@RequestBody List<OrderDto> orderDto) {
+        log.info(orderDto.toString()+"addOrder");
+        Long orderId = orderService.order(orderDto, 1L);
         return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
     }
 
+    // 배송정보을 생성합니다.
+    @PostMapping("/order/delivery")
+    public ResponseEntity<Long> addDelivery(@RequestBody DeliveryDto deliveryDto) {
+        log.info(deliveryDto.toString()+"addDelivery");
+        Long orderId = orderService.delivery(deliveryDto, 1L);
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
+    }
 
 
 
