@@ -47,7 +47,21 @@ export default function Order(){
 
     const [barPosition, setBarPosition] = useState(0);
 
+    const [deliveryReq, setDeliveryReq] = useState(''); // 배송 요청 사항
+    const [receiverName, setReceiverName] = useState('');
+    const [receiverPhoneNumber, setReceiverPhoneNumber] = useState('');
 
+    const open = useDaumPostcodePopup('https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js');
+    const [receiverPost, setReceiverPost] = useState('');
+    const [receiverAddr, setReceiverAddr] = useState('');
+    const [receiverAddrDtl, setReceiverAddrDtl] = useState('');
+
+    const [orderSuccess, setOrderSuccess] = useState(false);
+
+    const [orderItems, setOrderItems] = useState([]);
+
+
+    // 숫자만
     const numberOnly = (event) => {
         event = event || window.event;
         const keyID = event.which || event.keyCode;
@@ -65,6 +79,7 @@ export default function Order(){
         }
     };
 
+    // 문자 삭제
     const removeChar = (event) => {
         event = event || window.event;
         const keyID = event.which || event.keyCode;
@@ -73,8 +88,7 @@ export default function Order(){
         }
     };
 
-    const open = useDaumPostcodePopup('https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js');
-
+    // daum 주소 가져오기
     const handleComplete = (data) => {
         let fullAddress = data.address;
         let extraAddress = '';
@@ -100,7 +114,7 @@ export default function Order(){
 
     // 오른쪽 사이드 박스 스크롤 내릴 때 따라 움직이게 하는 함수
     const handleScroll = () => {
-        const position = 450 < window.scrollY ? 450 : window.scrollY;
+        const position = 450 < window.scrollY ? 400 : window.scrollY;
         setBarPosition(position);
     };
 
@@ -117,18 +131,15 @@ export default function Order(){
         setIsChecked(!isChecked); // 상태를 반전시킴
     };
 
-
-    const [orderItems, setOrderItems] = useState([]);
-
+    // 카트에서 주문한 상품 정보 가져오기
     async function getOrderItems() {
         // 서버로부터 상품 정보를 가져오는 요청
         const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-        const response = await axios.post(`${Spring_Server_Ip}/api/order`);
+        const response = await axios.post(`${Spring_Server_Ip}/api/order/orderItems`);
 
         // 서버로부터 받은 상품 정보를 상태에 설정
         setOrderItems(response.data);
     }
-
 
 
     // 최종 결제 금액 계산 함수
@@ -149,15 +160,6 @@ export default function Order(){
         return orderItems.reduce((total, item) => total + item.price * item.count, 0);
     };
 
-
-    const [deliveryReq, setDeliveryReq] = useState(''); // 배송 요청 사항
-    const [receiverName, setReceiverName] = useState('');
-    const [receiverPost, setReceiverPost] = useState('');
-    const [receiverAddr, setReceiverAddr] = useState('');
-    const [receiverAddrDtl, setReceiverAddrDtl] = useState('');
-    const [receiverPhoneNumber, setReceiverPhoneNumber] = useState('');
-
-    const [orderSuccess, setOrderSuccess] = useState(false);
 
     // 주문 생성
     const handleOrder = async () => {
@@ -195,7 +197,6 @@ export default function Order(){
             // 주문 생성에 실패했을 때 처리할 코드를 작성합니다.
         }
     };
-
 
 
 

@@ -128,7 +128,7 @@ export default function OrderList(){
                             </div>
                             <div className="order-content-box">
                                 <ul className="order-div-list">
-                                    {tempProductData.map(item => (
+                                    {orderListData.map(item => (
                                         <li key={item.id} className="order-div-item">
                                             <div className="prd-info-area">
                                                 <div className="inner">
