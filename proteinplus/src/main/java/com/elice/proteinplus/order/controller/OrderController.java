@@ -2,6 +2,7 @@ package com.elice.proteinplus.order.controller;
 
 import com.elice.proteinplus.cart.dto.CartDto;
 import com.elice.proteinplus.order.dto.DeliveryDto;
+import com.elice.proteinplus.order.dto.OrderAndDeliveryDto;
 import com.elice.proteinplus.order.dto.OrderDto;
 import com.elice.proteinplus.order.dto.OrderHistDto;
 import com.elice.proteinplus.order.service.OrderService;
@@ -44,12 +45,11 @@ public class OrderController {
 
     // 주문을 생성합니다.
     @PostMapping("/order/order")
-    public ResponseEntity<Long> addOrder(@RequestBody OrderDto orderDto,
-                                           @RequestBody DeliveryDto deliveryDto,
-                                           @PathVariable Long userId) {
-        Long orderId = orderService.order(orderDto, deliveryDto, userId);
+    public ResponseEntity<Long> addOrder(@RequestBody OrderAndDeliveryDto orderAndDeliveryDto, @PathVariable Long userId) {
+        Long orderId = orderService.order(orderAndDeliveryDto.getOrderDto(), orderAndDeliveryDto.getDeliveryDto(), userId);
         return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
     }
+
 
 
 
