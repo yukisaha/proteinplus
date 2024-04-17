@@ -126,16 +126,16 @@ export default function Order(){
         getCartItemsFromLocalStorage();
     }, []); // 빈 배열을 전달하여 한 번만 실행되도록 설정합니다.
 
-    // 로컬 스토리지에서 장바구니 데이터를 가져오고 상태에 설정하는 함수
     const getCartItemsFromLocalStorage = async () => {
         const storedCartItems = localStorage.getItem('cartItems');
         if (storedCartItems) {
             const cartItems = JSON.parse(storedCartItems);
-            const checkedItems = cartItems.filter(item => item.isChecked === true);
+            const cartItemsArray = Object.values(cartItems);
+            const checkedItems = cartItemsArray.filter(item => item.isChecked === true);
             setOrderItems(checkedItems);
 
             // product_id 배열 생성
-            const productIds = Object.keys(cartItems).map(productId => cartItems[productId].product_id);
+            const productIds = cartItemsArray.map(item => item.product_id);
 
             // 장바구니 데이터 가져오기
             await getOrderList(productIds);
@@ -144,6 +144,7 @@ export default function Order(){
             setOrderItems([]);
         }
     };
+
 
     async function getOrderList(productIds) { // Axios
         console.log("productIds:", productIds); // productIds를 콘솔에 출력하여 확인
