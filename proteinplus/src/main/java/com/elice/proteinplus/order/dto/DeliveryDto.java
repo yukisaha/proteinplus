@@ -9,6 +9,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class DeliveryDto {
+
+    private Long orderId;
+
     private String receiverName;
 
     private String receiverPhoneNumber;
