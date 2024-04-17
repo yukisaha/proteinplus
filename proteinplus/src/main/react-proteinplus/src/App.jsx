@@ -20,6 +20,7 @@ import UserProfileEditPwdCheck from "./pages/user/UserProfileEditPwdCheck";
 import SubmitCategory from "./pages/category/SubmitCategory";
 import SubmitRank from "./pages/rank/SubmitRank";
 import UploadProduct from "./pages/product/UploadProduct";
+import ProductDetails from "./pages/product/ProductDetails";
 
 const router = createBrowserRouter([
     {
@@ -102,6 +103,10 @@ const router = createBrowserRouter([
     {
         path: "/admin/product",
         element: <UploadProduct />
+    },
+    {
+        path: "/product/:productId",
+        element: <ProductDetails />
     }
 
 ]);

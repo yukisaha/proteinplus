@@ -90,16 +90,16 @@ function ProductList({categoryId}){
                     let url;
                     switch (selectedOption1) {
                     case 'sales':
-                        url = `${Spring_Server_Ip}/product/test/${categoryId}?orderBy=sales`;
+                        url = `${Spring_Server_Ip}/product/list/${categoryId}?orderBy=sales`;
                         break;
                     case 'uploadDateDesc':
-                        url = `${Spring_Server_Ip}/product/test/${categoryId}?orderBy=uploadDateDesc`;
+                        url = `${Spring_Server_Ip}/product/list/${categoryId}?orderBy=uploadDateDesc`;
                         break;
                     case 'discountRateDesc':
-                        url = `${Spring_Server_Ip}/product/test/${categoryId}?orderBy=discountRateDesc`;
+                        url = `${Spring_Server_Ip}/product/list/${categoryId}?orderBy=discountRateDesc`;
                         break;
                     default:
-                        url = `${Spring_Server_Ip}/product/test/${categoryId}?orderBy=uploadDateDesc`;
+                        url = `${Spring_Server_Ip}/product/list/${categoryId}?orderBy=uploadDateDesc`;
                         break;
                     }
                     const response = await axios.get(url);
@@ -156,10 +156,10 @@ function ProductList({categoryId}){
             </div>
             <div className="dropdown">
               <select value={selectedOption1} onChange={handleSelectChange1}>
+                <option value="uploadDateDesc">신상품순</option>
                 <option value="sales">인기순</option>
                 <option value="priceAsc">낮은가격순</option>
                 <option value="priceDesc">높은가격순</option>
-                <option value="uploadDateDesc">신상품순</option>
                 <option value="discountRateDesc">할인율순</option>
               </select>
             </div>
@@ -197,9 +197,7 @@ function ProductCard({product}) {
   return (
       <div className="product-card">
         <Link to={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
-          {/*<img src={`상품 이미지 경로`} alt={product.name} className="product-image" />*/}
-          {/* 이미지 예시 */}
-          <img src={'https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20240126/IMG1706rIY251836826_330_330.jpg'} className={'product-image'} />
+          <img src={product.mainImageUrl} alt={product.name} className="product-image" />
         </Link>
         <div className="product-details">
           <h3 className="product-name">{product.name}</h3>

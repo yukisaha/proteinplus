@@ -1,5 +1,6 @@
 package com.elice.proteinplus.product.service;
 
+import com.elice.proteinplus.category.entity.Category;
 import com.elice.proteinplus.product.dto.ProductCreateDto;
 import com.elice.proteinplus.product.entity.Product;
 import com.elice.proteinplus.product.repository.ProductRepository;
@@ -24,6 +25,8 @@ public class ProductService {
     public Long createProduct(ProductCreateDto productCreateDto){
         Product product = productCreateDto.createProduct();
         product.setUploadDate(LocalDateTime.now());
+        Category category = new Category();
+        category.setId(productCreateDto.getCategoryId());
         productRepository.save(product);
 
         return product.getId();
@@ -49,10 +52,6 @@ public class ProductService {
         return switch (orderBy) {
             //판매량순
             //case "sales" -> productRepository.findAllByCategoryIdOrderBySales(pageable, categoryId);
-            //높은가격순
-            //case "priceAsc" -> productRepository.findAllByCategoryIdOrderByFinalPriceAsc(pageable, categoryId);
-            //낮은가격순
-            ///case "priceDesc" -> productRepository.findAllByCategoryIdOrderByFinalPriceDesc(pageable, categoryId);
             //신상품순
             case "uploadDateDesc" -> productRepository.findAllByCategoryIdOrderByUploadDateDesc(pageable, categoryId);
             //할인율순

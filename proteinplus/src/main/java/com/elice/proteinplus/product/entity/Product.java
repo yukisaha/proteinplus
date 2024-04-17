@@ -58,6 +58,11 @@ public class Product extends BaseTimeEntity {
     @Column(nullable = false)
     private int stock;
 
+    @Column(name = "main_image_url", length = 1000)
+    private String mainImageUrl;
+
+    @Column(name = "detail_image_url", length = 1000)
+    private String detailImageUrl;
 
     public void updateProduct(ProductCreateDto productCreateDto){
         this.name = productCreateDto.getName();

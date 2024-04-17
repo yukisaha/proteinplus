@@ -43,9 +43,9 @@ public class ProductController {
     }
 
     //카테고리별 상품 조회(정렬)
-    @GetMapping("/list")
+    @GetMapping("/list/{categoryId}")
     public Page<Product> getAllProductsByCategoryIdAndSortedBy(
-            @RequestParam Long categoryId,
+            @PathVariable Long categoryId,
             @RequestParam(required = false, defaultValue = "uploadDateDesc") String orderBy,
             Pageable pageable
     ){
@@ -63,7 +63,7 @@ public class ProductController {
 //    }
 
     @GetMapping("/{productId}")
-    public Product getProductById(@PathVariable("categoryId") Long productId) {
+    public Product getProductById(@PathVariable("productId") Long productId) {
         return productService.getProductById(productId);
     }
 
