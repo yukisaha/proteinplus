@@ -100,7 +100,7 @@ export default function Order(){
 
     // 오른쪽 사이드 박스 스크롤 내릴 때 따라 움직이게 하는 함수
     const handleScroll = () => {
-        const position = 270 < window.scrollY ? 270 : window.scrollY;
+        const position = 300 < window.scrollY ? 300 : window.scrollY;
         setBarPosition(position);
     };
 
@@ -121,6 +121,20 @@ export default function Order(){
     const [orderItems, setOrderItems] = useState([]);
     const [orderData, setOrderData] = useState([]);
 
+    // order.js 파일
+
+    // // 로컬 스토리지에서 장바구니 데이터를 가져오고 상태에 설정하는 함수
+    // const getCartItemsFromLocalStorage = () => {
+    //     const storedCartItems = localStorage.getItem('cartItems');
+    //     if (storedCartItems) {
+    //         const cartItems = JSON.parse(storedCartItems);
+    //         setOrderItems(cartItems);
+    //     } else {
+    //         setOrderItems([]);
+    //     }
+    // };
+
+
     useEffect(() => {
         // 컴포넌트가 마운트될 때 로컬 스토리지에서 장바구니 데이터를 가져와서 상태에 설정합니다.
         getCartItemsFromLocalStorage();
@@ -135,7 +149,7 @@ export default function Order(){
             setOrderItems(checkedItems);
 
             // product_id 배열 생성
-            const productIds = cartItemsArray.map(item => item.product_id);
+            const productIds = checkedItems.map(item => item.product_id);
 
             // 장바구니 데이터 가져오기
             await getOrderList(productIds);
@@ -192,13 +206,17 @@ export default function Order(){
     const renderOrderItems = () => {
         const orderItemKeys = Object.keys(orderItems);
 
-        // 각 상품의 가격과 수량을 곱하여 소계를 계산하는 함수
-        const calculateSubtotal = () => {
+        const calculateProductSubtotal = (productData, count) => {
+            return productData.price * count;
+        };
+
+        const calculateTotalSubtotal = () => {
             let totalSubtotal = 0;
             orderItemKeys.forEach(productId => {
                 const productData = orderData.find(product => product.id === orderItems[productId].product_id);
                 if (productData) {
-                    totalSubtotal += productData.price * orderItems[productId].count;
+                    const subtotal = calculateProductSubtotal(productData, orderItems[productId].count);
+                    totalSubtotal += subtotal;
                 }
             });
             return totalSubtotal;
@@ -206,21 +224,13 @@ export default function Order(){
 
         // 배송비를 계산하는 함수
         const calculateShippingFee = () => {
-            return calculateSubtotal() >= 50000 ? 0 : 3000;
+            return calculateTotalSubtotal() >= 50000 ? 0 : 3000;
         };
 
         // 최종 결제 금액 계산 함수
         const calculateFinalPrice = () => {
-            // 각 상품의 소계를 계산하여 합산
-            const totalSubtotal = orderItemKeys.reduce((total, productId) => {
-                return total + calculateSubtotal(productId);
-            }, 0);
-
-            // 배송비 계산
-            const shippingFee = calculateShippingFee();
-
             // 최종 결제 금액 계산 (상품 소계 + 배송비)
-            return totalSubtotal + shippingFee;
+            return calculateTotalSubtotal() + calculateShippingFee();
         };
 
 
@@ -366,16 +376,16 @@ export default function Order(){
                                                             </div>
                                                             <div className="column tit">
                                                                 <p className="tit">
-                                                                    <a href={`/product/view?productCd=${item.product_id}`}>{productData.name}</a>
+                                                                    <a href={`/product/view?productCd=${item.product_id}`}>{productData ? productData.name : "상품 이름 없음"}</a>
                                                                 </p>
                                                                 <ul className="price-item">
-                                                                    <li><span className="num">{productData.price}</span>원
+                                                                    <li><span className="num">{productData ? productData.price : "상품 가격 없음"}</span>원
                                                                     </li>
                                                                     <li><span className="num">{item.count}</span>개</li>
                                                                 </ul>
                                                             </div>
                                                             <div className="column price w70">
-                                                                <span className="num">{productData.price}</span>원
+                                                                <span className="num">{productData ? calculateProductSubtotal(productData, item.count) : "상품 가격 없음"}</span>원
                                                             </div>
                                                         </div>
                                                     </div>
@@ -423,7 +433,7 @@ export default function Order(){
                                             <div className="list-inner">
                                                 <span className="tit">상품금액</span>
                                                 <p className="price"><strong className="num resetOrderPaySide"
-                                                                             id="txt_tot_price">{calculateSubtotal()}</strong> 원
+                                                                             id="txt_tot_price">{calculateTotalSubtotal()}</strong> 원
                                                 </p>
                                                 <input type="hidden" name="tot_price" className="resetOrderPaySide"
                                                        value="가격"/>
@@ -489,7 +499,6 @@ export default function Order(){
                                     <span className="num"><span id="txt_btn_payment"
                                                                 className="resetOrderPaySide">가격</span>원 결제하기</span>
                                 </button>
-                                st
                             </div>
                         </div>
                         <div className="order-info">
