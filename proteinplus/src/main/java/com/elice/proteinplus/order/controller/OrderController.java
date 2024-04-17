@@ -6,6 +6,7 @@ import com.elice.proteinplus.order.dto.OrderDto;
 import com.elice.proteinplus.order.dto.OrderHistDto;
 import com.elice.proteinplus.order.service.OrderService;
 import com.elice.proteinplus.product.entity.Product;
+import com.elice.proteinplus.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -25,6 +26,7 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
+    private final ProductService productService;
 
     // 특정 사용자의 주문 목록을 조회합니다.
     @GetMapping("/user/mypage/orderlist")
@@ -49,24 +51,7 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
     }
 
-    private List<CartDto> savedCartDto;
 
-    @PostMapping("/order/cartOrderItems")
-    public void addOrderItems(@RequestBody List<CartDto> cartDto) {
-        this.savedCartDto = cartDto;
-        log.info("Received and saved cartDto: " + cartDto.toString());
-    }
-
-    @GetMapping("/order/orderItems")
-    public List<CartDto> getOrderItems() {
-        if (savedCartDto != null) {
-            log.info("Returning saved cartDto: " + savedCartDto.toString());
-            return savedCartDto;
-        } else {
-            log.info("No saved cartDto found.");
-            return Collections.emptyList();
-        }
-    }
 
 //    // 주문의 배송 정보를 업데이트합니다.
 //    @PutMapping("/user/mypage/orderlist/{orderId}/edit")
@@ -81,7 +66,7 @@ public class OrderController {
 //    }
 
     // 주문을 취소합니다.
-    @PostMapping("/user/mypage/orderlist/{orderId}")
+    @DeleteMapping("/user/mypage/orderlist/{orderId}")
     public ResponseEntity<Void> cancelOrder(@PathVariable Long orderId) {
         boolean cancelled = orderService.cancelOrder(orderId);
         if (cancelled) {

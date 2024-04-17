@@ -24,9 +24,6 @@ public class OrderDetail extends BaseTimeEntity{
     @JoinColumn(name = "order_id", nullable = false) //fk
     private Order order; //하나의 주문에 여러개의 상품을 주문할 수 있다. 주문상품과 주문 엔티티를 다대일 단방향
 
-    @Column(name = "order_price")
-    private int orderPrice; //주문가격
-
     @Column(name = "count")
     private int count; //수량
 
