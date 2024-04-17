@@ -158,40 +158,49 @@ export default function Order(){
     const handleOrder = async () => {
         try {
             // 주문을 생성할 때 필요한 상품 정보들을 추출합니다.
-            const orderItemsInfo = Object.values(orderItems).map(item => ({
+            const orderItemsInfo = orderItems.map(item => ({
                 productId: item.product_id,
                 count: item.count,
                 isChecked: item.isChecked
             }));
             console.log(orderItemsInfo);
+
             // 주문 정보를 백엔드로 전송합니다.
-            const response = await axios.post(
-                `${Spring_Server_Ip}/api/order/order`, // userId를 어떻게 얻을지에 따라 수정해야 합니다.
+            const orderResponse = await axios.post(
+                `${Spring_Server_Ip}/api/order/order`, orderItemsInfo // 주문 정보만 전송
+            );
+
+            // 주문 생성 후 주문 ID를 받아옵니다.
+            const orderId = orderResponse.data;
+            console.log(orderId);
+
+            // 배송 정보를 백엔드로 전송합니다.
+            const deliveryResponse = await axios.post(
+                `${Spring_Server_Ip}/api/delivery`, // 배송 정보를 전송하는 API 엔드포인트에 맞게 수정해야 합니다.
                 {
-                    orderAndDeliveryDto: {
-                        orderDto: orderItemsInfo,
-                        deliveryDto: {
-                            receiverName,
-                            receiverPhoneNumber,
-                            deliveryReq,
-                            address: {
-                                city: receiverAddr,
-                                zipcode: receiverPost,
-                                addressDetail: receiverAddrDtl
-                            }
+                    deliveryDto: { // 배송 정보
+                        orderId, // 주문 ID
+                        receiverName,
+                        receiverPhoneNumber,
+                        deliveryReq,
+                        address: {
+                            city: receiverAddr,
+                            zipcode: receiverPost,
+                            addressDetail: receiverAddrDtl
                         }
                     }
                 }
             );
 
-            console.log('주문이 생성되었습니다. 주문 ID:', response.data);
-            // 주문 성공 시 처리
+            console.log('주문 및 배송이 생성되었습니다.');
+            // 주문 및 배송 성공 시 처리
             setOrderSuccess(true);
         } catch (error) {
-            console.error('주문 생성 중 오류가 발생했습니다:', error);
-            // 주문 생성에 실패했을 때 처리할 코드를 작성합니다.
+            console.error('주문 또는 배송 생성 중 오류가 발생했습니다:', error);
+            // 주문 또는 배송 생성에 실패했을 때 처리할 코드를 작성합니다.
         }
     };
+
 
 
     const renderOrderItems = () => {
