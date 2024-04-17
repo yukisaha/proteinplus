@@ -4,25 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
-/**
- 상품 상세 페이지에서 주문할 상품의 아이디와 주문 수량을 전달
- */
 @Getter
 @Setter
 @AllArgsConstructor
-public class OrderDto {
+public class OrderRequestDto {
 
-    @NotNull(message = "상품 아이디는 필수 입력 값입니다.")
     private Long productId;
 
-    @Min(value = 1, message = "최소 주문 수량은 1개 입니다.")
-    @Max(value = 200, message = "최대 주문 수량은 200개 입니다.")
+    private Long userId;
+
     private int count;
 
     private int orderPrice;
+
+    private DeliveryDto deliveryDto;
 
 }
