@@ -24,35 +24,37 @@ export default function WishList() {
       }
   }
 
-  async function getWishList() {
+    async function getWishList() {
 
-      const response = await axios.get(`${Spring_Server_Ip}/wishList`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+        const response = await axios.get(`${Spring_Server_Ip}/wishList`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+      try{
+        const reviews = await axios.get(`${Spring_Server_Ip}/review`);
 
-      const reviews = await axios.get(`${Spring_Server_Ip}/review`);
+        // productId를 기준으로 리뷰 정보를 매핑
+        const reviewMap = {};
+        reviews.data.forEach(review => {
+          const productId = review.productId;
+          if (!reviewMap[productId]) {
+            reviewMap[productId] = review;
+          }
+        });
 
-      // productId를 기준으로 리뷰 정보를 매핑
-      const reviewMap = {};
-      reviews.data.forEach(review => {
-        const productId = review.productId;
-        if (!reviewMap[productId]) {
-          reviewMap[productId] = review;
-        }
-      });
+        // WishList와 리뷰 정보 합치기
+        const wishListWithReview = response.data.map(product => {
+          const productId = product.id;
+          const productReview = reviewMap[productId];
+          return { ...product, review: productReview };
+        });
 
-      // WishList와 리뷰 정보 합치기
-      const wishListWithReview = response.data.map(product => {
-        const productId = product.id;
-        const productReview = reviewMap[productId];
-        return { ...product, review: productReview };
-      });
-
-      setWishListData(wishListWithReview);
-
-  }
+        setWishListData(wishListWithReview);
+      }catch(error){
+      console.error("서버 요청 중 에러가 발생했습니다:", error);
+      }
+    }
 
 
   const handleDeleteSelected = async (productId) => {
