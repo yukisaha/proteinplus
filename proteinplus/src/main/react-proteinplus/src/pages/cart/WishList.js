@@ -28,7 +28,7 @@ export default function WishList() {
 
         const response = await axios.get(`${Spring_Server_Ip}/wishList`, {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `${token}`
             }
         });
         try{

@@ -3,6 +3,7 @@ package com.elice.proteinplus.cart.controller;
 import com.elice.proteinplus.cart.service.WishListService;
 import com.elice.proteinplus.product.entity.Product;
 import com.elice.proteinplus.product.service.ProductService;
+import com.elice.proteinplus.user.Service.UserJoinService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -21,12 +23,13 @@ public class WishListController {
 
     private final WishListService wishListService;
     private final ProductService productService;
+    private final UserJoinService userService;
 
 
     // 다른페이지에서 하트누르면 찜한 상품에 추가
     @PostMapping("/{productId}")
     public void addProductToWishList(@PathVariable("productId") Long productId) {
-        log.info("WishListController Add Product to WishList: productId : " + productId);
+        log.info("Add Product to WishList: productId : " + productId);
         wishListService.addProductToWishList(1L, productId); // userId 받아왔다고 가정
     }
 
@@ -34,7 +37,7 @@ public class WishListController {
     @GetMapping("/{productId}")
     public ResponseEntity<Boolean> checkProductInWishList(@PathVariable("productId") Long productId) {
         try {
-            log.info("WishListController checkProductInWishList productId : " + productId);
+            log.info("checkProductInWishList productId : " + productId);
             boolean isProductInWishList = wishListService.checkProductInWishList(productId);
             return ResponseEntity.ok(isProductInWishList);
         } catch (Exception e) {
@@ -53,10 +56,13 @@ public class WishListController {
     @GetMapping
     public List<Product> getProductsInWishListByIds(@RequestHeader("Authorization") String token){
         // JWT 디코딩하여 사용자 ID 추출
-        log.info("WishListController getProductsInWishListByIds token : "+token);
+        log.info("getProductsInWishListByIds token : "+token);
 
-        // userId로 상품 아이디 리스트 가져오기
-        List<Long> productIds = wishListService.findProductIdsByUserId(1L);
+        // loginId 가져오기
+        Long userId = userService.getUserIdFromToken(token);
+        log.info("getProductsInWishListByIds userId : "+userId);
+
+        List<Long> productIds = wishListService.findProductIdsByUserId(userId);
         log.info("찜 목록의 상품 아이템 아이디들 : " + productIds);
 
         // 상품 아이디 리스트로 상품 목록 가져오기
