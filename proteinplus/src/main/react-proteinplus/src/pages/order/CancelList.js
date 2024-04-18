@@ -3,36 +3,26 @@ import '../../styles/order/css/OrderDetail.scoped.css';
 import MypageFrame from '../../components/MypageFrame';
 import axios from "axios";
 
-export default function CancelList(){
-    // 임시 데이터를 사용하여 상품 목록 생성
-    const tempProductData = [
-        {
-            id: 1,
-            name: '[맛있닭] 닭가슴살 스테이크',
-            imageUrl: 'https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20240109/IMG1704AEO777787343_330_330.jpg',
-            salePercent: 29,
-            price: '17,900',
-            originalPrice: '24,900',
-            rating: '★4.9',
-            totalRating: '(82,648)'
-        }
-    ];
-
+export default function CancelList() {
     const [cancelListData, setCancelListData] = useState([]);
 
-    async function getCancelList() { // Axios 방식 사용
-        const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-        const response = await axios.get(`${Spring_Server_Ip}/api/user/mypage/cancellist`);
-        setCancelListData(response.data);
+    async function getCancelList() {
+        try {
+            const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
+            const response = await axios.get(`${Spring_Server_Ip}/api/user/mypage/cancellist`);
+            setCancelListData(response.data.content);
+        } catch (error) {
+            console.error('취소 내역을 불러오는 중 오류가 발생했습니다:', error);
+        }
     }
 
     useEffect(() => {
-        // 카테고리 전체 조회 함수 호출
+        // 취소 내역 조회 함수 호출
         getCancelList();
     }, []);
 
     const renderOrderListItems = () => {
-        if (tempProductData.length === 0) {
+        if (cancelListData.length === 0) {
             return (
                 <div>
                     <div className="menu-title-area">
@@ -108,50 +98,51 @@ export default function CancelList(){
                 {/* search-box */}
                 <div className="order-list-area">
                     <ul className="order-list-inner">
-                        <li>
-                            {/* 취소 목록 */}
-                            <div className="order-list-head">
-                                <strong className="date">취소날짜</strong>
-                                <div className="right">
-                                    <span className="order-item-id">주문번호</span>
+                        {cancelListData.map((item) => (
+                            <li key={item.orderId}>
+                                {/* 주문 목록 */}
+                                <div className="order-list-head">
+                                    <strong className="date">{item.orderDate}</strong>
+                                    <div className="right">
+                                        <span className="order-item-id">{item.orderId}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="order-content-box">
-                                <ul className="order-div-list">
-                                    {tempProductData.map(item => (
-                                        <li key={item.id} className="order-div-item">
+                                <div className="order-content-box">
+                                    <ul className="order-div-list">
+                                        <li className="order-div-item">
                                             <div className="prd-info-area">
                                                 <div className="inner">
                                                     <div className="column img">
-                                                        <a href="javascript:void(0);">
-                                                            <img src={item.imageUrl} alt="상품이미지"/>
-                                                        </a>
+                                                        <img src={item.orderDetailDtoList[0].mainImageUrl} alt="상품이미지"/>
                                                     </div>
                                                     <div className="column tit">
                                                         <div className="prd-state-row">
-                                                            <strong className="prd-state-head">주문취소</strong>
+                                                            <strong className="prd-state-head">{item.orderStatus}</strong>
                                                         </div>
                                                         <div className="tit">
-                                                            <a href="javascript:void(0);">{item.name}</a>
+                                                            <a href="javascript:void(0);">{item.orderDetailDtoList[0].productName}</a>
                                                         </div>
                                                     </div>
                                                     <div className="price-item">
                                                         <div className="dlv-nmr">
                                                             <p className="dlv-nmr-price">
-                                                                <span className="num">{item.price}</span>원
+                                                                <span className="num">{item.orderDetailDtoList[0].price}</span>원
                                                             </p>
                                                             <p className="dlv-nmr-cnt">
-                                                                <span className="num">상품개수</span>개
+                                                                <span className="num">{item.orderDetailDtoList[0].count}</span>개
                                                             </p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </li>
+                                    </ul>
+                                    <div className="addr-info-line">
+                                        <p><i className="ico-bl-home2"></i>주소</p>
+                                    </div>
+                                </div>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>
