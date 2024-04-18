@@ -1,13 +1,14 @@
 package com.elice.proteinplus.order.dto;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class DeliveryDto {
 
     private Long orderId;
@@ -25,5 +26,4 @@ public class DeliveryDto {
     private String receiverAddrDtl;
 
     private int totalPrice;
-
 }

@@ -275,14 +275,17 @@ address, caption, cite, code, dfn, em, strong, th, var {
 }
 
 .order-content-box .prd-info-area .column.col-btn-group {
+    display: table-cell;
     vertical-align: middle;
+    text-align: center;
+    width: 100px; /* 취소 버튼을 고정할 너비 */
 }
+
 .prd-info-area .column {
     display: table-cell;
     vertical-align: top;
     text-align: center;
 }
-
 
 .order-content-box .prd-info-area .column.col-btn-group .col-btn-group-inn .prd-control-btn {
     display: block;
@@ -297,6 +300,7 @@ address, caption, cite, code, dfn, em, strong, th, var {
     color: #333;
     white-space: nowrap;
 }
+
 
 .order-content-box .prd-info-area .price-item {
     width: 130px;

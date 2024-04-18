@@ -5,6 +5,7 @@ import com.elice.proteinplus.order.dto.OrderDto;
 import com.elice.proteinplus.order.dto.OrderHistDto;
 import com.elice.proteinplus.order.service.OrderService;
 import com.elice.proteinplus.product.service.ProductService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -47,7 +48,6 @@ public class OrderController {
     }
 
 
-
     // 배송정보을 생성합니다.
     @PostMapping("/order/delivery")
     public ResponseEntity<Long> addDelivery(@RequestBody DeliveryDto deliveryDto) {
@@ -57,7 +57,16 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.CREATED).body(deliveryId);
     }
 
-
+    // 배송정보를 조회합니다.
+    @GetMapping("/order/delivery/{orderId}")
+    public ResponseEntity<DeliveryDto> getAddressByOrderId(@PathVariable Long orderId) {
+        try {
+            DeliveryDto deliveryDto = orderService.getAddressByOrderId(orderId);
+            return ResponseEntity.ok(deliveryDto);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 
 //    // 주문의 배송 정보를 업데이트합니다.
