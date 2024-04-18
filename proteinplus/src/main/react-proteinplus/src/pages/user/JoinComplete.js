@@ -8,6 +8,8 @@ function JoinComplete(){
 
     let location = useLocation();
     const loginId = location.state.loginId;
+    console.log("location.name : " + location.state.name);
+    const name = location.state.name;
 
     return(
         <div className="wrap main">
@@ -16,8 +18,8 @@ function JoinComplete(){
                 <div className="join-certified user_frame-full">
                     <div className="user_frame-sm">
                         <div className="join-greeting">
-                            <div className={`and loginId`}>{loginId}</div>
-                            {/*<div className={`and`}>님,</div>*/}
+                            {/*<div className={`and loginId`}>{loginId}</div>*/}
+                            <div>{name}님</div>
                             <br/>회원가입을 축하합니다.
                             <br/>
                             <span>로그인 후 다양한 서비스를 이용하실 수 있습니다.</span>
