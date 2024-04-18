@@ -52,16 +52,6 @@ public class ProductController {
         return productService.findAllByCategoryIdAndSortedBy(categoryId, pageable, orderBy);
     }
 
-//    @GetMapping("/includingSoldOut")
-//    public Page<Product> findAllIncludingSoldOut(Pageable pageable) {
-//        return productService.findAllIncludingSoldOut(pageable);
-//    }
-//
-//    @GetMapping("/excludingSoldOut")
-//    public Page<Product> findAllExcludingSoldOut(Pageable pageable) {
-//        return productService.findAllExcludingSoldOut(pageable);
-//    }
-
     @GetMapping("/{productId}")
     public Product getProductById(@PathVariable("productId") Long productId) {
         return productService.getProductById(productId);

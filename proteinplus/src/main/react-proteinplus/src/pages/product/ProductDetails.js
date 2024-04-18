@@ -19,6 +19,9 @@ function ProductDetails() {
     const [like, setLike] = useState(false);
     const [reviewOpen, setReviewOpen] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [imageModalIsOpen, setImageModalIsOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState('');
+    const [reviews, setReviews] = useState([]);
 
     const getProductById = async (productId) => {
         try {
@@ -29,6 +32,22 @@ function ProductDetails() {
             console.error('Error getting product: ', error);
         }
     }
+
+    const getReviewsByProductId = async (productId) => {
+        try {
+            const url = `${Spring_Server_Ip}/review/product/${productId}`;
+            const response = await axios.get(url);
+            console.log(response.data);
+            setReviews(response.data);
+        } catch (error) {
+            console.error('Error getting reviews: ', error);
+        }
+    }
+
+    useEffect(() => {
+        getProductById(productId);
+        getReviewsByProductId(productId);
+    }, [productId]);
 
     const checkProductInWishList = async (productId) => {
         try {
@@ -88,6 +107,16 @@ function ProductDetails() {
         }
     };
 
+    const openImageModal = (imageSrc) => {
+        setSelectedImage(imageSrc);
+        setImageModalIsOpen(true); // 상세 이미지 모달 열
+    };
+
+    const closeImageModal = () => {
+        setSelectedImage('');
+        setImageModalIsOpen(false);
+    };
+
     const openReview = () =>{
         setReviewOpen(true);
     }
@@ -106,18 +135,20 @@ function ProductDetails() {
         <Header/>
         <div className="product-detail">
             <div className="main-container">
-            <img src={product.mainImageUrl} alt={product.name} className="main-image"/>
+            <img src={product.mainImageUrl} alt={product.name} className="main-image"
+                onClick={() =>
+                    openImageModal(product.detailImageUrl)} />
             <div className="main-detail-container">
             <button onClick={openReview} className="review-btn">리뷰</button>
             <div className="main-detail">
                 <p className="main-product-name">{product.name}</p>
                 <p>{product.content}</p>
-                <p className="main-result">{resultPrice}<span className="won">원</span></p>
+                <p className="main-result">{resultPrice.toLocaleString()}<span className="won">원</span></p>
                 {product.discountRate && <span className="main-discount">
                     {product.discountRate}
                     <span className="main-discount-text">% 할인</span>
                 </span>}
-                {product.discountRate !== null && product.price && <span className="main-price">(정상가격 : {product.price}원)</span>}
+                {product.discountRate !== null && product.price && <span className="main-price">(정상가격 : {product.price.toLocaleString()}원)</span>}
                 <p className="main-sales">{product.sales ? product.sales.toLocaleString() : 0}
                     <span className="main-sales-text">개의 상품이 구매됨</span>
                 </p>
@@ -132,12 +163,19 @@ function ProductDetails() {
             </div>
             </div>
         </div>
-        {reviewOpen && <Review closeReview={closeReview} />}
+        {reviewOpen && <Review closeReview={closeReview} reviews={reviews}/>}
         <Footer/>
         <CartModal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} />
+        {imageModalIsOpen && (
+            <div className="detail-image-modal">
+                <span className="detail-close" onClick={closeImageModal}>&times;</span>
+                <div className="detail-image-container">
+                    {selectedImage && <img src={selectedImage} alt="상세 이미지" className="detail-image" />}
+                </div>
+            </div>
+        )}
         </>
-    )
-
+    );
 }
 
 export default ProductDetails

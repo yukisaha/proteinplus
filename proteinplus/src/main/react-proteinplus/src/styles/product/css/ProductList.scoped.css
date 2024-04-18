@@ -116,3 +116,7 @@ input {
   padding: 0;
   box-sizing: border-box;
 }
+
+.checkbox{
+    margin-right: 5px;
+}

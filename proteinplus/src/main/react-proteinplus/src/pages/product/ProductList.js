@@ -10,8 +10,8 @@ function ProductList({categoryId}){
 
   const [loading, setLoading] = useState(true); // 초기에는 로딩 중 상태로 설정
   const [products, setProducts] = useState([]);
-  const [selectedOption1, setSelectedOption1] = useState('');
-  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [selectedOption1, setSelectedOption1] = useState('uploadDateDesc');
+  const [itemsPerPage, setItemsPerPage] = useState(8);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [categoryProductCount, setCategoryProductCount] = useState(0);
@@ -30,11 +30,27 @@ function ProductList({categoryId}){
       const response = await axios.get(url);
 
       let sortedProducts = response.data;
-      if (selectedOption1 === 'priceAsc') {
-        sortedProducts.sort((a, b) => calculateFinalPrice(a.price, a.discountRate) - calculateFinalPrice(b.price, b.discountRate));
-      } else if (selectedOption1 === 'priceDesc') {
-        sortedProducts.sort((a, b) => calculateFinalPrice(b.price, b.discountRate) - calculateFinalPrice(a.price, a.discountRate));
-      }
+
+      switch (selectedOption1) {
+        case 'priceAsc':
+          sortedProducts.sort((a, b) => calculateFinalPrice(a.price, a.discountRate) - calculateFinalPrice(b.price, b.discountRate));
+          break;
+        case 'priceDesc':
+              sortedProducts.sort((a, b) => calculateFinalPrice(b.price, b.discountRate) - calculateFinalPrice(a.price, a.discountRate));
+              break;
+            case 'sales':
+              // 클라이언트 측에서 정렬?
+              sortedProducts.sort((a, b) => b.sales - a.sales);
+              break;
+            case 'uploadDateDesc':
+              sortedProducts.sort((a, b) => new Date(b.uploadDate) - new Date(a.uploadDate));
+              break;
+            case 'discountRateDesc':
+              sortedProducts.sort((a, b) => b.discountRate - a.discountRate);
+              break;
+            default:
+              break;
+          }
 
       const newTotalPages = Math.ceil(sortedProducts.length / itemsPerPage);
       setTotalPages(newTotalPages);
@@ -70,52 +86,6 @@ function ProductList({categoryId}){
     fetchProducts();
     fetchCategoryProductCount();
   }, [categoryId, includeSoldOut, selectedOption1, currentPage, itemsPerPage]);
-
-  useEffect(() => {
-      const fetchProducts = async () => {
-          try {
-              let sortedProducts = [...products]; // 상품을 복사하여 정렬
-
-              switch (selectedOption1) {
-                case 'priceAsc':
-                    // 클라이언트 측에서 낮은가격순으로 정렬
-                    sortedProducts.sort((a, b) => calculateFinalPrice(a.price, a.discountRate) - calculateFinalPrice(b.price, b.discountRate));
-                    break;
-                case 'priceDesc':
-                    // 클라이언트 측에서 높은가격순으로 정렬
-                    sortedProducts.sort((a, b) => calculateFinalPrice(b.price, b.discountRate) - calculateFinalPrice(a.price, a.discountRate));
-                    break;
-                default:
-                    // 나머지 경우는 서버에서 해당 순서로 정렬된 상품을 가져오도록 설정
-                    let url;
-                    switch (selectedOption1) {
-                    case 'sales':
-                        url = `${Spring_Server_Ip}/product/list/${categoryId}?orderBy=sales`;
-                        break;
-                    case 'uploadDateDesc':
-                        url = `${Spring_Server_Ip}/product/list/${categoryId}?orderBy=uploadDateDesc`;
-                        break;
-                    case 'discountRateDesc':
-                        url = `${Spring_Server_Ip}/product/list/${categoryId}?orderBy=discountRateDesc`;
-                        break;
-                    default:
-                        url = `${Spring_Server_Ip}/product/list/${categoryId}?orderBy=uploadDateDesc`;
-                        break;
-                    }
-                    const response = await axios.get(url);
-                    sortedProducts = response.data;
-                    break;
-                }
-                const startIndex = (currentPage - 1) * itemsPerPage;
-                const endIndex = startIndex + itemsPerPage;
-                setProducts(sortedProducts.slice(startIndex, endIndex));
-          } catch (error) {
-                console.error('Error fetching products:', error);
-          }
-      };
-
-      fetchProducts();
-  }, [selectedOption1, categoryId]); // useEffect 의존성 배열에 selectedOption1과 categoryId 추가
 
   const handleSelectChange1 = (event) => {
     setSelectedOption1(event.target.value);
@@ -165,10 +135,10 @@ function ProductList({categoryId}){
             </div>
             <div className="dropdown">
               <select value={itemsPerPage} onChange={handleSelectChange2}>
-                <option value={1}>1개 보기</option>
-                <option value={2}>2개 보기</option>
-                <option value={3}>3개 보기</option>
                 <option value={4}>4개 보기</option>
+                <option value={8}>8개 보기</option>
+                <option value={12}>12개 보기</option>
+                <option value={16}>16개 보기</option>
               </select>
             </div>
           </div>
