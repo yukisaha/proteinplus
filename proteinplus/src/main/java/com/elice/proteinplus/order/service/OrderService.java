@@ -188,7 +188,9 @@ public class OrderService {
         delivery.setReceiverName(deliveryDto.getReceiverName());
         delivery.setReceiverPhone(deliveryDto.getReceiverPhoneNumber());
         delivery.setDeliveryReq(deliveryDto.getDeliveryReq());
-        delivery.setAddress(deliveryDto.getAddress());
+        delivery.setReceiverAddr(deliveryDto.getReceiverAddr());
+        delivery.setReceiverPost(deliveryDto.getReceiverPost());
+        delivery.setReceiverAddrDtl(deliveryDto.getReceiverAddrDtl());
 
         // 배송 정보 저장
         deliveryRepository.save(delivery);

@@ -28,13 +28,13 @@ public class OrderController {
     // 특정 사용자의 주문 목록을 조회합니다.
     @GetMapping("/user/mypage/orderlist")
     public ResponseEntity<Page<OrderHistDto>> getUserOrders(@PathVariable Long userId, Pageable pageable) {
-        Page<OrderHistDto> orders = orderService.getOrders(userId, pageable);
+        Page<OrderHistDto> orders = orderService.getOrders(1L, pageable);
         return ResponseEntity.ok(orders);
     }
 
     // 특정 사용자의 취소된 주문 목록을 조회합니다.
     @GetMapping("/user/mypage/cancellist")
-    public ResponseEntity<Page<OrderHistDto>> getCancelledUserOrders(Pageable pageable) {
+    public ResponseEntity<Page<OrderHistDto>> getCancelledUserOrders(@PathVariable Long userId, Pageable pageable) {
         Page<OrderHistDto> cancelledOrders = orderService.getCancelledOrders(1L, pageable);
         return ResponseEntity.ok(cancelledOrders);
     }
@@ -73,7 +73,7 @@ public class OrderController {
 //    }
 
     // 주문을 취소합니다.
-    @DeleteMapping("/user/mypage/orderlist/{orderId}")
+    @PostMapping("/user/mypage/orderlist/{orderId}")
     public ResponseEntity<Void> cancelOrder(@PathVariable Long orderId) {
         boolean cancelled = orderService.cancelOrder(orderId);
         if (cancelled) {

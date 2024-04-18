@@ -46,6 +46,8 @@ export default function Order(){
 
     const [orderSuccess, setOrderSuccess] = useState(false);
 
+    const [orderItems, setOrderItems] = useState([]);
+    const [orderData, setOrderData] = useState([]);
 
     // 숫자만
     const numberOnly = (event) => {
@@ -118,10 +120,6 @@ export default function Order(){
     };
 
 
-    const [orderItems, setOrderItems] = useState([]);
-    const [orderData, setOrderData] = useState([]);
-
-
     useEffect(() => {
         // 컴포넌트가 마운트될 때 로컬 스토리지에서 장바구니 데이터를 가져와서 상태에 설정합니다.
         getCartItemsFromLocalStorage();
@@ -183,13 +181,13 @@ export default function Order(){
                     receiverName,
                     receiverPhoneNumber,
                     deliveryReq,
-                    address: {
-                        city: receiverAddr,
-                        zipcode: receiverPost,
-                        addressDetail: receiverAddrDtl
-                    }
+                    receiverAddr,
+                    receiverPost,
+                    receiverAddrDtl
                 }
             );
+            const deliveryId = deliveryResponse.data;
+            console.log(deliveryId);
         }
         catch (error) {
             // 오류 처리
@@ -203,8 +201,12 @@ export default function Order(){
     const renderOrderItems = () => {
         const orderItemKeys = Object.keys(orderItems);
 
+        const calculateProduct = (productData) => {
+            return productData.price * (1 - productData.discountRate / 100);
+        };
+
         const calculateProductSubtotal = (productData, count) => {
-            return productData.price * count;
+            return (productData.price * (1 - productData.discountRate / 100)) * count;
         };
 
         const calculateTotalSubtotal = () => {
@@ -376,7 +378,7 @@ export default function Order(){
                                                                     <a href={`/product/view?productCd=${item.product_id}`}>{productData ? productData.name : "상품 이름 없음"}</a>
                                                                 </p>
                                                                 <ul className="price-item">
-                                                                    <li><span className="num">{productData ? productData.price : "상품 가격 없음"}</span>원
+                                                                    <li><span className="num">{productData ? calculateProduct(productData) : "상품 가격 없음"}</span>원
                                                                     </li>
                                                                     <li><span className="num">{item.count}</span>개</li>
                                                                 </ul>

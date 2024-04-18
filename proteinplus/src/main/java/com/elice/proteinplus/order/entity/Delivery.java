@@ -26,14 +26,22 @@ public class Delivery {
     @Column(name = "receiver_phone", nullable = false)
     private int receiverPhone;
 
-    @Embedded
-    private Address address;
+    @Column(name = "city", nullable = false)
+    private String receiverAddr; //서울시
+
+    @Column(name = "zipcode", nullable = false)
+    private String receiverPost; //--시 --구 도로명주소
+
+    @Column(name = "addressDetail", nullable = false)
+    private String receiverAddrDtl; //상세주소
 
     @Column(name = "delivery_request")
     private String deliveryReq; //주문 요청사항
 
-    public Delivery update(Address address, String receiverName, Integer receiverPhone) {
-        this.address = address;
+    public Delivery update(String receiverAddr, String receiverPost, String receiverAddrDtl, String receiverName, Integer receiverPhone) {
+        this.receiverAddr = receiverAddr;
+        this.receiverPost = receiverPost;
+        this.receiverAddrDtl = receiverAddrDtl;
         this.receiverName = receiverName;
         this.receiverPhone = receiverPhone;
         //주문 개수 수정 넣고 싶음
