@@ -163,7 +163,7 @@ function calculateFinalPrice(price, discountRate) {
   }
 }
 
-function ProductCard({product}) {
+export function ProductCard({product}) {
   return (
       <div className="product-card">
         <Link to={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
