@@ -31,8 +31,11 @@ export default function WishList() {
                     Authorization: `${token}`
                 }
             });
-            const reviews = await axios.get(`${Spring_Server_Ip}/review`);
-
+            const reviews = await axios.get(`${Spring_Server_Ip}/review`,{
+                headers: {
+                    Authorization: `${token}`
+                }
+            });
             // productId를 기준으로 리뷰 정보를 매핑
             const reviewMap = {};
             reviews.data.forEach(review => {
@@ -64,7 +67,11 @@ export default function WishList() {
 
     const handleDeleteSelected = async (productId) => {
         // WishList에서 선택된 상품 삭제
-        await axios.delete(`${Spring_Server_Ip}/wishList/${productId}`);
+        await axios.delete(`${Spring_Server_Ip}/wishList/${productId}`,{
+                headers: {
+                    Authorization: `${token}`
+                }
+            });
         // WishList를 다시 가져와서 렌더링
         await getWishList();
     };
@@ -72,8 +79,11 @@ export default function WishList() {
     // 전체삭제
     const handleDeleteAll = async () => {
         // WishList를 서버에서 비우는 로직
-        await axios.delete(`${Spring_Server_Ip}/wishList`);
-
+        await axios.delete(`${Spring_Server_Ip}/wishList`,{
+                headers: {
+                    Authorization: `${token}`
+                }
+            });
         // WishList를 다시 가져와서 렌더링
         await getWishList();
     };

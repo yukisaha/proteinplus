@@ -24,5 +24,8 @@ public interface WishListRepository extends JpaRepository<WishList, Long> {
     @Query("DELETE FROM WishList w WHERE w.user.id = :userId AND w.product.id = :productId")
     int deleteSelectedByIds(@Param("userId") Long userId, @Param("productId") Long productId);
 
-    boolean existsByProductId(Long productId);
+
+    @Query("SELECT w.id FROM WishList w WHERE w.product.id = :productId AND w.user.id = :userId")
+    Long findIdByProductIdAndUserId(@Param("productId") Long productId, @Param("userId") Long userId);
+
 }

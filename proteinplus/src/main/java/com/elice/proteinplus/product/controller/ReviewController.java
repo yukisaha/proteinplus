@@ -4,6 +4,7 @@ import com.elice.proteinplus.cart.service.WishListService;
 import com.elice.proteinplus.product.dto.ReviewTotalDto;
 import com.elice.proteinplus.product.entity.Review;
 import com.elice.proteinplus.product.service.ReviewService;
+import com.elice.proteinplus.user.Service.UserJoinService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -20,13 +21,19 @@ public class ReviewController {
 
     private final ReviewService reviewService;
     private final WishListService wishListService;
+    private final UserJoinService userService;
 
 
     @GetMapping
-    public List<ReviewTotalDto> getReviewTotalDtoByProductId() {
+    public List<ReviewTotalDto> getReviewTotalDtoByProductId(@RequestHeader("Authorization") String token) {
         try {
+            log.info("getReviewTotalDtoByProductId : " + token);
+
+            Long userId = userService.getUserIdFromToken(token);
+            log.info("getReviewTotalDtoByProductId userId : "+userId);
+
             // 여기에 해당 엔드포인트의 로직을 추가합니다.
-            List<Long> productIds = wishListService.findProductIdsByUserId(1L); //userId 받아왔다고 가정
+            List<Long> productIds = wishListService.findProductIdsByUserId(userId); //userId 받아왔다고 가정
             return reviewService.getReviewTotalDtoByProductIds(productIds);
         } catch (Exception e) {
             log.error("Error occurred while processing the request: {}", e.getMessage());
