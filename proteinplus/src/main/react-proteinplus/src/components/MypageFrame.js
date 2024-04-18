@@ -125,11 +125,8 @@ export default function MypageFrame({children}) {
                                                 <li className="">
                                                     <a href="/mypage/delivery">배송지 관리</a>
                                                 </li>
-                                                <li><a href="/mypage/info/edit">정보수정</a></li>
+                                                <li><a href="/mypage/memberPwdCheck">회원정보수정</a></li>
                                                 {/* 활성화될 경우 li에 addClass current  */}
-                                                <li>
-                                                    <a href="/mypage/member/delete">회원탈퇴하기</a>
-                                                </li>
                                             </ul>
                                         </li>
                                     </ul>

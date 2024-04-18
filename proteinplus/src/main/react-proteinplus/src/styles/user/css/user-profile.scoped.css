@@ -222,3 +222,10 @@ input {
   padding: 0;
   box-sizing: border-box;
 }
+
+.delete {
+  float: right;
+  margin-top: 20px;
+  margin-right: 80px;
+  text-decoration: underline;
+}

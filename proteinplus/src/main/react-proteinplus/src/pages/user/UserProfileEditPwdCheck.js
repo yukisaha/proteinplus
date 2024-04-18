@@ -1,10 +1,43 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, {useState} from 'react';
 import "../../styles/user/css/login.scoped.css"
 import "../../styles/user/css/user-profile.scoped.css"
 import "../../styles/common/css/MypageFrame.css"
 import MypageFrame from "../../components/MypageFrame";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 function UserProfileEditPwdCheck(){
+
+    const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip
+    const token = window.localStorage.getItem("token");
+
+    const navigate = useNavigate();
+
+    const [loginPwd, setLoginPwd] = useState("");
+
+    const handleLoginPwdChange = (e) => {
+        const LoginPwd = e.target.value;
+        setLoginPwd(LoginPwd);
+    };
+
+    const pwdCheck = async (e) => {
+        e.preventDefault(); // 폼의 기본 제출 동작을 막음
+
+        try {
+            const data = {
+                loginPwd: loginPwd
+            };
+            const response = await axios.get(`${Spring_Server_Ip}/member/pwdCheck`, {params: data, headers: {Authorization: `${token}`}});
+            //성공했을경우 수정 페이지로
+            console.log(response.data);
+            if(response.data === true){
+                navigate('/mypage/info/edit');
+            }else{
+                alert("비밀번호가 일치하지 않습니다");
+            }
+        } catch (error) {
+            alert("비밀번호가 일치하지 않습니다");
+        }
+    };
 
     const userProfileEditPwdCheck = () => {
         return (
@@ -30,23 +63,21 @@ function UserProfileEditPwdCheck(){
                             </div>
                             {/* pw확인 form */}
                             <div class="profile_inner">
-                                <form
-                                    id="user-pw-check-form"
-                                    name="user-pw-check-form"
-                                    action=""
-                                    method=""
-                                    onsubmit=""
-                                >
+                                <form id="pwd_check_form" className="pwd_check_form" onSubmit={pwdCheck}>
                                     <div class="profile_button-group">
                                         <input
                                             type="password"
                                             id="password"
                                             name="password"
                                             class="profile_input-text type-lg profile_input-group-first"
-                                            placeholder="비밀번호 입력"
+                                            onChange={handleLoginPwdChange}
+                                            value={loginPwd}
+                                            placeholder="비밀번호"
+                                            maxLength="20"
+                                            required
                                         />
                                         <button
-                                            type="submit"
+                                            type={`submit`}
                                             class="user_btn-primary profile_input-group-second"
                                         >
                                             <span>확인</span>
