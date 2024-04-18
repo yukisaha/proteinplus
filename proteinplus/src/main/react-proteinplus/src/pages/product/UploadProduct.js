@@ -101,7 +101,6 @@ function UploadProduct() {
               id="content"
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              required
           />
           <label htmlFor="stock">재고</label>
           <input

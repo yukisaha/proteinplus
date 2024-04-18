@@ -20,7 +20,6 @@ public class ProductCreateDto {
     @NotNull(message = "가격을 입력해주세요.")
     private Integer price;
 
-    @NotBlank(message = "상품정보를 입력해주세요.")
     private String content;
 
     @NotNull(message = "재고를 입력해주세요.")
