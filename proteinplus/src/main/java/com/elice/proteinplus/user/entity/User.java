@@ -1,6 +1,7 @@
 package com.elice.proteinplus.user.entity;
 
 import com.elice.proteinplus.order.entity.Order;
+import com.elice.proteinplus.user.dto.UserUpdateDTO;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -33,7 +34,7 @@ public class User {
     private String nickname;
 
     @Column(name = "phone", nullable = false, unique = true)
-    private int phone;
+    private String phone;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
@@ -60,8 +61,8 @@ public class User {
 
     @Builder
     public User(String loginId, String loginPwd, String name, String nickname,
-                int phone, String email, LocalDate birth, String address,
-                String detailAddress, Role role){
+                String phone, String email, LocalDate birth, String address,
+                String detailAddress, Role role, String isDelete){
         this.loginId = loginId;
         this.loginPwd = loginPwd;
         this.name = name;
@@ -72,5 +73,17 @@ public class User {
         this.address = address;
         this.detailAddress = detailAddress;
         this.role = role;
+        this.isDelete = isDelete;
+    }
+
+    public void update(UserUpdateDTO userUpdateDTO){
+        this.loginPwd = userUpdateDTO.getLoginPwd();
+        this.nickname = userUpdateDTO.getNickname();
+        this.address = userUpdateDTO.getAddress();
+        this.detailAddress = userUpdateDTO.getDetailAddress();
+    }
+
+    public void setIsDelete(String isDelete) {
+        this.isDelete = isDelete;
     }
 }
