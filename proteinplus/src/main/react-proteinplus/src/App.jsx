@@ -10,6 +10,7 @@ import Rank from "./pages/rank/Rank";
 import Order from "./pages/order/Order";
 import OrderList from "./pages/order/OrderList";
 import CancelList from "./pages/order/CancelList";
+import SubmitOrder from "./pages/order/SubmitOrder";
 import ProductList from "./pages/product/ProductList";
 import Join from "./pages/user/Join";
 import JoinComplete from "./pages/user/JoinComplete";
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
     {
         path: "/mypage/cancelList",
         element: <CancelList />
+    },
+    {
+        path: "/admin/orderList",
+        element: <SubmitOrder />
     },
     {
         path: "/product",

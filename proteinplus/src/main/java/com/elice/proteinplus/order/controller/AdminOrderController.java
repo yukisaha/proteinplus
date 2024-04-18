@@ -25,7 +25,7 @@ public class AdminOrderController {
     }
 
     // 특정 사용자의 주문 조회 (페이지네이션 포함)
-    @GetMapping("/order/user/{userId}")
+    @GetMapping("/order/{userId}")
     public ResponseEntity<Page<OrderHistDto>> getOrdersByUserId(@PathVariable Long userId, Pageable pageable) {
         Page<OrderHistDto> orders = adminOrderService.getOrdersByUserId(userId, pageable);
         return ResponseEntity.ok(orders);
@@ -43,7 +43,7 @@ public class AdminOrderController {
     }
 
     // 주문 삭제
-    @PostMapping("/order/{orderId}")
+    @DeleteMapping("/order/{orderId}")
     public ResponseEntity<Void> deleteOrder(@PathVariable Long orderId) {
         boolean deleted = adminOrderService.deleteOrder(orderId);
         if (deleted) {

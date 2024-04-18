@@ -7,6 +7,7 @@ import Select from "react-select";
 import {useDaumPostcodePopup} from 'react-daum-postcode';
 
 
+
 export default function Order(){
 
     const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
@@ -46,6 +47,8 @@ export default function Order(){
 
     const [orderSuccess, setOrderSuccess] = useState(false);
 
+    const [orderItems, setOrderItems] = useState([]);
+    const [orderData, setOrderData] = useState([]);
 
     // 숫자만
     const numberOnly = (event) => {
@@ -73,6 +76,21 @@ export default function Order(){
             setReceiverPhoneNumber(event.target.value.replace(/[^0-9]/g, ""));
         }
     };
+
+    const handleSelectChange = (selectedOption) => {
+        // 선택한 옵션에 따라 selectOption 상태 업데이트
+        setSelectOption(selectedOption);
+
+        // 선택한 옵션에 따라 deliveryReq 상태 업데이트
+        if (selectedOption.value === '직접입력') {
+            // 직접입력인 경우, deliveryReq 상태 업데이트
+            setDeliveryReq('');
+        } else {
+            // 다른 옵션인 경우, deliveryReq 상태 업데이트
+            setDeliveryReq(selectedOption.value);
+        }
+    };
+
 
     // daum 주소 가져오기
     const handleComplete = (data) => {
@@ -118,10 +136,6 @@ export default function Order(){
     };
 
 
-    const [orderItems, setOrderItems] = useState([]);
-    const [orderData, setOrderData] = useState([]);
-
-
     useEffect(() => {
         // 컴포넌트가 마운트될 때 로컬 스토리지에서 장바구니 데이터를 가져와서 상태에 설정합니다.
         getCartItemsFromLocalStorage();
@@ -146,28 +160,26 @@ export default function Order(){
         }
     };
 
-
     async function getOrderList(productIds) { // Axios
         console.log("productIds:", productIds); // productIds를 콘솔에 출력하여 확인
         const response = await axios.post(`${Spring_Server_Ip}/cart`,  productIds );
         setOrderData(response.data);
     }
 
-
     // 주문 생성 함수
     const handleOrder = async () => {
         try {
             // 주문을 생성할 때 필요한 상품 정보들을 추출합니다.
-            const orderItemsInfo = orderItems.map(item => ({
-                productId: item.product_id,
-                count: item.count,
+            const orderDtoList = orderItems.map(item => ({
+                productIds: [item.product_id],
+                counts: [item.count],
                 isChecked: item.isChecked
             }));
-            console.log(orderItemsInfo);
+            console.log(orderDtoList);
 
             // 주문 정보를 백엔드로 전송합니다.
             const orderResponse = await axios.post(
-                `${Spring_Server_Ip}/api/order/order`, orderItemsInfo // 주문 정보만 전송
+                `${Spring_Server_Ip}/api/order/order`, orderDtoList
             );
 
             // 주문 생성 후 주문 ID를 받아옵니다.
@@ -176,38 +188,38 @@ export default function Order(){
 
             // 배송 정보를 백엔드로 전송합니다.
             const deliveryResponse = await axios.post(
-                `${Spring_Server_Ip}/api/delivery`, // 배송 정보를 전송하는 API 엔드포인트에 맞게 수정해야 합니다.
+                `${Spring_Server_Ip}/api/order/delivery`,
                 {
-                    deliveryDto: { // 배송 정보
-                        orderId, // 주문 ID
-                        receiverName,
-                        receiverPhoneNumber,
-                        deliveryReq,
-                        address: {
-                            city: receiverAddr,
-                            zipcode: receiverPost,
-                            addressDetail: receiverAddrDtl
-                        }
-                    }
+                    orderId, // 직접 orderId를 넣어줍니다.
+                    receiverName,
+                    receiverPhoneNumber,
+                    deliveryReq,
+                    receiverAddr,
+                    receiverPost,
+                    receiverAddrDtl
                 }
             );
-
-            console.log('주문 및 배송이 생성되었습니다.');
-            // 주문 및 배송 성공 시 처리
-            setOrderSuccess(true);
-        } catch (error) {
-            console.error('주문 또는 배송 생성 중 오류가 발생했습니다:', error);
-            // 주문 또는 배송 생성에 실패했을 때 처리할 코드를 작성합니다.
+            const deliveryId = deliveryResponse.data;
+            console.log(deliveryId);
+            // 주문 생성 성공 시 페이지 이동
+            window.location.href = '/mypage/orderList'; // 이동할 페이지의 경로
+        }
+        catch (error) {
+            // 오류 처리
+            console.error('Error while handling order:', error);
         }
     };
-
 
 
     const renderOrderItems = () => {
         const orderItemKeys = Object.keys(orderItems);
 
+        const calculateProduct = (productData) => {
+            return productData.price * (1 - productData.discountRate / 100);
+        };
+
         const calculateProductSubtotal = (productData, count) => {
-            return productData.price * count;
+            return (productData.price * (1 - productData.discountRate / 100)) * count;
         };
 
         const calculateTotalSubtotal = () => {
@@ -379,7 +391,7 @@ export default function Order(){
                                                                     <a href={`/product/view?productCd=${item.product_id}`}>{productData ? productData.name : "상품 이름 없음"}</a>
                                                                 </p>
                                                                 <ul className="price-item">
-                                                                    <li><span className="num">{productData ? productData.price : "상품 가격 없음"}</span>원
+                                                                    <li><span className="num">{productData ? calculateProduct(productData) : "상품 가격 없음"}</span>원
                                                                     </li>
                                                                     <li><span className="num">{item.count}</span>개</li>
                                                                 </ul>
@@ -403,7 +415,7 @@ export default function Order(){
                                     <div className="request-detail">
                                         <div className="ui-select select-box w-full">
                                             <Select options={options} //위에서 만든 배열을 select로 넣기
-                                                    onChange={setSelectOption} //값이 바뀌면 setState되게
+                                                    onChange={handleSelectChange}
                                                     defaultValue={options[0]}/>
 
                                         </div>

@@ -26,35 +26,58 @@ public class WishListController {
     private final UserJoinService userService;
 
 
-    // 다른페이지에서 하트누르면 찜한 상품에 추가
+    // 상품 상세페이지에서 하트누르면 찜한 상품에 추가
+//    @PostMapping("/{productId}")
+//    public void addProductToWishList(@PathVariable("productId") Long productId, @RequestHeader("Authorization") String token) {
+//        log.info("Add Product to WishList: productId : " + productId);
+//        log.info("addProductToWishList token : " + token);
+//
+//        Long userId = userService.getUserIdFromToken(token);
+//        log.info("addProductToWishList userId : " + userId);
+//
+//        wishListService.addProductToWishList(userId, productId);
+//    }
     @PostMapping("/{productId}")
-    public void addProductToWishList(@PathVariable("productId") Long productId) {
-        log.info("Add Product to WishList: productId : " + productId);
-        wishListService.addProductToWishList(1L, productId); // userId 받아왔다고 가정
+    public ResponseEntity<?> addProductToWishList(@PathVariable("productId") Long productId, @RequestHeader("Authorization") String token) {
+        try {
+            log.info("Add Product to WishList: productId : " + productId);
+            log.info("addProductToWishList token : " + token);
+
+            Long userId = userService.getUserIdFromToken(token);
+            log.info("addProductToWishList userId : " + userId);
+
+            wishListService.addProductToWishList(userId, productId);
+
+            return ResponseEntity.ok().build(); // 성공 상태 코드 반환
+        } catch (Exception e) {
+            log.error("Error adding product to wish list: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to add product to wish list."); // 실패 상태 코드 반환
+        }
     }
 
-    // 다른페이지에서 하트누르면 찜한 상품에 추가
+
+
     @GetMapping("/{productId}")
-    public ResponseEntity<Boolean> checkProductInWishList(@PathVariable("productId") Long productId) {
-        try {
-            log.info("checkProductInWishList productId : " + productId);
-            boolean isProductInWishList = wishListService.checkProductInWishList(productId);
-            return ResponseEntity.ok(isProductInWishList);
-        } catch (Exception e) {
-            log.error("Error checkProductInWishList productId=" + productId, e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+    public Long checkProductInWishList(@PathVariable("productId") Long productId, @RequestHeader("Authorization") String token) {
+        log.info("checkProductInWishList token : " + token);
+
+        // loginId 가져오기
+        Long userId = userService.getUserIdFromToken(token);
+        log.info("checkProductInWishList userId : " + userId);
+        log.info("checkProductInWishList productId : " + productId);
+
+        return wishListService.findIdByProductIdAndUserId(productId, userId);
     }
 
     // userId로 products 정보 받는 메소드
     @GetMapping
-    public List<Product> getProductsInWishListByIds(@RequestHeader("Authorization") String token){
+    public List<Product> getProductsInWishListByIds(@RequestHeader("Authorization") String token) {
         // JWT 디코딩하여 사용자 ID 추출
-        log.info("getProductsInWishListByIds token : "+token);
+        log.info("getProductsInWishListByIds token : " + token);
 
         // loginId 가져오기
         Long userId = userService.getUserIdFromToken(token);
-        log.info("getProductsInWishListByIds userId : "+userId);
+        log.info("getProductsInWishListByIds userId : " + userId);
 
         List<Long> productIds = wishListService.findProductIdsByUserId(userId);
         log.info("찜 목록의 상품 아이템 아이디들 : " + productIds);
@@ -64,17 +87,29 @@ public class WishListController {
     }
 
 
+    // 전체 삭제 버튼 누르면 찜 상품 전체 삭제
     @DeleteMapping
     @Transactional
-    public void deleteWishListsByUesrId() { // 전체삭제
-        int deletedRows = wishListService.deleteWishListsByUserId(1L); //userId 받아왔다고 가정
-        log.info("WishListController deleteWishListsByUesrId 삭제된 행의 수 : "+deletedRows);
+    public void deleteWishListsByUesrId(@RequestHeader("Authorization") String token) {
+        log.info("deleteWishListsByUesrId token : " + token);
+
+        Long userId = userService.getUserIdFromToken(token);
+        log.info("getProductsInWishListByIds userId : " + userId);
+
+        int deletedRows = wishListService.deleteWishListsByUserId(userId);
+        log.info("WishListController deleteWishListsByUesrId 삭제된 행의 수 : " + deletedRows);
     }
 
+    // 하트 누르면 찜 상품 개별 삭제
     @DeleteMapping("/{productId}")
     @Transactional
-    public void deleteWishListByIds(@PathVariable("productId") Long productId) {
-        log.info("WishListController deleteWishListByIds productId : " +productId);
-        wishListService.deleteSelectedWishListByIds(1L, productId);
+    public void deleteWishListByIds(@PathVariable("productId") Long productId, @RequestHeader("Authorization") String token) {
+        log.info("deleteWishListByIds token : " + token);
+
+        Long userId = userService.getUserIdFromToken(token);
+        log.info("getProductsInWishListByIds userId : " + userId);
+
+        log.info("WishListController deleteWishListByIds productId : " + productId);
+        wishListService.deleteSelectedWishListByIds(userId, productId);
     }
 }

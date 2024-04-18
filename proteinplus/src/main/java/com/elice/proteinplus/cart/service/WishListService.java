@@ -51,8 +51,8 @@ public class WishListService {
     }
 
 
-    public boolean checkProductInWishList(Long productId) {
+    public Long findIdByProductIdAndUserId(Long productId, Long userId) {
         // 해당 상품 ID가 위시리스트에 있는지 확인
-        return wishListRepository.existsByProductId(productId);
+        return wishListRepository.findIdByProductIdAndUserId(productId, userId);
     }
 }

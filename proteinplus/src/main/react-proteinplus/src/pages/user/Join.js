@@ -233,7 +233,8 @@ function Join(){
                         };
                         console.log(data);
                         const response = await axios.post(`${Spring_Server_Ip}/member/join`, data);
-                        navigate('/member/join/complete', {state: {loginId: response.data.loginId}}, {replace: true});
+                        console.log("name : "+response.data.name);
+                        navigate('/member/join/complete', {state: {loginId: data.loginId, name: data.name}}, {replace: true});
                     } catch (error) {
                         alert("회원가입에 실패했습니다.");
                     }

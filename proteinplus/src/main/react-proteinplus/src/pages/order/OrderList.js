@@ -1,48 +1,63 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../styles/order/css/OrderDetail.scoped.css';
 import MypageFrame from '../../components/MypageFrame';
 import axios from "axios";
 
-export default function OrderList(){
-    const tempProductData = [
-        {
-            id: 1,
-            name: '[맛있닭] 닭가슴살 스테이크',
-            imageUrl: 'https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20240109/IMG1704AEO777787343_330_330.jpg',
-            salePercent: 29,
-            price: '17,900',
-            originalPrice: '24,900',
-            rating: '★4.9',
-            totalRating: '(82,648)'
-        }
-    ];
-
+export default function OrderList() {
     const [orderListData, setOrderListData] = useState([]);
 
-    async function getOrderList() { // Axios 방식 사용
-        const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-        const response = await axios.get(`${Spring_Server_Ip}/api/user/mypage/orderlist`);
-        setOrderListData(response.data);
+    async function getOrderList() {
+        try {
+            const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
+            const response = await axios.get(`${Spring_Server_Ip}/api/user/mypage/orderlist`);
+            console.log("response.data-->", response);
+            setOrderListData(response.data.content);
+        } catch (error) {
+            console.error('주문 내역을 불러오는 중 오류가 발생했습니다:', error);
+        }
     }
-
-    useEffect(() => {
-        // 카테고리 전체 조회 함수 호출
-        getOrderList();
-    }, []);
 
     const handleCancelOrder = async (orderId) => {
         try {
             const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-            await axios.delete(`${Spring_Server_Ip}/api/user/mypage/orderlist/${orderId}`);
+            await axios.post(`${Spring_Server_Ip}/api/user/mypage/orderlist/${orderId}`);
             // 주문 취소 성공 시 화면 갱신 또는 사용자에게 알림
+            alert('주문이 취소되었습니다.');
+            // 취소 후 주문 목록을 다시 불러옴
+            getOrderList();
         } catch (error) {
-            // 오류 처리
             console.error('주문 취소 중 오류가 발생했습니다:', error);
         }
     };
 
+    useEffect(() => {
+        // 주문 내역 조회 함수 호출
+        getOrderList();
+    }, []);
+
+    const [addressData, setAddressData] = useState(null);
+    const [orderId, setOrderId] = useState(null); // 원하는 주문 ID 설정
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
+                const response = await axios.get(`${Spring_Server_Ip}/api/order/delivery/${orderId}`);
+                console.log("addressdata-->", response.data);
+                setAddressData(response.data);
+            } catch (error) {
+                console.error('주소 정보를 불러오는 중 오류가 발생했습니다:', error);
+            }
+        };
+
+        if (orderId !== null) {
+            fetchData();
+        }
+    }, [orderId]);
+
+
     const renderOrderListItems = () => {
-        if (tempProductData.length === 0) {
+        if (orderListData.length === 0) {
             return (
                 <div>
                     <div className="menu-title-area">
@@ -118,62 +133,69 @@ export default function OrderList(){
                 {/* search-box */}
                 <div className="order-list-area">
                     <ul className="order-list-inner">
-                        <li>
-                            {/* 주문 목록 */}
-                            <div className="order-list-head">
-                                <strong className="date">주문날짜</strong>
-                                <div className="right">
-                                    <span className="order-item-id">주문번호</span>
+                        {orderListData.map((order) => (
+                            <li key={order.orderId}>
+                                {/* 주문 목록 */}
+                                <div className="order-list-head">
+                                    <strong className="date">{order.orderDate}</strong>
+                                    <div className="right">
+                                        <span className="order-item-id">{order.orderId}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="order-content-box">
-                                <ul className="order-div-list">
-                                    {orderListData.map(item => (
-                                        <li key={item.id} className="order-div-item">
-                                            <div className="prd-info-area">
-                                                <div className="inner">
-                                                    <div className="column img">
-                                                        <a href="javascript:void(0);">
-                                                            <img src={item.imageUrl} alt="상품이미지"/>
-                                                        </a>
-                                                    </div>
-                                                    <div className="column tit">
-                                                        <div className="prd-state-row">
-                                                            <strong className="prd-state-head">배송상태표시</strong>
+                                <div className="order-content-box">
+                                    <ul className="order-div-list">
+                                        {order.orderDetailDtoList.map((item, index) => (
+                                            <li key={index} className="order-div-item">
+                                                <div className="prd-info-area">
+                                                    <div className="inner">
+                                                        <div className="column img">
+                                                            <img src={item.mainImageUrl} alt="상품이미지"/>
                                                         </div>
-                                                        <div className="tit">
-                                                            <a href="javascript:void(0);">{item.name}</a>
+                                                        <div className="column tit">
+                                                            <div className="prd-state-row">
+                                                                <strong className="prd-state-head">{order.orderStatus}</strong>
+                                                            </div>
+                                                            <div className="tit">
+                                                                <a href="javascript:void(0);">{item.productName}</a>
+                                                            </div>
                                                         </div>
-                                                        <p className="desc">상품옵션</p>
-                                                    </div>
-                                                    <div className="column col-btn-group">
-                                                        <div className="col-btn-group-inn">
-                                                            <button onClick={() => handleCancelOrder(item.id)}
-                                                                    className="prd-control-btn">
-                                                                <span>취소</span>
-                                                            </button>
+                                                        <div className="column col-btn-group">
+                                                            <div className="col-btn-group-inn">
+                                                                {order.orderStatus !== 'CANCELLED' &&
+                                                                    <button onClick={() => handleCancelOrder(order.orderId)} className="prd-control-btn">
+                                                                        <span>취소</span>
+                                                                    </button>
+                                                                }
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="price-item">
-                                                        <div className="dlv-nmr">
-                                                            <p className="dlv-nmr-price">
-                                                                <span className="num">{item.price}</span>원
-                                                            </p>
-                                                            <p className="dlv-nmr-cnt">
-                                                                <span className="num">상품개수</span>개
-                                                            </p>
+                                                        <div className="price-item">
+                                                            <div className="dlv-nmr">
+                                                                <p className="dlv-nmr-price">
+                                                                    <span className="num">{item.price}</span>원
+                                                                </p>
+                                                                <p className="dlv-nmr-cnt">
+                                                                    <span className="num">{item.count}</span>개
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </li>
-                                    ))}
-                                </ul>
-                                <div className="addr-info-line">
-                                    <p><i className="ico-bl-home2"></i>주소</p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <div className="addr-info-line">
+                                        <p><i className="ico-bl-home2"></i>주소</p>
+                                        {addressData ? (
+                                            <>
+                                                [{addressData.receiverPost}] {addressData.receiverAddr}, {addressData.receiverAddrDtl}
+                                            </>
+                                        ) : (
+                                            '주소 정보를 불러오는 중입니다...'
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>
@@ -182,4 +204,3 @@ export default function OrderList(){
 
     return <MypageFrame>{renderOrderListItems()}</MypageFrame>;
 }
-

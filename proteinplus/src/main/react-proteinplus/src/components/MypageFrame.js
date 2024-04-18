@@ -1,22 +1,41 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import '../styles/common/css/MypageFrame.css';
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 export default function MypageFrame({children}) {
+  const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
+  const [userName, setUserName] = useState('');
+  const token = window.localStorage.getItem("token");
 
   useEffect(() => {
     checkToken();
+    getUserName();
   }, []);
 
   async function checkToken() {
-    const token = window.localStorage.getItem("token");
     if (!token) {
       // 토큰이 없는 경우 로그인 페이지로 리디렉션
       window.location.href = '/auth/login'; // 로그인 페이지로 이동
     }
   }
+
+  async function getUserName() {
+    try {
+      const response = await axios.get(`${Spring_Server_Ip}/mypage`, {
+        headers: {
+          Authorization: `${token}`
+        }
+      });
+      const name = response.data; // 여기서 name을 가져오거나 응답 데이터 구조에 맞게 변경
+      setUserName(name);
+    } catch (error) {
+      console.error('유저 이름을 가져오는 중 에러가 발생했습니다:', error);
+    }
+  }
+
     return (
         <div className="wrap main">
             {/* ========== 컨텐츠 영역 :: container ========== */}
@@ -36,7 +55,7 @@ export default function MypageFrame({children}) {
                                             style={{ display: 'inline-block', width: 'calc(100% - 60px)' }}
                                         >
                                             <p className="greeting">
-                                                <strong className="name">정주용</strong>님 반갑습니다
+                                                <strong className="name">{userName}</strong>님 반갑습니다
                                             </p>
                                         </div>
                                     </div>
