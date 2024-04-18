@@ -52,23 +52,9 @@ public class ProductService {
         return switch (orderBy) {
             //판매량순
             //case "sales" -> productRepository.findAllByCategoryIdOrderBySales(pageable, categoryId);
-            //신상품순
-            case "uploadDateDesc" -> productRepository.findAllByCategoryIdOrderByUploadDateDesc(pageable, categoryId);
-            //할인율순
-            case "discountRateDesc" -> productRepository.findAllByCategoryIdOrderByDiscountRateDesc(pageable, categoryId);
-            default -> productRepository.findAllByCategoryId(pageable, categoryId);
+        default -> productRepository.findAllByCategoryId(pageable, categoryId);
         };
     }
-
-//    @Transactional(readOnly = true)
-//    public Page<Product> findAllIncludingSoldOut(Pageable pageable) {
-//        return productRepository.findAllIncludingSoldOut(pageable);
-//    }
-//
-//    @Transactional(readOnly = true)
-//    public Page<Product> findAllExcludingSoldOut(Pageable pageable) {
-//        return productRepository.findAllExcludingSoldOut(pageable);
-//    }
 
     //상품 상세 페이지로
     @Transactional(readOnly = true)

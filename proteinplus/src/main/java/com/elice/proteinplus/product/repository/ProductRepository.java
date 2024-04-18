@@ -15,27 +15,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 //    @Query("SELECT p FROM Product p LEFT JOIN p.orders o WHERE p.category.id = :categoryId OR p.category.parent.id = :categoryId GROUP BY p ORDER BY COUNT(o) DESC")
 //    Page<Product> findAllByCategoryIdOrderBySales(Pageable pageable, @Param("categoryId") Long categoryId);
 
-    //신상품순
-    @Query("SELECT p FROM Product p JOIN p.category c WHERE c.id = :categoryId OR c.parent.id = :categoryId ORDER BY p.uploadDate DESC")
-    Page<Product> findAllByCategoryIdOrderByUploadDateDesc(Pageable pageable, @Param("categoryId") Long categoryId);
-
-    //할인율순
-    @Query("SELECT p FROM Product p JOIN p.category c WHERE c.id = :categoryId OR c.parent.id = :categoryId ORDER BY p.discountRate DESC")
-    Page<Product> findAllByCategoryIdOrderByDiscountRateDesc(Pageable pageable, @Param("categoryId") Long categoryId);
-
     Page<Product> findAllByCategoryId(Pageable pageable, Long categoryId);
 
     //카테고리 상품 총 개수
     //Long countByCategoryId(Long categoryId);
-
-    //품절포함
-//    @Query("SELECT p FROM Product p")
-//    Page<Product> findAllIncludingSoldOut(Pageable pageable);
-//
-//    //품절 제외
-//    @Query("SELECT p FROM Product p WHERE p.productStatus = 'sell'")
-//    Page<Product> findAllExcludingSoldOut(Pageable pageable);
-
 
     /************************ react에서 사용중인 코드 *********************************/
     //카테고리 id 별 상품 조회

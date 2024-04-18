@@ -1,20 +1,23 @@
 package com.elice.proteinplus.user.Service;
 
+import com.elice.proteinplus.jwt.JwtFilter;
 import com.elice.proteinplus.jwt.token.TokenProvider;
 import com.elice.proteinplus.jwt.token.dto.TokenInfo;
 import com.elice.proteinplus.user.entity.Role;
 import com.elice.proteinplus.user.entity.User;
 import com.elice.proteinplus.user.Repository.UserJoinRepository;
 import com.elice.proteinplus.user.dto.UserJoinDTO;
+import io.jsonwebtoken.Claims;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.OptionalLong;
 import java.util.regex.Pattern;
 
 @Service
@@ -30,6 +33,7 @@ public class UserJoinService {
 
     private final PasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
+    private final JwtFilter jwtFilter;
 
     //회원가입
     //비밀번호 암호화
@@ -120,4 +124,28 @@ public class UserJoinService {
         return userJoinRepository.findById(UserId)
                 .orElseThrow(() -> new EntityNotFoundException("유저을 찾을 수 없습니다. ID: " + UserId));
     }
+
+    // 사용자 ID 추출 메서드
+    public Long getUserIdFromToken(String token) {
+        if (token != null) {
+            Claims claims = tokenProvider.validateToken(token).getClaims();
+            if (claims != null) {
+                return userJoinRepository.findUserIdByLoginId(claims.getSubject());
+            }
+        }
+        throw new UsernameNotFoundException("Unable to extract user ID from token");
+    }
+
+
+    public String getUserNameFromToken(String token) {
+        if (token != null) {
+            Claims claims = tokenProvider.validateToken(token).getClaims();
+            if (claims != null) {
+                return userJoinRepository.findUserNameByLoginId(claims.getSubject());
+            }
+        }
+        throw new UsernameNotFoundException("Unable to extract user Name from token");
+    }
+
+
 }

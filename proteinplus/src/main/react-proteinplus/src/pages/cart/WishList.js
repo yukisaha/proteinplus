@@ -25,13 +25,12 @@ export default function WishList() {
     }
 
     async function getWishList() {
-
-        const response = await axios.get(`${Spring_Server_Ip}/wishList`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
-        try{
+        try {
+            const response = await axios.get(`${Spring_Server_Ip}/wishList`, {
+                headers: {
+                    Authorization: `${token}`
+                }
+            });
             const reviews = await axios.get(`${Spring_Server_Ip}/review`);
 
             // productId를 기준으로 리뷰 정보를 매핑
@@ -51,10 +50,16 @@ export default function WishList() {
             });
 
             setWishListData(wishListWithReview);
-        }catch(error){
-            console.error("서버 요청 중 에러가 발생했습니다:", error);
+        } catch (error) {
+            if (error.response && error.response.status === 401) {
+                // 인증 실패 시 로그인 페이지로 리디렉션
+                console.error("토큰 검증 안됨 :", error);
+            } else {
+                console.error("서버 요청 중 에러가 발생했습니다:", error);
+            }
         }
     }
+
 
 
     const handleDeleteSelected = async (productId) => {

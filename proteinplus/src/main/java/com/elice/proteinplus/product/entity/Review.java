@@ -2,7 +2,9 @@ package com.elice.proteinplus.product.entity;
 
 import com.elice.proteinplus.user.entity.User;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -20,13 +22,13 @@ public class Review {
     @Column(name = "review_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "user_id", nullable = false)
+//    private User user;
 
     @Column(nullable = false)
     private int rating;
@@ -38,5 +40,6 @@ public class Review {
     private String content;
 
     //리뷰이미지는 시간남으면 하기...
-
+    @Column(name = "review_image_url", length = 1000)
+    private String reviewImageUrl;
 }
