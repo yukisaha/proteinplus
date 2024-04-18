@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {uploadImage} from './firebase';
+import '../../styles/product/css/UploadProduct.scoped.css';
 
 function UploadProduct() {
   const [productName, setProductName] = useState('');
@@ -96,8 +97,7 @@ function UploadProduct() {
             required
           />
           <label htmlFor="content">상품정보</label>
-          <input
-              type="text"
+          <textarea
               id="content"
               value={content}
               onChange={(e) => setContent(e.target.value)}
