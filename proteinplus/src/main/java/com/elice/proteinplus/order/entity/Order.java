@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jakarta.persistence.FetchType.LAZY;
+
 @Entity
 @NoArgsConstructor
 @Getter
@@ -32,15 +34,10 @@ public class Order extends BaseTimeEntity{
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus; //주문상태
 
-    @Column(name = "total_price")
-    private int total_price;
-
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderDetail> orderDetails = new ArrayList<>(); //하나의 주문이 여러개의 주문 상품을 가지므로 List사용
 
-    //cascade : order를 저장할때 delivery도 자동으로 persist 해준다.
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //하나의 배송정보는 하나의 주문정보만 가져야 하니까
-    @JoinColumn(name = "delivery_id")  //연관관계 주인 fk
+    @OneToOne(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Delivery delivery; //배송정보
 
 
@@ -56,7 +53,6 @@ public class Order extends BaseTimeEntity{
         order.setUser(user);
         order.setOrderDate(orderDate);
         order.setOrderStatus(orderStatus);
-//        order.setOrderDetails(orderDetails);
         order.setOrderStatus(OrderStatus.ORDER);
         order.setOrderDate(LocalDateTime.now());
         return order;

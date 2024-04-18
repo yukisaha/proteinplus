@@ -77,68 +77,6 @@ public class OrderService {
         return new PageImpl<OrderHistDto>(orderHistDtos);
     }
 
-//    /* 주문 (회원) */
-//    @Transactional
-//    public Long order(OrderDto orderDto, DeliveryDto deliveryDto, Long userId) {
-//        // 상품 조회
-//        Product product = productRepository.findById(orderDto.getProductId())
-//                .orElseThrow(EntityNotFoundException::new);
-//        // 사용자 조회
-//        User user = userRepository.findById(userId)
-//                .orElseThrow(EntityNotFoundException::new);
-//
-//        // 배송 정보 생성
-//        Address address = deliveryDto.getAddress();
-//        Delivery delivery = new Delivery();
-//        delivery.setReceiverName(deliveryDto.getReceiverName());
-//        delivery.setReceiverPhone(deliveryDto.getReceiverPhoneNumber());
-//        delivery.setDeliveryReq(deliveryDto.getDeliveryReq());
-//        delivery.setAddress(address);
-//
-//        // 배송 정보 저장
-//        deliveryRepository.save(delivery);
-//
-//        // 주문 상세 생성
-//        OrderDetail orderDetail = OrderDetail.createOrderDetail(product, product.getPrice(), orderDto.getCount());
-//        // 주문 상세 목록 생성
-//        List<OrderDetail> orderDetailList = new ArrayList<>();
-//        orderDetailList.add(orderDetail);
-//
-//        LocalDateTime orderDate = LocalDateTime.now();
-//        OrderStatus orderStatus = OrderStatus.ORDER;
-//
-//        //주문 생성
-//        Order order = Order.createOrder(user, orderDate, orderStatus, orderDetailList);
-//        order.setDelivery(delivery); // 배송 정보 설정
-//        orderRepository.save(order);
-//
-//        return order.getId();
-//    }
-
-//    public Long order(List<OrderDto> orderDto, Long userId) {
-//        // 상품 조회
-//        Product product = productRepository.findById(orderDto.getProductId())
-//                .orElseThrow(EntityNotFoundException::new);
-//        // 사용자 조회
-//        User user = userRepository.findById(userId)
-//                .orElseThrow(EntityNotFoundException::new);
-//
-//        // 주문 상세 생성
-//        OrderDetail orderDetail = OrderDetail.createOrderDetail(product, product.getPrice(), orderDto.getCount());
-//        // 주문 상세 목록 생성
-//        List<OrderDetail> orderDetailList = new ArrayList<>();
-//        orderDetailList.add(orderDetail);
-//
-//        LocalDateTime orderDate = LocalDateTime.now();
-//        OrderStatus orderStatus = OrderStatus.ORDER;
-//
-//        //주문 생성
-//        Order order = Order.createOrder(user, orderDate, orderStatus, orderDetailList);
-//        orderRepository.save(order);
-//
-//        return order.getId();
-//    }
-
     @Transactional
     public Long order(List<OrderDto> orderDtoList, Long userId) {
         User user = userRepository.findById(userId)
@@ -191,13 +129,13 @@ public class OrderService {
         delivery.setReceiverAddr(deliveryDto.getReceiverAddr());
         delivery.setReceiverPost(deliveryDto.getReceiverPost());
         delivery.setReceiverAddrDtl(deliveryDto.getReceiverAddrDtl());
+        delivery.setTotalPrice(deliveryDto.getTotalPrice());
 
         // 배송 정보 저장
         deliveryRepository.save(delivery);
 
         return delivery.getId();
     }
-
 
 
     /* 주문 수정(회원) - 배송지 */

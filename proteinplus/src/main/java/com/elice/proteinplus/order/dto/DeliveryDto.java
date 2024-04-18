@@ -1,5 +1,6 @@
 package com.elice.proteinplus.order.dto;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,5 +23,7 @@ public class DeliveryDto {
     private String receiverPost;
 
     private String receiverAddrDtl;
+
+    private int totalPrice;
 
 }

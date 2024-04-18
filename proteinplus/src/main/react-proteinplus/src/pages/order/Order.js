@@ -7,6 +7,7 @@ import Select from "react-select";
 import {useDaumPostcodePopup} from 'react-daum-postcode';
 
 
+
 export default function Order(){
 
     const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
@@ -76,6 +77,21 @@ export default function Order(){
         }
     };
 
+    const handleSelectChange = (selectedOption) => {
+        // 선택한 옵션에 따라 selectOption 상태 업데이트
+        setSelectOption(selectedOption);
+
+        // 선택한 옵션에 따라 deliveryReq 상태 업데이트
+        if (selectedOption.value === '직접입력') {
+            // 직접입력인 경우, deliveryReq 상태 업데이트
+            setDeliveryReq('');
+        } else {
+            // 다른 옵션인 경우, deliveryReq 상태 업데이트
+            setDeliveryReq(selectedOption.value);
+        }
+    };
+
+
     // daum 주소 가져오기
     const handleComplete = (data) => {
         let fullAddress = data.address;
@@ -144,15 +160,12 @@ export default function Order(){
         }
     };
 
-
     async function getOrderList(productIds) { // Axios
         console.log("productIds:", productIds); // productIds를 콘솔에 출력하여 확인
         const response = await axios.post(`${Spring_Server_Ip}/cart`,  productIds );
         setOrderData(response.data);
     }
 
-
-    // 주문 생성 함수
     // 주문 생성 함수
     const handleOrder = async () => {
         try {
@@ -188,14 +201,14 @@ export default function Order(){
             );
             const deliveryId = deliveryResponse.data;
             console.log(deliveryId);
+            // 주문 생성 성공 시 페이지 이동
+            window.location.href = '/mypage/orderList'; // 이동할 페이지의 경로
         }
         catch (error) {
             // 오류 처리
             console.error('Error while handling order:', error);
         }
     };
-
-
 
 
     const renderOrderItems = () => {
@@ -402,7 +415,7 @@ export default function Order(){
                                     <div className="request-detail">
                                         <div className="ui-select select-box w-full">
                                             <Select options={options} //위에서 만든 배열을 select로 넣기
-                                                    onChange={setSelectOption} //값이 바뀌면 setState되게
+                                                    onChange={handleSelectChange}
                                                     defaultValue={options[0]}/>
 
                                         </div>
