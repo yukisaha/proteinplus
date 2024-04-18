@@ -134,7 +134,6 @@ export default function CancelList(){
                                                         <div className="tit">
                                                             <a href="javascript:void(0);">{item.name}</a>
                                                         </div>
-                                                        <p className="desc">상품옵션</p>
                                                     </div>
                                                     <div className="price-item">
                                                         <div className="dlv-nmr">
