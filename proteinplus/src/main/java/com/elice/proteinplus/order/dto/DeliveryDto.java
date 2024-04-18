@@ -1,6 +1,6 @@
 package com.elice.proteinplus.order.dto;
 
-import com.elice.proteinplus.order.entity.Address;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,10 +14,16 @@ public class DeliveryDto {
 
     private String receiverName;
 
-    private String receiverPhoneNumber;
+    private int receiverPhoneNumber;
 
     private String deliveryReq;
 
-    private Address address;
+    private String receiverAddr;
+
+    private String receiverPost;
+
+    private String receiverAddrDtl;
+
+    private int totalPrice;
 
 }

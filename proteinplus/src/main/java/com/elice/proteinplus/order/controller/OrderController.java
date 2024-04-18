@@ -28,32 +28,35 @@ public class OrderController {
     // 특정 사용자의 주문 목록을 조회합니다.
     @GetMapping("/user/mypage/orderlist")
     public ResponseEntity<Page<OrderHistDto>> getUserOrders(@PathVariable Long userId, Pageable pageable) {
-        Page<OrderHistDto> orders = orderService.getOrders(userId, pageable);
+        Page<OrderHistDto> orders = orderService.getOrders(1L, pageable);
         return ResponseEntity.ok(orders);
     }
 
     // 특정 사용자의 취소된 주문 목록을 조회합니다.
     @GetMapping("/user/mypage/cancellist")
-    public ResponseEntity<Page<OrderHistDto>> getCancelledUserOrders(Pageable pageable) {
+    public ResponseEntity<Page<OrderHistDto>> getCancelledUserOrders(@PathVariable Long userId, Pageable pageable) {
         Page<OrderHistDto> cancelledOrders = orderService.getCancelledOrders(1L, pageable);
         return ResponseEntity.ok(cancelledOrders);
     }
 
     // 주문을 생성합니다.
     @PostMapping("/order/order")
-    public ResponseEntity<Long> addOrder(@RequestBody List<OrderDto> orderDto) {
-        log.info(orderDto.toString()+"addOrder");
-        Long orderId = orderService.order(orderDto, 1L);
+    public ResponseEntity<Long> addOrder(@RequestBody List<OrderDto> orderDtoList) {
+        Long orderId = orderService.order(orderDtoList, 1L); // 여기서 1L은 사용자 ID로 변경 가능
         return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
     }
+
+
 
     // 배송정보을 생성합니다.
     @PostMapping("/order/delivery")
     public ResponseEntity<Long> addDelivery(@RequestBody DeliveryDto deliveryDto) {
-        log.info(deliveryDto.toString()+"addDelivery");
-        Long orderId = orderService.delivery(deliveryDto, 1L);
-        return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
+        log.info(deliveryDto.toString() + " addDelivery");
+        Long orderId = deliveryDto.getOrderId(); // DeliveryDto에서 orderId를 가져옴
+        Long deliveryId = orderService.delivery(deliveryDto, orderId); // orderId를 함께 전달
+        return ResponseEntity.status(HttpStatus.CREATED).body(deliveryId);
     }
+
 
 
 
@@ -70,7 +73,7 @@ public class OrderController {
 //    }
 
     // 주문을 취소합니다.
-    @DeleteMapping("/user/mypage/orderlist/{orderId}")
+    @PostMapping("/user/mypage/orderlist/{orderId}")
     public ResponseEntity<Void> cancelOrder(@PathVariable Long orderId) {
         boolean cancelled = orderService.cancelOrder(orderId);
         if (cancelled) {

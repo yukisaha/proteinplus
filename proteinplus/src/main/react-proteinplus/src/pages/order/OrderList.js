@@ -4,18 +4,6 @@ import MypageFrame from '../../components/MypageFrame';
 import axios from "axios";
 
 export default function OrderList(){
-    const tempProductData = [
-        {
-            id: 1,
-            name: '[맛있닭] 닭가슴살 스테이크',
-            imageUrl: 'https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20240109/IMG1704AEO777787343_330_330.jpg',
-            salePercent: 29,
-            price: '17,900',
-            originalPrice: '24,900',
-            rating: '★4.9',
-            totalRating: '(82,648)'
-        }
-    ];
 
     const [orderListData, setOrderListData] = useState([]);
 
@@ -33,7 +21,7 @@ export default function OrderList(){
     const handleCancelOrder = async (orderId) => {
         try {
             const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-            await axios.delete(`${Spring_Server_Ip}/api/user/mypage/orderlist/${orderId}`);
+            await axios.post(`${Spring_Server_Ip}/api/user/mypage/orderlist/${orderId}`);
             // 주문 취소 성공 시 화면 갱신 또는 사용자에게 알림
         } catch (error) {
             // 오류 처리
@@ -42,7 +30,7 @@ export default function OrderList(){
     };
 
     const renderOrderListItems = () => {
-        if (tempProductData.length === 0) {
+        if (orderListData.length === 0) {
             return (
                 <div>
                     <div className="menu-title-area">
@@ -144,7 +132,6 @@ export default function OrderList(){
                                                         <div className="tit">
                                                             <a href="javascript:void(0);">{item.name}</a>
                                                         </div>
-                                                        <p className="desc">상품옵션</p>
                                                     </div>
                                                     <div className="column col-btn-group">
                                                         <div className="col-btn-group-inn">

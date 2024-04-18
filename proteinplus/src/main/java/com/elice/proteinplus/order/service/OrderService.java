@@ -6,6 +6,7 @@ import com.elice.proteinplus.order.dto.OrderDto;
 import com.elice.proteinplus.order.dto.OrderHistDto;
 import com.elice.proteinplus.order.entity.*;
 import com.elice.proteinplus.order.repository.DeliveryRepository;
+import com.elice.proteinplus.order.repository.OrderDetailRepository;
 import com.elice.proteinplus.order.repository.OrderRepository;
 import com.elice.proteinplus.user.Repository.UserJoinRepository;
 import com.elice.proteinplus.product.entity.Product;
@@ -25,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 /* 주문 로직 */
@@ -36,6 +38,7 @@ public class OrderService {
     private final ProductRepository productRepository;
     private final UserJoinRepository userRepository;
     private final DeliveryRepository deliveryRepository;
+    private final OrderDetailRepository orderDetailRepository;
 
     /* 회원의 주문 내역 조회(회원) */
     @Transactional
@@ -74,123 +77,66 @@ public class OrderService {
         return new PageImpl<OrderHistDto>(orderHistDtos);
     }
 
-//    /* 주문 (회원) */
-//    @Transactional
-//    public Long order(OrderDto orderDto, DeliveryDto deliveryDto, Long userId) {
-//        // 상품 조회
-//        Product product = productRepository.findById(orderDto.getProductId())
-//                .orElseThrow(EntityNotFoundException::new);
-//        // 사용자 조회
-//        User user = userRepository.findById(userId)
-//                .orElseThrow(EntityNotFoundException::new);
-//
-//        // 배송 정보 생성
-//        Address address = deliveryDto.getAddress();
-//        Delivery delivery = new Delivery();
-//        delivery.setReceiverName(deliveryDto.getReceiverName());
-//        delivery.setReceiverPhone(deliveryDto.getReceiverPhoneNumber());
-//        delivery.setDeliveryReq(deliveryDto.getDeliveryReq());
-//        delivery.setAddress(address);
-//
-//        // 배송 정보 저장
-//        deliveryRepository.save(delivery);
-//
-//        // 주문 상세 생성
-//        OrderDetail orderDetail = OrderDetail.createOrderDetail(product, product.getPrice(), orderDto.getCount());
-//        // 주문 상세 목록 생성
-//        List<OrderDetail> orderDetailList = new ArrayList<>();
-//        orderDetailList.add(orderDetail);
-//
-//        LocalDateTime orderDate = LocalDateTime.now();
-//        OrderStatus orderStatus = OrderStatus.ORDER;
-//
-//        //주문 생성
-//        Order order = Order.createOrder(user, orderDate, orderStatus, orderDetailList);
-//        order.setDelivery(delivery); // 배송 정보 설정
-//        orderRepository.save(order);
-//
-//        return order.getId();
-//    }
-
-//    public Long order(List<OrderDto> orderDto, Long userId) {
-//        // 상품 조회
-//        Product product = productRepository.findById(orderDto.getProductId())
-//                .orElseThrow(EntityNotFoundException::new);
-//        // 사용자 조회
-//        User user = userRepository.findById(userId)
-//                .orElseThrow(EntityNotFoundException::new);
-//
-//        // 주문 상세 생성
-//        OrderDetail orderDetail = OrderDetail.createOrderDetail(product, product.getPrice(), orderDto.getCount());
-//        // 주문 상세 목록 생성
-//        List<OrderDetail> orderDetailList = new ArrayList<>();
-//        orderDetailList.add(orderDetail);
-//
-//        LocalDateTime orderDate = LocalDateTime.now();
-//        OrderStatus orderStatus = OrderStatus.ORDER;
-//
-//        //주문 생성
-//        Order order = Order.createOrder(user, orderDate, orderStatus, orderDetailList);
-//        orderRepository.save(order);
-//
-//        return order.getId();
-//    }
-
+    @Transactional
     public Long order(List<OrderDto> orderDtoList, Long userId) {
-        // 사용자 조회
         User user = userRepository.findById(userId)
                 .orElseThrow(EntityNotFoundException::new);
-
-        // 주문 상세 목록 생성
-        List<OrderDetail> orderDetailList = new ArrayList<>();
-
-        for (OrderDto orderDto : orderDtoList) {
-            // 상품 조회
-            Product product = productRepository.findById(orderDto.getProductId())
-                    .orElseThrow(EntityNotFoundException::new);
-
-            // 주문 상세 생성
-            OrderDetail orderDetail = OrderDetail.createOrderDetail(product, product.getPrice(), orderDto.getCount());
-            orderDetailList.add(orderDetail);
-        }
 
         LocalDateTime orderDate = LocalDateTime.now();
         OrderStatus orderStatus = OrderStatus.ORDER;
 
-        //주문 생성
-        Order order = Order.builder()
-                .user(user)
-                .orderDate(orderDate)
-                .orderStatus(orderStatus)
-                .orderDetails(orderDetailList)
-                .build();
-        orderRepository.save(order);
+        Order order = Order.createOrder(user, orderDate, orderStatus);
+        order = orderRepository.save(order);
+
+        for (OrderDto orderDto : orderDtoList) {
+            List<Long> productIds = orderDto.getProductIds();
+            List<Integer> counts = orderDto.getCounts();
+
+            for (int i = 0; i < productIds.size(); i++) {
+                Long productId = productIds.get(i);
+                Integer count = counts.get(i);
+
+                Product product = productRepository.findById(productId)
+                        .orElseThrow(EntityNotFoundException::new);
+
+                OrderDetail orderDetail = OrderDetail.createOrderDetail(order, product, count);
+                orderDetailRepository.save(orderDetail);
+            }
+        }
 
         return order.getId();
     }
 
 
 
-    public Long delivery(DeliveryDto deliveryDto, Long userId) {
-        // 사용자 조회
-        // 여기서는 사용자 조회 로직이 필요한 경우에만 사용하도록 가정합니다.
-        // 예를 들어, 배송 주소를 사용자의 기본 배송 주소로 저장하는 등의 로직이 있다면 사용될 수 있습니다.
+    @Transactional
+    public Long delivery(DeliveryDto deliveryDto, Long orderId) {
+        // 주문에 대한 배송 정보가 이미 존재하는지 확인
+        if (deliveryRepository.existsByOrder_Id(orderId)) {
+            throw new IllegalStateException("이 주문에 대한 배송 정보가 이미 존재합니다.");
+        }
 
-        User user = userRepository.findById(userId)
+        // 주문 조회
+        Order order = orderRepository.findById(orderId)
                 .orElseThrow(EntityNotFoundException::new);
 
         // 배송 정보 생성
         Delivery delivery = new Delivery();
+        delivery.setOrder(order); // 주문 객체 설정
         delivery.setReceiverName(deliveryDto.getReceiverName());
         delivery.setReceiverPhone(deliveryDto.getReceiverPhoneNumber());
         delivery.setDeliveryReq(deliveryDto.getDeliveryReq());
-        delivery.setAddress(deliveryDto.getAddress());
+        delivery.setReceiverAddr(deliveryDto.getReceiverAddr());
+        delivery.setReceiverPost(deliveryDto.getReceiverPost());
+        delivery.setReceiverAddrDtl(deliveryDto.getReceiverAddrDtl());
+        delivery.setTotalPrice(deliveryDto.getTotalPrice());
 
         // 배송 정보 저장
         deliveryRepository.save(delivery);
 
         return delivery.getId();
     }
+
 
     /* 주문 수정(회원) - 배송지 */
     @Transactional
