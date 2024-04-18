@@ -126,26 +126,6 @@ public class UserJoinService {
     }
 
     // 사용자 ID 추출 메서드
-//    public Long getUserIdFromToken(String token) {
-//        String resolvedToken = jwtFilter.resolveToken();
-//        if (resolvedToken != null) {
-//            Claims claims = tokenProvider.validateToken(resolvedToken).getClaims();
-//            if (claims != null) {
-//                return Long.parseLong(claims.getSubject());
-//            }
-//        }
-//        throw new UsernameNotFoundException("Unable to extract user ID from token");
-//    }
-    // 사용자 ID 추출 메서드
-//    public Optional<Long> getUserIdFromToken(String token) {
-//        if (token != null) {
-//            Claims claims = tokenProvider.validateToken(token).getClaims();
-//            if (claims != null) {
-//                return userJoinRepository.findUserIdByLoginId(claims.getSubject());
-//            }
-//        }
-//        throw new UsernameNotFoundException("Unable to extract user ID from token");
-//    }
     public Long getUserIdFromToken(String token) {
         if (token != null) {
             Claims claims = tokenProvider.validateToken(token).getClaims();
