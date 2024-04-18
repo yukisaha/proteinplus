@@ -66,6 +66,10 @@
   border-radius: 6px;
 }
 
+.pwdValidateStyle {
+  color: #ccc;
+}
+
 /* join 환영 */
 .join-greeting {
   font-size: 32px;

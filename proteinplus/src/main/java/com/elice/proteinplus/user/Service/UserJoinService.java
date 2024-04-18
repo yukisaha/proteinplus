@@ -3,6 +3,7 @@ package com.elice.proteinplus.user.Service;
 import com.elice.proteinplus.jwt.JwtFilter;
 import com.elice.proteinplus.jwt.token.TokenProvider;
 import com.elice.proteinplus.jwt.token.dto.TokenInfo;
+import com.elice.proteinplus.user.dto.UserUpdateDTO;
 import com.elice.proteinplus.user.entity.Role;
 import com.elice.proteinplus.user.entity.User;
 import com.elice.proteinplus.user.Repository.UserJoinRepository;
@@ -17,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.awt.event.WindowFocusListener;
 import java.util.OptionalLong;
 import java.util.regex.Pattern;
 
@@ -33,7 +35,6 @@ public class UserJoinService {
 
     private final PasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
-    private final JwtFilter jwtFilter;
 
     //회원가입
     //비밀번호 암호화
@@ -51,6 +52,8 @@ public class UserJoinService {
                 .email(joinUserDTO.getEmail())
                 .role(Role.ROLE_USER)
                 .build();
+
+        user.setIsDelete("N");
 
         return userJoinRepository.save(user);
     }
@@ -76,7 +79,7 @@ public class UserJoinService {
     }
 
     //전화번호 중복체크
-    public boolean phoneDuplicateCheck(int phone){
+    public boolean phoneDuplicateCheck(String phone){
         return userJoinRepository.existsByPhone(phone);
     }
 
@@ -84,13 +87,20 @@ public class UserJoinService {
     //로그인
 
     public TokenInfo login(String loginId, String loginPwd){
-        try {
-            User user = findUserByLoginId(loginId);
 
-            checkPassword(loginPwd, user);
+        User user = findUserByLoginId(loginId);
 
-            return tokenProvider.createToken(user);
-        }catch (IllegalArgumentException e){
+        if(user.getIsDelete().equals("N")){
+            try {
+
+                checkPassword(loginPwd, user);
+
+                return tokenProvider.createToken(user);
+            }catch (IllegalArgumentException e){
+                throw new IllegalArgumentException("계정이 존재하지 않거나 비밀번호가 잘못되었습니다");
+            }
+
+        } else {
             throw new IllegalArgumentException("계정이 존재하지 않거나 비밀번호가 잘못되었습니다");
         }
     }
@@ -114,8 +124,53 @@ public class UserJoinService {
         });
     }
 
-    public void delete(String loginId) {
-        userJoinRepository.deleteByLoginId(loginId);
+    //마이페이지 비밀번호 체크
+    public boolean pwdCheckByUserId(String token, String loginPwd){
+
+        // userId 가져오기
+        Long userId = getUserIdFromToken(token);
+
+        User user = userJoinRepository.findUserByUserId(userId);
+
+        checkPassword(loginPwd, user);
+        return true;
+    }
+
+    //회원 정보 조회
+    public User getUserByUserId(String token){
+
+        Long userId = getUserIdFromToken(token);
+
+        return userJoinRepository.findUserByUserId(userId);
+    }
+
+
+    //회원 정보 수정
+    public User updateUser(String token, UserUpdateDTO userUpdateDTO){
+
+        Long userId = getUserIdFromToken(token);
+
+        User updateUser = userJoinRepository.findUserByUserId(userId);
+
+        checkPasswordStrength(userUpdateDTO.getLoginPwd());
+
+        userUpdateDTO.setLoginPwd(passwordEncoder.encode(userUpdateDTO.getLoginPwd()));
+
+        updateUser.update(userUpdateDTO);
+
+
+        return userJoinRepository.save(updateUser);
+    }
+
+    //회원 삭제
+    public void delete(String token) {
+
+        Long userId = getUserIdFromToken(token);
+
+        User deleteUser = userJoinRepository.findUserByUserId(userId);
+
+        //is_delete = Y로 변경
+        deleteUser.setIsDelete("Y");
     }
 
 

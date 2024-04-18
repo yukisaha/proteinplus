@@ -56,7 +56,7 @@ function Login(){
             }
 
         }catch (error){
-            alert("로그인 실패: " + error.message);
+            alert("계정이 존재하지 않거나 비밀번호가 잘못되었습니다");
         }
     }
 

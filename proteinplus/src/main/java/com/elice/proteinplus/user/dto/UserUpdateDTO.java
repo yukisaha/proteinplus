@@ -5,16 +5,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserJoinDTO {
+public class UserUpdateDTO {
 
-    //회원가입 시 필요한 정보
-    private String name;
-    private String nickname;
-    private String loginId;
     private String loginPwd;
-    private String phone;
-    private String email;
+    private String nickname;
+    private String address;
+    private String detailAddress;
+//    private LocalDate birth;
+
 }

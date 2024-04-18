@@ -1,9 +1,28 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import "../../styles/user/css/login.scoped.css"
 import MypageFrame from "../../components/MypageFrame";
+import axios from "axios";
 
 function UserDelete(){
+
+    const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip
+    const token = window.localStorage.getItem("token");
+
+    const deleteUser = async (e) => {
+        e.preventDefault(); // 폼의 기본 제출 동작을 막음
+
+        try {
+            const response = await axios.delete(`${Spring_Server_Ip}/member/delete`, {headers: {Authorization: `${token}`}});
+            //성공했을경우 수정 페이지로
+            console.log(response.data);
+            window.localStorage.removeItem("token");
+            window.location.href = '/';
+        } catch (error) {
+            alert("오류 발생");
+        }
+    };
+
+
 
     const userDelete = () => {
         return(
@@ -34,32 +53,29 @@ function UserDelete(){
                     {/* 회원탈퇴 form */}
                     <div className="profile_frame-inner">
                         {/*<span>탈퇴사유</span>*/}
-                        {/*<form*/}
-                        {/*    id="user-delete_form"*/}
-                        {/*    name="user-delete_form"*/}
-                        {/*    action=""*/}
-                        {/*    method=""*/}
-                        {/*    onsubmit=""*/}
-                        {/*>*/}
+                        <form
+                            id="user-delete_form"
+                            name="user-delete_form"
+                            onSubmit={deleteUser}
+                        >
                         {/*    <textarea></textarea>*/}
-                        <div className="profile_page-guide-center">
-                            <ul className="profile_txt-link-list">
-                                <button
-                                    type="submit"
-                                    className="user_btn-secondary w-full"
-                                >
-                                    <span>취소</span>
-                                </button>
-                                <button type="submit" className="user_btn-primary w-full">
-                                    <span>확인</span>
-                                </button>
-                            </ul>
-                        </div>
-                        {/*</form>*/}
+                            <div className="profile_page-guide-center">
+                                <ul className="profile_txt-link-list">
+                                    <button
+                                        className="user_btn-secondary w-full"
+                                    >
+                                        <span>취소</span>
+                                    </button>
+                                    <button type={`submit`} className="user_btn-primary w-full">
+                                        <span>확인</span>
+                                    </button>
+                                </ul>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 
     return<MypageFrame>{userDelete()}</MypageFrame>

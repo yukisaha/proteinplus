@@ -23,8 +23,10 @@ function Join(){
     const [isIdAvailable, setIsIdAvailable] = useState(false);
     const [idMessage, setIdMessage] = useState("");
     const [pwdMessage, setPwdMessage] = useState("");
+    const [pwdValidateMessage, setPwdValidateMessage] = useState("* 비밀번호는 최소 8자리에 영어, 숫자, 특수문자를 포함해야 합니다.");
     const [idDuplicateStyle, setIdDuplicateStyle] = useState('');
     const [pwdDuplicateStyle, setPwdDuplicateStyle] = useState('');
+    const [pwdValidateStyle, setPwdValidateStyle] = useState("pwdValidateStyle");
 
     const navigate = useNavigate();
 
@@ -42,9 +44,28 @@ function Join(){
         setIsIdAvailable(false); //아이디 변경 시 다시 중복체 크 해야함
         setIdMessage("");
     };
+
+    const validatePassword = (password) => {
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@S!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+        return passwordRegex.test(password);
+    };
+
     const handleLoginPwdChange = (e) => {
         const LoginPwd = e.target.value;
         setLoginPwd(LoginPwd);
+
+        // 비밀번호 정책 검사
+        if (loginPwd) {
+            if (validatePassword(loginPwd)) {
+                setPwdValidateMessage("");
+            } else {
+                setPwdValidateMessage("비밀번호는 최소 8자리에 영어, 숫자, 특수문자를 포함해야 합니다.");
+                setPwdValidateStyle(`idUnavailable`);
+            }
+        } else {
+            setPwdMessage("");
+            setPwdDuplicateStyle("");
+        }
     };
     const handleLoginPwdCheckChange = (e) => {
         const LoginPwdCheck = e.target.value;
@@ -58,8 +79,10 @@ function Join(){
                 setPwdMessage("비밀번호가 일치합니다");
                 setPwdDuplicateStyle(`idAvailable`);
             }else{
-                setPwdMessage("비밀번호가 일치하지 않습니다")
-                setPwdDuplicateStyle(`idUnavailable`);
+                if(loginPwdCheck){
+                    setPwdMessage("비밀번호가 일치하지 않습니다")
+                    setPwdDuplicateStyle(`idUnavailable`);
+                }
             }
         }
     }, [loginPwd, loginPwdCheck])
@@ -295,8 +318,7 @@ function Join(){
                                 </div>
                                 <div className="join_input-group user_w-full">
                                     <label htmlFor="pw"
-                                    >비밀번호 <span id="required-text">[필수]</span></label
-                                    >
+                                    >비밀번호 <span id="required-text">[필수]</span></label>
                                     <input
                                         id="pw"
                                         name="pw"
@@ -305,9 +327,10 @@ function Join(){
                                         onChange={handleLoginPwdChange}
                                         value={loginPwd}
                                         placeholder="비밀번호"
-                                        maxLength="100"
+                                        maxLength="20"
                                         required
                                     />
+                                    <div className={`${pwdValidateStyle}`}>{pwdValidateMessage}</div>
                                     <input
                                         id="pw2"
                                         name="pw2"
@@ -316,7 +339,7 @@ function Join(){
                                         onChange={handleLoginPwdCheckChange}
                                         value={loginPwdCheck}
                                         placeholder="비밀번호 확인"
-                                        maxLength="100"
+                                        maxLength="20"
                                         required
                                     />
                                     <div className={`${pwdDuplicateStyle}`}>{pwdMessage}</div>
