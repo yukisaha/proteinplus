@@ -137,4 +137,15 @@ public class UserJoinService {
     }
 
 
+    public String getUserNameFromToken(String token) {
+        if (token != null) {
+            Claims claims = tokenProvider.validateToken(token).getClaims();
+            if (claims != null) {
+                return userJoinRepository.findUserNameByLoginId(claims.getSubject());
+            }
+        }
+        throw new UsernameNotFoundException("Unable to extract user Name from token");
+    }
+
+
 }
