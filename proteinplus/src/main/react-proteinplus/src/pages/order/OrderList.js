@@ -10,6 +10,7 @@ export default function OrderList(){
     async function getOrderList() { // Axios 방식 사용
         const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
         const response = await axios.get(`${Spring_Server_Ip}/api/user/mypage/orderlist`);
+        console.log("response.data-->"+response);
         setOrderListData(response.data);
     }
 
@@ -116,7 +117,7 @@ export default function OrderList(){
                             </div>
                             <div className="order-content-box">
                                 <ul className="order-div-list">
-                                    {orderListData.map(item => (
+                                    {Object.values(orderListData).map((item) => (
                                         <li key={item.id} className="order-div-item">
                                             <div className="prd-info-area">
                                                 <div className="inner">
@@ -147,7 +148,7 @@ export default function OrderList(){
                                                                 <span className="num">{item.price}</span>원
                                                             </p>
                                                             <p className="dlv-nmr-cnt">
-                                                                <span className="num">상품개수</span>개
+                                                                <span className="num">{item.count}</span>개
                                                             </p>
                                                         </div>
                                                     </div>

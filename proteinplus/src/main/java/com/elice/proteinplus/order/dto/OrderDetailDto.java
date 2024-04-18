@@ -19,6 +19,8 @@ public class OrderDetailDto {
 
     private String productName; //상품명
     private int count; //주문 수량
+    // private String imageUrl
+    //
 
     public OrderDetailDto(OrderDetail orderDetail){
         this.productName = orderDetail.getProduct().getName();
