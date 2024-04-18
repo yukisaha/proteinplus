@@ -74,7 +74,7 @@ public class OrderService {
         }
         // 페이지 구현 객체를 생성하여 반환
 //        return new PageImpl<OrderHistDto>(orderHistDtos, pageable);
-        return new PageImpl<OrderHistDto>(orderHistDtos);
+        return new PageImpl<OrderHistDto>(orderHistDtos, pageable, orderHistDtos.size());
     }
 
     @Transactional
