@@ -137,6 +137,26 @@ public class OrderService {
         return delivery.getId();
     }
 
+    public DeliveryDto getAddressByOrderId(Long orderId) {
+        // 주문 ID로 배송 정보를 조회합니다.
+        Delivery delivery = deliveryRepository.findByOrderId(orderId)
+                .orElseThrow(() -> new EntityNotFoundException("주문 ID에 해당하는 배송 정보를 찾을 수 없습니다: " + orderId));
+
+        DeliveryDto deliveryDto = new DeliveryDto();
+        deliveryDto.setOrderId(delivery.getOrder().getId()); // 주문 ID 설정
+        deliveryDto.setReceiverName(delivery.getReceiverName());
+        deliveryDto.setReceiverPhoneNumber(delivery.getReceiverPhone()); // 문자열로 변환
+        deliveryDto.setDeliveryReq(delivery.getDeliveryReq());
+        deliveryDto.setReceiverAddr(delivery.getReceiverAddr());
+        deliveryDto.setReceiverPost(delivery.getReceiverPost());
+        deliveryDto.setReceiverAddrDtl(delivery.getReceiverAddrDtl());
+        deliveryDto.setTotalPrice(delivery.getTotalPrice()); // totalPrice 설정
+
+        return deliveryDto;
+    }
+
+
+
 
     /* 주문 수정(회원) - 배송지 */
     @Transactional

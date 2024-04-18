@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../styles/order/css/OrderDetail.scoped.css';
 import MypageFrame from '../../components/MypageFrame';
 import axios from "axios";
@@ -98,44 +98,46 @@ export default function CancelList() {
                 {/* search-box */}
                 <div className="order-list-area">
                     <ul className="order-list-inner">
-                        {cancelListData.map((item) => (
-                            <li key={item.orderId}>
+                        {cancelListData.map((order) => (
+                            <li key={order.orderId}>
                                 {/* 주문 목록 */}
                                 <div className="order-list-head">
-                                    <strong className="date">{item.orderDate}</strong>
+                                    <strong className="date">{order.orderDate}</strong>
                                     <div className="right">
-                                        <span className="order-item-id">{item.orderId}</span>
+                                        <span className="order-item-id">{order.orderId}</span>
                                     </div>
                                 </div>
                                 <div className="order-content-box">
                                     <ul className="order-div-list">
-                                        <li className="order-div-item">
-                                            <div className="prd-info-area">
-                                                <div className="inner">
-                                                    <div className="column img">
-                                                        <img src={item.orderDetailDtoList[0].mainImageUrl} alt="상품이미지"/>
-                                                    </div>
-                                                    <div className="column tit">
-                                                        <div className="prd-state-row">
-                                                            <strong className="prd-state-head">{item.orderStatus}</strong>
+                                        {order.orderDetailDtoList.map((item, index) => (
+                                            <li key={index} className="order-div-item">
+                                                <div className="prd-info-area">
+                                                    <div className="inner">
+                                                        <div className="column img">
+                                                            <img src={item.mainImageUrl} alt="상품이미지"/>
                                                         </div>
-                                                        <div className="tit">
-                                                            <a href="javascript:void(0);">{item.orderDetailDtoList[0].productName}</a>
+                                                        <div className="column tit">
+                                                            <div className="prd-state-row">
+                                                                <strong className="prd-state-head">{order.orderStatus}</strong>
+                                                            </div>
+                                                            <div className="tit">
+                                                                <a href="javascript:void(0);">{item.productName}</a>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="price-item">
-                                                        <div className="dlv-nmr">
-                                                            <p className="dlv-nmr-price">
-                                                                <span className="num">{item.orderDetailDtoList[0].price}</span>원
-                                                            </p>
-                                                            <p className="dlv-nmr-cnt">
-                                                                <span className="num">{item.orderDetailDtoList[0].count}</span>개
-                                                            </p>
+                                                        <div className="price-item">
+                                                            <div className="dlv-nmr">
+                                                                <p className="dlv-nmr-price">
+                                                                    <span className="num">{item.price}</span>원
+                                                                </p>
+                                                                <p className="dlv-nmr-cnt">
+                                                                    <span className="num">{item.count}</span>개
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </li>
+                                            </li>
+                                        ))}
                                     </ul>
                                     <div className="addr-info-line">
                                         <p><i className="ico-bl-home2"></i>주소</p>
@@ -151,4 +153,3 @@ export default function CancelList() {
 
     return <MypageFrame>{renderOrderListItems()}</MypageFrame>;
 }
-
