@@ -40,8 +40,6 @@ public class Delivery {
     @Column(name = "delivery_request")
     private String deliveryReq; //주문 요청사항
 
-    @Column(name = "total_price")
-    private int totalPrice;
 
     public Delivery update(String receiverAddr, String receiverPost, String receiverAddrDtl, String receiverName, Integer receiverPhone) {
         this.receiverAddr = receiverAddr;
