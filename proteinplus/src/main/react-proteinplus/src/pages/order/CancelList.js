@@ -5,6 +5,7 @@ import axios from "axios";
 
 export default function CancelList() {
     const [cancelListData, setCancelListData] = useState([]);
+    const [addressData, setAddressData] = useState({}); // 주문별 배송 정보를 저장할 객체
 
     async function getCancelList() {
         try {
@@ -20,6 +21,27 @@ export default function CancelList() {
         // 취소 내역 조회 함수 호출
         getCancelList();
     }, []);
+
+    useEffect(() => {
+        const fetchData = async (orderId) => {
+            try {
+                const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
+                const response = await axios.get(`${Spring_Server_Ip}/api/order/delivery/${orderId}`);
+                console.log("addressdata-->", response.data);
+                setAddressData(prevState => ({
+                    ...prevState,
+                    [orderId]: response.data
+                }));
+            } catch (error) {
+                console.error(`주문 ID ${orderId}에 대한 주소 정보를 불러오는 중 오류가 발생했습니다:`, error);
+            }
+        };
+
+        // 취소 내역 데이터가 변경될 때마다 주문별 주소 정보를 가져오도록 함
+        cancelListData.forEach(order => {
+            fetchData(order.orderId);
+        });
+    }, [cancelListData]);
 
     const renderOrderListItems = () => {
         if (cancelListData.length === 0) {
@@ -140,7 +162,14 @@ export default function CancelList() {
                                         ))}
                                     </ul>
                                     <div className="addr-info-line">
-                                        <p><i className="ico-bl-home2"></i>주소</p>
+                                        <p><i className="ico-bl-home2"></i></p>
+                                        {addressData[order.orderId] ? (
+                                            <>
+                                                [{addressData[order.orderId].receiverPost}] {addressData[order.orderId].receiverAddr}, {addressData[order.orderId].receiverAddrDtl}
+                                            </>
+                                        ) : (
+                                            '주소 정보를 불러오는 중입니다...'
+                                        )}
                                     </div>
                                 </div>
                             </li>

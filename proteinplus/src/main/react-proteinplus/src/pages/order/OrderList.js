@@ -5,6 +5,7 @@ import axios from "axios";
 
 export default function OrderList() {
     const [orderListData, setOrderListData] = useState([]);
+    const [addressData, setAddressData] = useState({}); // 주문별 배송 정보를 저장할 객체
 
     async function getOrderList() {
         try {
@@ -16,6 +17,11 @@ export default function OrderList() {
             console.error('주문 내역을 불러오는 중 오류가 발생했습니다:', error);
         }
     }
+
+    useEffect(() => {
+        // 주문 내역 조회 함수 호출
+        getOrderList();
+    }, []);
 
     const handleCancelOrder = async (orderId) => {
         try {
@@ -31,30 +37,25 @@ export default function OrderList() {
     };
 
     useEffect(() => {
-        // 주문 내역 조회 함수 호출
-        getOrderList();
-    }, []);
-
-    const [addressData, setAddressData] = useState(null);
-    const [orderId, setOrderId] = useState(null); // 원하는 주문 ID 설정
-
-    useEffect(() => {
-        const fetchData = async () => {
+        const fetchData = async (orderId) => {
             try {
                 const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
                 const response = await axios.get(`${Spring_Server_Ip}/api/order/delivery/${orderId}`);
                 console.log("addressdata-->", response.data);
-                setAddressData(response.data);
+                setAddressData(prevState => ({
+                    ...prevState,
+                    [orderId]: response.data
+                }));
             } catch (error) {
-                console.error('주소 정보를 불러오는 중 오류가 발생했습니다:', error);
+                console.error(`주문 ID ${orderId}에 대한 주소 정보를 불러오는 중 오류가 발생했습니다:`, error);
             }
         };
 
-        if (orderId !== null) {
-            fetchData();
-        }
-    }, [orderId]);
-
+        // 주문 목록 데이터가 변경될 때마다 주문별 주소 정보를 가져오도록 함
+        orderListData.forEach(order => {
+            fetchData(order.orderId);
+        });
+    }, [orderListData]);
 
     const renderOrderListItems = () => {
         if (orderListData.length === 0) {
@@ -90,8 +91,8 @@ export default function OrderList() {
                     {/* search-box */}
                     <div className="order-list-area">
                         <ul className="order-list-inner">
-                            <div className = "no-data">
-                                <p className = "message">
+                            <div className="no-data">
+                                <p className="message">
                                     주문내역이 없습니다.
                                 </p>
                             </div>
@@ -184,10 +185,10 @@ export default function OrderList() {
                                         ))}
                                     </ul>
                                     <div className="addr-info-line">
-                                        <p><i className="ico-bl-home2"></i>주소</p>
-                                        {addressData ? (
+                                        <p><i className="ico-bl-home2"></i></p>
+                                        {addressData[order.orderId] ? (
                                             <>
-                                                [{addressData.receiverPost}] {addressData.receiverAddr}, {addressData.receiverAddrDtl}
+                                                [{addressData[order.orderId].receiverPost}] {addressData[order.orderId].receiverAddr}, {addressData[order.orderId].receiverAddrDtl}
                                             </>
                                         ) : (
                                             '주소 정보를 불러오는 중입니다...'
