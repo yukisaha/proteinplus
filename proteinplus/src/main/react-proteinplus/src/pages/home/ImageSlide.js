@@ -18,7 +18,7 @@ function ImageSlide ({images}) {
         const interval = setInterval(() => {
             const nextIndex = (currentIndex + 1) % images.length;
             setCurrentIndex(nextIndex);
-        }, 7000);
+        }, 5000);
         return () => clearInterval(interval);
     }, [currentIndex, images.length]);
 

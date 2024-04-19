@@ -22,6 +22,7 @@ import SubmitCategory from "./pages/category/SubmitCategory";
 import SubmitRank from "./pages/rank/SubmitRank";
 import UploadProduct from "./pages/product/UploadProduct";
 import ProductDetails from "./pages/product/ProductDetails";
+import EditProduct from "./pages/product/EditProduct";
 
 const router = createBrowserRouter([
     {
@@ -112,6 +113,10 @@ const router = createBrowserRouter([
     {
         path: "/product/:productId",
         element: <ProductDetails />
+    },
+    {
+        path: "admin/product/edit",
+        element: <EditProduct />
     }
 
 ]);

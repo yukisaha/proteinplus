@@ -41,7 +41,7 @@ public class Product extends BaseTimeEntity {
     private String productStatus;
 
     @Column(name = "price", nullable = false)
-    private int price;  //원가
+    private Integer price;  //원가
 
     @Lob
     @Column(name = "content")
@@ -58,7 +58,7 @@ public class Product extends BaseTimeEntity {
     private Integer  discountRate;
 
     @Column(nullable = false)
-    private int stock;
+    private Integer stock;
 
     @Column(name = "main_image_url", length = 1000)
     private String mainImageUrl;
@@ -68,7 +68,9 @@ public class Product extends BaseTimeEntity {
 
     public void updateProduct(ProductCreateDto productCreateDto){
         this.name = productCreateDto.getName();
-        this.price = productCreateDto.getPrice();
+        if(productCreateDto.getPrice() != null) { // price 필드가 null이 아닌지 확인
+            this.price = productCreateDto.getPrice();
+        }
         this.stock = productCreateDto.getStock();
         this.discountRate = productCreateDto.getDiscountRate();
         this.productStatus = productCreateDto.getProductStatus();

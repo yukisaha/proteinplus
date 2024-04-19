@@ -9,6 +9,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import axios from 'axios';
 import CartModal from '../../components/Modal/CartModal';
+import ProductInfo from './ProductInfo';
 
 function ProductDetails() {
 
@@ -180,6 +181,7 @@ function ProductDetails() {
             </div>
             </div>
         </div>
+        <ProductInfo/>
         {reviewOpen && <Review closeReview={closeReview} reviews={reviews}/>}
         <Footer/>
         <CartModal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} />

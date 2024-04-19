@@ -17,9 +17,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Page<Product> findAllByCategoryId(Pageable pageable, Long categoryId);
 
-    //카테고리 상품 총 개수
-    //Long countByCategoryId(Long categoryId);
-
     /************************ react에서 사용중인 코드 *********************************/
     //카테고리 id 별 상품 조회
     @Query("SELECT p FROM Product p JOIN p.category c WHERE c.id = :categoryId OR c.parent.id = :categoryId")

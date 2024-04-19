@@ -31,7 +31,7 @@ public class ProductController {
 
     //상품 수정
     @PutMapping("/admin/edit/{productId}")
-    public void updateProduct(@PathVariable("categoryId") Long productId, @RequestBody ProductCreateDto productCreateDto){
+    public void updateProduct(@PathVariable("productId") Long productId, @RequestBody ProductCreateDto productCreateDto){
         productCreateDto.setId(productId);
         productService.updateProduct(productCreateDto);
     }
