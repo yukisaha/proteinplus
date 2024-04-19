@@ -25,5 +25,4 @@ public class DeliveryDto {
 
     private String receiverAddrDtl;
 
-    private int totalPrice;
 }

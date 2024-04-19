@@ -129,7 +129,6 @@ public class OrderService {
         delivery.setReceiverAddr(deliveryDto.getReceiverAddr());
         delivery.setReceiverPost(deliveryDto.getReceiverPost());
         delivery.setReceiverAddrDtl(deliveryDto.getReceiverAddrDtl());
-        delivery.setTotalPrice(deliveryDto.getTotalPrice());
 
         // 배송 정보 저장
         deliveryRepository.save(delivery);
@@ -150,7 +149,6 @@ public class OrderService {
         deliveryDto.setReceiverAddr(delivery.getReceiverAddr());
         deliveryDto.setReceiverPost(delivery.getReceiverPost());
         deliveryDto.setReceiverAddrDtl(delivery.getReceiverAddrDtl());
-        deliveryDto.setTotalPrice(delivery.getTotalPrice()); // totalPrice 설정
 
         return deliveryDto;
     }
