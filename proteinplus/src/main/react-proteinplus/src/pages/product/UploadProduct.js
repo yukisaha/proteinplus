@@ -14,6 +14,9 @@ function UploadProduct() {
   const [categories, setCategories] = useState([]);
   const [mainImage, setMainImage] = useState(null);
   const [detailImage, setDetailImage] = useState(null);
+  const [parentCategory, setParentCategory] = useState('');
+  const [childCategory, setChildCategory] = useState('');
+  const [childCategories, setChildCategories] = useState([]);
 
   const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
 
@@ -52,7 +55,7 @@ function UploadProduct() {
         stock: parseInt(stock),
         discountRate: discountRate ? parseInt(discountRate) : null,
         productStatus: statusToSend,
-        categoryId: category,
+        categoryId: childCategory,
         mainImageUrl: mainImageUrl,
         detailImageUrl: detailImageUrl
       });
@@ -64,18 +67,33 @@ function UploadProduct() {
     }
   };
 
-  const fetchCategories = async () => {
-    try {
-      const response = await axios.get(`${Spring_Server_Ip}/category/find/category`);
-      setCategories(response.data);
-    } catch (error) {
-      console.error('Error fetching categories:', error);
-    }
-  };
+    const fetchParentCategories = async () => {
+        try{
+            const response = await axios.get(`${Spring_Server_Ip}/category`);
+            setCategories(response.data);
+        } catch (error){
+            console.error('부모카테고리 조회 실패: ',error);
+        }
+    };
+
+    const fetchChildCategories = async (parent_id) => {
+        try{
+            const response = await axios.get(`${Spring_Server_Ip}/category/${parent_id}`);
+            setChildCategories(response.data);
+        } catch (error){
+            console.error('자식카테고리 조회 실패: ', error);
+        }
+    };
 
   useEffect(() => {
-    fetchCategories();
+    fetchParentCategories();
   }, []);
+
+  useEffect(()=> {
+    if(parentCategory){
+        fetchChildCategories(parentCategory);
+    }
+  }, [parentCategory]);
 
   return (
     <div className="upload-product-container">
@@ -127,19 +145,31 @@ function UploadProduct() {
               <option value="sell">판매가능</option>
               <option value="soldout">품절</option>
             </select>
-          <label htmlFor="category">카테고리</label>
+          <label htmlFor="parentCategory">부모 카테고리</label>
+              <select
+                id="parentCategory"
+                value={parentCategory}
+                onChange={(e) => setParentCategory(e.target.value)}
+                required>
+                <option value="">부모 카테고리를 선택하세요</option>
+                {categories.map((category)=> (
+                    <option key={category.id} value={category.id}>
+                        {category.name}
+                    </option>
+                 ))}
+              </select>
+          <label htmlFor="childCategory">자식 카테고리</label>
           <select
-            id="category"
-            value={category}
-            onChange={(e) => setCategory(parseInt(e.target.value))}
-            required
-          >
-            <option value="">카테고리를 선택하세요</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
+            id="childCategory"
+            value={childCategory}
+            onChange={(e)=> setChildCategory(e.target.value)}
+            required>
+                <option value="">자식 카테고리를 선택하세요</option>
+                {childCategories.map((category) => (
+                    <option key={category.id} value={category.id}>
+                        {category.name}
+                    </option>
+                ))}
           </select>
           <input type="file" onChange={(e) => setMainImage(e.target.files[0])} />
           <input type="file" onChange={(e) => setDetailImage(e.target.files[0])} />

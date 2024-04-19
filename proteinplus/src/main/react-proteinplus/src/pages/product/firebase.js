@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBrPuVXR1cYRTgjtuf9fiXdVY-Z7NLorqY",
@@ -22,6 +22,24 @@ export const uploadImage = async (file) => {
         return imageUrl;
     } catch (error){
         console.error('이미지 업로드 실패:', error);
+        throw error;
+    }
+};
+
+export const deleteImage = async (imageUrl) => {
+    try {
+        // 이미지 URL에서 파일명 추출
+        const fileName = imageUrl.split('%2F').pop().split('?')[0];
+
+        // 파일이름으로 참조 생성
+        const imageRef = ref(storage, `product_images/${fileName}`);
+
+        // 파일 삭제
+        await deleteObject(imageRef);
+
+        console.log('이미지 삭제 완료:', imageUrl);
+    } catch (error) {
+        console.error('이미지 삭제 실패:', error);
         throw error;
     }
 };
