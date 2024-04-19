@@ -102,7 +102,7 @@ export default function Header({categoryId}) {
                 <div className="my-menu">
                     <ul>
                         <li><a href="" className="btn-util-coupon" title=""><span className="blind">쿠폰</span></a></li>
-                        <li><a href="/mypageFrame" className="btn-util-mypage" title=""><span className="blind">마이페이지</span></a></li>
+                        <li><a href="/mypage/orderList" className="btn-util-mypage" title=""><span className="blind">마이페이지</span></a></li>
                         <li>
                             <a href="/order/cart" className="btn-util-cart" title="">
                                 <span className="blind">장바구니</span>
