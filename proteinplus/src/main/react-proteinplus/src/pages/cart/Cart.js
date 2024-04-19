@@ -158,6 +158,7 @@ function Cart() {
 
         // 각 상품의 총 가격을 합하여 전체 상품 가격을 계산
         const totalProductPrice = cartItemKeys.reduce((total, productId) => {
+
             // isChecked가 true인 경우에만 상품 가격을 더합니다.
             if (cartItems[productId].isChecked) {
                 return total + calculateTotalPriceForItem(productId);

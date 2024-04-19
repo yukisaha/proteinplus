@@ -2,7 +2,9 @@ package com.elice.proteinplus.user.Service;
 
 import com.elice.proteinplus.jwt.JwtFilter;
 import com.elice.proteinplus.jwt.token.TokenProvider;
+import com.elice.proteinplus.jwt.token.TokenType;
 import com.elice.proteinplus.jwt.token.dto.TokenInfo;
+import com.elice.proteinplus.jwt.token.dto.TokenValidationResult;
 import com.elice.proteinplus.user.dto.UserUpdateDTO;
 import com.elice.proteinplus.user.entity.Role;
 import com.elice.proteinplus.user.entity.User;
@@ -181,12 +183,37 @@ public class UserJoinService {
     }
 
     // 사용자 ID 추출 메서드
+//    public Long getUserIdFromToken(String token) {
+//        if (token != null) {
+//            Claims claims = tokenProvider.validateToken(token).getClaims();
+//            if (claims != null) {
+//                return userJoinRepository.findUserIdByLoginId(claims.getSubject());
+//            }
+//        }
+//        throw new UsernameNotFoundException("Unable to extract user ID from token");
+//    }
     public Long getUserIdFromToken(String token) {
         if (token != null) {
-            Claims claims = tokenProvider.validateToken(token).getClaims();
-            if (claims != null) {
-                return userJoinRepository.findUserIdByLoginId(claims.getSubject());
+            TokenValidationResult tokenValidationResult = tokenProvider.validateToken(token);
+            Claims claims = tokenValidationResult.getClaims();
+
+            if (tokenValidationResult.getTokenType() == TokenType.ACCESS) {
+                if (claims != null) {
+                    return userJoinRepository.findUserIdByLoginId(claims.getSubject());
+                }else{// 토큰이 만료된 상태이기 때문에 리액트로 돌아가서
+
+//                    const logout = () => {
+//                        alert("로그인 유효시간이 지나 로그아웃 되었습니다.");
+//                        // 로컬 스토리지에서 토큰 제거
+//                        window.localStorage.removeItem("token");
+//                        // 새로고침하여 로그아웃 적용
+//                        window.location.href = '/'; // 홈으로 이동
+//
+//                    };
+//                    로컬스토리지 비우고 로그인 페이지로 이동 시키는 작업을 하고 싶음
+                }
             }
+
         }
         throw new UsernameNotFoundException("Unable to extract user ID from token");
     }

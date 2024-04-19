@@ -54,32 +54,43 @@ function ProductDetails() {
 
     const checkProductInWishList = async (productId) => {
         try {
-            const url = `${Spring_Server_Ip}/wishList/${productId}`;
-            const response = await axios.get(url,{
-                headers: {
-                    Authorization: `${token}`
-                }
-            });
-            console.log(response.data);
-            setLike(response.data); // 위시리스트에 해당 상품이 있으면 true, 없으면 false
+            if (token) {
+                const url = `${Spring_Server_Ip}/wishList/${productId}`;
+                const response = await axios.get(url, {
+                    headers: {
+                        Authorization: `${token}`
+                    }
+                });
+                console.log(response.data);
+                setLike(response.data); // 위시리스트에 해당 상품이 있으면 true, 없으면 false
+            }
+            console.log("token = null");
+            // token이 null인 경우 아무 동작도 하지 않음
         } catch (error) {
             console.error('Error checking product in WishList: ', error);
         }
     }
 
+
     const postAddWishListByProductId = async (productId) => {
         try {
-            await axios.post(`${Spring_Server_Ip}/wishList/${productId}`, {}, {
-                headers: {
-                    Authorization: `${token}`
-                }
-            });
+            if (token) {
+                await axios.post(`${Spring_Server_Ip}/wishList/${productId}`, {}, {
+                    headers: {
+                        Authorization: `${token}`
+                    }
+                });
 
-            alert("찜한 상품에 담겼습니다.");
+                alert("찜한 상품에 담겼습니다.");
+            } else {
+                // token이 null인 경우
+                window.location.href = '/auth/login';
+            }
         } catch (error){
             console.error('Error Add WishList: ', error);
         }
     }
+
 
 
     const deleteWishListByProductId = async (productId) => {
