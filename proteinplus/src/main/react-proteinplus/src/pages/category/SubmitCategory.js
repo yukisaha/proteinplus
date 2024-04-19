@@ -146,7 +146,7 @@ export default function SubmitCategory() {
         e.preventDefault();
 
         let data;
-        if (selectedChildId == "default") {
+        if (selectedChildId === "default") {
             console.log("categoryNameChange = ", categoryNameChange);
             console.log("categoryId = ", parseInt(selectedParentId));
             data = {

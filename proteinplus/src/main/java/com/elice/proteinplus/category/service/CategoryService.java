@@ -132,5 +132,7 @@ public class CategoryService {
             throw new RuntimeException("상품이 존재하는 카테고리는 삭제할 수 없습니다");
         }
 
+        categoryRepository.deleteById(id);
+
     }
 }
