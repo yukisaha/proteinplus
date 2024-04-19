@@ -27,16 +27,6 @@ public class WishListController {
 
 
     // 상품 상세페이지에서 하트누르면 찜한 상품에 추가
-//    @PostMapping("/{productId}")
-//    public void addProductToWishList(@PathVariable("productId") Long productId, @RequestHeader("Authorization") String token) {
-//        log.info("Add Product to WishList: productId : " + productId);
-//        log.info("addProductToWishList token : " + token);
-//
-//        Long userId = userService.getUserIdFromToken(token);
-//        log.info("addProductToWishList userId : " + userId);
-//
-//        wishListService.addProductToWishList(userId, productId);
-//    }
     @PostMapping("/{productId}")
     public ResponseEntity<?> addProductToWishList(@PathVariable("productId") Long productId, @RequestHeader("Authorization") String token) {
         try {

@@ -49,9 +49,6 @@ function Login(){
                 const token = response.data.data.accessToken;
                 window.localStorage.setItem("token", token);
 
-                console.log("저장된 토큰:", token);
-                console.log("로컬스토리지에 저장된 토큰:", window.localStorage.getItem("token"));
-
                 navigate('/');
             }
 

@@ -13,7 +13,7 @@ export default function MypageFrame({children}) {
   useEffect(() => {
     checkToken();
     getUserName();
-  }, []);
+  }, [token]);
 
   async function checkToken() {
     if (!token) {
@@ -32,9 +32,19 @@ export default function MypageFrame({children}) {
       const name = response.data; // 여기서 name을 가져오거나 응답 데이터 구조에 맞게 변경
       setUserName(name);
     } catch (error) {
-      console.error('유저 이름을 가져오는 중 에러가 발생했습니다:', error);
+      if (error.response && error.response.status === 401) {
+        // 토큰이 만료되었을 때 로그아웃 처리 및 리다이렉션
+        alert("로그인 유효시간이 지나 로그아웃 되었습니다.");
+        // 로컬 스토리지에서 토큰 제거
+        window.localStorage.removeItem("token");
+        // 새로고침하여 로그아웃 적용
+        window.location.href = '/auth/login'; // 홈으로 이동
+      } else {
+        console.error('유저 이름을 가져오는 중 에러가 발생했습니다:', error);
+      }
     }
   }
+
 
     return (
         <div className="wrap main">
