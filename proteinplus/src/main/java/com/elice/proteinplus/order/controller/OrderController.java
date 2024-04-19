@@ -5,6 +5,7 @@ import com.elice.proteinplus.order.dto.OrderDto;
 import com.elice.proteinplus.order.dto.OrderHistDto;
 import com.elice.proteinplus.order.service.OrderService;
 import com.elice.proteinplus.product.service.ProductService;
+import com.elice.proteinplus.user.Service.UserJoinService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,25 +26,31 @@ public class OrderController {
 
     private final OrderService orderService;
     private final ProductService productService;
+    private final UserJoinService userService;
 
     // 특정 사용자의 주문 목록을 조회합니다.
     @GetMapping("/user/mypage/orderlist")
-    public ResponseEntity<Page<OrderHistDto>> getUserOrders(Pageable pageable) {
-        Page<OrderHistDto> orders = orderService.getOrders(1L, pageable);
+    public ResponseEntity<Page<OrderHistDto>> getUserOrders(Pageable pageable, @RequestHeader("Authorization") String token ) {
+        Long userId = userService.getUserIdFromToken(token);
+        Page<OrderHistDto> orders = orderService.getOrders(userId, pageable);
         return ResponseEntity.ok(orders);
     }
 
     // 특정 사용자의 취소된 주문 목록을 조회합니다.
     @GetMapping("/user/mypage/cancellist")
-    public ResponseEntity<Page<OrderHistDto>> getCancelledUserOrders(Pageable pageable) {
-        Page<OrderHistDto> cancelledOrders = orderService.getCancelledOrders(1L, pageable);
+    public ResponseEntity<Page<OrderHistDto>> getCancelledUserOrders(Pageable pageable, @RequestHeader("Authorization") String token) {
+
+        Long userId = userService.getUserIdFromToken(token);
+
+        Page<OrderHistDto> cancelledOrders = orderService.getCancelledOrders(userId, pageable);
         return ResponseEntity.ok(cancelledOrders);
     }
 
     // 주문을 생성합니다.
     @PostMapping("/order/order")
-    public ResponseEntity<Long> addOrder(@RequestBody List<OrderDto> orderDtoList) {
-        Long orderId = orderService.order(orderDtoList, 1L); // 여기서 1L은 사용자 ID로 변경 가능
+    public ResponseEntity<Long> addOrder(@RequestBody List<OrderDto> orderDtoList, @RequestHeader("Authorization") String token) {
+        Long userId = userService.getUserIdFromToken(token);
+        Long orderId = orderService.order(orderDtoList, userId);
         return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
     }
 

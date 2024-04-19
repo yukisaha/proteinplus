@@ -6,11 +6,16 @@ import axios from "axios";
 export default function OrderList() {
     const [orderListData, setOrderListData] = useState([]);
     const [addressData, setAddressData] = useState({}); // 주문별 배송 정보를 저장할 객체
+    const token = window.localStorage.getItem("token");
 
     async function getOrderList() {
         try {
             const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-            const response = await axios.get(`${Spring_Server_Ip}/api/user/mypage/orderlist`);
+            const response = await axios.get(`${Spring_Server_Ip}/api/user/mypage/orderlist`, {
+                headers: {
+                    Authorization: `${token}`
+                }
+            });
             console.log("response.data-->", response);
             setOrderListData(response.data.content);
         } catch (error) {
@@ -72,7 +77,7 @@ export default function OrderList() {
                                 <div className="search-detail-top">
                                     <div className="search-detail-date-itemname">
                                         <div className="input-group w-full">
-                                            <label for="item1-1" className="blind">검색</label>
+                                            <label htmlFor="item1-1" className="blind">검색</label>
                                             <input type="text" id="item1-1" name="srchProductNm" className="input-text"
                                                    placeholder="주문 상품명 검색" value=""/>
                                             <span className="input-group-btn">
@@ -115,7 +120,7 @@ export default function OrderList() {
                             <div className="search-detail-top">
                                 <div className="search-detail-date-itemname">
                                     <div className="input-group w-full">
-                                        <label for="item1-1" className="blind">검색</label>
+                                        <label htmlFor="item1-1" className="blind">검색</label>
                                         <input type="text" id="item1-1" name="srchProductNm" className="input-text"
                                                placeholder="주문 상품명 검색" value=""/>
                                         <span className="input-group-btn">

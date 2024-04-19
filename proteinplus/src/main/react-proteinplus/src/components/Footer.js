@@ -20,22 +20,22 @@ export default function Footer() {
                 <div className="colum-info">
                     <h5 className="blind">회사 정보</h5>
                     <ul className="footer-biz-info">
-                        <li><span className="company-name">(주)푸드나무</span></li>
-                        <li>대표 : 김영문</li>
-                        <li>주소 : 서울특별시 마포구 월드컵북로 396, 15층(상암동, 누리꿈스퀘어 비지니스타워)</li>
-                        <li>사업자등록번호 : 105-87-81968
+                        <li><span className="company-name">(주)프로틴플러스</span></li>
+                        <li>대표 : 엘리스 </li>
+                        <li> 주소 : 서울특별시 마포구 </li>
+                        <li> 사업자등록번호 : 123-12-12345
                             사업자정보 확인
                         </li>
-                        <li>통신판매업신고번호 : 제2015-서울마포-1058호</li>
-                        <li>개인정보보호책임자 : 이재길</li>
+                        <li> 통신판매업신고번호 : 제1234-서울마포-1234호</li>
+                        <li> 개인정보보호책임자 : 모자장수</li>
                     </ul>
                     <p className="copyright">Copyright©ProteinPlus All rights reserved.</p>
                 </div>
                 <div className="colum-info">
                     <ul className="customer-info">
                         <li className="cscenter">고객센터 <em className="footer-tel">02-6405-8088</em></li>
-                        <li>FAX. 02-6351-8088</li>
-                        <li>E-mail. admin@foodnamoo.com</li>
+                        <li>FAX. 02-1234-1234</li>
+                        <li>E-mail. admin@proteinplus.com</li>
                     </ul>
                     <div className="customer-btns">
                         <a href="#"><span>고객의 제안</span></a>

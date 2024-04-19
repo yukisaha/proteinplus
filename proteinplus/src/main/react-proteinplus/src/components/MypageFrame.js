@@ -108,7 +108,7 @@ export default function MypageFrame({children}) {
                                                 <li className=""><a href="/mypage/myPoint">포인트</a></li>
                                                 <li className="">
                                                     <a href="/mypage/giftCard/list"
-                                                    >랭킹닭컴 상품권 관리</a
+                                                    >상품권 관리</a
                                                     >
                                                 </li>
                                                 {/* 활성화될 경우 li에 addClass current  */}
@@ -139,14 +139,6 @@ export default function MypageFrame({children}) {
                                                 </li>
                                                 {/* 활성화될 경우 li에 addClass current  */}
                                             </ul>
-                                        </li>
-                                        <li>
-                                            <a href="" className="menu goVipView">VIP전용관</a>
-                                        </li>
-                                        <li className="">
-                                            <a href="/mypage/orangeMember" className="menu"
-                                            >오렌지멤버스</a
-                                            >
                                         </li>
                                         <li>
                                             <a href="/mypage/delivery" className="menu">회원정보관리</a>

@@ -49,6 +49,7 @@ export default function Order(){
 
     const [orderItems, setOrderItems] = useState([]);
     const [orderData, setOrderData] = useState([]);
+    const token = window.localStorage.getItem("token");
 
     // 숫자만
     const numberOnly = (event) => {
@@ -179,8 +180,11 @@ export default function Order(){
 
             // 주문 정보를 백엔드로 전송합니다.
             const orderResponse = await axios.post(
-                `${Spring_Server_Ip}/api/order/order`, orderDtoList
-            );
+                `${Spring_Server_Ip}/api/order/order`, orderDtoList, {
+                headers: {
+                                                Authorization: `${token}`
+                                            }
+                                        });
 
             // 주문 생성 후 주문 ID를 받아옵니다.
             const orderId = orderResponse.data;

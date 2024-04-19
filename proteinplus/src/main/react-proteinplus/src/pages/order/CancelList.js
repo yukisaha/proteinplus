@@ -6,11 +6,16 @@ import axios from "axios";
 export default function CancelList() {
     const [cancelListData, setCancelListData] = useState([]);
     const [addressData, setAddressData] = useState({}); // 주문별 배송 정보를 저장할 객체
+    const token = window.localStorage.getItem("token");
 
     async function getCancelList() {
         try {
             const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-            const response = await axios.get(`${Spring_Server_Ip}/api/user/mypage/cancellist`);
+            const response = await axios.get(`${Spring_Server_Ip}/api/user/mypage/cancellist`,{
+            headers: {
+                                Authorization: `${token}`
+                            }
+                        });
             setCancelListData(response.data.content);
         } catch (error) {
             console.error('취소 내역을 불러오는 중 오류가 발생했습니다:', error);
