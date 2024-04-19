@@ -166,7 +166,7 @@ function UserProfileEdit(){
             const response = await axios.put(`${Spring_Server_Ip}/member/edit`, data, {headers: {Authorization: `${token}`}});
             console.log(response.data);
             alert("회원정보가 성공적으로 변경되었습니다")
-            navigate('/mypageFrame');
+            navigate('/mypage/orderList');
         } catch (error) {
             alert("회원 정보 변경에 실패했습니다.");
         }
