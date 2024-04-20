@@ -1,0 +1,60 @@
+.dialog_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.50);
+    z-index: 999999;
+}
+.alert_wrap_box {
+    position: absolute;
+    width: 270px;
+    top: 50%;
+    left: 50%;
+    z-index: 10006;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+.alert_wrap_box .alertTitleWrap {
+    padding: 22px 16px;
+    text-align: center;
+    border-bottom: 1px solid #E6E6E6;
+}
+.alert_wrap_box .alertTitleWrap .alert_title {
+    padding-bottom: 8px;
+    font-size: 16px;
+    color: #333333;
+    word-break: keep-all;
+    font-weight: 500;
+}
+.alert_wrap_box .alertBtnWrap button:first-child {
+    border-right: 1px solid #E6E6E6;
+}
+
+.alert_wrap_box .alertBtnWrap .alertCancel {
+    color: #999999;
+}
+.alert_wrap_box .alertBtnWrap button {
+    width: 134px;
+    display: inline-block;
+    text-align: center;
+    padding: 13px;
+    cursor: pointer;
+}
+.alert_wrap_box .alertBtnWrap button span {
+    font-size: 16px;
+    font-weight: 400;
+}
+.alert_wrap_box .alertBtnWrap .alertOkay {
+    color: #5356FF;
+}
+
+.alert_wrap_box .alertBtnWrap button {
+    width: 134px;
+    display: inline-block;
+    text-align: center;
+    padding: 13px;
+    cursor: pointer;
+}
