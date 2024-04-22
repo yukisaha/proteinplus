@@ -19,12 +19,11 @@ function ManageProduct({productId}){
     const [selectedChildCategoryId, setSelectedChildCategoryId] = useState('');
     const [productInfo, setProductInfo] = useState(null);
 
-    const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
 
     useEffect(() => {
         const fetchProductInfo = async () => {
             try {
-                const response = await axios.get(`${Spring_Server_Ip}/product/${productId}`);
+                const response = await axios.get(`/api/product/${productId}`);
                 const productInfo = response.data;
                 setProductInfo(productInfo);
 
@@ -49,7 +48,7 @@ function ManageProduct({productId}){
     useEffect(() => {
         const fetchParentCategoriesEdit = async () => {
             try {
-                const response = await axios.get(`${Spring_Server_Ip}/category`);
+                const response = await axios.get(`/api/category`);
                 setParentCategoriesEdit(response.data);
             } catch (error) {
                 console.error('부모 카테고리 조회 실패:', error);
@@ -60,7 +59,7 @@ function ManageProduct({productId}){
 
     const fetchChildCategoriesEdit = async (selectedParentCategoryId) => {
         try {
-            const response = await axios.get(`${Spring_Server_Ip}/category/${selectedParentCategoryId}`);
+            const response = await axios.get(`/api/category/${selectedParentCategoryId}`);
             console.log("자식 카테고리 조회 응답:", response.data);
             setChildCategoriesEdit(response.data);
         } catch (error) {
@@ -103,7 +102,7 @@ function ManageProduct({productId}){
               await deleteImage(detailImageUrl);
             }
 
-            await axios.put(`${Spring_Server_Ip}/product/admin/edit/${productId}`, {
+            await axios.put(`/api/product/admin/edit/${productId}`, {
                 id: productId,
                 mainImageUrl: mainImageUrl ? mainImageUrl : undefined,
                 detailImageUrl: detailImageUrl ? detailImageUrl : undefined
@@ -145,7 +144,7 @@ function ManageProduct({productId}){
                 alert('수정된 내용이 없습니다.');
                 return;
             }
-            const response = await axios.put(`${Spring_Server_Ip}/product/admin/edit/${productId}`, updatedProductData);
+            const response = await axios.put(`/api/product/admin/edit/${productId}`, updatedProductData);
 
             await updateProductImages(productId, mainImage, detailImage);
 

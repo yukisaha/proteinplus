@@ -5,8 +5,6 @@ import axios from "axios";
 
 export default function SubmitRank() {
 
-    const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-
     //랭크 카테고리 조회
     const [rankCategory, setRankCategory] = useState([]);
 
@@ -21,12 +19,12 @@ export default function SubmitRank() {
 
 
     async function findRank() { // Axios 방식 사용
-        const response = await axios.get(`${Spring_Server_Ip}/rank`);
+        const response = await axios.get(`/api/rank`);
         setRankCategory(response.data);
     }
 
     async function findExceptRank() { // Axios 방식 사용
-        const response = await axios.get(`${Spring_Server_Ip}/rank/except`);
+        const response = await axios.get(`/api/rank/except`);
         setExceptRankCategory(response.data);
     }
 
@@ -83,7 +81,7 @@ export default function SubmitRank() {
         e.preventDefault();
         let data = { category_id: parseInt(selectedExceptRankId) };
         try {
-            await axios.post(`${Spring_Server_Ip}/rank/add`, null, {params: data});
+            await axios.post(`/api/rank/add`, null, {params: data});
             alert("카테고리가 성공적으로 추가되었습니다.");
             findRank();
             findExceptRank();
@@ -98,7 +96,7 @@ export default function SubmitRank() {
 
         let data = { category_id: selectedRankId };
         try {
-            await axios.delete(`${Spring_Server_Ip}/rank/delete`, {params: data});
+            await axios.delete(`/api/rank/delete`, {params: data});
             alert("성공적으로 삭제되었습니다.");
             findRank();
             findExceptRank();

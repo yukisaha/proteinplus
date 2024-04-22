@@ -5,14 +5,13 @@ import axios from "axios";
 
 function UserDelete(){
 
-    const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip
     const token = window.localStorage.getItem("token");
 
     const deleteUser = async (e) => {
         e.preventDefault(); // 폼의 기본 제출 동작을 막음
 
         try {
-            const response = await axios.delete(`${Spring_Server_Ip}/member/delete`, {headers: {Authorization: `${token}`}});
+            const response = await axios.delete(`/api/member/delete`, {headers: {Authorization: `${token}`}});
             //성공했을경우 수정 페이지로
             console.log(response.data);
             window.localStorage.removeItem("token");

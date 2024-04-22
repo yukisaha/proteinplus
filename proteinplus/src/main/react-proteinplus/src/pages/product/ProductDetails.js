@@ -13,8 +13,6 @@ import ProductInfo from './ProductInfo';
 
 function ProductDetails() {
 
-    const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-
     const [product, setProduct] = useState(null);
     const {productId} = useParams();
     const [like, setLike] = useState(false);
@@ -29,7 +27,7 @@ function ProductDetails() {
 
     const getProductById = async (productId) => {
         try {
-            const url = `${Spring_Server_Ip}/product/${productId}`;
+            const url = `/api/product/${productId}`;
             const response = await axios.get(url);
             setProduct(response.data);
         } catch (error){
@@ -39,7 +37,7 @@ function ProductDetails() {
 
     const getReviewsByProductId = async (productId) => {
         try {
-            const url = `${Spring_Server_Ip}/review/product/${productId}`;
+            const url = `/api/review/product/${productId}`;
             const response = await axios.get(url);
             console.log(response.data);
             setReviews(response.data);
@@ -56,7 +54,7 @@ function ProductDetails() {
     const checkProductInWishList = async (productId) => {
         try {
             if (token) {
-                const url = `${Spring_Server_Ip}/wishList/${productId}`;
+                const url = `/api/wishList/${productId}`;
                 const response = await axios.get(url, {
                     headers: {
                         Authorization: `${token}`
@@ -76,7 +74,7 @@ function ProductDetails() {
     const postAddWishListByProductId = async (productId) => {
         try {
             if (token) {
-                await axios.post(`${Spring_Server_Ip}/wishList/${productId}`, {}, {
+                await axios.post(`/api/wishList/${productId}`, {}, {
                     headers: {
                         Authorization: `${token}`
                     }
@@ -96,7 +94,7 @@ function ProductDetails() {
 
     const deleteWishListByProductId = async (productId) => {
         try {
-            const url = `${Spring_Server_Ip}/wishList/${productId}`;
+            const url = `/api/wishList/${productId}`;
             await axios.delete(url,{
                 headers: {
                     Authorization: `${token}`

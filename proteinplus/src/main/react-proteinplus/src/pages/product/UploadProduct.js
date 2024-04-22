@@ -18,8 +18,6 @@ function UploadProduct() {
   const [childCategory, setChildCategory] = useState('');
   const [childCategories, setChildCategories] = useState([]);
 
-  const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-
   const uploadProductImages = async (mainImage, detailImage) => {
     try{
         const mainImageUrl = await uploadImage(mainImage);
@@ -48,7 +46,7 @@ function UploadProduct() {
 
       const statusToSend = productStatus === '' ? null : productStatus;
 
-      const response = await axios.post( `${Spring_Server_Ip}/product/admin/add`, {
+      const response = await axios.post( `/api/product/admin/add`, {
         name: productName,
         price: parseInt(price),
         content: content,
@@ -69,7 +67,7 @@ function UploadProduct() {
 
     const fetchParentCategories = async () => {
         try{
-            const response = await axios.get(`${Spring_Server_Ip}/category`);
+            const response = await axios.get(`/api/category`);
             setCategories(response.data);
         } catch (error){
             console.error('부모카테고리 조회 실패: ',error);
@@ -78,7 +76,7 @@ function UploadProduct() {
 
     const fetchChildCategories = async (parent_id) => {
         try{
-            const response = await axios.get(`${Spring_Server_Ip}/category/${parent_id}`);
+            const response = await axios.get(`/api/category/${parent_id}`);
             setChildCategories(response.data);
         } catch (error){
             console.error('자식카테고리 조회 실패: ', error);

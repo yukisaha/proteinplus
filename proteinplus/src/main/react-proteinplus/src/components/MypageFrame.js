@@ -6,7 +6,6 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 
 export default function MypageFrame({children}) {
-  const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
   const [userName, setUserName] = useState('');
   const token = window.localStorage.getItem("token");
 
@@ -24,7 +23,7 @@ export default function MypageFrame({children}) {
 
   async function getUserName() {
     try {
-      const response = await axios.get(`${Spring_Server_Ip}/mypage`, {
+      const response = await axios.get(`/api/mypage`, {
         headers: {
           Authorization: `${token}`
         }

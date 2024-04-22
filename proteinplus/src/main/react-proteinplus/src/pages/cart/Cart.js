@@ -36,9 +36,8 @@ function Cart() {
         }
     };
     async function getCartList(productIds) { // Axios
-        const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
         console.log("productIds:", productIds); // productIds를 콘솔에 출력하여 확인
-        const response = await axios.post(`${Spring_Server_Ip}/cart`,  productIds );
+        const response = await axios.post(`/api/cart`,  productIds );
         // response.data 배열의 각 상품에 할인된 가격을 적용하여 업데이트합니다.
         const updatedCartData = response.data.map(product => ({
             ...product,

@@ -30,7 +30,7 @@ function Home() {
 
     const handleRefreshBundleProducts = async () => {
         try {
-            const url = `${Spring_Server_Ip}/product/test/sell`;
+            const url = `/api/product/test/sell`;
             const response = await axios.get(url);
             const allProducts = response.data;
             const filteredBundleProducts = allProducts.filter(product => product.name.includes('10팩'));
@@ -46,7 +46,7 @@ function Home() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const url = `${Spring_Server_Ip}/product/test/sell`;
+                const url = `/api/product/test/sell`;
                 const response = await axios.get(url);
                 const allProducts = response.data;
                 const filteredProducts = allProducts.filter(product => product.content && product.content.includes('추천상품'));

@@ -9,9 +9,6 @@ import {useNavigate} from "react-router-dom";
 //회원가입
 function Join(){
 
-    const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-
-
     const [loginId, setLoginId] = useState("");
     const [loginPwd, setLoginPwd] = useState("");
     const [loginPwdCheck, setLoginPwdCheck] = useState("");
@@ -124,7 +121,7 @@ function Join(){
 
             };
         console.log(data);
-            const response = await axios.get(`${Spring_Server_Ip}/member/idDuplicateCheck`, {params: data});
+            const response = await axios.get(`/api/member/idDuplicateCheck`, {params: data});
             console.log(response);
             //이미 존재하는 아이디일 경우
             if(response.data === true) {
@@ -149,7 +146,7 @@ function Join(){
             const data = {
                 email: email
             };
-            const response = await axios.get(`${Spring_Server_Ip}/member/emailDuplicateCheck`, {params: data});
+            const response = await axios.get(`/api/member/emailDuplicateCheck`, {params: data});
             //이미 존재하는 이메일일 경우
             return response.data === true;
         } catch (error) {
@@ -163,7 +160,7 @@ function Join(){
             const data = {
                 phone: phone
             };
-            const response = await axios.get(`${Spring_Server_Ip}/member/phoneDuplicateCheck`, {params: data});
+            const response = await axios.get(`/api/member/phoneDuplicateCheck`, {params: data});
             //이미 존재하는 전화번호일 경우
             return response.data === true;
         } catch (error) {
@@ -232,7 +229,7 @@ function Join(){
                             email: email
                         };
                         console.log(data);
-                        const response = await axios.post(`${Spring_Server_Ip}/member/join`, data);
+                        const response = await axios.post(`/api/member/join`, data);
                         console.log("name : "+response.data.name);
                         navigate('/member/join/complete', {state: {loginId: data.loginId, name: data.name}}, {replace: true});
                     } catch (error) {

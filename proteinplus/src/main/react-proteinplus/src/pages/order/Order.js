@@ -9,9 +9,6 @@ import {useDaumPostcodePopup} from 'react-daum-postcode';
 
 
 export default function Order(){
-
-    const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-
     const  options = [
         { value: "메세지를 선택해 주세요.", label: "메세지를 선택해 주세요." },
         { value: "직접입력", label: "직접입력" },
@@ -163,7 +160,7 @@ export default function Order(){
 
     async function getOrderList(productIds) { // Axios
         console.log("productIds:", productIds); // productIds를 콘솔에 출력하여 확인
-        const response = await axios.post(`${Spring_Server_Ip}/cart`,  productIds );
+        const response = await axios.post(`/api/cart`,  productIds );
         setOrderData(response.data);
     }
 
@@ -180,7 +177,7 @@ export default function Order(){
 
             // 주문 정보를 백엔드로 전송합니다.
             const orderResponse = await axios.post(
-                `${Spring_Server_Ip}/api/order/order`, orderDtoList, {
+                `/api/api/order/order`, orderDtoList, {
                 headers: {
                                                 Authorization: `${token}`
                                             }
@@ -192,7 +189,7 @@ export default function Order(){
 
             // 배송 정보를 백엔드로 전송합니다.
             const deliveryResponse = await axios.post(
-                `${Spring_Server_Ip}/api/order/delivery`,
+                `/api/api/order/delivery`,
                 {
                     orderId, // 직접 orderId를 넣어줍니다.
                     receiverName,

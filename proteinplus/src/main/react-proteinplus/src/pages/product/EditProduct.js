@@ -13,11 +13,9 @@ function EditProduct(){
     const [selectedChildCategory, setSelectedChildCategory] = useState('');
     const [selectedProduct, setSelectedProduct] = useState('');
 
-    const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-
     const fetchParentCategories = async () => {
       try {
-        const response = await axios.get(`${Spring_Server_Ip}/category`);
+        const response = await axios.get(`/api/category`);
         setParentCategories(response.data);
       } catch (error) {
         console.error('부모 카테고리 조회 실패:', error);
@@ -26,7 +24,7 @@ function EditProduct(){
 
     const fetchChildCategories = async (selectedParentCategory) => {
       try {
-        const response = await axios.get(`${Spring_Server_Ip}/category/${selectedParentCategory}`);
+        const response = await axios.get(`/api/category/${selectedParentCategory}`);
         setChildCategories(response.data);
       } catch (error) {
         console.error('자식 카테고리 조회 실패:', error);
@@ -35,7 +33,7 @@ function EditProduct(){
 
     const fetchProducts = async (selectedChildCategory) => {
       try {
-        const response = await axios.get(`${Spring_Server_Ip}/product/test/${selectedChildCategory}`);
+        const response = await axios.get(`/api/product/test/${selectedChildCategory}`);
         setProducts(response.data.map(product => ({ id: product.id, name: product.name })));
       } catch (error) {
         console.error('상품 조회 실패:', error);

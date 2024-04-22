@@ -10,8 +10,7 @@ export default function CancelList() {
 
     async function getCancelList() {
         try {
-            const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-            const response = await axios.get(`${Spring_Server_Ip}/api/user/mypage/cancellist`,{
+            const response = await axios.get(`/api/api/user/mypage/cancellist`,{
             headers: {
                                 Authorization: `${token}`
                             }
@@ -30,8 +29,7 @@ export default function CancelList() {
     useEffect(() => {
         const fetchData = async (orderId) => {
             try {
-                const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-                const response = await axios.get(`${Spring_Server_Ip}/api/order/delivery/${orderId}`);
+                const response = await axios.get(`/api/api/order/delivery/${orderId}`);
                 console.log("addressdata-->", response.data);
                 setAddressData(prevState => ({
                     ...prevState,

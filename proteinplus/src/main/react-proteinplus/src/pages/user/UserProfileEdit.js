@@ -8,8 +8,6 @@ import MypageFrame from "../../components/MypageFrame";
 import axios from "axios";
 function UserProfileEdit(){
 
-    const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-
     const token = window.localStorage.getItem("token");
 
     const [id, setId] = useState("");
@@ -115,7 +113,7 @@ function UserProfileEdit(){
     // };
 
     const getUserInfo = async () => {
-        const response = await axios.get(`${Spring_Server_Ip}/member/info`, {headers: {Authorization: `${token}`}});
+        const response = await axios.get(`/api/member/info`, {headers: {Authorization: `${token}`}});
         console.log(response.data);
 
         setUsername(response.data.name);
@@ -163,7 +161,7 @@ function UserProfileEdit(){
                 // birth: birth
             };
             console.log(data);
-            const response = await axios.put(`${Spring_Server_Ip}/member/edit`, data, {headers: {Authorization: `${token}`}});
+            const response = await axios.put(`/api/member/edit`, data, {headers: {Authorization: `${token}`}});
             console.log(response.data);
             alert("회원정보가 성공적으로 변경되었습니다")
             navigate('/mypage/orderList');

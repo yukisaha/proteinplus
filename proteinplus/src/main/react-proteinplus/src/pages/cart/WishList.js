@@ -5,7 +5,6 @@ import '../../styles/cart/css/WishList.css';
 import axios from "axios";
 
 export default function WishList() {
-    const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
     const [WishList, setWishListData] = useState([]);
     const [Review, setReviewData] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -26,12 +25,12 @@ export default function WishList() {
 
     async function getWishList() {
         try {
-            const response = await axios.get(`${Spring_Server_Ip}/wishList`, {
+            const response = await axios.get(`/api/wishList`, {
                 headers: {
                     Authorization: `${token}`
                 }
             });
-            const reviews = await axios.get(`${Spring_Server_Ip}/review`,{
+            const reviews = await axios.get(`/api/review`,{
                 headers: {
                     Authorization: `${token}`
                 }
@@ -67,7 +66,7 @@ export default function WishList() {
 
     const handleDeleteSelected = async (productId) => {
         // WishList에서 선택된 상품 삭제
-        await axios.delete(`${Spring_Server_Ip}/wishList/${productId}`,{
+        await axios.delete(`/api/wishList/${productId}`,{
                 headers: {
                     Authorization: `${token}`
                 }
@@ -79,7 +78,7 @@ export default function WishList() {
     // 전체삭제
     const handleDeleteAll = async () => {
         // WishList를 서버에서 비우는 로직
-        await axios.delete(`${Spring_Server_Ip}/wishList`,{
+        await axios.delete(`/api/wishList`,{
                 headers: {
                     Authorization: `${token}`
                 }

@@ -17,15 +17,13 @@ function ProductList({categoryId}){
   const [categoryProductCount, setCategoryProductCount] = useState(0);
   const [includeSoldOut, setIncludeSoldOut] = useState(false);
 
-  const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-
   const fetchProducts = async () => {
     try {
       let url;
       if (includeSoldOut) {
-        url = `${Spring_Server_Ip}/product/test/${categoryId}`;
+        url = `/api/product/test/${categoryId}`;
       } else {
-        url = `${Spring_Server_Ip}/product/test/sell/${categoryId}`;
+        url = `/api/product/test/sell/${categoryId}`;
       }
       const response = await axios.get(url);
 
@@ -69,9 +67,9 @@ function ProductList({categoryId}){
     try {
       let url;
       if (includeSoldOut) {
-        url = `${Spring_Server_Ip}/product/count/${categoryId}`;
+        url = `/api/product/count/${categoryId}`;
       } else{
-        url = `${Spring_Server_Ip}/product/count/sell/${categoryId}`;
+        url = `/api/product/count/sell/${categoryId}`;
       }
       const response = await axios.get(url);
       setCategoryProductCount(response.data);

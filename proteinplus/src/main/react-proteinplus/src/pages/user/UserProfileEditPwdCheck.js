@@ -7,7 +7,6 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 function UserProfileEditPwdCheck(){
 
-    const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip
     const token = window.localStorage.getItem("token");
 
     const navigate = useNavigate();
@@ -26,7 +25,7 @@ function UserProfileEditPwdCheck(){
             const data = {
                 loginPwd: loginPwd
             };
-            const response = await axios.get(`${Spring_Server_Ip}/member/pwdCheck`, {params: data, headers: {Authorization: `${token}`}});
+            const response = await axios.get(`/api/member/pwdCheck`, {params: data, headers: {Authorization: `${token}`}});
             //성공했을경우 수정 페이지로
             console.log(response.data);
             if(response.data === true){

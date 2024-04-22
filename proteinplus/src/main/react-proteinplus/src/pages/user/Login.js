@@ -8,8 +8,6 @@ import axios from "axios";
 
 function Login(){
 
-    const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-
     const [loginId, setLoginId] = useState("");
     const [loginPwd, setLoginPwd] = useState("");
 
@@ -37,7 +35,7 @@ function Login(){
                 loginId: loginId,
                 loginPwd: loginPwd
             };
-            const response = await axios.post(`${Spring_Server_Ip}/member/auth/login`, data);
+            const response = await axios.post(`/api/member/auth/login`, data);
 
 
             if(response.status === 200){

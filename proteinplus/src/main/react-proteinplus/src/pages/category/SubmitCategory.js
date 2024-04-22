@@ -5,12 +5,10 @@ import axios from "axios";
 
 export default function SubmitCategory() {
 
-    const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-
     //부모 카테고리 조회
     const [parentCategory, setParentCategory] = useState([]);
     async function findParentCategory() { // Axios 방식 사용
-        const response = await axios.get(`${Spring_Server_Ip}/category`);
+        const response = await axios.get(`/api/category`);
         console.log("parentCategory = ", response.data);
         setParentCategory(response.data);
     }
@@ -28,7 +26,7 @@ export default function SubmitCategory() {
 
     const [parentCategoryName, setParentCategoryName] = useState("1차 카테고리");
     async function findChildCategory(selectedParentId) { // Axios 방식 사용
-        const response = await axios.get(`${Spring_Server_Ip}/category/${selectedParentId}`);
+        const response = await axios.get(`/api/category/${selectedParentId}`);
         console.log("childCategory = ", response.data);
         setChildCategory(response.data);
     }
@@ -74,7 +72,7 @@ export default function SubmitCategory() {
         e.preventDefault();
         try {
             const name = newParentCategoryName;
-            await axios.post(`${Spring_Server_Ip}/category/add`, null, {params: {name}});
+            await axios.post(`/api/category/add`, null, {params: {name}});
             alert("카테고리가 성공적으로 추가되었습니다.");
             setNewParentCategoryName(""); // 추가 후 입력 필드 초기화
             findParentCategory();
@@ -98,7 +96,7 @@ export default function SubmitCategory() {
                 name: newChildCategoryName, parent_id: parseInt(selectedParentId)
             };
             console.log(data);
-            await axios.post(`${Spring_Server_Ip}/category/add/${selectedParentId}`, null, {params: data});
+            await axios.post(`/api/category/add/${selectedParentId}`, null, {params: data});
             alert("카테고리가 성공적으로 추가되었습니다.");
             setNewChildCategoryName(""); // 추가 후 입력 필드 초기화
             findParentCategory();
@@ -162,7 +160,7 @@ export default function SubmitCategory() {
             setUpdateCategoryName(childCategoryName);
         }
         try {
-            await axios.put(`${Spring_Server_Ip}/category/edit`, null, {params: data});
+            await axios.put(`/api/category/edit`, null, {params: data});
             alert("카테고리명이 성공적으로 변경되었습니다.");
             setCategoryNameChange(""); // 추가 후 입력 필드 초기화
             findParentCategory();
@@ -187,7 +185,7 @@ export default function SubmitCategory() {
             setUpdateCategoryName(childCategoryName);
         }
         try {
-            await axios.delete(`${Spring_Server_Ip}/category/delete`, {params: data});
+            await axios.delete(`/api/category/delete`, {params: data});
             alert("카테고리가 성공적으로 삭제되었습니다.");
             setCategoryNameChange(""); // 추가 후 입력 필드 초기화
             findParentCategory();

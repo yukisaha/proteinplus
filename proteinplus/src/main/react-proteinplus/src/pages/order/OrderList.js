@@ -10,8 +10,7 @@ export default function OrderList() {
 
     async function getOrderList() {
         try {
-            const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-            const response = await axios.get(`${Spring_Server_Ip}/api/user/mypage/orderlist`, {
+            const response = await axios.get(`/api/api/user/mypage/orderlist`, {
                 headers: {
                     Authorization: `${token}`
                 }
@@ -30,8 +29,7 @@ export default function OrderList() {
 
     const handleCancelOrder = async (orderId) => {
         try {
-            const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-            await axios.post(`${Spring_Server_Ip}/api/user/mypage/orderlist/${orderId}`);
+            await axios.post(`/api/api/user/mypage/orderlist/${orderId}`);
             // 주문 취소 성공 시 화면 갱신 또는 사용자에게 알림
             alert('주문이 취소되었습니다.');
             // 취소 후 주문 목록을 다시 불러옴
@@ -44,8 +42,7 @@ export default function OrderList() {
     useEffect(() => {
         const fetchData = async (orderId) => {
             try {
-                const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
-                const response = await axios.get(`${Spring_Server_Ip}/api/order/delivery/${orderId}`);
+                const response = await axios.get(`/api/api/order/delivery/${orderId}`);
                 console.log("addressdata-->", response.data);
                 setAddressData(prevState => ({
                     ...prevState,

@@ -16,10 +16,9 @@ function Rank() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true); // 초기에는 로딩 중 상태로 설정
 
-    const Spring_Server_Ip = process.env.REACT_APP_Spring_Server_Ip;
     async function getCategory() { // Axios 방식 사용
         try {
-            const response = await axios.get(`${Spring_Server_Ip}/rank`);
+            const response = await axios.get(`/api/rank`);
             setCategoryData(response.data);
             setLoading(false); // 데이터를 성공적으로 받아온 후 로딩 상태 해제
         } catch (error) {
@@ -30,7 +29,7 @@ function Rank() {
     //전체 상품 조회
     const fetchAllProducts = async () => {
         try {
-            const response = await axios.get(`${Spring_Server_Ip}/product/test/sell`);
+            const response = await axios.get(`/api/product/test/sell`);
             let sortedProducts = response.data;
             sortedProducts.sort((a, b) => b.discountRate - a.discountRate);
             setProducts(sortedProducts);
@@ -43,7 +42,7 @@ function Rank() {
     //id별 판매중인 상품 조회
     const fetchProducts = async (categoryId) => {
         try {
-            const response = await axios.get(`${Spring_Server_Ip}/product/test/sell/${categoryId}`);
+            const response = await axios.get(`/api/product/test/sell/${categoryId}`);
             let sortedProducts = response.data;
             // products.sort((a, b) => b.sales - a.sales);
             sortedProducts.sort((a, b) => b.discountRate - a.discountRate);
